@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>量子计算与量子算法</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2024; --ink-dim:#5b6570;
+  --line:#dfe3e8; --line-soft:#eef0f3; --accent:#1f5fa8; --accent-soft:#e8f0fa;
+  --amber-bg:#fff8e6; --amber-line:#e5c168; --amber-ink:#6b5200;
+  --green:#1c7a4a; --green-bg:#e8f5ee; --red:#b03030; --red-bg:#fdecec;
+  --code-bg:#f6f7f9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,serif;
+  background:var(--bg); color:var(--ink); line-height:1.85; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.layout{display:flex; max-width:1280px; margin:0 auto; gap:28px; padding:0 24px}
+/* 侧栏目录 */
+.toc{
+  width:246px; flex-shrink:0; position:sticky; top:0; height:100vh;
+  overflow-y:auto; padding:28px 0 40px; font-family:"Noto Sans SC","PingFang SC",sans-serif;
+}
+.toc h4{font-size:11px; letter-spacing:1.6px; color:var(--ink-dim); text-transform:uppercase;
+  margin:0 0 12px; padding-left:2px; font-weight:600}
+.toc a{
+  display:block; font-size:13px; color:var(--ink-dim); text-decoration:none;
+  padding:5px 10px; border-left:2px solid transparent; line-height:1.5;
+}
+.toc a:hover{color:var(--accent); background:var(--accent-soft)}
+.toc a.sub{padding-left:24px; font-size:12.5px}
+.toc a.active{color:var(--accent); border-left-color:var(--accent); background:var(--accent-soft); font-weight:600}
+/* 正文 */
+.main{flex:1; min-width:0; padding:28px 0 120px}
+.paper{background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  padding:48px 56px; box-shadow:0 1px 3px rgba(16,24,40,.05)}
+h1{font-size:27px; line-height:1.45; margin:0 0 18px; letter-spacing:.3px; font-weight:700}
+h2{font-size:20px; margin:52px 0 18px; padding-bottom:9px; border-bottom:1.5px solid var(--ink);
+  letter-spacing:.3px}
+h3{font-size:16.5px; margin:32px 0 12px; color:var(--accent); font-weight:600}
+h4{font-size:15px; margin:22px 0 10px; font-weight:600}
+p{margin:0 0 15px; text-align:justify}
+blockquote{
+  margin:18px 0; padding:13px 18px; background:var(--amber-bg);
+  border-left:3px solid var(--amber-line); border-radius:0 4px 4px 0; color:var(--amber-ink);
+}
+blockquote p{margin:0 0 8px} blockquote p:last-child{margin:0}
+blockquote strong{color:#4a3800}
+ul,ol{margin:0 0 15px; padding-left:26px}
+li{margin:6px 0}
+table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14px;
+  font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th{background:#f0f2f5; text-align:left; padding:9px 12px; border:1px solid var(--line); font-weight:600}
+td{padding:9px 12px; border:1px solid var(--line); vertical-align:top}
+tbody tr:nth-child(even){background:#fafbfc}
+code{background:var(--code-bg); padding:2px 6px; border-radius:3px; font-size:13.5px;
+  font-family:"SF Mono",Menlo,Consolas,monospace}
+pre{background:var(--code-bg); padding:14px 16px; border-radius:5px; overflow-x:auto; margin:16px 0;
+  border:1px solid var(--line-soft)}
+pre code{background:none; padding:0}
+hr{border:none; border-top:1px solid var(--line-soft); margin:34px 0}
+strong{font-weight:700; color:#0f1419}
+a{color:var(--accent)}
+img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6px; background:#fff}
+.katex-display{margin:20px 0; overflow-x:auto; overflow-y:hidden; padding:2px 0}
+.katex{font-size:1.045em}
+.tag-note{font-family:"Noto Sans SC","PingFang SC",sans-serif; font-size:12px; color:var(--ink-dim);
+  margin-top:40px; padding-top:16px; border-top:1px solid var(--line-soft); line-height:1.9}
+@media(max-width:900px){
+  .toc{display:none}
+  .paper{padding:28px 22px}
+  .layout{padding:0 12px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc"><h4>目录</h4><div id="toc"></div></nav>
+  <main class="main"><article class="paper" id="content"></article></main>
+</div>
+
+<script type="text/plain" id="src">
+# 量子计算与量子算法
+
+> **分类归属：第四部分·量子信息与量子光学 · 数学程度：L3 · 前置依赖：第 9 篇《量子态与叠加原理》、第 12 篇《算符、对易关系与表象》、第 29 篇《量子纠缠》**
+
+> **验证依据**：Deutsch (1985) Proc. R. Soc. A、Deutsch & Jozsa (1992) Proc. R. Soc. A、Shor (1997) SIAM J. Comput.、Grover (1997) Phys. Rev. Lett.、Barenco et al. (1995) Phys. Rev. A、Preskill (1998) Proc. R. Soc. A、DiVincenzo (2000) Fortschr. Phys.、Steane (1996) Phys. Rev. Lett.、Ekert & Jozsa (1996) Rev. Mod. Phys.、Nielsen & Chuang *Quantum Computation and Quantum Information* (2000)（教材）
+
+---
+
+## 一、概念与定位
+
+**量子计算（quantum computing）** 是用量子比特（qubit）代替经典比特、用量子门（酉演化）代替经典逻辑门的信息处理模型；**量子算法（quantum algorithm）** 则是运行于该模型上、利用叠加、干涉与纠缠，对特定问题取得超越经典算法复杂度界（如多项式时间分解大整数、平方根时间无结构搜索）的算法集合。其信息载体态写为计算基的线性组合
+
+$$
+|\psi\rangle=\sum_{x=0}^{N-1}\alpha_x\,|x\rangle,\qquad N=2^n,
+\tag{1}
+$$
+
+其中 $|x\rangle$ 为 $n$ 个量子比特的 $N$ 个计算基之一，$\alpha_x\in\mathbb C$ 为概率幅，满足归一化 $\sum_x|\alpha_x|^2=1$。
+
+名称词源：*quantum* 取自「量子」（第 9 篇）；*computing/algorithm* 为计算/算法；*qubit* 是 *quantum bit* 的缩合，指基本信息单元。量子计算的思想源于 Feynman (1982) 关于「用可控量子系统模拟量子系统」的设想，首个形式化算法由 Deutsch (1985) 给出 [24fu]。
+
+本篇须抓住的核心特征：
+
+1. **连续幅角自由度**：单量子比特不是 0/1 二值，而是 Bloch 球面上的态 $|\psi\rangle=\cos(\theta/2)|0\rangle+e^{i\phi}\sin(\theta/2)|1\rangle$；$n$ 比特寄存器张成 $2^n$ 维复希尔伯特空间（区别于经典 $n$ 比特仅 $n$ 个二值变量）。
+2. **演化可逆且酉**：无测量时演化由酉算符 $U$ 描述（$U^\dagger U=I$），要求算法可逆；测量才将叠加坍缩为单个样本（见第 9、12、29 篇）。
+3. **干涉是加速的本质**：算法先制备广域叠加，再以相位干涉构造性/相消地放大目标幅、抑制其余幅——Grover 的振幅放大与 Shor 的周期查找均源于此。
+4. **纠缠作为多体资源**：多比特算法（如 Shor 的模幂、QFT 线路）依赖纠缠（第 29 篇）；但纠缠是否「量子加速的唯一来源」仍有争议（见第七、八节 [24gc]）。
+5. **加速有严格界限**：并非所有问题都被加速——Shor 对整数分解为多项式时间、Grover 对无结构搜索为 $O(\sqrt N)$；对 NP 完全问题尚无超越经典指数的证明。
+
+本主题在体系中的位置：它是第 9 篇（态与叠加）、第 12 篇（算符与表象）、第 29 篇（纠缠）的直接应用，并通向本套第五部分（量子光学/腔 QED，见腔 QED 与量子比特实现篇）及第六部分（交叉应用）。与量子密钥分发、隐形传态同属第四部分「量子信息」家族。
+
+---
+
+## 二、数学结构
+
+**符号约定声明**：本篇采用 Dirac 符号（第 12 篇）；计算基 $|0\rangle,|1\rangle$ 为单比特 $\sigma_z$ 本征态。多比特寄存器以整数 $x\in\{0,1,\dots,2^n-1\}$ 标记，$x$ 的二进制写作 $x=\sum_{k=0}^{n-1}x_k2^k$，约定 $x_0$ 为最低有效位（qubit 0）。门矩阵在无特别说明时采用自然约定（不显式写 $\hbar$），物理量尺度处恢复 SI 单位。第 12 篇已声明本套约定 $\hbar$ 与 $2\pi$ 不省略。
+
+### 2.1 量子比特与态空间
+
+单量子比特态
+
+$$
+|\psi\rangle=\alpha|0\rangle+\beta|1\rangle,\qquad |\alpha|^2+|\beta|^2=1,\quad \alpha,\beta\in\mathbb C.
+\tag{2}
+$$
+
+| 符号 | 含义 | 单位/量纲 |
+|------|------|-----------|
+| $\alpha,\beta$ | 计算基 $|0\rangle,|1\rangle$ 的概率幅（复数） | 无量纲 |
+| $|0\rangle,|1\rangle$ | 计算基矢量（标准正交） | 无量纲 |
+| $\|\psi\|^2$ | 态矢量范数平方，恒为 1 | 无量纲 |
+
+$n$ 量子比特寄存器张成 $N=2^n$ 维 Hilbert 空间，计算基 $\{|x\rangle\}_{x=0}^{N-1}$ 标准正交。纯态归一化 $\langle\psi|\psi\rangle=1$；混合态用密度矩阵 $\rho$（第 12 篇、绘景与密度矩阵篇）。
+
+### 2.2 量子门与酉演化
+
+无测量演化由酉算符 $U$（满足 $U^\dagger U=I$）实现。单比特门属 $U(2)$ 群；离散普适量子门集可由**任意单比特门 + 受控非门（CNOT）** 构成 [24fy]，常用有限近似集 $\{H,T,\text{CNOT}\}$（$T=\text{diag}(1,e^{i\pi/4})$）。基本门矩阵：
+
+$$
+H=\frac1{\sqrt2}\begin{pmatrix}1&1\\1&-1\end{pmatrix},\qquad
+X=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+\mathrm{CNOT}=|0\rangle\langle0|\otimes I+|1\rangle\langle1|\otimes X.
+\tag{3}
+$$
+
+| 符号 | 含义 | 单位/量纲 |
+|------|------|-----------|
+| $H$ | Hadamard 门（生成等幅叠加） | 无量纲（矩阵） |
+| $X$ | Pauli-$X$（比特翻转，NOT） | 无量纲 |
+| $\mathrm{CNOT}$ | 受控非门：控制位为 1 时翻转目标位 | 无量纲 |
+| $I$ | 单位算符 | 无量纲 |
+
+### 2.3 受控相位门 $R_k$
+
+量子傅里叶变换线路使用受控相位门
+
+$$
+R_k=\begin{pmatrix}1&0\\0&e^{2\pi i/2^{\,k}}\end{pmatrix},\qquad k=2,3,\dots
+\tag{4}
+$$
+
+其相位因子 $\varphi_k=2\pi/2^k$。$R_2$（即 $T$ 门）相位 $e^{i\pi/2}=i$，$R_3$ 相位 $e^{i\pi/4}$。第 3 节与脚本 2 验证其酉性。
+
+### 2.4 Deutsch–Jozsa 算法（解析实例，单查询判定）
+
+给定布尔函数 $f:\{0,1\}^n\to\{0,1\}$，已知其要么为**常函数**（所有输入同值）要么为**平衡函数**（恰一半输入为 0、一半为 1）。预言（oracle）算符
+
+$$
+U_f\,|x\rangle|y\rangle=|x\rangle\,|y\oplus f(x)\rangle,
+\tag{5}
+$$
+
+其中 $\oplus$ 为模 2 加法（异或）。制备辅助位 $|y\rangle=(|0\rangle-|1\rangle)/\sqrt2$，经 $H^{\otimes n}$ 后作用 $U_f$，再对输入寄存器做 $H^{\otimes n}$，输出首寄存器测量得到
+
+$$
+\frac1{2^n}\sum_{x=0}^{2^n-1}(-1)^{f(x)}\,|x\rangle.
+\tag{6}
+$$
+
+- 若 $f$ 为常函数：各项相位一致，干涉后坍缩到 $|0\rangle^{\otimes n}$（出现概率 1）。
+- 若 $f$ 为平衡函数：正负相位各半相消，测得 $|0\rangle^{\otimes n}$ 概率为 0。
+
+故**单次查询**即可确定函数类别（经典需至多 $2^{n-1}+1$ 次）[24fv]。第 6.3 节给出 $n=1$ 的完整幅值推导。
+
+### 2.5 量子傅里叶变换（QFT）
+
+对 $N=2^n$ 维寄存器，QFT 是离散傅里叶变换的酉版本：
+
+$$
+\mathrm{QFT}\,|x\rangle=\frac1{\sqrt N}\sum_{y=0}^{N-1}e^{2\pi i\,x y/N}\,|y\rangle,
+\qquad D_{y,x}=\frac1{\sqrt N}e^{2\pi i\,x y/N}.
+\tag{7}
+$$
+
+| 符号 | 含义 | 单位/量纲 |
+|------|------|-----------|
+| $N$ | 寄存器维数，$N=2^n$ | 无量纲 |
+| $x,y$ | 计算基整数标号，$0\le x,y<N$ | 无量纲 |
+| $D_{y,x}$ | QFT 矩阵元（行标 $y$、列标 $x$） | 无量纲 |
+| $i$ | 虚数单位，$\sqrt{-1}$ | 无量纲 |
+
+**关键谱性质**（脚本 2 已数值验证）：
+1. **对角化循环移位算符** $S|x\rangle=|x+1\bmod N\rangle$：有 $S\,\mathrm{QFT}=\mathrm{QFT}\,\Lambda$，其中 $\Lambda=\mathrm{diag}(1,e^{2\pi i/N},\dots,e^{2\pi i(N-1)/N})$，即 QFT 把移位算符对角化。
+2. **平方为取反置换**：$\mathrm{QFT}^2\,|x\rangle=|{-x}\bmod N\rangle$，即 $\mathrm{QFT}^2$ 等于「取负」置换算符，与基矢位序约定无关。
+
+### 2.6 Shor 算法框架（周期查找）
+
+Shor 算法将整数分解归约为**求模幂函数的周期**（隐藏子群问题的一类）[24fw]。对选定底数 $a$ 与待分解 $N$，构造
+
+$$
+f(x)=a^x\bmod N,\qquad x=0,1,\dots,
+\tag{8}
+$$
+
+其为以某周期 $r$ 为周期的函数。算法先对叠加 $|x\rangle|0\rangle$ 经受控模幂制备 $|\psi\rangle=\frac1{\sqrt Q}\sum_{x=0}^{Q-1}|x\rangle|f(x)\rangle$，对第二寄存器测量坍缩到某一函数值后，第一寄存器在周期 $r$ 的整数倍处保留等幅叠加；对该寄存器做 QFT（式 7），测得接近 $kQ/r$ 的值，再以连分数展开恢复 $r$。若 $r$ 为偶数且 $a^{r/2}\not\equiv-1\bmod N$，则 $\gcd(a^{r/2}\pm1,N)$ 给出非平凡因子。整体复杂度 $O((\log N)^3)$（经典最优为亚指数），是多项式时间分解。
+
+### 2.7 Grover 迭代（振幅放大）
+
+设搜索空间大小 $N=2^n$，唯一目标标号 $\omega$。初态为均匀叠加
+
+$$
+|s\rangle=H^{\otimes n}|0\rangle=\frac1{\sqrt N}\sum_{x=0}^{N-1}|x\rangle,\qquad \sin\theta\equiv\frac1{\sqrt N}.
+\tag{9}
+$$
+
+- **预言（标记）算符** $O=I-2|\omega\rangle\langle\omega|$（对目标态取负，其余不变）；
+- **扩散算符** $D=2|s\rangle\langle s|-I$（关于均值反射）；
+- **一次 Grover 迭代** $G=D\,O$。
+
+在由 $\{|\omega\rangle,|s_\perp\rangle\}$ 张成的二维子空间内，$G$ 等效为绕原点旋转 $2\theta$（$|\omega\rangle$ 方向）的转动。经 $n$ 次迭代后目标幅与成功概率
+
+$$
+\alpha_\omega^{(n)}=\sin\bigl((2n+1)\theta\bigr),\qquad
+P_{\mathrm{succ}}(n)=\sin^2\bigl((2n+1)\theta\bigr).
+\tag{10}
+$$
+
+最优迭代次数取使 $(2n+1)\theta\approx\pi/2$：
+
+$$
+n^*=\left\lfloor\frac{\pi}{4\theta}-\frac12\right\rfloor\approx\frac{\pi}{4}\sqrt N.
+\tag{11}
+$$
+
+对 $N=1024$，$\sin\theta=1/32$，由脚本 1 算得 $\theta\approx0.031255\ \mathrm{rad}$，$n^*=25$，峰值成功概率 $P_{\mathrm{succ}}\approx0.9995$（详见第 3、6 节）。
+
+### 2.8 量子纠错与容错阈值
+
+量子比特易受退相干与门错误（不可克隆定理禁止经典「三模冗余」直接复制）。量子纠错码用 $m$ 个物理比特编码 1 个逻辑比特，使错误可 syndrome 诊断而不破坏叠加 [24gb]。**容错阈值定理**（accuracy threshold theorem）：若单门/单步错误率低于某阈值 $p_{\mathrm{th}}$，则可通过级联编码将有效错误率压到任意小，从而实现任意长的容错计算 [24fz]。阈值大小依赖噪声模型与编码；Preskill (1998) 在一类去极化噪声模型下估计 $p_{\mathrm{th}}\sim10^{-4}$（量级，噪声模型依赖，见第七、八节）。
+
+---
+
+## 三、物理量与特征尺度
+
+| 物理量 | 符号 | 数值/量级 | 适用条件 |
+|--------|------|-----------|----------|
+| 普朗克常数 | $h$ | $6.626\,070\,15\times10^{-34}\ \mathrm{J\cdot s}$（精确） | SI 2019 重定义后定值（CODATA 2018 列为精确） |
+| 约化普朗克常数 | $\hbar=h/2\pi$ | $1.054\,571\,817\times10^{-34}\ \mathrm{J\cdot s}$（精确） | 同上 |
+| 基本电荷 | $e$ | $1.602\,176\,634\times10^{-19}\ \mathrm{C}$（精确） | 同上 |
+| 寄存器维数 | $N=2^n$ | 无量纲；$n=10$ 时 $N=1024$ | 任意 $n$ 量子比特系统 |
+| Grover 旋转角 | $\theta=\arcsin(1/\sqrt N)$ | $N=1024$ 时 $\theta\approx0.031255\ \mathrm{rad}\approx1.791^\circ$ | 单目标 Grover 搜索（脚本 1） |
+| Grover 最优迭代 | $n^*$ | $N=1024$ 时 $n^*=25$；通式 $\approx\pi\sqrt N/4$ | 单目标无结构搜索 |
+| Grover 峰值成功概率 | $P_{\mathrm{succ}}$ | $N=1024$ 时 $\approx0.9995$（理想极限 1） | 整数次迭代取整后的数值（脚本 1） |
+| 单门容错阈值 | $p_{\mathrm{th}}$ | $\sim10^{-4}$（量级，噪声模型依赖） | 去极化噪声类模型（Preskill 1998 [24fz]） |
+| 退相干时间 | $T_2$ | 超导线路 $\sim10^1\!-\!10^2\ \mu\mathrm{s}$；离子阱 $\sim10^{-1}\!-\!1\ \mathrm{s}$（代表性量级） | 随物理体系与技术快速变化，非 CODATA 常数（DiVincenzo 判据背景 [24ga]） |
+| 门时间 | $t_{\mathrm{gate}}$ | 超导 $\sim10\!-\!100\ \mathrm{ns}$；离子阱 $\sim\mu\mathrm{s}\!-\!\mathrm{ms}$（量级） | 同上，体系依赖 |
+
+**量子效应显著判据**：算法可用要求相干时间远大于总门数所需时长，即 $T_2\gg n_{\mathrm{gate}}\,t_{\mathrm{gate}}$ 且单门错误率 $p\ll p_{\mathrm{th}}$。对 $N=1024$ 的 Grover 搜索约需 25 次迭代（每次若干门），故要求总相干时间内错误累积低于阈值。
+
+> 说明：上表 $h,\hbar,e$ 为 SI 2019 后精确常数（CODATA 2018 推荐值与其一致，不确定度为 0）；其余（阈值、退相干、门时间）为代表性量级，依赖具体物理实现与噪声模型，非普适常数，引用时须注明体系。
+
+---
+
+## 四、实验基础与观测证据
+
+本篇主体为算法与理论，其「实验证据」体现为（a）物理实现判据的建立与（b）算法在少比特硬件上的原理验证。
+
+1. **DiVincenzo 实现判据（2000）**：DiVincenzo 提出可扩展量子计算机须满足的物理判据——具定标性的物理比特、可初始化、长相干时间、通用门集、高效可测，以及两条通信判据 [24ga]。该判据成为实验界「是否构成量子计算机」的基准，已在超导、离子阱、光量子等多平台的部分满足（少比特级）。
+2. **量子纠错码验证（1996）**：Steane 提出基于 CSS 结构的纠错码，可在不破坏叠加的前提下检测并纠正比特/相位错误 [24gb]；其码族（及后续表面码）已在离子阱与超导线路上演示，是容错阈值定理的物理前提。
+3. **算法原理验证**：Deutsch–Jozsa、Grover、Shor（小整数分解）、QFT 等已在 NMR、离子阱与超导线路的数比特至十余比特硬件上演示（早期综述见 Ekert & Jozsa 1996 [24gc]）。例如小整数（如 $15=3\times5$）的 Shor 分解、小 $N$ 的 Grover 搜索均被复现，证实式 (6)(10) 的干涉/振幅放大机制在真实噪声硬件上成立。
+4. **纠缠资源（第 29 篇）**：多比特算法必需的纠缠已在多平台实验确认（2022 年诺贝尔物理学奖授予纠缠与 Bell 不等式实验验证），为第四部分算法提供物理基础。
+
+**误读纠正**（以 blockquote 突出）：
+
+> 量子计算机**并非对所有问题指数加速**。对无结构搜索仅 $\sqrt N$ 加速（Grover），对 NP 完全问题迄今无超越经典指数的证明；Shor 仅针对整数分解与离散对数等特定问题。
+
+> 「量子并行」不是「同时算出所有输入的函数值再直接读出」。测量只返回一个样本（式 1 的坍缩）；算法通过干涉（式 6）或振幅放大（式 10）从全局幅角提取有用信息，而非经典地并行枚举。
+
+**实验局限**：少比特演示距离容错规模仍远——当前错误率多在 $10^{-3}$ 量级，未普遍低于阈值 $p_{\mathrm{th}}\sim10^{-4}$（部分平台特定门可达更低）；退相干与串扰是主要障碍，阈值能否在大规模下保持是开放工程问题（见第七、八节）。
+
+---
+
+## 五、分类体系与物理机制
+
+### 5.1 主要量子算法类型
+
+| 算法 | 问题类别 | 复杂度（相对经典） | 核心机制 | 依赖（本套章节） |
+|------|----------|--------------------|----------|------------------|
+| Deutsch–Jozsa | 常/平衡函数判定 | 单查询 vs $O(2^{n-1})$ | 相位干涉全相消 | 第 9 篇（叠加）、第 12 篇（算符） |
+| 量子傅里叶变换 | 周期/谱变换子程序 | $O(n^2)$ 门 vs $O(N\log N)$ | 干涉 + 受控相位 | 第 2.5 节 |
+| Shor | 整数分解/离散对数 | 多项式 $O((\log N)^3)$ vs 亚指数 | 周期查找 + QFT | 第 2.5、2.6 节 |
+| Grover | 无结构搜索 | $O(\sqrt N)$ vs $O(N)$ | 振幅放大 | 第 2.7 节、第 29 篇（纠缠非必需） |
+
+### 5.2 加速机制（数学结构 → 物理现象）
+
+- **干涉放大**：Deutsch–Jozsa 与 Shor 靠构造性/相消干涉把「全局性质」（常/平衡、周期）集中到一个可测基。
+- **振幅放大**：Grover 每次迭代把目标幅按 $\sin((2n+1)\theta)$ 抬升（式 10），是旋转算符的几何迭代。
+- **态空间指数维**：式 (1) 的 $2^n$ 维叠加是被利用的资源，而非「同时计算」——读出受测量限制（第 4 节误读纠正）。
+
+### 5.3 概念辨析
+
+- **量子叠加 vs 统计混合**：叠加（式 2）的幅角干涉产生可观测干涉项；经典统计混合只有概率无干涉（第 9 篇）。二者不可混淆。
+- **量子并行 vs 经典并行**：经典并行是多个独立副本同时算；量子「并行」是单态承载多基幅，但仅一次测量取样（第 4 节）。
+- **振幅放大 vs 随机重复猜测**：Grover 以确定性旋转提升成功概率至 $O(1)$，而非随机重试；最优 $n^*$ 给出最小查询数（式 11）。
+
+> 辨析服务于澄清机制，不做优劣/主观排序。
+
+### 5.4 适用范围与失效边界
+
+- **退相干**：相干叠加被破坏时，干涉/振幅放大失效，回到经典行为（第 4、29 篇）。
+- **错误率高于阈值**：若 $p\gg p_{\mathrm{th}}$，级联纠错无法压低错误，容错计算不可行 [24fz]。
+- **问题规模**：小 $N$ 时 Grover 的 $\sqrt N$ 加速被门开销抵消，未必优于经典；Shor 仅在合数有非平凡因子时有效（素数无加速意义）。
+
+---
+
+## 六、典型系统与可解模型
+
+### 6.1 Grover 搜索成功概率（数值，脚本 1）
+
+取 $N=1024$（$n=10$），由式 (9)(10)(11) 计算随迭代次数 $n$ 的成功概率，并标出最优迭代与峰值。
+
+- 脚本：`code/量子计算_Grover搜索.py`（对应式 9–11）；运行结果见图 `量子计算_Grover成功概率.svg`（图 1）
+- 数值结果（脚本回写）：$\theta=\arcsin(1/32)\approx0.031255\ \mathrm{rad}$；最优迭代 $n^*=25$；峰值代入 $n=25$ 得 $P_{\mathrm{succ}}=\sin^2(51\theta)\approx0.9995$（理想极限 1，取整导致微离 1）。
+- 物理意义：25 次振幅放大即可把目标态概率从 $1/1024\approx9.8\times10^{-4}$ 提升到近 1，体现 $\sqrt N$ 加速（经典平均需 $N/2=512$ 次查询）。
+
+### 6.2 三比特量子傅里叶变换（数值，脚本 2）
+
+取 $n=3$、$N=8$，用定义式 (7) 构造 QFT 矩阵，并显式构造 2 比特受控相位门 $R_k$（式 4）及其 $n$ 比特嵌入，验证酉性与谱性质。
+
+- 脚本：`code/量子计算_QFT.py`（对应式 4、7）；运行结果见图 `量子计算_QFT输出.svg`（图 2）
+- 验证结果（脚本回写）：
+  - 整体酉性：$\max|U^\dagger U-I|=7.7\times10^{-16}$（机器精度内为酉）；
+  - $\mathrm{QFT}^2=$ 取反置换：$\max|U^2-P_{\mathrm{neg}}|=1.2\times10^{-15}$；
+  - 列等幅性：$\max\big||\text{列幅}|^2-1/N\big|=5.6\times10^{-17}$（每列模方均为 $1/8$）；
+  - 受控相位门 $R_2,R_3$ 及其嵌入酉性误差均为 0（构造精确）；
+  - 输入 $|1\rangle$（即整数 1）经 QFT，输出在 8 个计算基上**等幅** $1/\sqrt8$，各基概率均为 $1/8=0.125$——印证式 (7) 的列等幅结构。
+
+### 6.3 Deutsch–Jozsa 单比特情形（解析可解）
+
+取 $n=1$，输入寄存器 $|x\rangle\in\{|0\rangle,|1\rangle\}$，辅助位制备为 $|-\rangle=(|0\rangle-|1\rangle)/\sqrt2$。由式 (5)：
+
+$$
+|x\rangle|-\rangle \xrightarrow{U_f} (-1)^{f(x)}|x\rangle|-\rangle.
+\tag{12}
+$$
+
+初态经 $H|0\rangle=(|0\rangle+|1\rangle)/\sqrt2$ 得 $(|0\rangle+|1\rangle)/\sqrt2\otimes|-\rangle$；作用 $U_f$ 后两基获得相位 $(-1)^{f(0)},(-1)^{f(1)}$；再对输入寄存器做 $H$：
+
+$$
+\frac12\Big[(-1)^{f(0)}+(-1)^{f(1)}\Big]|0\rangle+\frac12\Big[(-1)^{f(0)}-(-1)^{f(1)}\Big]|1\rangle.
+\tag{13}
+$$
+
+- 若 $f$ 常函数：$f(0)=f(1)$，测得 $|0\rangle$ 概率 1（式 6 在 $n=1$ 的特例）；
+- 若 $f$ 平衡：$f(0)\neq f(1)$，测得 $|1\rangle$ 概率 1。
+
+此即单查询判定（第 2.4 节）的完整幅值推导，无需数值，属解析可解实例。
+
+---
+
+## 七、历史脉络与学术争议
+
+**提出动机**：经典计算受「有效可计算」与「难解问题」（如大数分解的密码学困难性）限制；Feynman 指出经典机难以高效模拟量子系统，Deutsch 进而问「量子力学本身能否构成更强的计算模型」，从而开创量子算法。
+
+| 年份 | 人物 | 贡献 | 文献 |
+|------|------|------|------|
+| 1985 | Deutsch | 量子图灵机与首个量子算法 | [24fu] |
+| 1992 | Deutsch & Jozsa | Deutsch–Jozsa 算法（单查询判定） | [24fv] |
+| 1994（发表 1997） | Shor | 整数分解的多项式时间量子算法 | [24fw] |
+| 1995 | Barenco et al. | 普适量子门集（单比特 + CNOT 通用） | [24fy] |
+| 1996 | Grover | 无结构搜索的 $O(\sqrt N)$ 算法 | [24fx] |
+| 1996 | Steane | CSS 量子纠错码 | [24gb] |
+| 1996 | Ekert & Jozsa | 量子计算与算法综述（含早期实验） | [24gc] |
+| 1998 | Preskill | 容错阈值定理（accuracy threshold） | [24fz] |
+| 2000 | DiVincenzo | 物理实现判据（五条 + 通信两条） | [24ga] |
+
+**学术争议与开放问题**（并列各方，不站队）：
+
+1. **量子加速的来源**：有立场认为「纠缠是必需资源」（多比特算法离不开纠缠），亦有立场认为「干涉与指数维态空间」才是本质（Grover 可在无纠缠下运行）。Ekert & Jozsa 综述指出该问题尚无定论 [24gc]。
+2. **容错阈值的实际可达性**：阈值 $p_{\mathrm{th}}$ 强烈依赖噪声模型与编码——Preskill (1998) 在一类去极化模型下估得 $\sim10^{-4}$ [24fz]，其他模型与编码下数值在 $10^{-6}$ 至 $10^{-2}$ 区间变动；「大规模容错是否工程可行」仍开放。
+3. **物理实现路线竞争**：超导线路、离子阱、光量子、拓扑量子比特等各有权衡（DiVincenzo 判据为共同基准 [24ga]）；本篇不评判优劣，仅列判据。
+4. **对复杂性类的影响**：Shor 不解决 NP 完全；Grover 仅平方加速。量子计算是否能在 P vs NP 意义上改变「难解」边界，无公认结论；相关声称须谨慎（见第 4 节误读纠正）。
+
+> 本节内容可能随研究进展更新；人名-年份-贡献三元组已据原始文献核对（Shor 算法 1994 年宣布、1997 年正式发表，已注明差异）。
+
+---
+
+## 八、参考文献
+
+[24fu] Deutsch D. *Proc. R. Soc. A* **400**, 97–117 (1985). DOI: 10.1098/rspa.1985.0070 — 量子图灵机与首个量子算法（量子并行思想）。 `[已核实]`
+
+[24fv] Deutsch D., Jozsa R. *Proc. R. Soc. A* **439**, 553–558 (1992). DOI: 10.1098/rspa.1992.0167 — Deutsch–Jozsa 算法（单查询判定常/平衡函数）。 `[已核实]`
+
+[24fw] Shor P. W. *SIAM J. Comput.* **26**(5), 1484–1509 (1997). DOI: 10.1137/S0097539795293172 — 整数分解与离散对数的多项式时间量子算法（周期查找 + QFT）。 `[已核实]`
+
+[24fx] Grover L. K. *Phys. Rev. Lett.* **79**, 325–328 (1997). DOI: 10.1103/PhysRevLett.79.325 — 无结构搜索的量子算法（振幅放大，$O(\sqrt N)$）。 `[已核实]`
+
+[24fy] Barenco A., Bennett C. H., Cleve R., DiVincenzo D. P., Margolus N., Shor P., Sleator T., Smolin J. A., Weinfurter H. *Phys. Rev. A* **52**, 3457–3467 (1995). DOI: 10.1103/PhysRevA.52.3457 — 普适量子门集（单比特门 + CNOT 通用）。 `[已核实]`
+
+[24fz] Preskill J. *Proc. R. Soc. A* **454**, 385–410 (1998). DOI: 10.1098/rspa.1998.0167 — 容错阈值定理（accuracy threshold theorem）。 `[已核实]`
+
+[24ga] DiVincenzo D. P. *Fortschr. Phys.* **48**, 771–783 (2000). DOI: 10.1002/1521-3978(200009)48:9/11<771::AID-PROP771>3.0.CO;2-E — 量子计算机的物理实现判据（DiVincenzo criteria）。 `[已核实]`
+
+[24gb] Steane A. M. *Phys. Rev. Lett.* **77**, 793–797 (1996). DOI: 10.1103/PhysRevLett.77.793 — 多比特量子纠错码（CSS 结构）。 `[已核实]`
+
+[24gc] Ekert A., Jozsa R. *Rev. Mod. Phys.* **68**, 733–753 (1996). DOI: 10.1103/RevModPhys.68.733 — 量子计算与量子算法的权威综述（含早期实验概览）。 `[已核实]`
+</script>
+<script>
+// 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏
+function protectMath(src){
+  var blocks = [];
+  // 先抽块级 $$...$$（可跨行）
+  src = src.replace(/\$\$([\s\S]+?)\$\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  // 再抽行内 $...$（不含换行、内部不含 $）
+  src = src.replace(/\$([^\$\n]+?)\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  return { src: src, blocks: blocks };
+}
+
+function boot(){
+  var raw = document.getElementById('src').textContent;
+  // 记录标题锚点（在保护公式之前，避免影响）
+  var md = raw.replace(/^(#{1,3})\s+(.+)$/gm, function(m, h, t){
+    var id = 'h-' + t.replace(/[^\w一-龥]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+    return h + ' <span id="' + id + '"></span>' + t;
+  });
+
+  // 保护数学公式
+  var prot = protectMath(md);
+  md = prot.src;
+
+  document.getElementById('content').innerHTML = marked.parse(md);
+
+  // 还原数学公式占位符
+  var content = document.getElementById('content');
+  var html = content.innerHTML.replace(/%%MATH(\d+)%%/g, function(m, n){
+    return prot.blocks[+n];
+  });
+  content.innerHTML = html;
+
+  // 生成目录
+  var hs = document.querySelectorAll('#content h2, #content h3');
+  var toc = document.getElementById('toc'), tocHtml = '';
+  hs.forEach(function(h){
+    var sp = h.querySelector('span[id]');
+    var id = sp ? sp.id : '';
+    var cls = h.tagName === 'H3' ? 'sub' : '';
+    tocHtml += '<a class="' + cls + '" href="#' + id + '">' + h.textContent.trim() + '</a>';
+  });
+  toc.innerHTML = tocHtml;
+
+  // 图片路径：正文里写 figures/xxx.svg
+  document.querySelectorAll('#content img').forEach(function(im){
+    if(/^figures\//.test(im.getAttribute('src')||'')) return;
+  });
+
+  if (window.renderMathInElement) {
+    renderMathInElement(document.getElementById('content'), {
+      delimiters:[
+        {left:'$$', right:'$$', display:true},
+        {left:'$',  right:'$',  display:false}
+      ],
+      ignoredTags:['script','noscript','style','textarea','pre','code'],
+      throwOnError:false
+    });
+  }
+
+  // 滚动高亮
+  var links = [].slice.call(toc.querySelectorAll('a'));
+  window.addEventListener('scroll', function(){
+    var cur = null;
+    hs.forEach(function(h){
+      if (h.getBoundingClientRect().top < 120) cur = h;
+    });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if (cur){
+      var sp = cur.querySelector('span[id]');
+      var act = toc.querySelector('a[href="#' + (sp?sp.id:'') + '"]');
+      if (act) act.classList.add('active');
+    }
+  }, {passive:true});
+}
+if (window.marked) boot();
+else window.addEventListener('load', boot);
+</script>
+</body>
+</html>

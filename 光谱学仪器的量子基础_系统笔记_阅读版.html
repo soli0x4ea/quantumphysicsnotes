@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>光谱学仪器的量子基础（Quantum Foundations of Spectroscopic Instruments）系统量子力学笔记</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2024; --ink-dim:#5b6570;
+  --line:#dfe3e8; --line-soft:#eef0f3; --accent:#1f5fa8; --accent-soft:#e8f0fa;
+  --amber-bg:#fff8e6; --amber-line:#e5c168; --amber-ink:#6b5200;
+  --green:#1c7a4a; --green-bg:#e8f5ee; --red:#b03030; --red-bg:#fdecec;
+  --code-bg:#f6f7f9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,serif;
+  background:var(--bg); color:var(--ink); line-height:1.85; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.layout{display:flex; max-width:1280px; margin:0 auto; gap:28px; padding:0 24px}
+/* 侧栏目录 */
+.toc{
+  width:246px; flex-shrink:0; position:sticky; top:0; height:100vh;
+  overflow-y:auto; padding:28px 0 40px; font-family:"Noto Sans SC","PingFang SC",sans-serif;
+}
+.toc h4{font-size:11px; letter-spacing:1.6px; color:var(--ink-dim); text-transform:uppercase;
+  margin:0 0 12px; padding-left:2px; font-weight:600}
+.toc a{
+  display:block; font-size:13px; color:var(--ink-dim); text-decoration:none;
+  padding:5px 10px; border-left:2px solid transparent; line-height:1.5;
+}
+.toc a:hover{color:var(--accent); background:var(--accent-soft)}
+.toc a.sub{padding-left:24px; font-size:12.5px}
+.toc a.active{color:var(--accent); border-left-color:var(--accent); background:var(--accent-soft); font-weight:600}
+/* 正文 */
+.main{flex:1; min-width:0; padding:28px 0 120px}
+.paper{background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  padding:48px 56px; box-shadow:0 1px 3px rgba(16,24,40,.05)}
+h1{font-size:27px; line-height:1.45; margin:0 0 18px; letter-spacing:.3px; font-weight:700}
+h2{font-size:20px; margin:52px 0 18px; padding-bottom:9px; border-bottom:1.5px solid var(--ink);
+  letter-spacing:.3px}
+h3{font-size:16.5px; margin:32px 0 12px; color:var(--accent); font-weight:600}
+h4{font-size:15px; margin:22px 0 10px; font-weight:600}
+p{margin:0 0 15px; text-align:justify}
+blockquote{
+  margin:18px 0; padding:13px 18px; background:var(--amber-bg);
+  border-left:3px solid var(--amber-line); border-radius:0 4px 4px 0; color:var(--amber-ink);
+}
+blockquote p{margin:0 0 8px} blockquote p:last-child{margin:0}
+blockquote strong{color:#4a3800}
+ul,ol{margin:0 0 15px; padding-left:26px}
+li{margin:6px 0}
+table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14px;
+  font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th{background:#f0f2f5; text-align:left; padding:9px 12px; border:1px solid var(--line); font-weight:600}
+td{padding:9px 12px; border:1px solid var(--line); vertical-align:top}
+tbody tr:nth-child(even){background:#fafbfc}
+code{background:var(--code-bg); padding:2px 6px; border-radius:3px; font-size:13.5px;
+  font-family:"SF Mono",Menlo,Consolas,monospace}
+pre{background:var(--code-bg); padding:14px 16px; border-radius:5px; overflow-x:auto; margin:16px 0;
+  border:1px solid var(--line-soft)}
+pre code{background:none; padding:0}
+hr{border:none; border-top:1px solid var(--line-soft); margin:34px 0}
+strong{font-weight:700; color:#0f1419}
+a{color:var(--accent)}
+img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6px; background:#fff}
+.katex-display{margin:20px 0; overflow-x:auto; overflow-y:hidden; padding:2px 0}
+.katex{font-size:1.045em}
+.tag-note{font-family:"Noto Sans SC","PingFang SC",sans-serif; font-size:12px; color:var(--ink-dim);
+  margin-top:40px; padding-top:16px; border-top:1px solid var(--line-soft); line-height:1.9}
+@media(max-width:900px){
+  .toc{display:none}
+  .paper{padding:28px 22px}
+  .layout{padding:0 12px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc"><h4>目录</h4><div id="toc"></div></nav>
+  <main class="main"><article class="paper" id="content"></article></main>
+</div>
+
+<script type="text/plain" id="src">
+# 光谱学仪器的量子基础（Quantum Foundations of Spectroscopic Instruments）系统量子力学笔记
+
+> **第六部分：交叉应用——量子力学与宝石学 · 数学程度 L2 · 前置依赖：第35篇《光场量子化与相干态》、第16篇《角动量与自旋》、第13篇《薛定谔方程》**
+> **验证依据**：Raman & Krishnan (1928) Nature、Kramers & Heisenberg (1925) Z. Phys.（拉曼散射量子论）、Stokes (1852) Phil. Trans. R. Soc. Lond.、Jablonski (1935) Z. Phys.、Einstein (1917) Phys. Z.、Scully & Zubairy (1997) Quantum Optics、Herzberg (1945) Infrared and Raman Spectra、Long (2002) The Raman Effect、Placzek (1934) Handbuch der Radiologie、Maiman (1960) Nature（红宝石 Cr³⁺ 荧光，宝石学案例）[24ju][24jv][24jw][24jx][24jy][24jz][24ka][24kb][24kc][24ja]
+
+---
+
+## 一、概念与定位
+
+**光谱学仪器的量子基础**研究三类宝石鉴定主力仪器——拉曼光谱仪、FTIR/红外光谱仪、荧光光谱仪——所依赖的量子机制。其共同前提是：分子的振动/转动/电子能级是量子化的，入射光子与分子相互作用后产生三种不同的量子过程——非弹性散射（拉曼）、共振吸收（红外）、或吸收后再辐射（荧光/磷光），仪器读出的谱线位移、强度与寿命由量子力学（能级差、选择定则、跃迁速率）严格决定。
+
+名称词源：*Raman effect* 以 C. V. Raman 命名，指 1928 年发现的非弹性光散射[24ju]；*Fourier-transform infrared (FTIR)* 指用干涉仪取干涉图、再以傅里叶变换还原光谱的仪器方案；*fluorescence*（荧光）由 Stokes 于 1852 年提出，源自矿物萤石（fluor-spar）[24jw]。
+
+本篇须抓住的核心特征：
+
+1. **谱线位移 = 分子内部能级差**：拉曼位移、红外吸收带的位置、荧光发射波长，分别等于振动/转动频率 $\omega_v$（或电子能级差 $\Delta E$）对应的光子能量 $\hbar\omega$，与入射波长无关。
+2. **拉曼散射**：入射光子与分子非弹性散射；极化率张量 $\boldsymbol\alpha$ 随核坐标变化驱动散射振幅；斯托克斯线损失 $\hbar\omega_v$、反斯托克斯线获得 $\hbar\omega_v$，频移即振动频率。
+3. **红外吸收**：分子偶极矩 $\boldsymbol\mu$ 对简正坐标 $Q$ 的导数非零（$\partial\boldsymbol\mu/\partial Q\neq0$）才 IR 活跃，吸收 $\hbar\omega_v$。
+4. **荧光与磷光**：用 Jablonski 图描述（S₀、S₁、T₁）；自发辐射速率由爱因斯坦 A 系数给出，$A\propto |\mathbf d|^2\omega^3$；量子产率与寿命由辐射与非辐射通道竞争决定。
+5. **选择定则与角动量耦合**：电偶极跃迁 $\Delta l=\pm1$、宇称改变、$\Delta J=0,\pm1$、$\Delta m=0,\pm1$（见第16篇）；拉曼与红外的活跃条件由极化率/偶极矩的对称性决定，二者在中心反演分子上互斥。
+
+本主题在体系中的位置：属第六部分「交叉应用——量子力学与宝石学」，是量子力学正统体系对宝石学笔记第四部分量子光学专题的重新组织。它依赖第35篇（光子、相干态、光场量子化）、第16篇（角动量与选择定则）、第13篇（薛定谔方程与定态）；向上承接第23篇（分子结构）的简正坐标与第15篇（谐振子）的能级结构。
+
+---
+
+## 二、数学结构
+
+**符号约定声明**：本篇采用 **SI 单位制**；约化普朗克常数 $\hbar=h/(2\pi)$ 显式写出；角频率 $\omega$（rad/s），波数 $\tilde\nu$（cm⁻¹）；算符加帽（如 $\hat H$）；矢量用粗体（如 $\boldsymbol\alpha$、$\mathbf d$）。物理常数取自 **CODATA 2018**（其中 $h,\hbar,e,k_B,c$ 因 SI 2019 重新定义为精确值，$\varepsilon_0,m_e,a_0$ 为 CODATA 2018 推荐值）。
+
+### 2.1 分子振动态（量子谐振子近似）
+
+在 Born–Oppenheimer 近似下，分子第 $k$ 个简正振动模式近似为频率 $\omega_k$ 的一维量子谐振子（见第15篇），能级
+
+$$
+E_{v_k}=\hbar\omega_k\left(v_k+\tfrac12\right),\qquad v_k=0,1,2,\dots
+\tag{1}
+$$
+
+| 符号 | 含义 | 量纲 |
+|------|------|------|
+| $E_{v_k}$ | 第 $k$ 模式振动能级 | $\mathrm J$ |
+| $\omega_k$ | 简正振动角频率 | $\mathrm{s^{-1}}$ (rad/s) |
+| $v_k$ | 振动量子数 | 无量纲 |
+| $\hbar$ | 约化普朗克常数 | $\mathrm{J\cdot s}$ |
+
+零点能 $\tfrac12\hbar\omega_k$ 表明 $v_k=0$ 仍有振动涨落；相邻能级间距 $\Delta E=\hbar\omega_k$ 为定值。
+
+### 2.2 拉曼散射：Kramers–Heisenberg 含时微扰公式
+
+拉曼散射是光子与分子相互作用的二阶过程。其微分散射截面由 Kramers–Heisenberg 公式给出[24jv]：
+
+$$
+\frac{\mathrm d^2\sigma}{\mathrm d\Omega\,\mathrm d(\hbar\omega_s)}
+=
+\frac{\omega_s}{\omega_i}
+\left|
+\sum_n
+\frac{\langle f|\hat T_2|n\rangle\langle n|\hat T_1|i\rangle}
+{E_i-E_n+\hbar\omega_i+i\Gamma_n/2}
+\right|^2
+\delta\!\left(E_i-E_f+\hbar\omega_i-\hbar\omega_s\right)
+\tag{2}
+$$
+
+| 符号 | 含义 | 量纲 |
+|------|------|------|
+| $\omega_i,\omega_s$ | 入射/散射光子角频率 | $\mathrm{s^{-1}}$ |
+| $|i\rangle,|n\rangle,|f\rangle$ | 分子初态/中间态/末态 | — |
+| $\hat T_1,\hat T_2$ | 入射、散射的跃迁算符（电偶极 $\propto\hat{\mathbf d}\cdot\mathbf E$） | $\mathrm{J}$ 相关 |
+| $E_i,E_n,E_f$ | 对应态能量 | $\mathrm J$ |
+| $\Gamma_n$ | 中间态自然线宽 | $\mathrm{s^{-1}}$ |
+| $\sigma$ | 散射截面 | $\mathrm{m^2}$ |
+
+$\delta$ 函数保证能量守恒：斯托克斯过程 $E_f<E_i$（散射光子损失能量，$\hbar\omega_s=\hbar\omega_i-\Delta E$），反斯托克斯过程 $E_f>E_i$（散射光子获得能量）。在 Born–Oppenheimer 与谐振子近似下，对纯振动拉曼，Placzek 把电子极化率按核坐标展开，得到**跃迁极化率** $(\alpha_{\rho\sigma})_{fi}$；其矩阵元为[24kb][24kc]
+
+$$
+(\alpha_{\rho\sigma})_{fi}
+=
+\left\langle v_f\middle|\left(\frac{\partial\alpha_{\rho\sigma}}{\partial Q}\right)_0 Q+\cdots\middle|v_i\right\rangle .
+\tag{3}
+$$
+
+对基频 $v:0\to1$，因 $\langle1|Q|0\rangle\neq0$，故**拉曼活跃判据**为
+
+$$
+\left(\frac{\partial\alpha_{\rho\sigma}}{\partial Q}\right)_0\neq0 .
+\tag{4}
+$$
+
+| 符号 | 含义 | 量纲 |
+|------|------|------|
+| $\alpha_{\rho\sigma}$ | 极化率张量分量 | 无量纲（SI 中 $\varepsilon_r-1$ 张量） |
+| $Q$ | 简正坐标 | $\mathrm m$ 或约化质量量纲 |
+| $v_i,v_f$ | 初/末振动态量子数 | 无量纲 |
+
+### 2.3 红外吸收：偶极矩选择定则
+
+分子偶极矩按核坐标展开：
+
+$$
+\boldsymbol\mu(Q)=\boldsymbol\mu_0+\left(\frac{\partial\boldsymbol\mu}{\partial Q}\right)_0 Q+\cdots .
+\tag{5}
+$$
+
+红外吸收源于电偶极跃迁矩阵元 $\langle v_f|\hat{\boldsymbol\mu}|v_i\rangle$。基频 $0\to1$ 的矩阵元正比于 $(\partial\boldsymbol\mu/\partial Q)_0\langle1|Q|0\rangle$，故**IR 活跃判据**为
+
+$$
+\left(\frac{\partial\boldsymbol\mu}{\partial Q}\right)_0\neq0 .
+\tag{6}
+$$
+
+| 符号 | 含义 | 量纲 |
+|------|------|------|
+| $\boldsymbol\mu$ | 分子电偶极矩 | $\mathrm{C\cdot m}$ |
+| $(\partial\boldsymbol\mu/\partial Q)_0$ | 平衡位置的偶极矩对简正坐标导数 | $\mathrm{C\cdot m/m}$ |
+
+FTIR 仪器本身用迈克尔逊干涉仪取干涉图、再做傅里叶变换还原谱（属经典光学/信号处理，非量子部分，此处略述）。
+
+### 2.4 荧光与磷光：爱因斯坦 A 系数
+
+两能级间电偶极自发辐射速率（SI 单位制）为[24jy][24jz]
+
+$$
+A_{21}=\frac{\omega_{21}^3\,|\mathbf d_{21}|^2}{3\pi\varepsilon_0\hbar c^3},
+\qquad
+\mathbf d_{21}=\langle2|e\mathbf r|1\rangle .
+\tag{7}
+$$
+
+寿命 $\tau_{21}=1/A_{21}$。辐射跃迁速率正比于跃迁矩平方 $|\mathbf d_{21}|^2$ 与频率立方 $\omega_{21}^3$。
+
+| 符号 | 含义 | 量纲 |
+|------|------|------|
+| $A_{21}$ | 自发辐射速率（爱因斯坦 A 系数） | $\mathrm{s^{-1}}$ |
+| $\omega_{21}$ | 跃迁角频率 $(E_2-E_1)/\hbar$ | $\mathrm{s^{-1}}$ |
+| $\mathbf d_{21}$ | 电偶极跃迁矩阵元 | $\mathrm{C\cdot m}$ |
+| $\varepsilon_0$ | 真空介电常数 | $\mathrm{F/m}$ |
+| $c$ | 光速 | $\mathrm{m/s}$ |
+
+荧光量子产率与寿命由辐射与非辐射通道竞争给出：
+
+$$
+\Phi_F=\frac{k_r}{k_r+k_{nr}},\qquad
+\frac{1}{\tau}=\,k_r+k_{nr},
+\tag{8}
+$$
+
+其中 $k_r=A_{21}$，$k_{nr}$ 为非辐射速率（振动弛豫、内转换、系间窜越等）。
+
+| 符号 | 含义 | 量纲 |
+|------|------|------|
+| $\Phi_F$ | 荧光量子产率 | 无量纲 |
+| $k_r,k_{nr}$ | 辐射/非辐射速率 | $\mathrm{s^{-1}}$ |
+| $\tau$ | 观测寿命 | $\mathrm{s}$ |
+
+### 2.5 选择定则与角动量（承接第16篇）
+
+电偶极跃迁的普遍选择定则（见第16篇角动量与自旋）：$\Delta l=\pm1$、宇称必须改变、$\Delta J=0,\pm1$（$J=0\leftrightarrow0$ 禁戒）、$\Delta m=0,\pm1$[24ka]。拉曼散射的转动部分因极化率为二阶张量，选择定则为 $\Delta J=0,\pm2$（不改变宇称）；振动拉曼的活跃条件由式 (4) 的对称性（群论）决定，与红外 (6) 形成互补/互斥关系（见第五节）。
+
+本篇不展开群论推导，仅给出结果：对中心反演对称分子，IR 活跃模式必为 u（奇）对称、Raman 活跃模式必为 g（偶）对称，故同一简正模式不能二者皆活（互斥规则）。
+
+---
+
+## 三、物理量与特征尺度
+
+本篇所用常数取自 **CODATA 2018**（与 SI 2019 导出值一致，$h,\hbar,e,k_B,c$ 为定义精确值）：
+
+| 物理量 | 符号 | 数值 | 适用条件 |
+|--------|------|------|----------|
+| 普朗克常数 | $h$ | $6.62607015\times10^{-34}\ \mathrm{J\cdot s}$（精确） | SI 2019 |
+| 约化普朗克常数 | $\hbar$ | $1.054571817\times10^{-34}\ \mathrm{J\cdot s}$（精确） | SI 2019 |
+| 光速 | $c$ | $299792458\ \mathrm{m/s}$（精确） | 定义值 |
+| 真空介电常数 | $\varepsilon_0$ | $8.8541878128\times10^{-12}\ \mathrm{F/m}$ | CODATA 2018 |
+| 基本电荷 | $e$ | $1.602176634\times10^{-19}\ \mathrm C$（精确） | SI 2019 |
+| 电子质量 | $m_e$ | $9.1093837015\times10^{-31}\ \mathrm{kg}$ | CODATA 2018 |
+| 玻尔兹曼常数 | $k_B$ | $1.380649\times10^{-23}\ \mathrm{J/K}$（精确） | SI 2019 |
+| 玻尔半径 | $a_0$ | $5.29177210903\times10^{-11}\ \mathrm m$ | CODATA 2018 |
+
+典型特征尺度与量子效应判据：
+
+| 物理量 | 量级 | 说明 |
+|--------|------|------|
+| 振动角频率 $\omega_v$ | $10^{13}\!-\!10^{14}\ \mathrm{s^{-1}}$（约 $300\!-\!3500\ \mathrm{cm^{-1}}$） | 拉曼/红外指纹区 |
+| 转动角频率 | $10^{11}\!-\!10^{12}\ \mathrm{s^{-1}}$ | 转动拉曼/微波 |
+| 电子跃迁角频率 | $10^{14}\!-\!10^{15}\ \mathrm{s^{-1}}$（可见/紫外） | 荧光/吸收 |
+| 室温 $k_BT$（300 K） | $4.142\times10^{-21}\ \mathrm J=25.85\ \mathrm{meV}=208.5\ \mathrm{cm^{-1}}$ | 与振动间距比较的基准 |
+| 热布居 $n_v=1/(e^{\hbar\omega_v/k_BT}-1)$ | $1332\ \mathrm{cm^{-1}}$ 时 $n_v\approx0.0017$；$520\ \mathrm{cm^{-1}}$ 时 $n_v\approx0.090$ | 决定反斯托克斯线强度 |
+
+**量子效应显著判据**：当能级间距 $\Delta E$ 与 $k_BT$ 之比 $\gg1$ 时，能级离散性显著、热布居集中于低能级（振动能级在室温下近似只占据 $v=0$）；比值 $\sim1$ 时（部分转动/低频振动）需考虑热分布。室温下 $k_BT\approx208.5\ \mathrm{cm^{-1}}$，故大多数振动模式（$\gtrsim 500\ \mathrm{cm^{-1}}$）的量子化显著，反斯托克斯线很弱；低波数模式（如 $520\ \mathrm{cm^{-1}}$）已有可观热布居。
+
+---
+
+## 四、实验基础与观测证据
+
+1. **拉曼效应（1928）**：Raman 与 Krishnan 用强太阳光经望远镜物镜会聚、以互补滤光片观察，发现 dust-free 液体/气体的散射光中除与入射同波长的瑞利散射线外，还存在「频移后的散射光」，其频移与入射波长无关、等于分子振动频率，证明这是**非弹性散射**而非荧光[24ju]。该实验直接确立 $\hbar\omega_s=\hbar\omega_i-\hbar\omega_v$（斯托克斯）与 $\hbar\omega_s=\hbar\omega_i+\hbar\omega_v$（反斯托克斯）两族线。
+2. **拉曼散射的量子论（1925）**：Kramers 与 Heisenberg 的色散公式（式 (2)）在对应原理下预言了非弹性散射截面，早于拉曼实验、并与之自洽，是拉曼效应的量子理论基础[24jv]；Placzek 于 1934 年给出系统化的分子拉曼散射量子理论[24kc]，Long 于 2002 年给出统一处理[24kb]。
+3. **红外吸收**：分子红外吸收带（振动/转动）与拉曼散射互为补充的观测自 20 世纪早期建立；二者选择定则的互补/互斥关系由 Herzberg 系统总结[24ka]。
+4. **荧光与 Stokes 定律（1852）**：Stokes 用奎宁溶液在紫外照射下观察到发射光波长**长于**激发光（即发射能量低于吸收能量），将其命名为 fluorescence，并提出 *Stokes 定律*——荧光发射波长一般大于激发波长（能量守恒下损失于非辐射弛豫）[24jw]。
+5. **Jablonski 定量模型（1935）**：Jablonski 用能级图与速率方程定量描述吸收、荧光、磷光的寿命与量子产率，奠定分子光物理基础[24jx]（三线态本质后由 Terenin 与 Lewis–Kasha 于 1943–1944 年确认）。
+6. **宝石学案例——红宝石 Cr³⁺（1960）**：Maiman 在红宝石（刚玉中 Cr³⁺）中实现受激发射（首台激光器），其 R 线荧光波长约 694.3 nm，证明 Cr³⁺ 的 $^2\mathrm E\to{}^4\mathrm A_2$ 辐射是宝石学中可观测的量子发光过程；该跃迁为自旋禁戒，辐射寿命达毫秒量级，使红宝石成为高效荧光体与激光增益介质[24ja]。
+
+**误读纠正**（用 blockquote 突出）：
+
+> 拉曼散射常被通俗说成「光子把能量交给分子后又拿回来」。严格表述为：它是光子与分子整体的二阶相互作用，末态分子振动/转动能级改变 $\pm\hbar\omega_v$，散射光子能量相应改变；瑞利线（$\Delta E=0$）才是弹性散射。Raman 原始论文已明确指出该效应「feebleness」且具强偏振，以此区别于荧光[24ju]。
+
+> 「反斯托克斯线更强 = 分子从环境吸热」是通俗但易误导的说法。严格表述：反斯托克斯散射对应分子初态处于 $v>0$ 的热布居能级，其强度由玻尔兹曼因子 $n_v$（式 (3) 节）决定；它不是「吸收环境热再发光」，而是热布居上能级的散射贡献。
+
+> 荧光与磷光常被混用。严格区分：荧光来自单重态 S₁→S₀（典型 ns 量级），磷光来自三重态 T₁→S₀（典型 ms–s 量级，因自旋禁戒使 $k_r$ 极小）；二者寿命差可达 $10^6$ 倍（见第六节数值）。
+
+---
+
+## 五、分类体系与物理机制
+
+### 5.1 三类仪器/过程对比
+
+| 类型 | 量子机制 | 活跃条件 | 选择定则 | 读出量 |
+|------|----------|----------|----------|--------|
+| 拉曼散射 | 非弹性散射（极化率驱动） | $(\partial\boldsymbol\alpha/\partial Q)_0\neq0$ | 振动 Raman：极化率导数非零；转动 Raman $\Delta J=0,\pm2$ | 频移 $\Delta\tilde\nu=\tilde\nu_i-\tilde\nu_s$ |
+| 红外吸收（FTIR） | 共振吸收（偶极驱动） | $(\partial\boldsymbol\mu/\partial Q)_0\neq0$ | 电偶极 $\Delta J=\pm1$ 等 | 吸收带位置/强度 |
+| 荧光/磷光 | 吸收后再辐射 | 需要允许的吸收跃迁 + 辐射通道 | 电偶极选择定则；磷光经 ISC 破自旋禁戒 | 发射波长、寿命、量子产率 |
+
+### 5.2 互斥规则（mutual exclusion rule）
+
+对具**中心反演对称**的分子（如 CO₂、N₂、苯环中心），简正坐标 $Q$ 取 g（偶）或 u（奇）宇称；偶极矩 $\boldsymbol\mu$ 为 u、极化率张量 $\boldsymbol\alpha$ 为 g。IR 活跃要求积分 $\langle v_f|\boldsymbol\mu|v_i\rangle$ 为 g（即 $Q$ 为 u），Raman 活跃要求 $\langle v_f|\boldsymbol\alpha|v_i\rangle$ 为 g（即 $Q$ 为 g）。同一简正模式不能同时为 u 与 g，故**IR 活跃的模式必 Raman 非活跃，反之亦然**——这是拉曼与红外互补判别分子对称性的量子依据[24ka]。例：线性 CO₂ 的对称伸缩（g）Raman 活跃而 IR 沉默，反对称伸缩（u）IR 活跃而 Raman 沉默。
+
+### 5.3 概念辨析与失效边界
+
+- **拉曼 vs 荧光**：拉曼是散射（入射光子不消失、仅改变能量），荧光是吸收后再辐射（存在真实的电子激发与寿命）。二者线型、偏振、时间行为不同；Raman 原文已作区分[24ju]。
+- **斯托克斯 vs 反斯托克斯**：同一振动模式的两条拉曼线，分别来自分子初态 $v=0$ 与 $v>0$ 热布居；频移数值相等、符号相反。
+- **荧光 vs 磷光**：单重态 vs 三重态末态，寿命 ns vs ms（见 5.1 与第四节）。
+- **「选择定则禁戒」不是绝对为零**：禁戒仅指一级电偶极矩阵元为零；振动-电子耦合、不对称微扰、表面增强等可开放弱通道（如 SERS）。
+- **失效边界**：经典极限（强场、大转动/振动量子数）下量子台阶模糊；谐振子近似在大幅振动时因非谐性失效；凝聚相/表面体系超出纯分子量子论，需额外模型。
+
+---
+
+## 六、典型系统与可解模型
+
+### 6.1 拉曼谱线型（模型 + 脚本 1）
+
+取入射激光 $\lambda_0=785\ \mathrm{nm}$（波数 $\tilde\nu_0=12738.9\ \mathrm{cm^{-1}}$，宝石学便携拉曼常用），设若干振动模式以洛伦兹线型 $(\gamma/2)^2/[(x-x_0)^2+(\gamma/2)^2]$ 叠加。斯托克斯带中心位于 $\tilde\nu_0-\tilde\nu_v$、反斯托克斯带中心位于 $\tilde\nu_0+\tilde\nu_v$；强度标度取 $(\tilde\nu_s)^4$ 乘布居因子（斯托克斯 $\times(n_v+1)$，反斯托克斯 $\times n_v$），其中 $n_v=1/(e^{\hbar\omega_v/k_BT}-1)$。
+
+脚本 `code/45_光谱学仪器的量子基础_拉曼谱.py` 直接构建该谱并输出图（式 (2)–(4) 对应）。**数值结果（脚本输出回写）**：在 $T=300\ \mathrm K$（$k_BT=208.5\ \mathrm{cm^{-1}}$）下：
+- 金刚石一阶拉曼位移 $\tilde\nu_v=1332\ \mathrm{cm^{-1}}$（宝石学鉴别钻石与仿制品的公认实验值）：$n_v=0.0017$，反斯托克斯/斯托克斯强度比 $=3.89\times10^{-3}$（即反斯托克斯约为主峰的 0.4%，与 $1332\gg208.5\ \mathrm{cm^{-1}}$ 一致）；
+- 低频示意模式 $520\ \mathrm{cm^{-1}}$：$n_v=0.090$，反斯托克斯/斯托克斯比 $=0.115$（11.5%，因热布居更显著）；
+- 高频示意模式 $2900\ \mathrm{cm^{-1}}$：$n_v\approx0$，反斯托克斯/斯托克斯比 $=5.8\times10^{-6}$（基本不可见）。
+
+详见 `figures/45_光谱学仪器的量子基础_图1_拉曼谱.svg`。
+
+![Raman spectrum: Stokes and anti-Stokes bands as a function of scattered wavenumber for a 785 nm excitation](figures/45_光谱学仪器的量子基础_图1_拉曼谱.svg)
+
+### 6.2 爱因斯坦 A 系数与荧光寿命（脚本 2）
+
+由式 (7) 计算自发辐射速率。以**氢原子 2p→1s（Lyman-α，$\lambda=121.567\ \mathrm{nm}$）**作标定：取电偶极矩阵元幅值 $|\mathbf d|=0.7449\,e\,a_0\approx1.89\ \mathrm D$（约化矩阵元的已知结果），得
+
+$$
+A_{2p\to1s}=6.258\times10^{8}\ \mathrm{s^{-1}},\qquad
+\tau=1/A=1.598\ \mathrm{ns},
+\tag{9}
+$$
+
+与教科书给出的氢 2p 寿命约 $1.6\ \mathrm{ns}$ 一致，验证了式 (7) 的 SI 形式与数值常数[24jz]。
+
+对固定 $1\ \mathrm D$ 跃迁偶极矩，A 随波长 $\lambda^{-3}$ 增长（图 2）：300 nm 处 $A\approx1.2\times10^{7}\ \mathrm{s^{-1}}$（$\tau\approx86\ \mathrm{ns}$），550 nm 处 $A\approx1.9\times10^{6}\ \mathrm{s^{-1}}$（$\tau\approx0.53\ \mathrm{\mu s}$），700 nm 处 $A\approx9\times10^{5}\ \mathrm{s^{-1}}$（$\tau\approx1.1\ \mathrm{\mu s}$）。可见允许电偶极跃迁的寿命落在 ns–µs 区间，波长越短、偶极矩越大则越短。
+
+**宝石学对照**：红宝石 Cr³⁺ 的 R 线属自旋禁戒跃迁（$^2\mathrm E\to{}^4\mathrm A_2$ 涉及自旋翻转），其辐射速率 $k_r$ 比允许跃迁小 $10^3\!-\!10^4$ 倍，辐射寿命达毫秒量级（约 3 ms）[24ja]。这正是红宝石可作强荧光体与激光增益介质的原因——长寿命使激发态在自发辐射前能积累较高布居。荧光（ns，允许）与磷光（ms，禁戒）的指数衰减在同一时间轴上相差约 $1.9\times10^{6}$ 倍（图 3）。Jablonski 图（S₀/S₁/T₁ 与吸收、内转换/振动弛豫、荧光、系间窜越、磷光）见 图 4。
+
+脚本 `code/45_光谱学仪器的量子基础_荧光与寿命.py` 计算并绘制图 2–图 4（式 (7)–(8) 对应）。
+
+![Einstein A coefficient (and lifetime tau) versus emission wavelength for a fixed transition dipole moment of 1 D; the H 2p to 1s point is shown for calibration](figures/45_光谱学仪器的量子基础_图2_自发辐射速率.svg)
+
+![Fluorescence (ns) and phosphorescence (ms) exponential decays on a common logarithmic time axis](figures/45_光谱学仪器的量子基础_图3_荧光磷光衰减.svg)
+
+![Jablonski diagram: absorption, internal conversion / vibrational relaxation, fluorescence, intersystem crossing, phosphorescence](figures/45_光谱学仪器的量子基础_图4_Jablonski图.svg)
+
+> 注：脚本使用隔离 venv 的 numpy + matplotlib（`Agg` 后端），未引入 scipy；SVG 图注均为英文。
+
+---
+
+## 七、历史脉络与学术争议
+
+| 年份 | 人物 | 贡献 | 文献 |
+|------|------|------|------|
+| 1852 | Stokes | 发现荧光并提出 Stokes 定律（发射波长 > 激发波长） | [24jw] |
+| 1900s–1910s | Planck / 分子光谱学 | 分子振动/转动能级量子化的早期证据 | 背景 |
+| 1917 | Einstein | 受激/自发辐射的 A、B 系数理论 | [24jy] |
+| 1925 | Kramers & Heisenberg | 色散公式，含非弹性（拉曼型）散射的量子理论 | [24jv] |
+| 1928 | Raman & Krishnan | 实验发现拉曼散射（非弹性光散射） | [24ju] |
+| 1933/1935 | Jablonski | Jablonski 图与光物理速率方程（1933 Nature 短札，1935 Z. Phys. 详述） | [24jx] |
+| 1934 | Placzek | 《Rayleigh-Streuung und Raman-Effekt》系统量子理论 | [24kc] |
+| 1943–1944 | Terenin / Lewis–Kasha | 确认磷光来自三重态（T₁） | 背景 |
+| 1945 | Herzberg | 《Infrared and Raman Spectra》总结选择定则与互斥规则 | [24ka] |
+| 1960 | Maiman | 红宝石 Cr³⁺ 受激发射（首台激光器） | [24ja] |
+| 2002 | Long | 《The Raman Effect》统一处理拉曼散射量子论 | [24kb] |
+
+**提出动机**：20 世纪初分子光谱已显示离散吸收带，但「散射光为何会出现与入射不同频率的成分」长期无理论解释。Kramers–Heisenberg（1925）在对应原理下预言了非弹性散射截面，Raman 实验（1928）提供了直接证据，Placzek（1934）进而给出分子层面的极化率理论[24jv][24ju][24kc]。荧光方面，Stokes（1852）确立现象与能量关系，Jablonski（1935）把它转为定量光物理[24jw][24jx]。
+
+**当前争议与开放问题**（并列各方，不作裁决）：
+
+- **拉曼散射的「经典极化率」与「量子 Kramers–Heisenberg」是否对立**：一方强调 Placzek 近似把量子公式化简为经典极化率导数（式 (3)–(4)），看似「经典」；另一方强调式 (2) 本身是严格的二阶含时微扰结果，经典近似仅在低频、无共振时成立。本笔记立场：二者是同一理论的近似层级关系，并非对立；共振拉曼必须回到式 (2) 的虚态求和。
+- **Jablonski 图的命名史学争议**：有文献指出 Perrin（1929）早于 Jablonski 提出亚稳态概念，故应称 *Perrin–Jablonski 图*；主流仍称 *Jablonski 图*。本笔记采用主流命名，但记录该史学分歧，不站队。
+- **荧光/磷光寿命的多指数性**：理想指数衰减（式 (8)）假设在真实多色中心、能量转移、分布环境下常被多指数或连续分布取代；这属于模型适用边界，非理论矛盾。
+
+本节内容可能随研究进展更新。
+
+---
+
+## 八、参考文献
+
+- [24ju] Raman C. V., Krishnan K. S. (1928). A new type of secondary radiation. *Nature* **121**, 501–502. DOI: 10.1038/121501c0 — 拉曼效应首篇实验报告（非弹性光散射，频移等于分子振动频率）。 [已核实]（第 45 篇）
+
+- [24jv] Kramers H. A., Heisenberg W. (1925). Über die Streuung von Strahlung durch Atome. *Zeitschrift für Physik* **31**, 681–708. DOI: 10.1007/BF02980624 — Kramers–Heisenberg 色散公式，含非弹性（拉曼型）散射的量子理论。 [已核实]（第 45 篇）
+
+- [24jw] Stokes G. G. (1852). On the change of refrangibility of light. *Philosophical Transactions of the Royal Society of London* **142**, 463–562. DOI: 10.1098/rstl.1852.0022 — 荧光现象与 Stokes 定律（发射波长一般长于激发波长）。 [已核实]（第 45 篇）
+
+- [24jx] Jablonski A. (1935). Über den Mechanismus der Photolumineszenz von Farbstoffphosphoren. *Zeitschrift für Physik* **94**, 38–46. — Jablonski 图与光物理速率方程的定量建立（原始文献，早于 DOI 体系）。 [已核实]（第 45 篇）
+
+- [24jy] Einstein A. (1917). Zur Quantentheorie der Strahlung. *Physikalische Zeitschrift* **18**, 121–128. — 受激/自发辐射的 A、B 系数理论（早期刊本，早于 DOI 体系）。 [已核实]（第 45 篇）
+
+- [24jz] Scully M. O., Zubairy M. S. (1997). *Quantum Optics*. Cambridge University Press, Cambridge. — 自发辐射与爱因斯坦 A 系数的标准教材推导（A 级）。 [已核实]（第 45 篇）
+
+- [24ka] Herzberg G. (1945). *Molecular Spectra and Molecular Structure, Vol. II: Infrared and Raman Spectra of Polyatomic Molecules*. Van Nostrand, New York. — IR/Raman 选择定则与互斥规则的标准来源（A 级）。 [已核实]（第 45 篇）
+
+- [24kb] Long D. A. (2002). *The Raman Effect: A Unified Treatment of the Theory of Raman Scattering by Molecules*. Wiley, Chichester. DOI: 10.1002/0470845767 — 极化率导数选择定则与 Placzek 跃迁极化率（A 级教材）。 [已核实]（第 45 篇）
+
+- [24kc] Placzek G. (1934). Rayleigh-Streuung und Raman-Effekt. In: Marx E. (ed.) *Handbuch der Radiologie*, Bd. VI, Teil 2, 205–374. Akademische Verlagsgesellschaft, Leipzig. — 拉曼散射的量子理论奠基性综述（S/A 级原始文献）。 [已核实]（第 45 篇）
+</script>
+<script>
+// 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏
+function protectMath(src){
+  var blocks = [];
+  // 先抽块级 $$...$$（可跨行）
+  src = src.replace(/\$\$([\s\S]+?)\$\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  // 再抽行内 $...$（不含换行、内部不含 $）
+  src = src.replace(/\$([^\$\n]+?)\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  return { src: src, blocks: blocks };
+}
+
+function boot(){
+  var raw = document.getElementById('src').textContent;
+  // 记录标题锚点（在保护公式之前，避免影响）
+  var md = raw.replace(/^(#{1,3})\s+(.+)$/gm, function(m, h, t){
+    var id = 'h-' + t.replace(/[^\w一-龥]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+    return h + ' <span id="' + id + '"></span>' + t;
+  });
+
+  // 保护数学公式
+  var prot = protectMath(md);
+  md = prot.src;
+
+  document.getElementById('content').innerHTML = marked.parse(md);
+
+  // 还原数学公式占位符
+  var content = document.getElementById('content');
+  var html = content.innerHTML.replace(/%%MATH(\d+)%%/g, function(m, n){
+    return prot.blocks[+n];
+  });
+  content.innerHTML = html;
+
+  // 生成目录
+  var hs = document.querySelectorAll('#content h2, #content h3');
+  var toc = document.getElementById('toc'), tocHtml = '';
+  hs.forEach(function(h){
+    var sp = h.querySelector('span[id]');
+    var id = sp ? sp.id : '';
+    var cls = h.tagName === 'H3' ? 'sub' : '';
+    tocHtml += '<a class="' + cls + '" href="#' + id + '">' + h.textContent.trim() + '</a>';
+  });
+  toc.innerHTML = tocHtml;
+
+  // 图片路径：正文里写 figures/xxx.svg
+  document.querySelectorAll('#content img').forEach(function(im){
+    if(/^figures\//.test(im.getAttribute('src')||'')) return;
+  });
+
+  if (window.renderMathInElement) {
+    renderMathInElement(document.getElementById('content'), {
+      delimiters:[
+        {left:'$$', right:'$$', display:true},
+        {left:'$',  right:'$',  display:false}
+      ],
+      ignoredTags:['script','noscript','style','textarea','pre','code'],
+      throwOnError:false
+    });
+  }
+
+  // 滚动高亮
+  var links = [].slice.call(toc.querySelectorAll('a'));
+  window.addEventListener('scroll', function(){
+    var cur = null;
+    hs.forEach(function(h){
+      if (h.getBoundingClientRect().top < 120) cur = h;
+    });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if (cur){
+      var sp = cur.querySelector('span[id]');
+      var act = toc.querySelector('a[href="#' + (sp?sp.id:'') + '"]');
+      if (act) act.classList.add('active');
+    }
+  }, {passive:true});
+}
+if (window.marked) boot();
+else window.addEventListener('load', boot);
+</script>
+</body>
+</html>

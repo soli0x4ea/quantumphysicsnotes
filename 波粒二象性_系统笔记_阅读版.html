@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>波粒二象性</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2024; --ink-dim:#5b6570;
+  --line:#dfe3e8; --line-soft:#eef0f3; --accent:#1f5fa8; --accent-soft:#e8f0fa;
+  --amber-bg:#fff8e6; --amber-line:#e5c168; --amber-ink:#6b5200;
+  --green:#1c7a4a; --green-bg:#e8f5ee; --red:#b03030; --red-bg:#fdecec;
+  --code-bg:#f6f7f9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,serif;
+  background:var(--bg); color:var(--ink); line-height:1.85; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.layout{display:flex; max-width:1280px; margin:0 auto; gap:28px; padding:0 24px}
+/* 侧栏目录 */
+.toc{
+  width:246px; flex-shrink:0; position:sticky; top:0; height:100vh;
+  overflow-y:auto; padding:28px 0 40px; font-family:"Noto Sans SC","PingFang SC",sans-serif;
+}
+.toc h4{font-size:11px; letter-spacing:1.6px; color:var(--ink-dim); text-transform:uppercase;
+  margin:0 0 12px; padding-left:2px; font-weight:600}
+.toc a{
+  display:block; font-size:13px; color:var(--ink-dim); text-decoration:none;
+  padding:5px 10px; border-left:2px solid transparent; line-height:1.5;
+}
+.toc a:hover{color:var(--accent); background:var(--accent-soft)}
+.toc a.sub{padding-left:24px; font-size:12.5px}
+.toc a.active{color:var(--accent); border-left-color:var(--accent); background:var(--accent-soft); font-weight:600}
+/* 正文 */
+.main{flex:1; min-width:0; padding:28px 0 120px}
+.paper{background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  padding:48px 56px; box-shadow:0 1px 3px rgba(16,24,40,.05)}
+h1{font-size:27px; line-height:1.45; margin:0 0 18px; letter-spacing:.3px; font-weight:700}
+h2{font-size:20px; margin:52px 0 18px; padding-bottom:9px; border-bottom:1.5px solid var(--ink);
+  letter-spacing:.3px}
+h3{font-size:16.5px; margin:32px 0 12px; color:var(--accent); font-weight:600}
+h4{font-size:15px; margin:22px 0 10px; font-weight:600}
+p{margin:0 0 15px; text-align:justify}
+blockquote{
+  margin:18px 0; padding:13px 18px; background:var(--amber-bg);
+  border-left:3px solid var(--amber-line); border-radius:0 4px 4px 0; color:var(--amber-ink);
+}
+blockquote p{margin:0 0 8px} blockquote p:last-child{margin:0}
+blockquote strong{color:#4a3800}
+ul,ol{margin:0 0 15px; padding-left:26px}
+li{margin:6px 0}
+table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14px;
+  font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th{background:#f0f2f5; text-align:left; padding:9px 12px; border:1px solid var(--line); font-weight:600}
+td{padding:9px 12px; border:1px solid var(--line); vertical-align:top}
+tbody tr:nth-child(even){background:#fafbfc}
+code{background:var(--code-bg); padding:2px 6px; border-radius:3px; font-size:13.5px;
+  font-family:"SF Mono",Menlo,Consolas,monospace}
+pre{background:var(--code-bg); padding:14px 16px; border-radius:5px; overflow-x:auto; margin:16px 0;
+  border:1px solid var(--line-soft)}
+pre code{background:none; padding:0}
+hr{border:none; border-top:1px solid var(--line-soft); margin:34px 0}
+strong{font-weight:700; color:#0f1419}
+a{color:var(--accent)}
+img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6px; background:#fff}
+.katex-display{margin:20px 0; overflow-x:auto; overflow-y:hidden; padding:2px 0}
+.katex{font-size:1.045em}
+.tag-note{font-family:"Noto Sans SC","PingFang SC",sans-serif; font-size:12px; color:var(--ink-dim);
+  margin-top:40px; padding-top:16px; border-top:1px solid var(--line-soft); line-height:1.9}
+@media(max-width:900px){
+  .toc{display:none}
+  .paper{padding:28px 22px}
+  .layout{padding:0 12px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc"><h4>目录</h4><div id="toc"></div></nav>
+  <main class="main"><article class="paper" id="content"></article></main>
+</div>
+
+<script type="text/plain" id="src">
+# 波粒二象性
+
+> **分类归属：第一部分 量子行为与基础概念 · 数学程度：L2（计算层）· 前置依赖：第 1 篇《量子行为》**
+>
+> **验证依据**：de Broglie (1924/1925)、Einstein (1905) [24cz 之前的插入条目见本篇文末；爱因斯坦光量子原始论文已核实]、Compton (1923)、Davisson & Germer (1927)、Tonomura (1989)、CODATA (2022)、Feynman Lectures Vol. III [主序列 #25]——逐条回溯核实，见第八节。
+
+---
+
+## 一、概念与定位
+
+第 1 篇确立了"概率幅相加"这一合成律，但刻意回避了一个问题：**概率幅沿哪个变量振荡？** 水波沿空间以波长 $\lambda$ 振荡，子弹没有振荡。本篇补上这块基石：德布罗意关系——对任何自由粒子（动量 $p$、能量 $E$），其概率幅是波长
+
+$$ \lambda = \frac{h}{p}, \qquad \omega = \frac{E}{\hbar} \tag{1} $$
+
+的波。这两个等式把爱因斯坦对光子给出的 $E=h\nu$、$p=h/\lambda$ **推广到一切物质**，是波动力学的直接源头（薛定谔 1926 年正是从该关系出发寻找波动方程，见第 13 篇）。
+
+**本篇的叙事主线**：关系 (1) 的一半（$E=h\nu$）来自光（1905，光量子假说），另一半的普适性来自物质（1924，德布罗意）。实验检验依次是：康普顿散射（光子有动量，第 5 篇详述）、戴维孙–革末电子衍射（电子有波长）。两条支线（光的粒子性、物质的波动性）在本篇汇合成"波粒二象性"这一总括概念——但要注意，第 9 篇之后的现代观点里并不存在"有时是波、有时是粒子"的切换：**量子客体始终按概率幅演化（波的一面），而探测始终返回整份量子（粒子的一面）**。"二象性"是史前术语，本篇保留其历史含义，并在第五节给出更准确的现代表述。
+
+## 二、数学结构
+
+### 2.1 平面波与德布罗意关系的相容性
+
+自由粒子的概率幅取平面波形式
+
+$$ \psi(x,t) = A\,e^{i(kx-\omega t)}, \tag{2} $$
+
+要求它携带正确的经典量：动量 $p=\hbar k=h/\lambda$、能量 $E=\hbar\omega$——这正是式 (1)。推导只有一步：波矢 $k$ 的定义是相位随空间的变化率，$k=\partial(\text{相位})/\partial x$；对平面波 (2) 相位为 $kx-\omega t$，故 $k$ 为常数。第 12 篇将证明 $\hat p=-i\hbar\,\partial/\partial x$ 作用于 (2) 得 $\hbar k$，从而 $p=\hbar k$ 不再是假设而是算符定义的推论。
+
+### 2.2 非相对论粒子的波长公式
+
+对静止质量 $m$、经电压 $V$ 加速（初速为零）的粒子，非相对论动能 $E_k=eV=\dfrac{p^2}{2m}$，故
+
+$$ p=\sqrt{2meV}, \qquad \lambda = \frac{h}{\sqrt{2meV}} = \frac{h}{\sqrt{2me}}\cdot\frac{1}{\sqrt{V}}. \tag{3} $$
+
+代入常数：$h/\sqrt{2m_e e}=6.626\,070\,15\times10^{-34}/\sqrt{2\times9.109\,383\,7\times10^{-31}\times1.602\,176\,634\times10^{-19}}=1.226\,39\times10^{-9}\ \text{V}^{1/2}\!\cdot\text{m}$。因此
+
+$$ \lambda\,[\text{nm}] = \frac{1.226\,39}{\sqrt{V[\text{V}]}}. \tag{4} $$
+
+$V=54\ \text{V}$（戴维孙–革末主峰电压）时 $\lambda=0.167\ \text{nm}$；$V=5\times10^4\ \text{V}$ 时 $\lambda=5.49\ \text{pm}$（与第 1 篇脚本一致）。
+
+**相对论修正的量级**：当 $eV$ 接近 $m_ec^2$（电子为 511 keV）时需用相对论动能 $E_k=\sqrt{(pc)^2+(m_ec^2)^2}-m_ec^2$，解出 $pc=\sqrt{E_k(E_k+2m_ec^2)}$。$V=50\ \text{kV}$ 时 $E_k/m_ec^2\approx0.098$，相对论波长比非相对论小约 $2.4\%$（解析：$pc$ 从 $\sqrt{2m_ec^2E_k}=226.1\ \text{keV}$ 升至 $\sqrt{E_k(E_k+2m_ec^2)}=231.5\ \text{keV}$，波长反比缩短；数值验证见脚本）；教学实验（百伏级）完全可忽略，电镜（十万伏级）必须计入。
+
+### 2.3 群速度与粒子速度
+
+单一频率的平面波 (2) 无法表示局域粒子（第 7 篇主题），真正对应粒子的是波包。波包峰值以**群速度**移动：
+
+$$ v_g=\frac{d\omega}{dk}=\frac{dE}{dp}. \tag{5} $$
+
+非相对论时 $E=p^2/2m$，$v_g=p/m=v$——群速度恰等于粒子速度，德布罗意关系与牛顿力学在这一点上自洽。推导（不跳步）：$dE/dp=d(p^2/2m)/dp=p/m$，而 $p=mv$，故 $v_g=v$。相对论时 $E=\sqrt{p^2c^2+m^2c^4}$，$dE/dp=pc^2/E=v$，同样自洽。本篇只需要"自洽"这个结论；波包的完整数学（扩散、相速度 $v_p=\omega/k=E/p=c^2/v>v$）在第 7 篇展开。
+
+### 2.4 频率的不确定性（历史注记）
+
+式 (1) 中 $\omega=E/\hbar$ 的 $E$ 取总能量还是动能，德布罗意当年用相对论内部时钟论证取**总能量**（静止质量也贡献频率 $m_0c^2/h$，即所谓康普顿频率）。这一频率至今没有任何实验直接测量（周期 $\sim10^{-20}\ \text{s}$），所有可观测效应只依赖相位差。本套笔记沿用 $E$ 为哈密顿量本征值的现代约定（第 13 篇），在涉及总能量口径时明确标注。
+
+## 三、物理量与特征尺度
+
+（数值以 CODATA 2022 为准；$h$ 与 $e$ 为精确定义值，$m_e=9.109\,383\,7139(28)\times10^{-31}\ \text{kg}$，相对不确定度 $3.1\times10^{-10}$。）
+
+| 客体 | 动量 | 德布罗意波长 | 与可分辨结构之比 |
+|------|------|--------------|------------------|
+| 电子（54 V，D–G 主峰） | $4.0\times10^{-24}\ \text{kg·m/s}$ | $0.167\ \text{nm}$ | 镍晶面间距 $d_{111}\approx0.203\ \text{nm}$，同量级 → 强衍射 |
+| 电子（50 kV，电镜） | $1.2\times10^{-22}\ \text{kg·m/s}$ | $5.4\ \text{pm}$（含相对论修正） | 远小于晶格 → 高分辨成像 |
+| 中子（热中子 25 meV） | $7.0\times10^{-24}\ \text{kg·m/s}$ | $0.18\ \text{nm}$ | 与原子间距同量级 → 凝聚态结构探针（第 21 篇） |
+| He 原子（65 K 热束） | — | $\sim0.06\ \text{nm}$ | 原子衍射 |
+| C₆₀ 分子（125 km/s） | $2.3\times10^{-22}\ \text{kg·m/s}$ | $\sim2.9\ \text{pm}$ | 分子直径 $\sim1\ \text{nm}$ 的 1/350，仍可干涉（1999） |
+| 棒球（145 g，40 m/s） | $5.8\ \text{kg·m/s}$ | $1.1\times10^{-34}\ \text{m}$ | 比普朗克长度还小 9 个量级 → 原则上不可观测 |
+
+**尺度结论**：$\lambda=h/p$ 中 $h\sim10^{-34}$ 使宏观动量对应的波长彻底不可观测；而电子动量 $\sim10^{-24}\ \text{kg·m/s}$ 恰好把波长送到原子尺度——这不是巧合，正是"量子效应在原子尺度显现"的定量表述。
+
+## 四、实验基础与观测证据
+
+### 4.1 光的一侧：从光量子假说到康普顿散射
+
+1905 年爱因斯坦提出光量子（后称光子）：光的能量 $E=h\nu$ 逐份集中于传播方向上局域的量子，解释光电效应（第 4 篇）。但"光量子有**动量** $p=h/\lambda$"直到 1923 年才被判决性实验确立：康普顿用 X 射线散射石墨，发现散射线中出现波长**变长**的成分，且位移与散射角满足 $\Delta\lambda=\dfrac{h}{m_ec}(1-\cos\theta)$——只有把 X 光当作携带动量 $h/\lambda$ 的粒子与静止电子做弹性碰撞，才能导出该式（完整推导与数据在第 5 篇）。1925 年 Bothe–Geiger 符合实验与 Compton–Simon 云室实验进一步证明：每一次散射事件中，光量子方向与反冲电子方向**逐个事件**守恒，推翻了玻尔–克喇末–斯莱特（BKS）的统计守恒方案。至此"光的粒子性"无可置疑。
+
+### 4.2 物质的一侧：戴维孙–革末实验（1927）
+
+**实验设置**：50 V 左右的低能电子束垂直入射镍单晶（切面平行 $\{111\}$ 晶面），探测器在入射面内扫角。**意外由来**：1925 年仪器爆裂、镍靶被热重结晶为大单晶，散射数据随即出现异常峰——1926 年戴维孙在英国休假时得知德布罗意理论，才意识到峰就是衍射。
+
+**判据与结果**：电子在晶体中的行为若如波，应满足布拉格条件 $2d\sin\phi'=n\lambda$。戴维孙–革末在 $V=54\ \text{V}$、$\phi=50^\circ$（散射极角）处观测到主峰。用干涉几何换算 $\phi'=65.0^\circ$，取镍 $\{111\}$ 面间距 $d=0.091\ \text{nm}$（由 X 射线衍射独立标定，非本轮验证对象），得 $\lambda_{\text{布拉格}}=2d\sin\phi'=0.165\ \text{nm}$；而德布罗意式 (4) 给 $\lambda_{\text{dB}}=0.167\ \text{nm}$。**两者相差约 $1.2\%$**——原始论文称"可接受的符合"（早期未考虑晶体表面向内收缩效应与未修正的电子在晶体内的折射；修正后偏差更小）。
+
+**论文摘要的关键自述**（据 *Phys. Rev.* 30, 705 摘要）："由衍射数据按通常方法计算的等效波长……与波动力学（undulatory mechanics）的 $h/mv$ 值令人满意地符合。"观察到 30 组衍射束，其中 24 组归因于晶格（6 组来自表面吸附气体，加热去气后消失），8 组预期束流因强度过低未观察到。这些细节记录在案，避免后人对实验做过度理想化。
+
+### 4.3 汇合：G. P. 汤姆孙与"两边都有"
+
+1927 年几乎同时，G. P. 汤姆孙用数万伏电子穿透多晶金薄膜得到同心环衍射（与 D–G 的单晶布拉格法互补），定量验证 $\lambda=h/p$。有趣的家族闭环：J. J. 汤姆孙 1897 年发现电子（证明其**粒子性**，获 1906 年诺奖），其子 G. P. 汤姆孙证明电子是**波**（获 1937 年诺奖）——父子俩因"对电子的相反结论"先后获奖，常被引作二象性的注脚。
+
+### 4.4 后续精密化
+
+戴维孙–革末的 $\lambda=h/p$ 在 1930 年代后经电子干涉仪反复精密检验；今天物质波干涉已推进到原子、分子（C₆₀ 及 2.5 万 amu 团簇）。$h$ 本身现已由定义固定（SI 2019，$h=6.626\,070\,15\times10^{-34}\ \text{J·s}$，精确值），$\lambda=h/p$ 不再是待验关系而是计量基准的一部分（基布尔秤以 $h$ 定义千克）。第 2 篇的任务到此完成：$\lambda=h/p$ 对光与物质同等成立，且有从 5 伏到 5 万伏、从电子到巨分子的实验谱系。
+
+## 五、分类体系与物理机制
+
+### 5.1 "波粒二象性"的现代准确表述
+
+历史术语"二象性"容易误导为"看情况切换"。准确表述分三层：
+
+1. **传播层（波的一面）**：客体由概率幅描述，演化是线性的、概率幅相加（第 1 篇式 3、第 13 篇薛定谔方程）。凡有路径不分，就有干涉——与强度无关（单电子干涉）。
+2. **探测层（粒子的一面）**：任何探测器返回整份量子（一个电子、一个光子），分布由 $|\psi|^2$ 给出。探测器不会返回"半个电子"。
+3. **互补性的操作表述**：路径可区分性（获取 which-way 信息）与干涉可见度此消彼长，定量关系由 Englert–Greenberger–Yasin 对偶关系 $D^2+V^2\le1$ 给出（第 31 篇推导）。"波或粒子"实为"信息获取方式"的选择。
+
+### 5.2 按验证手段分类的物质波实验
+
+| 类型 | 代表实验 | 信息内容 |
+|------|----------|----------|
+| 晶体衍射（布拉格） | 戴维孙–革末（单晶）、G. P. 汤姆孙（多晶） | $\lambda$ 与晶格间距标定 |
+| 人工光阑干涉 | Jönsson 多缝（1961/1974） | 直读干涉条纹，非晶格依赖 |
+| 双棱镜/分波干涉 | Möllenstedt 双棱镜、Merli 组、Tonomura 组 | 单电子条件下的累积 |
+| 原子/分子干涉 | C₆₀ 光栅干涉（1999）、大分子团簇 | 量子性边界扫描（第 31 篇） |
+
+### 5.3 机制：为什么所有物质共享同一对关系
+
+现代观点：$E=\hbar\omega$、$p=\hbar k$ 不是两条独立假设，而是**时空平移对称性**的推论——能量是时间平移的生成元、动量是空间平移的生成元（诺特定理，第 24 篇），量子力学中生成元对应相位演化率（第 12、18 篇）。因此只要承认"相位演化率 = 生成元"，式 (1) 对一切客体自动成立，与其内部结构无关。这也是为什么 $h$ 是普适常数而不分客体种类。
+
+## 六、典型系统与可解模型
+
+### 6.1 电子波长–加速电压标定曲线（模型 A）
+
+按式 (4) 与相对论修正公式（见 2.2）在 $V\in[10, 10^5]\ \text{V}$ 范围绘制 $\lambda(V)$ 双对数曲线，标出戴维孙–革末工作点（54 V, 0.167 nm）与 Tonomura 工作点（50 kV, 5.4 pm）。配套脚本输出：$V=54\ \text{V}$ 时 $\lambda=0.1669\ \text{nm}$（与原始文献 0.165–0.167 nm 一致，布拉格换算偏差 $1.1\%$）；$V=50\ \text{kV}$ 时非相对论 5.485 pm、相对论 5.355 pm（修正 $-2.4\%$）。
+
+### 6.2 单电子累积模拟（模型 B）
+
+按第 1 篇式 (3) 的双缝分布作为概率密度，用固定种子伪随机数模拟 $N=8,\ 270,\ 2000,\ 60000$ 个电子逐点落屏，四联图对应 Tonomura 原始实验的四级累积。脚本输出：$N=60000$ 时模拟直方图与理论分布的 $\chi^2$ 检验 $p$ 值、条纹可见度 $V_{\text{条}}=(P_{\max}-P_{\min})/(P_{\max}+P_{\min})$ 的收敛值。图 `figures/波粒二象性_单电子累积.svg`。
+
+### 6.3 模型边界
+
+模型 A 是纯运动学（不含晶体动力学），戴维孙–革末的定量强度对比需动力学衍射理论（第 21 篇的多个散射），本篇只用峰位不用强度；模型 B 假设单缝包络与真实双棱镜谱形可交换，只用于演示统计收敛性，不用于复现原始实验的绝对计数率。
+
+## 七、历史脉络与学术争议
+
+**1923–1924：德布罗意论文**。德布罗意在 1923 年 9–10 月提交三篇短文（法国科学院通报），1924 年完成博士论文《量子理论研究》，期刊版 1925 年刊于 *Ann. Phys. (Paris)* 3, 22–128。其核心并非"粒子像波"的口号，而是相对论性论证：粒子内禀周期过程的频率 $m_0c^2/h$（静止系），运动时"相位波"以超光速 $c^2/v$ 传播但群速度恰为 $v$（不传信息）。朗之万把论文寄给爱因斯坦，爱因斯坦复信称其"揭开了大幕的一角"，并借气体简并问题为之背书。1929 年德布罗意因博士论文获诺贝尔奖（史上唯一）。
+
+**争议一：波长式在论文中只出现一次**。教材常把 $\lambda=h/mv$ 当作德布罗意的"中心公式"，但史料（如对 1922–1924 黑体辐射研究的梳理）表明其论文主体是相对论相位波构造，$\lambda=h/p$ 是推论而非出发点。本套笔记按"关系式优先、构造史存而不论"处理。
+
+**争议二：BKS 与光量子**。玻尔–克喇末–斯莱特 1924 年提出以统计守恒换取"光仍是波"的方案，是量子力学诞生前最后一种严肃反光量子立场。1925 年 Bothe–Geiger（计数管符合，时间分辨 ms 级）与 Compton–Simon（云室角度关联，850 张底片中 38 例双径迹、其中 18 例在 $20^\circ$ 内符合守恒预言，随机符合概率约 $1/250$）两个独立实验判其出局。玻尔随后致信 Fowler："我们革命性的努力除了给它一场体面的葬礼外别无选择。"
+
+**争议三：D–G 峰位偏差的来源**。原始实验主峰布拉格换算与德布罗意值差约 1%，起因是电子在镍表面的折射（内势）与晶面收缩因子（论文自述间距因子 0.7–0.9 随能量变化）。这提醒读者：教科书式的"完美符合"叙述与原始数据有差距，反编造原则要求把偏差写明。
+
+## 八、参考文献
+
+> 24cu–24da 已在第 1 篇列出；本篇新增 24db 起（接续第 1 篇后），全部回溯核实。
+
+24db. Lenard, P. (1902). Über die lichtelektrische Wirkung. *Annalen der Physik*, 8(4), 149–198. `已核实`（光电效应规律的实验确立：最大动能与光强无关、与波长有关；第 4 篇详述）
+
+24dc. Compton, A.H. (1923). A Quantum Theory of the Scattering of X-rays by Light Elements. *Physical Review*, 21(5), 483–502. `已核实`（光子动量的判决性证据；DOI 10.1103/PhysRev.21.483；第 5 篇详述）
+
+24dd. Bothe, W., & Geiger, H. (1925). Experimentalles zur Theorie von Bohr, Kramers und Slater. *Zeitschrift für Physik*, 32(1), 639–663. `已核实`（逐事件符合实验，判 BKS 出局；DOI 10.1007/BF01331702）
+
+24de. Compton, A.H., & Simon, A.W. (1925). Directed Quanta of Scattered X-rays. *Physical Review*, 26(3), 289–299. `已核实`（云室角度关联；DOI 10.1103/PhysRev.26.289）
+
+24df. de Broglie, L. (1925). Recherches sur la théorie des quanta. *Annales de Physique*, 3(10), 22–128. `已核实`（1924 年巴黎大学博士论文的期刊版；物质波假说；DOI 未收录于原始刊面，以卷期页为准）
+
+24dg. Jönsson, C. (1961). Elektroneninterferenzen an mehreren künstlich hergestellten Feinspalten. *Zeitschrift für Physik*, 161(4), 454–474. `已核实`（同 24cv，第 2 篇引用其与晶体无关的干涉路线）
+
+24dh. Ehrenfest, P. (1927). Bemerkung über die angenäherte Gültigkeit der klassischen Mechanik innerhalb der Quantenmechanik. *Zeitschrift für Physik*, 45(7–8), 455–457. `已核实`（期望值服从牛顿方程的精确关系；DOI 10.1007/BF01329203；第 7 篇详述）
+
+### 经典专著与权威教材
+
+- Feynman, R.P., Leighton, R.B., & Sands, M. (2010). *The Feynman Lectures on Physics*, Vol. III, Chapter 1 后半与 Chapter 2（New Millennium ed.）. Basic Books. [主序列 #25]（德布罗意关系与二象性的教学处理）
+- CODATA (2022). *CODATA Recommended Values of the Fundamental Physical Constants*. [主序列]
+</script>
+<script>
+// 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏
+function protectMath(src){
+  var blocks = [];
+  // 先抽块级 $$...$$（可跨行）
+  src = src.replace(/\$\$([\s\S]+?)\$\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  // 再抽行内 $...$（不含换行、内部不含 $）
+  src = src.replace(/\$([^\$\n]+?)\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  return { src: src, blocks: blocks };
+}
+
+function boot(){
+  var raw = document.getElementById('src').textContent;
+  // 记录标题锚点（在保护公式之前，避免影响）
+  var md = raw.replace(/^(#{1,3})\s+(.+)$/gm, function(m, h, t){
+    var id = 'h-' + t.replace(/[^\w一-龥]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+    return h + ' <span id="' + id + '"></span>' + t;
+  });
+
+  // 保护数学公式
+  var prot = protectMath(md);
+  md = prot.src;
+
+  document.getElementById('content').innerHTML = marked.parse(md);
+
+  // 还原数学公式占位符
+  var content = document.getElementById('content');
+  var html = content.innerHTML.replace(/%%MATH(\d+)%%/g, function(m, n){
+    return prot.blocks[+n];
+  });
+  content.innerHTML = html;
+
+  // 生成目录
+  var hs = document.querySelectorAll('#content h2, #content h3');
+  var toc = document.getElementById('toc'), tocHtml = '';
+  hs.forEach(function(h){
+    var sp = h.querySelector('span[id]');
+    var id = sp ? sp.id : '';
+    var cls = h.tagName === 'H3' ? 'sub' : '';
+    tocHtml += '<a class="' + cls + '" href="#' + id + '">' + h.textContent.trim() + '</a>';
+  });
+  toc.innerHTML = tocHtml;
+
+  // 图片路径：正文里写 figures/xxx.svg
+  document.querySelectorAll('#content img').forEach(function(im){
+    if(/^figures\//.test(im.getAttribute('src')||'')) return;
+  });
+
+  if (window.renderMathInElement) {
+    renderMathInElement(document.getElementById('content'), {
+      delimiters:[
+        {left:'$$', right:'$$', display:true},
+        {left:'$',  right:'$',  display:false}
+      ],
+      ignoredTags:['script','noscript','style','textarea','pre','code'],
+      throwOnError:false
+    });
+  }
+
+  // 滚动高亮
+  var links = [].slice.call(toc.querySelectorAll('a'));
+  window.addEventListener('scroll', function(){
+    var cur = null;
+    hs.forEach(function(h){
+      if (h.getBoundingClientRect().top < 120) cur = h;
+    });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if (cur){
+      var sp = cur.querySelector('span[id]');
+      var act = toc.querySelector('a[href="#' + (sp?sp.id:'') + '"]');
+      if (act) act.classList.add('active');
+    }
+  }, {passive:true});
+}
+if (window.marked) boot();
+else window.addEventListener('load', boot);
+</script>
+</body>
+</html>

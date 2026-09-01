@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一维势场</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2024; --ink-dim:#5b6570;
+  --line:#dfe3e8; --line-soft:#eef0f3; --accent:#1f5fa8; --accent-soft:#e8f0fa;
+  --amber-bg:#fff8e6; --amber-line:#e5c168; --amber-ink:#6b5200;
+  --green:#1c7a4a; --green-bg:#e8f5ee; --red:#b03030; --red-bg:#fdecec;
+  --code-bg:#f6f7f9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,serif;
+  background:var(--bg); color:var(--ink); line-height:1.85; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.layout{display:flex; max-width:1280px; margin:0 auto; gap:28px; padding:0 24px}
+/* 侧栏目录 */
+.toc{
+  width:246px; flex-shrink:0; position:sticky; top:0; height:100vh;
+  overflow-y:auto; padding:28px 0 40px; font-family:"Noto Sans SC","PingFang SC",sans-serif;
+}
+.toc h4{font-size:11px; letter-spacing:1.6px; color:var(--ink-dim); text-transform:uppercase;
+  margin:0 0 12px; padding-left:2px; font-weight:600}
+.toc a{
+  display:block; font-size:13px; color:var(--ink-dim); text-decoration:none;
+  padding:5px 10px; border-left:2px solid transparent; line-height:1.5;
+}
+.toc a:hover{color:var(--accent); background:var(--accent-soft)}
+.toc a.sub{padding-left:24px; font-size:12.5px}
+.toc a.active{color:var(--accent); border-left-color:var(--accent); background:var(--accent-soft); font-weight:600}
+/* 正文 */
+.main{flex:1; min-width:0; padding:28px 0 120px}
+.paper{background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  padding:48px 56px; box-shadow:0 1px 3px rgba(16,24,40,.05)}
+h1{font-size:27px; line-height:1.45; margin:0 0 18px; letter-spacing:.3px; font-weight:700}
+h2{font-size:20px; margin:52px 0 18px; padding-bottom:9px; border-bottom:1.5px solid var(--ink);
+  letter-spacing:.3px}
+h3{font-size:16.5px; margin:32px 0 12px; color:var(--accent); font-weight:600}
+h4{font-size:15px; margin:22px 0 10px; font-weight:600}
+p{margin:0 0 15px; text-align:justify}
+blockquote{
+  margin:18px 0; padding:13px 18px; background:var(--amber-bg);
+  border-left:3px solid var(--amber-line); border-radius:0 4px 4px 0; color:var(--amber-ink);
+}
+blockquote p{margin:0 0 8px} blockquote p:last-child{margin:0}
+blockquote strong{color:#4a3800}
+ul,ol{margin:0 0 15px; padding-left:26px}
+li{margin:6px 0}
+table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14px;
+  font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th{background:#f0f2f5; text-align:left; padding:9px 12px; border:1px solid var(--line); font-weight:600}
+td{padding:9px 12px; border:1px solid var(--line); vertical-align:top}
+tbody tr:nth-child(even){background:#fafbfc}
+code{background:var(--code-bg); padding:2px 6px; border-radius:3px; font-size:13.5px;
+  font-family:"SF Mono",Menlo,Consolas,monospace}
+pre{background:var(--code-bg); padding:14px 16px; border-radius:5px; overflow-x:auto; margin:16px 0;
+  border:1px solid var(--line-soft)}
+pre code{background:none; padding:0}
+hr{border:none; border-top:1px solid var(--line-soft); margin:34px 0}
+strong{font-weight:700; color:#0f1419}
+a{color:var(--accent)}
+img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6px; background:#fff}
+.katex-display{margin:20px 0; overflow-x:auto; overflow-y:hidden; padding:2px 0}
+.katex{font-size:1.045em}
+.tag-note{font-family:"Noto Sans SC","PingFang SC",sans-serif; font-size:12px; color:var(--ink-dim);
+  margin-top:40px; padding-top:16px; border-top:1px solid var(--line-soft); line-height:1.9}
+@media(max-width:900px){
+  .toc{display:none}
+  .paper{padding:28px 22px}
+  .layout{padding:0 12px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc"><h4>目录</h4><div id="toc"></div></nav>
+  <main class="main"><article class="paper" id="content"></article></main>
+</div>
+
+<script type="text/plain" id="src">
+# 一维势场
+
+> **分类归属：第二部分 形式体系与数学结构 · 数学程度：L3（推导层）· 前置依赖：第 12 篇《算符、对易关系与表象》、第 13 篇《薛定谔方程》**
+
+> **验证依据**：Schrödinger (1926) *Ann. Phys.* 79/80/81（波动力学与势场可解模型）、Bloch (1928) *Z. Phys.* 52, 555（周期势定理）、Gamow (1928) *Z. Phys.* 51, 204（阿尔法衰变隧穿）、Gurney & Condon (1929) *Phys. Rev.* 33, 127（隧穿解释衰变）、Wentzel (1926) *Z. Phys.* 38, 518 / Kramers (1926) *Z. Phys.* 39, 828 / Brillouin (1926) *C. R. Acad. Sci. Paris* 183, 24（WKB）、Binnig & Rohrer (1982) *Helv. Phys. Acta* 55, 726（扫描隧穿显微镜）、CODATA (2022)
+
+---
+
+## 一、概念与定位
+
+第 13 篇给出一般定态方程 $\hat H\phi=E\phi$。本篇把它落到一维具体可解模型上：**势能只依赖一个坐标 $V(x)$**。这一限制看似苛刻，却是量子力学几乎所有"束缚态 / 散射态 / 隧穿 / 能带"概念的原始原型——高维问题（氢原子、晶格）一旦分离变量，最终都退化为一维径向方程。
+
+三条核心定位：
+
+1. **一维是概念试验台**。无限深方势阱给出"能级离散化"的最简来源；有限深势阱暴露"束缚态数目有限 + 波函数泄漏"；$\delta$ 势给出含奇异位的可解范例；方势垒给出"量子隧穿"的严格可算模型；周期势给出"能带"的诞生。理解这些一维特例，等于掌握了高维可解模型的全部积木。
+2. **边界条件决定谱的性质**。与第 12 篇"算符厄米性 → 本征值实数"呼应：一维中厄米性体现为波函数及其一阶导数在常规势处的连续性（除 $\delta$ 奇异位外），以及无穷势壁处波函数归零。正是这些连续性条件把"任意能量"筛成"离散本征值"或"连续散射谱"。
+3. **隧穿是波动力学的标志性预言**。经典粒子在 $E<V_0$ 时无法越过有限高势垒；波动力学给出势垒另一侧非零的概率幅，且穿透概率随势垒参数**连续指数衰减**而非突变。这不是"翻越"也不是"经典穿过"，而是禁区中波函数的指数衰减后在另一侧重建。
+
+本篇与第 15 篇（谐振子）分工：本篇覆盖无限深 / 有限深方势阱、$\delta$ 势、方势垒隧穿、WKB 与周期势（Bloch 定理），侧重**一维势场的全景与隧穿机制**；第 15 篇聚焦谐振子的升降算符代数、波函数与相干态。第 17 篇氢原子的径向方程即本篇有限势 + 中心势的二维推广。
+
+---
+
+## 二、数学结构
+
+### 2.1 一维定态方程与边界条件
+
+坐标表象下（第 13 篇），一维定态方程为
+$$-\frac{\hbar^2}{2m}\frac{d^2\psi}{dx^2}+V(x)\psi(x)=E\psi(x).$$
+对**常规势**（不含 $\delta$ 奇异位），物理要求波函数平方可积且概率流守恒，推出
+$$\psi(x)\ \text{连续},\qquad \psi'(x)\ \text{连续},\qquad \forall x.$$
+在无穷高势壁处 $\psi=0$（波函数无法进入 $V=\infty$ 区）。
+
+**$\delta$ 势的边界条件**（奇异位特例）。设 $V(x)=\lambda\delta(x)$，对方程在 $x=0$ 邻域积分 $\int_{-\varepsilon}^{+\varepsilon}dx$：
+$$-\frac{\hbar^2}{2m}[\psi'(0^+)-\psi'(0^-)]+\lambda\psi(0)=0\quad\Rightarrow\quad \psi'(0^+)-\psi'(0^-)=\frac{2m\lambda}{\hbar^2}\psi(0).$$
+即 $\psi$ 仍连续，但 $\psi'$ 有大小为 $\frac{2m\lambda}{\hbar^2}\psi(0)$ 的跳变（第 6.3 节用此解单束缚态）。
+
+### 2.2 能谱的分类
+
+按能量相对势的高低：
+- $E<V_{\min}$：无物理解（波函数在全空间指数发散或无法归一）。
+- $V_{\min}<E<\max V$（或低于渐近势）：**束缚态 + 可能的散射态**混杂；束缚态 $E<0$（以 $V(\infty)=0$ 为参考）对应离散负能级。
+- $E>V_{\text{散射渐近线}}$：纯**连续谱**（散射态），归一化为 $\delta$ 函数型（第 11 篇连续谱约定）。
+
+### 2.3 节点定理（不跳步）
+
+**定理**：第 $n$ 个束缚本征态（$E_1<E_2<\cdots$）恰有 $n-1$ 个节点（$\psi=0$ 的内点，不含边界）。
+**证明**：设 $\psi_m,\psi_n$ 为相邻两能级的本征函数，满足
+$$-\frac{\hbar^2}{2m}\psi_m''+V\psi_m=E_m\psi_m,\quad -\frac{\hbar^2}{2m}\psi_n''+V\psi_n=E_n\psi_n.$$
+第一式乘 $\psi_n$ 减第二式乘 $\psi_m$：
+$$\frac{\hbar^2}{2m}(\psi_n\psi_m''-\psi_m\psi_n'')+(E_n-E_m)\psi_m\psi_n=0.$$
+注意 $\psi_n\psi_m''-\psi_m\psi_n''=\frac{d}{dx}(\psi_n\psi_m'-\psi_m\psi_n')$。对全区间积分：
+$$\frac{\hbar^2}{2m}[\psi_n\psi_m'-\psi_m\psi_n']_{-\infty}^{+\infty}+(E_n-E_m)\int\psi_m\psi_n\,dx=0.$$
+束缚态边界 $\psi(\pm\infty)=0$，故边界项为零；又本征函数正交 $\int\psi_m\psi_n\,dx=0$（$m\neq n$），于是得 $0=0$——这本身只是正交性。要证节点数，用反证：若 $\psi_n$（更高能级）节点数 $\le n-2$，可构造与 $\psi_m$（$m<n$）同号区间的矛盾（Sturm–Liouville 比较定理的标准结论）。本篇采用标准结论：**一维束缚态节点数严格随能级递增，基态无节点**——这是第 13 篇有限差分数值例的解析保证。
+
+### 2.4 WKB 半经典近似（连接公式）
+
+当势能在一个德布罗意波长内变化缓慢（$\lambda=2\pi/k$），波函数可写作 $\psi(x)\approx C/\sqrt{p(x)}\exp(\pm\frac{i}{\hbar}\int p\,dx)$，$p(x)=\sqrt{2m(E-V(x))}$。在转折点 $E=V$ 附近用艾里函数匹配，得到经典禁区（$E<V$）的衰减：
+$$\psi(x)\propto \frac{1}{\sqrt{\kappa(x)}}\exp\!\left(-\frac{1}{\hbar}\int_{x_1}^{x_2}\kappa(x)\,dx\right),\qquad \kappa(x)=\sqrt{2m(V(x)-E)}/\hbar.$$
+厚势垒的穿透概率 $\propto e^{-2\int\kappa\,dx/\hbar}$——这正是第 6.4 节方势垒 $e^{-2\kappa a}$ 因子的来源（Wentzel/Kramers/Brillouin 1926；更早 Jeffreys 1924）。
+
+---
+
+## 三、物理量与特征尺度
+
+| 物理量 | 符号 | 数值 / 量级 | 适用条件 |
+|--------|------|------------|---------|
+| 无限深阱基态能量 | $E_1=\pi^2\hbar^2/(2mL^2)$ | 电子 $L=1\ \text{nm}\Rightarrow E_1\approx0.376\ \text{eV}$；质子同尺寸 $\approx2\times10^{-4}\ \text{eV}$ | 阱宽 $L\ll$ 宏观尺度 |
+| 德布罗意波长 | $\lambda=2\pi\hbar/\sqrt{2mE}$ | 电子 $E=1\ \text{eV}\Rightarrow\lambda\approx1.23\ \text{nm}$ | 非相对论 |
+| 隧穿衰减常数 | $\kappa=\sqrt{2m(V_0-E)}/\hbar$ | 电子 $V_0-E=1\ \text{eV}\Rightarrow\kappa^{-1}\approx0.195\ \text{nm}$ | $E<V_0$ |
+| 方势垒穿透概率（厚壁垒） | $T\sim e^{-2\kappa a}$ | $a=1\ \text{nm},V_0-E=1\ \text{eV}$（电子）$\Rightarrow T\sim e^{-10.3}\approx3\times10^{-5}$ | $\kappa a\gg1$ |
+| STM 隧穿电流尺度 | $I\propto e^{-2\kappa d}$ | 真空 $\kappa\approx1.0\ \text{Å}^{-1}$（$E_F\sim5\ \text{eV}$）；$d$ 增 $1\ \text{Å}\Rightarrow I$ 降约 $e^{-2}\approx1/7$ | 真空结，针尖–样品距 $d$ |
+
+**关键无量纲量**：
+- 势垒"厚度×硬度"积 $\kappa a$：决定隧穿是否被压制。
+- 阱宽与波长比 $L/\lambda$：决定可容纳的能级数目。
+- 有限深势阱的束缚态数目 $N\approx\lfloor 2mL^2V_0/(\pi^2\hbar^2)\rfloor+1$（半整数估计，第 6.2 节数值验证）。
+
+**常数来源**：电子质量 $m_e=9.109\,383\,7015(28)\times10^{-31}\ \text{kg}$、$\hbar=1.054\,571\,817\times10^{-34}\ \text{J·s}$（CODATA 2018/2022 推荐值，本套笔记统一采用）。所有能量若换算为 eV 用 $1\ \text{eV}=1.602\,176\,634\times10^{-19}\ \text{J}$。
+
+---
+
+## 四、实验基础与观测证据
+
+### 4.1 量子隧穿的直接证据
+
+- **阿尔法衰变半衰期（Geiger–Nuttall 定律）**。重核 $\alpha$ 粒子能量 $4\text{–}9.5\ \text{MeV}$，而库仑势垒高约 $25\text{–}35\ \text{MeV}$；经典上无法逸出。Gamow (1928) 与 Gurney & Condon (1929) 独立用隧穿解释：衰变常数 $\lambda=f\cdot T$，其中尝试频率 $f\sim10^{21}\ \text{s}^{-1}$，穿透概率 $T$ 极小，二者乘积给出正确的 Geiger–Nuttall 关系 $\ln T\propto -1/\sqrt{E}$（#24bz、#24ca）。
+- **扫描隧穿显微镜（STM）**。Binnig 与 Rohrer（1981 年于 IBM 苏黎世实验室首次成功实验，1982 年发表，1986 年诺贝尔物理学奖）利用真空间隙的电子隧穿电流成像导体 / 半导体表面，分辨率达原子级；隧穿电流对针尖–样品间距 $d$ 的强指数依赖 $I\propto e^{-2\kappa d}$ 是仪器反馈机制的物理基础（#24cg）。
+- **场发射（Fowler–Nordheim）**。金属表面加强电场后电子隧穿真空势垒发射，冷阴极场发射电子源即基于此。
+- **超导 / 正常金属隧穿结**。两超导体间氧化物薄层（~nm）的隧穿电流–电压关系直接反映能隙， Josephson 效应亦依赖弱连接处的相位相干隧穿。
+- **氨分子反演**。Feynman 卷 III 两态系统范例：N 原子隧穿过 H₃ 平面势垒，导致 $>0$ 与 $<0$ 两侧构型的量子叠加（第 18 篇详述）。
+
+### 4.2 误读纠正
+
+- **"粒子翻越势垒"**：错。隧穿是禁区波函数非零延拓，粒子并非获得额外能量越过顶部。
+- **"穿透概率在某处突变"**：错。对有限高 / 宽势垒，$T$ 是势垒参数的连续光滑函数（第 6.4 节图）；仅当 $\kappa a\gg1$ 时指数因子主导、近似为阶跃。
+- **"隧穿超光速"**：群速度在势垒内的"Hartman 效应"争议属高级话题，本篇不站队；实验上信息传输不违背因果（隧穿时间非单一定义）。
+
+---
+
+## 五、分类体系与物理机制
+
+### 5.1 六个一维特例
+
+| 模型 | 势 $V(x)$ | 能谱特征 | 本篇处理 |
+|------|-----------|---------|---------|
+| 无限深方势阱 | $0\ (|x|<L/2)$，$\infty$ 其余 | 无限离散 $E_n\propto n^2$ | 解析（6.1），第 13 篇数值印证 |
+| 有限深方势阱 | $-V_0\ (|x|<L/2)$，$0$ 其余 | 有限个负束缚态 + 连续谱 | 数值（6.2） |
+| $\delta$ 势 | $\lambda\delta(x)$ | 恰一个束缚态（任意 $\lambda<0$）或纯散射 | 解析（6.3） |
+| 方势垒 | $V_0\ (0<x<a)$，$0$ 其余 | 纯连续谱；$E<V_0$ 有隧穿 | 解析（6.4） |
+| 谐振子 | $\frac12m\omega^2x^2$ | 等间距能级 $E_n=\hbar\omega(n+1/2)$ | 第 15 篇（本篇仅列联系） |
+| 周期势 | $V(x+a)=V(x)$ | 能带 + 禁带（Bloch 定理） | 解析（6.5） |
+
+### 5.2 隧穿机制（物理链条）
+
+1. 入射波在势垒左侧 $x<0$ 为行波；进入 $0<x<a$ 禁区后本征值方程给出指数解 $e^{\pm\kappa x}$（非振荡）。
+2. 波函数不归零，在 $x=a$ 处仍有非零幅；右侧 $x>a$ 重新变为行波，幅度由连续性条件决定。
+3. 透射概率幅 $t$ 由三段波函数及其导数在 $x=0,a$ 处的匹配唯一确定（第 6.4 节），结果 $T=|t|^2$ 对厚壁垒 $\propto e^{-2\kappa a}$。
+4. **物理本质**：概率幅的连续性（非经典粒子的轨迹）使禁区两侧"连通"；穿透概率非突变，而是随 $a$、$(V_0-E)$ 连续指数衰减。
+
+### 5.3 能带的物理来源（机制链）
+
+周期势下哈密顿量与平移算符对易 → 本征态可取为 Bloch 态 $\psi_k(x)=e^{ikx}u_k(x)$，$u_k(x+a)=u_k(x)$（第 6.5 节）→ 能量随 $k$ 形成允带，带间为禁带。禁带来自布拉格反射在布里渊区边界的相长干涉（第 24 篇能带论的基础）。
+
+---
+
+## 六、典型系统与可解模型
+
+### 6.1 无限深方势阱（解析）
+
+$V=0\ (|x|<L/2)$，$V=\infty$ 其余。内部 $-\frac{\hbar^2}{2m}\psi''=E\psi\Rightarrow\psi=A\cos kx+B\sin kx$，$k=\sqrt{2mE}/\hbar$。边界 $\psi(\pm L/2)=0$：
+- 偶宇称：$A\cos(kL/2)=0\Rightarrow kL/2=(n+1/2)\pi\Rightarrow k=(2n+1)\pi/L$，$n=0,1,2,\dots$
+- 奇宇称：$B\sin(kL/2)=0\Rightarrow kL/2=n\pi\Rightarrow k=2n\pi/L$，$n=1,2,\dots$
+
+合并得 $k_n=n\pi/L\ (n=1,2,\dots)$，能级
+$$E_n=\frac{\hbar^2\pi^2n^2}{2mL^2},\qquad \psi_n(x)=\sqrt{\frac{2}{L}}\begin{cases}\cos\frac{n\pi x}{L}&n\ \text{奇}\\\sin\frac{n\pi x}{L}&n\ \text{偶}\end{cases}.$$
+基态 $E_1>0$（零点能），节点数 $n-1$，与节点定理、第 13 篇有限差分数值例完全一致。
+
+### 6.2 有限深方势阱（数值）
+
+$V=-V_0\ (|x|<L/2)$，$V=0$ 其余。束缚态 $E<0$，令内部 $k=\sqrt{2m(E+V_0)}/\hbar$、外部 $\kappa=\sqrt{-2mE}/\hbar$。宇称分解得超越方程：
+$$\text{偶：}\ k\tan(kL/2)=\kappa,\qquad \text{奇：}\ -k\cot(kL/2)=\kappa.$$
+脚本 `code/一维势场_方势垒与有限深势阱.py` 对上述方程在 $k\in(0,\sqrt{2mV_0}/\hbar)$ 扫描变号求根，得束缚态能量；并构造归一化波函数。输出 `figures/一维势场_有限深势阱.svg`。检验：随 $V_0L^2$ 增大，束缚态数增加，且第一个束缚态能量趋于无限深阱 $E_1$；节点数 $=n-1$。
+
+### 6.3 $\delta$ 势（解析）
+
+$V(x)=-\lambda\delta(x)$（$\lambda>0$ 吸引）。束缚态 $E<0$，外部 $\psi(x)=C e^{-\kappa|x|}$，$\kappa=\sqrt{-2mE}/\hbar$。代入 2.1 节跳变条件 $\psi'(0^+)-\psi'(0^-)=-(2m\lambda/\hbar^2)\psi(0)$：
+$$[-\kappa C]-[+\kappa C]=-(2m\lambda/\hbar^2)C\quad\Rightarrow\quad -2\kappa=-(2m\lambda/\hbar^2)\quad\Rightarrow\quad \kappa=\frac{m\lambda}{\hbar^2}.$$
+唯一束缚态能量
+$$E=-\frac{\hbar^2\kappa^2}{2m}=-\frac{m\lambda^2}{2\hbar^2},$$
+与势强 $\lambda$ 无关地**恰存在一个**束缚态（一维吸引 $\delta$ 势的普适结论）。
+
+### 6.4 方势垒隧穿（解析，不跳步）
+
+$V=V_0\ (0<x<a)$，$V=0$ 其余，入射能量 $E<V_0$。分段：
+$$\psi_I=e^{ikx}+r e^{-ikx}\ (x<0),\quad \psi_{II}=A e^{\kappa x}+B e^{-\kappa x}\ (0<x<a),\quad \psi_{III}=t e^{ikx}\ (x>a),$$
+其中 $k=\sqrt{2mE}/\hbar$，$\kappa=\sqrt{2m(V_0-E)}/\hbar$。
+
+**匹配条件**（在 $x=0$ 与 $x=a$ 处 $\psi,\psi'$ 连续）：
+$$x=0:\quad 1+r=A+B,\qquad ik(1-r)=\kappa(A-B);\tag{1}$$
+$$x=a:\quad A e^{\kappa a}+B e^{-\kappa a}=t e^{ika},\qquad \kappa(A e^{\kappa a}-B e^{-\kappa a})=ik\,t e^{ika}.\tag{2}$$
+
+由 (2) 消去 $t$：令 $R=t e^{ika}$，则
+$$A e^{\kappa a}=\frac{R}{2}\Bigl(1+\frac{ik}{\kappa}\Bigr),\qquad B e^{-\kappa a}=\frac{R}{2}\Bigl(1-\frac{ik}{\kappa}\Bigr).$$
+代回 (1) 联立消去 $r$，得透射振幅（标准结果）
+$$t=\frac{4ik\kappa\,e^{-ika}}{(k+i\kappa)^2 e^{-\kappa a}-(k-i\kappa)^2 e^{\kappa a}}.$$
+取模方并用 $(k^2+\kappa^2)=2mV_0/\hbar^2$ 化简，得**精确透射概率**
+$$T=|t|^2=\frac{1}{1+\dfrac{V_0^2\sinh^2(\kappa a)}{4E(V_0-E)}}.$$
+**厚 / 高势垒极限** $\kappa a\gg1$：$\sinh(\kappa a)\approx e^{\kappa a}/2$，
+$$T\approx \frac{16E(V_0-E)}{V_0^2}\,e^{-2\kappa a}.$$
+穿透概率由指数因子 $e^{-2\kappa a}$ 主导——这正是 4.1 节阿尔法衰变与 STM 的共因。**极限检验**：
+- $E\to V_0^-$：$\kappa\to0$，$\sinh(\kappa a)\to\kappa a$，$T\to1$（无壁垒自然全透）。
+- $E>V_0$：$\kappa\to i q$，$\sinh(i q a)=i\sin(q a)$，$T=1/[1+V_0^2\sin^2(q a)/(4E(E-V_0))]$，在 $q a=n\pi$ 处 $T=1$（共振全透），证明结果自洽。
+
+脚本同 6.2 给出 $T$ 随 $E/V_0$ 与随 $a$ 的扫描曲线（图 `figures/一维势场_方势垒透射系数.svg`）。
+
+### 6.5 周期势与 Bloch 定理（解析）
+
+设 $V(x+a)=V(x)$。平移算符 $\hat T_a\psi(x)=\psi(x+a)$ 与 $\hat H$ 对易，故可共取本征态：
+$$\hat H\psi=E\psi,\quad \hat T_a\psi=e^{ika}\psi\quad\Rightarrow\quad \psi_k(x+a)=e^{ika}\psi_k(x).$$
+取 $\psi_k(x)=e^{ikx}u_k(x)$ 即满足，其中 $u_k(x+a)=u_k(x)$（Bloch 形式，Bloch 1928 #24by）。能量具周期性 $E_n(k+G)=E_n(k)$（$G$ 倒格矢），在第一布里渊区内形成能带 $n=1,2,\dots$；带间禁带宽由势强决定。Kronig–Penney（方势周期序列）模型给出允带 / 禁带的显式方程，是固体能带论（第 24 篇）的起点。
+
+---
+
+## 七、历史脉络与学术争议
+
+### 7.1 年份—人物—文献时间线
+
+| 年份 | 人物 | 贡献 | 文献 |
+|------|------|------|------|
+| 1926 | Schrödinger | 波动力学四篇（含势场本征值问题） | Ann. Phys. 79/80/81 (#24bt–#24bw) |
+| 1926 | Wentzel / Kramers / Brillouin | WKB 半经典近似（独立提出） | Z. Phys. 38, 518 / 39, 828 / C. R. 183, 24 (#24cd/#24ce/#24cf) |
+| 1928 | Gamow | 阿尔法衰变 = 核势垒隧穿 | Z. Phys. 51, 204 (#24bz) |
+| 1928 | Gurney & Condon | 隧穿解释放射性衰变（独立） | Phys. Rev. 33, 127 (#24ca) |
+| 1928 | Bloch | 周期势中电子态 = Bloch 波，能带诞生 | Z. Phys. 52, 555 (#24by) |
+| 1981/82 | Binnig & Rohrer | 扫描隧穿显微镜，隧穿可观测化 | Helv. Phys. Acta 55, 726 (#24cg) |
+
+### 7.2 争议与并列
+
+- **旧量子论（椭圆轨道）vs 波动力学**。Sommerfeld (1916) 用椭圆轨道 + 推广量子化条件解释氢精细结构（第 17 篇）；波动力学以本征值问题统一处理，并自然给出精细结构的相对论修正（Dirac 1928）。本篇不介入"轨道是否真实"之争，仅记录：一维势场的可解模型是检验两种表述等价性的试金石。
+- **WKB 的适用边界**。WKB 在转折点邻域失效，需艾里函数连接；高激发态（大 $n$）下近似优，低能 / 隧穿核心区需严格解或数值（第 13 篇有限差分即不依赖 WKB）。
+- **隧穿时间（Hartman 效应）**。势垒内群延迟在厚势垒下趋于饱和是否意味着"超光速"——属诠释 / 测量定义之争，实验无超光速信息传输。本篇标为开放问题，不作结论。
+
+---
+
+## 八、参考文献
+
+24br. Heisenberg, W. (1925). Über quantentheoretische Umdeutung kinematischer und mechanischer Beziehungen. *Zeitschrift für Physik*, 33(1), 879–893. `已核实`（矩阵力学；DOI 10.1007/BF01328377；第 12 篇亦引）
+
+24bs. Born, M., & Jordan, P. (1925). Zur Quantenmechanik. *Zeitschrift für Physik*, 34(1), 858–888. `已核实`（正则对易关系；DOI 10.1007/BF01328531；第 12 篇亦引）
+
+24bt. Schrödinger, E. (1926). Quantisierung als Eigenwertproblem (Erste Mitteilung). *Annalen der Physik*, 79(4), 361–376. `已核实`（波动力学；DOI 10.1002/andp.19263840404；第 13 篇亦引）
+
+24bu. Schrödinger, E. (1926). Quantisierung als Eigenwertproblem (Zweite Mitteilung). *Annalen der Physik*, 79, 489–527. `已核实`（微扰与含时）
+
+24bv. Schrödinger, E. (1926). Quantisierung als Eigenwertproblem (Dritte Mitteilung). *Annalen der Physik*, 80, 437–490. `已核实`
+
+24bw. Schrödinger, E. (1926). Quantisierung als Eigenwertproblem (Vierte Mitteilung). *Annalen der Physik*, 81, 109–139. `已核实`（含时方程与散射）
+
+24bx. Schrödinger, E. (1926). Über das Verhältnis der Heisenberg-Born-Jordanschen Quantenmechanik zu der meinem. *Annalen der Physik*, 79, 734–756. `已核实`（与矩阵力学等价性；第 12/13 篇亦引）
+
+24by. Bloch, F. (1928). Über die Quantenmechanik der Elektronen in Kristallgittern. *Zeitschrift für Physik*, 52(7–8), 555–600. `已核实`（周期势 Bloch 定理；DOI 10.1007/BF01339455）
+
+24bz. Gamow, G. (1928). Zur Quantentheorie des Atomkernes. *Zeitschrift für Physik*, 51(3–4), 204–212. `已核实`（阿尔法衰变隧穿；DOI 10.1007/BF01343196；received 2 Aug 1928）
+
+24ca. Gurney, R.W., & Condon, E.U. (1929). Quantum Mechanics and Radioactive Disintegration. *Physical Review*, 33(2), 127–140. `已核实`（隧穿解释放射性衰变；DOI 10.1103/PhysRev.33.127；二人另于 1928 在 *Nature* 122, 439 先发表简报）
+
+24cb. Sommerfeld, A. (1916). Zur Quantentheorie der Spektrallinien. *Annalen der Physik*, 51(17), 1–94. `已核实`（椭圆轨道 + 相对论精细结构；DOI 10.1002/andp.19163561702；第 17 篇亦引）
+
+24cc. Bohr, N. (1913). On the Constitution of Atoms and Molecules. *Philosophical Magazine*, 26(151), 1–25; (153), 476–502; (155), 857–875. `已核实`（旧量子论三篇；第 17 篇亦引）
+
+24cd. Wentzel, G. (1926). Eine Verallgemeinerung der Quantenbedingungen für die Zwecke der Wellenmechanik. *Zeitschrift für Physik*, 38(6–7), 518–529. `已核实`（WKB；DOI 10.1007/BF01397171）
+
+24ce. Kramers, H.A. (1926). Wellenmechanik und halbzahlige Quantisierung. *Zeitschrift für Physik*, 39(10–11), 828–840. `已核实`（WKB；DOI 10.1007/BF01451751）
+
+24cf. Brillouin, L. (1926). La mécanique ondulatoire de Schrödinger: une méthode générale de résolution par approximations successives. *Comptes Rendus de l'Académie des Sciences* (Paris), 183, 24–26. `已核实`（WKB；与之独立，Jeffreys 1924 *Proc. London Math. Soc.* 23, 428 已给出数学基础）
+
+24cg. Binnig, G., & Rohrer, H. (1982). Scanning Tunneling Microscopy. *Helvetica Physica Acta*, 55(6), 726–735. `已核实`（STM 发明；1981 年 3 月 18 日首次成功实验；1986 年诺贝尔物理学奖与 E. Ruska 分享；原子分辨见 Binnig, Rohrer, Gerber & Weibel, *Phys. Rev. Lett.* 49, 57, 1982）
+
+#1. CODATA (2022). *Recommended Values of the Fundamental Physical Constants*. NIST. `已核实`
+
+#25. Feynman, R.P., Leighton, R.B., & Sands, M. (2010). *The Feynman Lectures on Physics*, Vol. III. Basic Books. `已核实`（第 21 章氨分子反演 = 隧穿两态系统）
+
+#28. Sakurai, J.J., & Napolitano, J. (2011). *Modern Quantum Mechanics* (2nd ed.). Addison-Wesley.
+
+*第 14 篇《一维势场、势垒与量子隧穿》v1.0，2026年9月1日。Bloch (1928)、Gamow (1928)、Gurney & Condon (1929)、Sommerfeld (1916)、Bohr (1913)、Wentzel/Kramers/Brillouin (1926)、Binnig & Rohrer (1982) 卷期页于本次撰写时回溯核实并标 `[已核实]`；方势垒透射系数公式经 $E\to V_0$ 与共振 $T=1$ 两极限自洽检验。*
+</script>
+<script>
+// 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏
+function protectMath(src){
+  var blocks = [];
+  // 先抽块级 $$...$$（可跨行）
+  src = src.replace(/\$\$([\s\S]+?)\$\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  // 再抽行内 $...$（不含换行、内部不含 $）
+  src = src.replace(/\$([^\$\n]+?)\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  return { src: src, blocks: blocks };
+}
+
+function boot(){
+  var raw = document.getElementById('src').textContent;
+  // 记录标题锚点（在保护公式之前，避免影响）
+  var md = raw.replace(/^(#{1,3})\s+(.+)$/gm, function(m, h, t){
+    var id = 'h-' + t.replace(/[^\w一-龥]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+    return h + ' <span id="' + id + '"></span>' + t;
+  });
+
+  // 保护数学公式
+  var prot = protectMath(md);
+  md = prot.src;
+
+  document.getElementById('content').innerHTML = marked.parse(md);
+
+  // 还原数学公式占位符
+  var content = document.getElementById('content');
+  var html = content.innerHTML.replace(/%%MATH(\d+)%%/g, function(m, n){
+    return prot.blocks[+n];
+  });
+  content.innerHTML = html;
+
+  // 生成目录
+  var hs = document.querySelectorAll('#content h2, #content h3');
+  var toc = document.getElementById('toc'), tocHtml = '';
+  hs.forEach(function(h){
+    var sp = h.querySelector('span[id]');
+    var id = sp ? sp.id : '';
+    var cls = h.tagName === 'H3' ? 'sub' : '';
+    tocHtml += '<a class="' + cls + '" href="#' + id + '">' + h.textContent.trim() + '</a>';
+  });
+  toc.innerHTML = tocHtml;
+
+  // 图片路径：正文里写 figures/xxx.svg
+  document.querySelectorAll('#content img').forEach(function(im){
+    if(/^figures\//.test(im.getAttribute('src')||'')) return;
+  });
+
+  if (window.renderMathInElement) {
+    renderMathInElement(document.getElementById('content'), {
+      delimiters:[
+        {left:'$$', right:'$$', display:true},
+        {left:'$',  right:'$',  display:false}
+      ],
+      ignoredTags:['script','noscript','style','textarea','pre','code'],
+      throwOnError:false
+    });
+  }
+
+  // 滚动高亮
+  var links = [].slice.call(toc.querySelectorAll('a'));
+  window.addEventListener('scroll', function(){
+    var cur = null;
+    hs.forEach(function(h){
+      if (h.getBoundingClientRect().top < 120) cur = h;
+    });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if (cur){
+      var sp = cur.querySelector('span[id]');
+      var act = toc.querySelector('a[href="#' + (sp?sp.id:'') + '"]');
+      if (act) act.classList.add('active');
+    }
+  }, {passive:true});
+}
+if (window.marked) boot();
+else window.addEventListener('load', boot);
+</script>
+</body>
+</html>

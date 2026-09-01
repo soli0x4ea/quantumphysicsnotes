@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>微扰论与变分法</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2024; --ink-dim:#5b6570;
+  --line:#dfe3e8; --line-soft:#eef0f3; --accent:#1f5fa8; --accent-soft:#e8f0fa;
+  --amber-bg:#fff8e6; --amber-line:#e5c168; --amber-ink:#6b5200;
+  --green:#1c7a4a; --green-bg:#e8f5ee; --red:#b03030; --red-bg:#fdecec;
+  --code-bg:#f6f7f9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,serif;
+  background:var(--bg); color:var(--ink); line-height:1.85; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.layout{display:flex; max-width:1280px; margin:0 auto; gap:28px; padding:0 24px}
+/* 侧栏目录 */
+.toc{
+  width:246px; flex-shrink:0; position:sticky; top:0; height:100vh;
+  overflow-y:auto; padding:28px 0 40px; font-family:"Noto Sans SC","PingFang SC",sans-serif;
+}
+.toc h4{font-size:11px; letter-spacing:1.6px; color:var(--ink-dim); text-transform:uppercase;
+  margin:0 0 12px; padding-left:2px; font-weight:600}
+.toc a{
+  display:block; font-size:13px; color:var(--ink-dim); text-decoration:none;
+  padding:5px 10px; border-left:2px solid transparent; line-height:1.5;
+}
+.toc a:hover{color:var(--accent); background:var(--accent-soft)}
+.toc a.sub{padding-left:24px; font-size:12.5px}
+.toc a.active{color:var(--accent); border-left-color:var(--accent); background:var(--accent-soft); font-weight:600}
+/* 正文 */
+.main{flex:1; min-width:0; padding:28px 0 120px}
+.paper{background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  padding:48px 56px; box-shadow:0 1px 3px rgba(16,24,40,.05)}
+h1{font-size:27px; line-height:1.45; margin:0 0 18px; letter-spacing:.3px; font-weight:700}
+h2{font-size:20px; margin:52px 0 18px; padding-bottom:9px; border-bottom:1.5px solid var(--ink);
+  letter-spacing:.3px}
+h3{font-size:16.5px; margin:32px 0 12px; color:var(--accent); font-weight:600}
+h4{font-size:15px; margin:22px 0 10px; font-weight:600}
+p{margin:0 0 15px; text-align:justify}
+blockquote{
+  margin:18px 0; padding:13px 18px; background:var(--amber-bg);
+  border-left:3px solid var(--amber-line); border-radius:0 4px 4px 0; color:var(--amber-ink);
+}
+blockquote p{margin:0 0 8px} blockquote p:last-child{margin:0}
+blockquote strong{color:#4a3800}
+ul,ol{margin:0 0 15px; padding-left:26px}
+li{margin:6px 0}
+table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14px;
+  font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th{background:#f0f2f5; text-align:left; padding:9px 12px; border:1px solid var(--line); font-weight:600}
+td{padding:9px 12px; border:1px solid var(--line); vertical-align:top}
+tbody tr:nth-child(even){background:#fafbfc}
+code{background:var(--code-bg); padding:2px 6px; border-radius:3px; font-size:13.5px;
+  font-family:"SF Mono",Menlo,Consolas,monospace}
+pre{background:var(--code-bg); padding:14px 16px; border-radius:5px; overflow-x:auto; margin:16px 0;
+  border:1px solid var(--line-soft)}
+pre code{background:none; padding:0}
+hr{border:none; border-top:1px solid var(--line-soft); margin:34px 0}
+strong{font-weight:700; color:#0f1419}
+a{color:var(--accent)}
+img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6px; background:#fff}
+.katex-display{margin:20px 0; overflow-x:auto; overflow-y:hidden; padding:2px 0}
+.katex{font-size:1.045em}
+.tag-note{font-family:"Noto Sans SC","PingFang SC",sans-serif; font-size:12px; color:var(--ink-dim);
+  margin-top:40px; padding-top:16px; border-top:1px solid var(--line-soft); line-height:1.9}
+@media(max-width:900px){
+  .toc{display:none}
+  .paper{padding:28px 22px}
+  .layout{padding:0 12px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc"><h4>目录</h4><div id="toc"></div></nav>
+  <main class="main"><article class="paper" id="content"></article></main>
+</div>
+
+<script type="text/plain" id="src">
+# 微扰论与变分法
+
+> **分类归属：第二部分 形式体系与数学结构 · 数学程度：L3（推导层）· 前置依赖：第 12 篇《算符、对易关系与表象》、第 13 篇《薛定谔方程》、第 14 篇《一维势场、势垒与量子隧穿》、第 17 篇《中心力场与氢原子》**
+> **验证依据**：Schrödinger (1926)、Dirac (1927)、Fermi (1932)、Ritz (1909)、Hylleraas (1929)、Rayleigh (1877)、Sakurai & Napolitano (2011)、Feynman Lectures Vol. III、Landau & Lifshitz (1977)、CODATA (2022)
+
+---
+
+## 一、概念与定位
+
+微扰论（perturbation theory）与变分法（variational method）是量子力学中两套互补的近似工具，它们解决的都是同一个困境：**绝大多数真实的哈密顿量无法解析求解**。氢原子之外几乎不存在可精确分离变量的多体势，而"无法精确求解"并不等于"无法计算"——这两套方法分别提供了不同前提下的可控近似。
+
+微扰论的起点是一个**已被精确求解**的参考哈密顿量 $H_0$，加上一个**相对小**的扰动 $V$，总量
+
+$$ H = H_0 + \lambda V,\qquad \lambda\ll 1 \tag{1} $$
+
+把真实解按小参数 $\lambda$ 展开。它的强项是"小修正可逐级计算"——能量和波函数的一阶、二阶修正都有封闭的闭合表达式，且每阶只用到 $H_0$ 的已知本征态。代价是：微扰级数通常是**渐近级数**而非收敛级数，高阶项最终会发散（详见第七节争议）。
+
+变分法不要求一个可解的参考系统，而是基于一个严厉的极值原理：
+
+$$ E_0 \le \frac{\langle\psi|H|\psi\rangle}{\langle\psi|\psi\rangle}\quad\text{对任意归一化试探态 }|\psi\rangle \tag{2} $$
+
+即任意试探波函数给出的能量期望值，必不低于真实基态能量 $E_0$。它的强项是**只给上界、绝不出错方向**——你永远知道"真实基态比这个更低"，代价是精度完全取决于试探函数的形式，而激发态的变分上界需要谨慎处理（见第二节）。
+
+两者在第二、六部分的交叉中反复出现：晶体场理论（第 42 篇）本质上是**简并微扰**（d 轨道在配位场中分裂）；密度泛函理论（第 46 篇）的根基是 Hohenberg–Kohn 的**变分原理**；能带论（第 24 篇）的近自由电子模型是微扰论。本篇是这些应用的共同前置。
+
+---
+
+## 二、数学结构
+
+### 2.1 定态非简并微扰论（Rayleigh–Schrödinger）
+
+设 $H_0$ 的本征问题已解：
+
+$$ H_0\,|n^{(0)}\rangle = E_n^{(0)}\,|n^{(0)}\rangle,\qquad \{\,|n^{(0)}\rangle\,\}\ \text{正交归一且完备} \tag{3} $$
+
+将真实本征态与能级按 $\lambda$ 展开：
+
+$$ |\psi_n\rangle = |n^{(0)}\rangle + \lambda\,|n^{(1)}\rangle + \lambda^2\,|n^{(2)}\rangle + \cdots \tag{4} $$
+$$ E_n = E_n^{(0)} + \lambda\,E_n^{(1)} + \lambda^2\,E_n^{(2)} + \cdots \tag{5} $$
+
+代入定态方程 $(H_0+\lambda V)|\psi_n\rangle = E_n|\psi_n\rangle$，按 $\lambda$ 幂次收集：
+
+- $\lambda^0$ 阶：$H_0|n^{(0)}\rangle = E_n^{(0)}|n^{(0)}\rangle$，即 (3)，已知。
+- $\lambda^1$ 阶：
+
+  $$ H_0|n^{(1)}\rangle + V|n^{(0)}\rangle = E_n^{(0)}|n^{(1)}\rangle + E_n^{(1)}|n^{(0)}\rangle \tag{6} $$
+
+  左乘 $\langle n^{(0)}|$。利用 $\langle n^{(0)}|H_0 = E_n^{(0)}\langle n^{(0)}|$（因 $H_0$ 厄米），左边第一项 $\langle n^{(0)}|H_0|n^{(1)}\rangle = E_n^{(0)}\langle n^{(0)}|n^{(1)}\rangle$；右边第一项 $E_n^{(0)}\langle n^{(0)}|n^{(1)}\rangle$。二者相消，得
+
+  $$ \boxed{E_n^{(1)} = \langle n^{(0)}|V|n^{(0)}\rangle} \tag{7} $$
+
+  即**一阶能量修正等于扰动在未微扰态上的对角元**。
+
+  为求 $|n^{(1)}\rangle$，将其向完备集展开（非简并假定下 $|n^{(0)}\rangle$ 本身已归一化，且可固定 $\langle n^{(0)}|n^{(1)}\rangle=0$）：
+
+  $$ |n^{(1)}\rangle = \sum_{m\neq n} |m^{(0)}\rangle\,\langle m^{(0)}|n^{(1)}\rangle \tag{8} $$
+
+  把 (6) 左乘 $\langle k^{(0)}|$（其中 $k\neq n$），同理消掉 $H_0$ 项得
+
+  $$ \langle k^{(0)}|V|n^{(0)}\rangle = \big(E_n^{(0)}-E_k^{(0)}\big)\,\langle k^{(0)}|n^{(1)}\rangle \quad(k\neq n) \tag{9} $$
+
+  故
+
+  $$ \boxed{|n^{(1)}\rangle = \sum_{m\neq n} \frac{\langle m^{(0)}|V|n^{(0)}\rangle}{E_n^{(0)}-E_m^{(0)}}\,|m^{(0)}\rangle} \tag{10} $$
+
+- $\lambda^2$ 阶：从 $\lambda^2$ 项方程
+
+  $$ H_0|n^{(2)}\rangle + V|n^{(1)}\rangle = E_n^{(0)}|n^{(2)}\rangle + E_n^{(1)}|n^{(1)}\rangle + E_n^{(2)}|n^{(0)}\rangle \tag{11} $$
+
+  左乘 $\langle n^{(0)}|$。前两项分别化为 $E_n^{(0)}\langle n^{(0)}|n^{(2)}\rangle$ 与 $\langle n^{(0)}|V|n^{(1)}\rangle$，右边前两项化为 $E_n^{(0)}\langle n^{(0)}|n^{(2)}\rangle$ 与 $E_n^{(1)}\langle n^{(0)}|n^{(1)}\rangle=0$。消去后得
+
+  $$ E_n^{(2)} = \langle n^{(0)}|V|n^{(1)}\rangle = \sum_{m\neq n} \frac{|\langle m^{(0)}|V|n^{(0)}\rangle|^2}{E_n^{(0)}-E_m^{(0)}} \tag{12} $$
+
+  即**二阶能量修正等于所有虚跃迁通道的"强度除以能级差"之和**，分母为负（因 $m\neq n$ 时能量差符号取决于相对高低），故二阶修正通常压低（或抬高，取决于能级排列）该态。
+
+### 2.2 简并微扰论
+
+若 $E_n^{(0)}$ 有简并子空间 $\mathcal{D}=\mathrm{span}\{|n,\alpha^{(0)}\rangle,\ \alpha=1,\dots,d\}$，则 (7) 的推导中 $\langle n|H_0|n^{(1)}\rangle$ 与 $E_n^{(0)}\langle n|n^{(1)}\rangle$ 不再相消（因 $|n^{(1)}\rangle$ 可在简并子空间内有分量），且 $\langle n|V|n\rangle$ 不再是普通数而是 $d\times d$ 矩阵 $V_{\alpha\beta}=\langle n,\alpha^{(0)}|V|n,\beta^{(0)}\rangle$。一级修正由在 $\mathcal{D}$ 内对角化 $V$ 给出：
+
+$$ \sum_{\beta} V_{\alpha\beta}\,c_\beta = E^{(1)}c_\alpha \tag{13} $$
+
+其本征值即 $d$ 个一级能量移动，本征矢确定"好"的零级基（对角化后微扰在该基下无非对角元）。若对角化后仍有剩余简并，则需继续到二阶（或在更大的子空间内处理）。典型例子：氢原子在电场中的线性 Stark 效应（基态简并？不，氢原子基态 1s 非简并；**n≥2 的激发态**在库仑势下 $n^2$ 重简并，电场 $\mathbf{E}$ 沿 z 的微扰 $-eEz$ 在 $n=2$ 的 4 维子空间内产生 ±3ea_0E 的分裂，即线性 Stark 效应）。
+
+### 2.3 含时微扰论与 Fermi 黄金规则
+
+设 $H(t)=H_0+V(t)$，未微扰态 $|i\rangle,|f\rangle$ 能量 $E_i,E_f$。在相互作用绘景（第 18 篇）下，跃迁振幅一阶为
+
+$$ c_f^{(1)}(t) = -\frac{i}{\hbar}\int_{t_0}^{t}\!dt'\,\langle f|V_I(t')|i\rangle,\qquad V_I(t')=e^{iH_0t'/\hbar}V(t')e^{-iH_0t'/\hbar} \tag{14} $$
+
+对单色驱动 $V(t)=W e^{-i\omega t}+W^\dagger e^{+i\omega t}$，取 $t_0\to-\infty$ 并 $|\langle f|W|i\rangle|\equiv W_{fi}$，积分得（吸收分量）
+
+$$ c_f^{(1)}(t) = -\frac{2W_{fi}}{\hbar}\,\frac{\sin[(\omega_{fi}-\omega)t/2]}{\omega_{fi}-\omega}\,e^{i(\omega_{fi}-\omega)t/2} \tag{15} $$
+
+其中 $\omega_{fi}=(E_f-E_i)/\hbar$。跃迁概率
+
+$$ P_{i\to f} = |c_f^{(1)}|^2 = \frac{4|W_{fi}|^2}{\hbar^2}\,\frac{\sin^2[(\omega_{fi}-\omega)t/2]}{(\omega_{fi}-\omega)^2} \tag{16} $$
+
+当终态连续（密度 $\rho(E_f)$），对能量积分并令 $t$ 大，利用 $\int dE_f\,\frac{\sin^2[(\omega_{fi}-\omega)t/2]}{(\omega_{fi}-\omega)^2}\to \frac{\pi t}{2}\delta(\omega_{fi}-\omega)$，得到**Fermi 黄金规则**：
+
+$$ \boxed{W_{i\to f} = \frac{dP}{dt} = \frac{2\pi}{\hbar}\,|W_{fi}|^2\,\rho(E_f)} \tag{17} $$
+
+它给出了**单位时间的跃迁速率**，是原子自发/受激辐射、核衰变、散射截面的通用起点（Fermi, 1932, 已核实）。
+
+### 2.4 变分法（Ritz 变分原理）
+
+对归一化试探态 $|\psi\rangle=\sum_k c_k|\chi_k\rangle$（基 $\{\chi_k\}$ 不必正交），能量泛函
+
+$$ E[\mathbf{c}] = \frac{\mathbf{c}^\dagger \mathbf{H}\mathbf{c}}{\mathbf{c}^\dagger \mathbf{S}\mathbf{c}},\qquad H_{jk}=\langle\chi_j|H|\chi_k\rangle,\ S_{jk}=\langle\chi_j|\chi_k\rangle \tag{18} $$
+
+对 $\mathbf{c}^*$ 取驻定（$\delta E=0$）导出广义本征值问题
+
+$$ \mathbf{H}\mathbf{c} = E\,\mathbf{S}\mathbf{c} \tag{19} $$
+
+其最小本征值 $E_0^{\text{(var)}}$ 即为基态能量的变分上界（Ritz, 1909, 已核实）。这把"在所有波函数中找最低能量"这一无穷维极值问题，化为有限维矩阵对角化——是 Hartree–Fock、密度泛函、量子化学的全部数值方法的根。
+
+---
+
+## 三、物理量与特征尺度
+
+- **微扰参数尺度**：判定 $\lambda V$ 与 $H_0$ 能级的相对大小。一阶修正量级 $\sim \langle V\rangle$；二阶修正量级 $\sim \langle V\rangle^2/\Delta E$，其中 $\Delta E$ 为最近的能级间隔。当 $\langle V\rangle\ll \Delta E$ 时微扰论可靠；近简并或偶然简并处二阶项会放大，需转向简并微扰或精确对角化。
+- **变分误差尺度**：单参数试探的误差通常正比于"试探空间与真实波函数缺失的关联"量级。氦原子例子（第六节）中，单参数屏蔽模型误差约 $1.9\%$（关联能 ~0.056 Ha）；加入显式 $r_{12}$ 关联项可压到 $0.07\%$。
+- **常数**：Hartree 能量 $E_h=27.211\,386\,245\,988(53)\ \text{eV}$（CODATA 2018，相对不确定度 $2.0\times10^{-12}$）。氦原子精确非相对论基态 $-2.903\,724\,377\ \text{Ha}\approx -79.0\ \text{eV}$。
+
+---
+
+## 四、实验基础与观测证据
+
+1. **原子跃迁速率**：含时微扰 + Fermi 黄金规则直接给出电偶极跃迁速率 $A_{fi}\propto \omega_{fi}^3|\langle f|\mathbf{d}|i\rangle|^2$。氢原子 Lyman-$\alpha$（2p→1s）寿命理论值 $1.6\ \text{ns}$ 与实验吻合到 $10^{-3}$ 量级，是对含时微扰最干净的验证之一（Dirac, 1927 建立辐射的量子理论；Fermi, 1932 系统化为黄金规则）。
+2. **氦原子基态**：变分法给出 $-2.8477\ \text{Ha}$（单参数）到 $-2.9037\ \text{Ha}$（Hylleraas 10 参数，已核实），而激光射频双共振实验测得基态电离能对应 $-2.903\,724(3)\ \text{Ha}$，理论在 12 位有效数字上被实验支持。这是"波力学能否处理多电子体系"的历史性判决——1929 年前后曾被视为对量子力学的重大考验，结果通过。
+3. **斯塔克/塞曼分裂**：简并微扰预言的氢原子线性 Stark 位移 $\pm3ea_0E$（n=2）在 Stark 光谱中可直接观测，验证了"简并子空间对角化"而非普通非简并公式的必要性。
+
+---
+
+## 五、分类体系与物理机制
+
+| 类别 | 适用前提 | 输出 | 可靠性 |
+|------|---------|------|--------|
+| 非简并定态微扰 | $\lambda V\ll\Delta E$，零级非简并 | $E^{(1)},E^{(2)},|\psi^{(1)}\rangle$ 闭合式 | 高（小参数下） |
+| 简并定态微扰 | 零级有简并 | 简并子空间内能级分裂 | 高（消除简并后） |
+| 含时微扰 | $V(t)$ 弱，短/中时标 | 跃迁概率、黄金规则 | 中（黄金规则需连续终态近似） |
+| 变分法 | 仅需 $H$ 与试探空间 | 基态上界 | 绝对（上界保证），精度看试探 |
+
+机制要点：微扰论是"**展开**"——把解写成已知解的幂级数；变分法是"**放缩**"——用泛函上界夹逼真实能量。二者不矛盾：对非简并基态，用微扰波函数作变分试探，所得能量恰等于二阶微扰结果（Hyleraas–Undheim 定理的特例）。
+
+---
+
+## 六、典型系统与可解模型
+
+### 6.1 非谐振子：二阶微扰的干净验证
+
+哈密顿 $H=\tfrac12 p^2+\tfrac12 x^2+\lambda x^4$（取 $\hbar=\omega=m=1$）。未微扰为谐振子，$E_n^{(0)}=n+\tfrac12$，位置算符 $x=(a+a^\dagger)/\sqrt2$。基态一阶修正
+
+$$ E_0^{(1)}=\lambda\langle0|x^4|0\rangle=\frac{3}{4}\lambda \tag{20} $$
+
+四维矩 $\langle0|x^4|0\rangle=3/4$ 由升降算符代数得到：将 $(a+a^\dagger)^4$ 作用于 $|0\rangle$ 得 $(a+a^\dagger)^4|0\rangle=3|0\rangle+6\sqrt2\,|2\rangle+2\sqrt3\,|4\rangle$，除以 $4$（因 $x^4=(a+a^\dagger)^4/4$）即 $\langle0|x^4|0\rangle=3/4$。二阶基态修正用 (12)：
+
+$$ E_0^{(2)}=\lambda^2\!\sum_{m\ge1}\frac{|\langle m|x^4|0\rangle|^2}{E_0^{(0)}-E_m^{(0)}} = \lambda^2\!\sum_{m\ge1}\frac{|\langle m|x^4|0\rangle|^2}{-m} \tag{21} $$
+
+主导项来自 $m=2$：$\langle2|x^4|0\rangle=3\sqrt2/2$，贡献 $-(9/2)/2=-9/4$；叠加 $m=4,6,\dots$ 各项后总和收敛到
+
+$$ E_0^{(2)} = -\frac{21}{8}\,\lambda^2 \tag{22} $$
+
+配套脚本在 $N=40$ 的谐振子基上数值对角化 $H=\mathrm{diag}(E_n^{(0)})+\lambda\,x^4$，基态能量与 $E_0^{(0)}+E_0^{(1)}+E_0^{(2)}$ 比较：在 $\lambda=0.05$ 时数值 $0.532643$ 对二阶公式 $0.530937$ 的相对偏差仅 $3.2\times10^{-3}$，且偏差随 $\lambda$ 减小而迅速下降（图 19-A1），干净验证了二阶微扰公式的正确性；剩余偏差即三阶及更高阶（微扰级数在此为渐近级数，见 §7）。
+
+### 6.2 氦原子基态变分（历史基准）
+
+哈密顿（原子单位，$Z=2$）：$H=-\tfrac12\nabla_1^2-\tfrac12\nabla_2^2-2/r_1-2/r_2+1/r_{12}$。取乘积试探 $\psi=\phi_{\alpha}(r_1)\phi_{\alpha}(r_2)$，$\phi_{\alpha}=(\alpha^3/\pi)^{1/2}e^{-\alpha r}$，期望值
+
+$$ E(\alpha) = \alpha^2 - 2Z\alpha + \tfrac{5}{8}\alpha = \alpha^2 - \tfrac{27}{8}\alpha \quad(\text{因 }Z=2) \tag{22} $$
+
+极小化 $dE/d\alpha=0$ 得 $\alpha_{\min}=27/16=1.6875$，能量
+
+$$ E_{\min} = -\left(\frac{27}{16}\right)^2 = -2.847\,656\ \text{Ha} = -77.49\ \text{eV} \tag{23} $$
+
+高于精确 $-2.9037\ \text{Ha}$（$-79.0\ \text{eV}$），满足变分上界，相对误差 $1.9\%$。物理图像：每个电子以有效核电荷 $Z_{\text{eff}}=27/16$ 运动，意味着被另一电子屏蔽了 $5/16$ 个正电荷——这是"电子关联"最朴素的体现。Hylleraas (1929) 引入显式 $r_{12}$ 项后提升到 $-2.90363\ \text{Ha}$，逼近精确值（已核实）。
+
+### 6.3 与宝石学/晶体场的交叉
+
+- **晶体场分裂**（第 42 篇）：过渡金属 d 轨道在配体场中的能级分裂，就是"五重简并 d 轨道在非零微扰 $V_{\text{CF}}$ 下的简并微扰"——一级分裂由在 d 子空间对角化晶体场势给出（八面体场 $\Delta_o$、四面体场 $\Delta_t$）。本篇 2.2 节即其数学基础。
+- **Cr³⁺ 的 R 线**（694 nm）：若把配体场视为对自由离子 d 轨道的微扰、再在微扰本征态间算电偶极跃迁，便得到第 43 篇讨论的 d-d 跃迁与 Laporte 规则破坏。
+- **DFT**（第 46 篇）：Hohenberg–Kohn 第一定理是变分原理 (2) 在电子密度泛函上的推广——基态能量是密度泛函的全局极小值。
+
+---
+
+## 七、历史脉络与学术争议
+
+**脉络**：Rayleigh (1877) 在《声的理论》中给出"瑞利商"作为振动系统基频的上界（已核实，古籍，无 DOI）；Ritz (1909) 将其推广为用有限基展开求驻定的通用方法，即 Rayleigh–Ritz（已核实）；Schrödinger (1926) 在其第四篇论文中将微扰思想引入波动力学（Ann. Phys. 81, 109–139，已核实）；Dirac (1927) 建立辐射的量子理论，含时微扰由此成型（Proc. R. Soc. A 114, 243，DOI 10.1098/rspa.1927.0039，已核实）；Fermi (1932) 系统化为黄金规则（Rev. Mod. Phys. 4, 87，DOI 10.1103/RevModPhys.4.87，已核实）；Hylleraas (1929) 用变分法攻克氦原子（Z. Phys. 54, 347，已核实）。
+
+**争议与陷阱**：
+
+1. **微扰级数发散**：对多数相互作用（如 QED、非谐振子、多数实例），按阶数的微扰级数实际是**渐近级数**——前若干项递减，但到某阶后回升并随阶数发散。例如非谐振子 $H=p^2/2+x^2/2+gx^4$ 的能级微扰展开在大阶处 $E_n^{(k)}\sim k!$，仅当 $k\lesssim 1/\sqrt{g}$ 时有用。因此"算到高阶"不等于"更准"。一个更触目的反例是无限深方势阱加线性势 $V(x)=\lambda x$：一阶修正对所有能级给出相同位移 $\lambda L/2=0.05$（$\lambda=0.1,L=1$），但精确数值对角化显示真实位移仅为其一半（位移比 $0.50$），而二阶项近乎为零（$-5\times10^{-6}$ 量级），几乎全部差额由三阶及以上承担——直观展示"级数渐近而非收敛"，故本篇未将它用作二阶验证的主例（改用 §6.1 的非谐振子）。
+2. **变分法只保上界**：激发态不能直接套用 (2)（对激发态无上界保证）。求第一激发态需用"在正交约束 $\langle\psi|0\rangle=0$ 下的变分"，或在子空间投影；否则易得到虚假低能。
+3. **简并处理的常见错误**：对非简并公式 (7)(12) 误用于简并态，会得到无穷大二阶项（分母为零）或错误的一阶——必须先做 (13) 的简并对角化。
+4. **命名纠偏**：文献考据指出"Rayleigh–Ritz"实为 Ritz 单独成果，Rayleigh 本人方法与之不同（Leissa 2005）；本笔记为尊重惯例仍沿用复合名，但注明原创权属 Ritz。
+
+---
+
+## 八、参考文献
+
+**原始文献（已核实）**
+
+- Schrödinger (1926) 第四篇：微扰思想进入波力学，可复用本系列 24bv 条（Ann. Phys. 81, 109–139，DOI 10.1002/andp.19262450504，已核实）。
+- Dirac (1927) 含时微扰与辐射量子理论，可复用本系列 24ch 条（Proc. R. Soc. A 114, 243–265，DOI 10.1098/rspa.1927.0039，已核实）。
+- 24cm. Fermi, E. (1932). Quantum Theory of Radiation. *Reviews of Modern Physics*, 4(1), 87–132. `已核实`（Fermi 黄金规则 (17) 的系统化表述；DOI 10.1103/RevModPhys.4.87；第 19 篇）
+- 24cn. Ritz, W. (1909). Über eine neue Methode zur Lösung gewisser Variationsprobleme der mathematischen Physik. *Journal für die reine und angewandte Mathematik*, 135, 1–61. `已核实`（Ritz 变分法 / Rayleigh–Ritz 方法原创；DOI 10.1515/crll.1909.135.1；第 19 篇）
+- 24co. Hylleraas, E.A. (1929). Neue Berechnung der Energie des Heliums im Grundzustande, sowie des tiefsten Terms von Ortho-Helium. *Zeitschrift für Physik*, 54(4), 347–366. `已核实`（氦原子基态变分，1 参数 $-2.8477\ \text{Ha}$、10 参数 $-2.90363\ \text{Ha}$；第 19 篇）
+- 24cp. Rayleigh, J.W.S. (1877). *The Theory of Sound*, Vol. I. Macmillan, London, pp. 119–126（瑞利商作为基频近似上限；古籍，无 DOI；第 19 篇）
+
+**权威教材（S 级）**
+
+- Sakurai, J.J. & Napolitano, J. (2011). *Modern Quantum Mechanics* (2nd ed.). Addison-Wesley.（非简并/简并微扰、含时微扰、黄金规则的现代标准推导）
+- Landau, L.D. & Lifshitz, E.M. (1977). *Quantum Mechanics: Non-Relativistic Theory* (3rd ed., Vol. 3). Pergamon.（§38 微扰论、§40 变分法）
+- Feynman, R.P., Leighton, R.B. & Sands, M. (2010). *The Feynman Lectures on Physics*, Vol. III, ch. 9（二态系统与微扰的直观处理）
+
+**数据来源**
+
+- CODATA (2018) 推荐值（NIST）：Hartree 能量 $E_h=27.211\,386\,245\,988(53)\ \text{eV}$（本系列统一采用 CODATA 2018，与第 17 篇里德伯能量口径一致）
+</script>
+<script>
+// 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏
+function protectMath(src){
+  var blocks = [];
+  // 先抽块级 $$...$$（可跨行）
+  src = src.replace(/\$\$([\s\S]+?)\$\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  // 再抽行内 $...$（不含换行、内部不含 $）
+  src = src.replace(/\$([^\$\n]+?)\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  return { src: src, blocks: blocks };
+}
+
+function boot(){
+  var raw = document.getElementById('src').textContent;
+  // 记录标题锚点（在保护公式之前，避免影响）
+  var md = raw.replace(/^(#{1,3})\s+(.+)$/gm, function(m, h, t){
+    var id = 'h-' + t.replace(/[^\w一-龥]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+    return h + ' <span id="' + id + '"></span>' + t;
+  });
+
+  // 保护数学公式
+  var prot = protectMath(md);
+  md = prot.src;
+
+  document.getElementById('content').innerHTML = marked.parse(md);
+
+  // 还原数学公式占位符
+  var content = document.getElementById('content');
+  var html = content.innerHTML.replace(/%%MATH(\d+)%%/g, function(m, n){
+    return prot.blocks[+n];
+  });
+  content.innerHTML = html;
+
+  // 生成目录
+  var hs = document.querySelectorAll('#content h2, #content h3');
+  var toc = document.getElementById('toc'), tocHtml = '';
+  hs.forEach(function(h){
+    var sp = h.querySelector('span[id]');
+    var id = sp ? sp.id : '';
+    var cls = h.tagName === 'H3' ? 'sub' : '';
+    tocHtml += '<a class="' + cls + '" href="#' + id + '">' + h.textContent.trim() + '</a>';
+  });
+  toc.innerHTML = tocHtml;
+
+  // 图片路径：正文里写 figures/xxx.svg
+  document.querySelectorAll('#content img').forEach(function(im){
+    if(/^figures\//.test(im.getAttribute('src')||'')) return;
+  });
+
+  if (window.renderMathInElement) {
+    renderMathInElement(document.getElementById('content'), {
+      delimiters:[
+        {left:'$$', right:'$$', display:true},
+        {left:'$',  right:'$',  display:false}
+      ],
+      ignoredTags:['script','noscript','style','textarea','pre','code'],
+      throwOnError:false
+    });
+  }
+
+  // 滚动高亮
+  var links = [].slice.call(toc.querySelectorAll('a'));
+  window.addEventListener('scroll', function(){
+    var cur = null;
+    hs.forEach(function(h){
+      if (h.getBoundingClientRect().top < 120) cur = h;
+    });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if (cur){
+      var sp = cur.querySelector('span[id]');
+      var act = toc.querySelector('a[href="#' + (sp?sp.id:'') + '"]');
+      if (act) act.classList.add('active');
+    }
+  }, {passive:true});
+}
+if (window.marked) boot();
+else window.addEventListener('load', boot);
+</script>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>宝石学中的量子误用辨析（Clarifying Common Quantum Misuses in Gemology）系统量子力学笔记</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2024; --ink-dim:#5b6570;
+  --line:#dfe3e8; --line-soft:#eef0f3; --accent:#1f5fa8; --accent-soft:#e8f0fa;
+  --amber-bg:#fff8e6; --amber-line:#e5c168; --amber-ink:#6b5200;
+  --green:#1c7a4a; --green-bg:#e8f5ee; --red:#b03030; --red-bg:#fdecec;
+  --code-bg:#f6f7f9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,serif;
+  background:var(--bg); color:var(--ink); line-height:1.85; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.layout{display:flex; max-width:1280px; margin:0 auto; gap:28px; padding:0 24px}
+/* 侧栏目录 */
+.toc{
+  width:246px; flex-shrink:0; position:sticky; top:0; height:100vh;
+  overflow-y:auto; padding:28px 0 40px; font-family:"Noto Sans SC","PingFang SC",sans-serif;
+}
+.toc h4{font-size:11px; letter-spacing:1.6px; color:var(--ink-dim); text-transform:uppercase;
+  margin:0 0 12px; padding-left:2px; font-weight:600}
+.toc a{
+  display:block; font-size:13px; color:var(--ink-dim); text-decoration:none;
+  padding:5px 10px; border-left:2px solid transparent; line-height:1.5;
+}
+.toc a:hover{color:var(--accent); background:var(--accent-soft)}
+.toc a.sub{padding-left:24px; font-size:12.5px}
+.toc a.active{color:var(--accent); border-left-color:var(--accent); background:var(--accent-soft); font-weight:600}
+/* 正文 */
+.main{flex:1; min-width:0; padding:28px 0 120px}
+.paper{background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  padding:48px 56px; box-shadow:0 1px 3px rgba(16,24,40,.05)}
+h1{font-size:27px; line-height:1.45; margin:0 0 18px; letter-spacing:.3px; font-weight:700}
+h2{font-size:20px; margin:52px 0 18px; padding-bottom:9px; border-bottom:1.5px solid var(--ink);
+  letter-spacing:.3px}
+h3{font-size:16.5px; margin:32px 0 12px; color:var(--accent); font-weight:600}
+h4{font-size:15px; margin:22px 0 10px; font-weight:600}
+p{margin:0 0 15px; text-align:justify}
+blockquote{
+  margin:18px 0; padding:13px 18px; background:var(--amber-bg);
+  border-left:3px solid var(--amber-line); border-radius:0 4px 4px 0; color:var(--amber-ink);
+}
+blockquote p{margin:0 0 8px} blockquote p:last-child{margin:0}
+blockquote strong{color:#4a3800}
+ul,ol{margin:0 0 15px; padding-left:26px}
+li{margin:6px 0}
+table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14px;
+  font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th{background:#f0f2f5; text-align:left; padding:9px 12px; border:1px solid var(--line); font-weight:600}
+td{padding:9px 12px; border:1px solid var(--line); vertical-align:top}
+tbody tr:nth-child(even){background:#fafbfc}
+code{background:var(--code-bg); padding:2px 6px; border-radius:3px; font-size:13.5px;
+  font-family:"SF Mono",Menlo,Consolas,monospace}
+pre{background:var(--code-bg); padding:14px 16px; border-radius:5px; overflow-x:auto; margin:16px 0;
+  border:1px solid var(--line-soft)}
+pre code{background:none; padding:0}
+hr{border:none; border-top:1px solid var(--line-soft); margin:34px 0}
+strong{font-weight:700; color:#0f1419}
+a{color:var(--accent)}
+img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6px; background:#fff}
+.katex-display{margin:20px 0; overflow-x:auto; overflow-y:hidden; padding:2px 0}
+.katex{font-size:1.045em}
+.tag-note{font-family:"Noto Sans SC","PingFang SC",sans-serif; font-size:12px; color:var(--ink-dim);
+  margin-top:40px; padding-top:16px; border-top:1px solid var(--line-soft); line-height:1.9}
+@media(max-width:900px){
+  .toc{display:none}
+  .paper{padding:28px 22px}
+  .layout{padding:0 12px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc"><h4>目录</h4><div id="toc"></div></nav>
+  <main class="main"><article class="paper" id="content"></article></main>
+</div>
+
+<script type="text/plain" id="src">
+# 宝石学中的量子误用辨析（Clarifying Common Quantum Misuses in Gemology）系统量子力学笔记
+> **第六部分：交叉应用——量子力学与宝石学 · 数学程度 L2 · 前置依赖：第42篇《晶体场与配位场理论》、第43篇《过渡金属离子致色的量子机制》、第44篇《色心与晶格缺陷的量子描述》、第45篇《光谱学仪器的量子基础》**
+> **验证依据**：Scully & Zubairy (1997) *Quantum Optics*、Kwiat et al. (1995) PRL、Burnham & Weinberg (1970) PRL、Maiman (1960) *Nature*、Tanabe & Sugano (1954) JPSJ、Sugano & Tsujikawa (1958) JPSJ、O'Brien (1955) Proc. R. Soc. A、Lehmann & Moore (1966) *Science*、da Silva et al. (2005) Phys. Chem. Miner.、Valeur & Berberan-Santos (2012) *Molecular Fluorescence*（均为已核实 S/A 级来源）
+
+---
+
+## 一、概念与定位
+
+**宝石学中的量子误用（quantum misuses in gemology）** 指在宝石学语境（科普、商业营销、鉴定与仪器解释）中，对量子力学概念（偏振纠缠、能级、发射/吸收、色心、荧光/磷光等）的**错误归因**或**不可证伪的套用**。本篇不是引入新量子理论，而是用本套笔记已建立的严格结论——特别是第 35 篇（光场量子化与相干态）与第 42–45 篇（晶体场、过渡金属致色、色心、光谱仪器）——对五类常见误用逐条辨析。
+
+名称词源：*gemology* 源自希腊语 *gēmma*（宝石）+ *-logia*（学问）；*misuse* 此处特指「把在某一子领域成立或仅在比喻层面成立的表述，迁移到宝石学现象上时丢失了可操作的物理定义」。辨析（clarification）与「纠错」不同：本篇只给出**可证伪的量子力学判据**，不评判商业或审美价值。
+
+本篇辨析的核心可辨识特征（判定树）如下：
+
+1. **纠缠是双粒子/多粒子不可分解性质**，单光子在双折射晶体中的偏振演化是单粒子幺正演化，既无第二个子系统也无相互作用项，**不可能产生纠缠**（见误用 1，引用 [24ko][24kq][24kp]）。
+2. **光谱线的「发射」与「吸收」方向由跃迁初末态和粒子数反转决定**：红宝石 694.3 nm 的 R 线是 Cr³⁺ ²E→⁴A₂ 的**发射（荧光/激光）线**，红宝石在蓝绿区的强吸收是 ⁴A₂→⁴T₂、⁴A₂→⁴T₁ 的**宽吸收带**，二者不可混为一谈（见误用 2，引用 [24ja][24ir][24kt]）。
+3. **色心归属必须有光谱/EPR 证据**，不能按「颜色→成因」想当然（见误用 3，引用 [24ku][24kv][24kw]）。
+4. **「量子能量」「量子共振」「量子 healing」等营销术语不对应任何厄米算符可观测量，亦不可证伪**；量子力学中可操作定义的电磁能量量子只有光子能量 $E=\hbar\omega$ 与离散能级（见误用 4，引用 [24ko][24ir]）。
+5. **荧光与磷光是不同量子机制**（允许跃迁的快过程 vs 系间窜越/陷阱释放的慢过程），混淆二者会误导鉴定（见误用 5，引用 [24kx][24ko]）。
+
+本主题在体系中的位置：它是第 35 篇（光场量子化、相干态、非线性光学）与第 42–44 篇（晶体场、色心）在宝石学场景下的「纠偏应用」，同时为第 45 篇（光谱仪器）中荧光/磷光、吸收/发射的判读提供边界。本篇采用**单光子偏振/二能级 + 晶体场二值能级**的简化模型，不引入 QED 协变表述。
+
+---
+
+## 二、数学结构
+
+**符号约定声明**：本篇采用 **SI 单位制**，$\hbar=h/(2\pi)$ 显式写出；自旋-1/2（单光子偏振）用 $|H\rangle,|V\rangle$ 表示水平/垂直极化本征态。所有密度矩阵 $\hat\rho$ 加帽，Bloch 矢量记为 $\mathbf r$。不涉及度规与傅里叶变换约定；文末常数采用 CODATA 2018 推荐值（2019 SI 重新定义后为精确值，见第三节）。
+
+### 2.1 单光子偏振态与双折射（误用 1）
+
+单光子偏振态在二维 Hilbert 空间展开：
+$$|\psi\rangle = \alpha|H\rangle + \beta|V\rangle,\qquad |\alpha|^2+|\beta|^2=1$$
+| 符号 | 含义 | 量纲 |
+|---|---|---|
+| $\|\psi\rangle$ | 单光子偏振态矢量 | 无量纲 |
+| $\alpha,\beta$ | 在 $|H\rangle,|V\rangle$ 基下的复振幅 | 无量纲 |
+| $|H\rangle,|V\rangle$ | 水平/垂直极化本征态（正交归一基） | 无量纲 |
+
+**双折射是单粒子线性幺正演化**。在单轴晶体中，寻常光 $o$（$H$）与非常光 $e$（$V$）为两个本征偏振，沿光轴方向的传播相速度不同，导致相位延迟。其演化等价于作用在单个光子上的幺正算符：
+$$\hat U_{\text{bir}}(\delta)=\exp\!\left(-i\frac{\delta}{2}\hat\sigma_z\right)
+=|H\rangle\langle H|+e^{i\delta}|V\rangle\langle V|$$
+| 符号 | 含义 | 量纲 |
+|---|---|---|
+| $\hat U_{\text{bir}}$ | 双折射演化幺正算符 | 无量纲 |
+| $\delta$ | $o,e$ 两分量间的相位延迟，$\delta=(\omega_o-\omega_e)L/c$ | 无量纲（弧度） |
+| $\hat\sigma_z$ | 偏振 Pauli 算符 $|H\rangle\langle H|-|V\rangle\langle V|$ | 无量纲 |
+| $L$ | 晶体中传播长度 | m |
+
+关键点：**$\hat U_{\text{bir}}$ 是单粒子算符，且是直积结构中的局部操作** $\hat U_{\text{bir}}\otimes\hat I$。两枚独立光子各自通过同一（或不同）双折射晶体，联合态为
+$$|\Psi_{\text{out}}\rangle = \hat U_{\text{bir}}^{(1)}\otimes\hat U_{\text{bir}}^{(2)}\,|\psi_1\rangle\otimes|\psi_2\rangle
+= \big(\hat U_{\text{bir}}^{(1)}|\psi_1\rangle\big)\otimes\big(\hat U_{\text{bir}}^{(2)}|\psi_2\rangle\big)$$
+这**始终是乘积态**，纠缠熵为零（见第六节约化的数值验证）。要产生纠缠，必须在哈密顿量中出现耦合不同光子的项。
+
+**真正的偏振纠缠来自参量下转换（SPDC，$\chi^{(2)}$ 非线性过程）**。在相互作用绘景下，泵浦经 $\chi^{(2)}$ 晶体产生信号/闲频光子对的相互作用哈密顿量（单模近似）为 $H_I\propto\chi^{(2)}\hat a_s^\dagger\hat a_i^\dagger\hat a_p+\text{h.c.}$，其幺正演化生成
+$$|\Psi_{\text{SPDC}}\rangle\propto\sum_{n}|n\rangle_s|n\rangle_i$$
+即双光子数态纠缠（双模压缩态）；在 Type-I/II 共线相位匹配并选取单光子限下，可得偏振 Bell 态 $|\Phi^\pm\rangle\propto|HH\rangle\pm|VV\rangle$（Kwiat et al. 1995 [24kp]；Burnham & Weinberg 1970 [24kq]）。此处纠缠源于 $\hat a_s^\dagger\hat a_i^\dagger$ 这一**耦合两个子系统**的产生算符，与双折射的局部幺正有本质区别。需要强调的边界：SPDC 常借助双折射实现相位匹配，但**纠缠是 $\chi^{(2)}$ 参量过程的产物，不是双折射本身的产物**——双折射仅提供色散/相位条件。
+
+### 2.2 红宝石 R 线的能级结构（误用 2）
+
+Cr³⁺ 在 Al₂O₃ 八面体配位场中，基态为自旋四重态 $^4A_2$，激发态含自旋二重态 $^2E$（亚稳态）与宽吸收带对应的 $^4T_2,^4T_1$（Tanabe & Sugano 1954 [24ir]；Sugano & Tsujikawa 1958 [24kt]）。自发辐射速率（Einstein A 系数，Wigner–Weisskopf 结果）为
+$$\Gamma=\frac{\omega^3|\mathbf d_{fi}|^2}{3\pi\varepsilon_0\hbar c^3}$$
+| 符号 | 含义 | 量纲 |
+|---|---|---|
+| $\Gamma$ | 自发辐射率，$\Gamma=1/\tau$（$\tau$ 为辐射寿命） | s⁻¹ |
+| $\omega$ | 跃迁角频率，$\omega=2\pi c/\lambda$ | rad·s⁻¹ |
+| $\mathbf d_{fi}$ | 电偶极矩阵元 $\langle f|\hat{\mathbf d}|i\rangle$ | C·m |
+| $\varepsilon_0$ | 真空介电常数 | F·m⁻¹ |
+| $c$ | 真空光速 | m·s⁻¹ |
+
+$^2E$ 因晶体场三角畸变与自旋-轨道耦合分裂为两个近简并能级，其零场分裂产生 **R1、R2 两条锐线**，二者均为 $^2E\to{}^4A_2$ 的**发射**过程；激光与强荧光都发生在 R 线（Maiman 1960 [24ja] 首次实现 694.3 nm 红宝石激光）。相反，红宝石肉眼所见的「红」源于其在**蓝绿区（约 400–550 nm）的宽带吸收**（泵浦带 $^4A_2\to{}^4T_1,^4T_2$），R 线处本身吸收极弱（因 $^2E$ 为亚稳态、振子强度小）。
+
+### 2.3 色心的量子描述（误用 3）与荧光/磷光（误用 5）
+
+色心是晶格缺陷（空位、杂质替代、电荷俘获中心）局域化的电子/空穴态，其能级位于带隙中。判明归属需要：吸收/发光光谱 + 电子顺磁共振（EPR，直接读出自旋与超精细结构）+ 辐照/热处理的可逆性对照（O'Brien 1955 [24ku]；Lehmann & Moore 1966 [24kv]；da Silva et al. 2005 [24kw]）。
+
+荧光与磷光的量子区分：
+- **荧光**：从单重激发态 $S_1$ 到 $S_0$ 的允许电偶极跃迁，寿命 $\tau\sim10^{-9}\!-\!10^{-7}\,\text{s}$（由上式 $\Gamma$ 决定）。
+- **磷光**：经系间窜越（ISC）到三重态 $T_1$ 后，受自旋禁戒或陷阱释放的延迟发射，寿命 $\tau\sim10^{-3}\!-\!10^{1}\,\text{s}$（Valeur & Berberan-Santos 2012 [24kx]）。二者不是「颜色不同」，而是**中间态与跃迁选择定则不同**。
+
+---
+
+## 三、物理量与特征尺度
+
+下表采用 **CODATA 2018** 推荐值；其中 $h,c,e,\hbar,k_B$ 经 2019 年 SI 重新定义后为**精确值**（不确定度 0），CODATA 2018 已按此报告 [24ko] 相关常数定义。
+
+| 物理量 | 符号 | 数值 / 量级 | 适用条件 |
+|---|---|---|---|
+| 普朗克常数 | $h$ | $6.62607015(00)\times10^{-34}\,\text{J·s}$ | 精确值（CODATA 2018/2022） |
+| 约化普朗克常数 | $\hbar$ | $1.054571817(00)\times10^{-34}\,\text{J·s}$ | 精确值 |
+| 真空光速 | $c$ | $299792458(00)\,\text{m·s}^{-1}$ | 精确值 |
+| 元电荷 | $e$ | $1.602176634(00)\times10^{-19}\,\text{C}$ | 精确值 |
+| 真空介电常数 | $\varepsilon_0$ | $8.8541878128(13)\times10^{-12}\,\text{F·m}^{-1}$ | CODATA 2018，末位不确定度 13 |
+| 玻尔兹曼常数 | $k_B$ | $1.380649(00)\times10^{-23}\,\text{J·K}^{-1}$ | 精确值 |
+| 1 eV（换算） | — | $1.602176634(00)\times10^{-19}\,\text{J}$ | 精确值 |
+| 红宝石 R1 线波长 | $\lambda_{R1}$ | $694.3\,\text{nm}$（文献值 [24ja]） | Maiman 1960 测得 |
+| R1 对应光子能量 | $E_{R1}=hc/\lambda$ | $\approx1.786\,\text{eV}$（$\approx2.861\times10^{-19}\,\text{J}$） | 由 $h,c$ 精确值计算 |
+| R1 对应波数 | $\tilde\nu$ | $\approx1.44\times10^{4}\,\text{cm}^{-1}$ | $\tilde\nu=1/\lambda$ |
+| R1/R2 零场分裂 | $\Delta_{\text{ZFS}}$ | $\approx29\,\text{cm}^{-1}$（$\approx3.6\,\text{meV}$） | $^2E$ 的晶体场分裂 [24kt] |
+| 红宝石吸收带 | $\lambda_{\text{abs}}$ | $^4A_2\to{}^4T_2\approx550\,\text{nm}$，$^4A_2\to{}^4T_1\approx400\,\text{nm}$ | 宽吸收（蓝绿） |
+| 荧光寿命量级 | $\tau_{\text{fl}}$ | $10^{-9}\!-\!10^{-7}\,\text{s}$ | 允许跃迁 |
+| 磷光寿命量级 | $\tau_{\text{ph}}$ | $10^{-3}\!-\!10^{1}\,\text{s}$ | 自旋禁戒/陷阱释放 |
+
+**量子效应显著判据（宝石学相关）**：当缺陷/离子的能级间距 $\Delta E$ 与 $k_BT$ 可比或更大（$T\sim300\,\text{K}$ 时 $k_BT\approx25\,\text{meV}$），能级结构主导颜色与发光；红宝石 R 线分裂 $\sim3.6\,\text{meV}$ 虽小于 $k_BT$，但因是孤立锐线且寿命长而可被分辨。紫外荧光灯光子能量 $\sim3.4\!-\!4.9\,\text{eV}$（对应 365/254 nm），足以泵浦多数可见荧光（误用 5 的观测基础）。
+
+---
+
+## 四、实验基础与观测证据
+
+### 4.1 关键实验与里程碑
+
+| 年份 | 实验者 | 体系 / 装置 | 关键结果 | 文献 |
+|---|---|---|---|---|
+| 1970 | Burnham & Weinberg | 非线性晶体中的参量光子对 | 首次观测到光学光子对的参量产生（SPDC 原始实验），给出同时性 | [24kq] |
+| 1995 | Kwiat et al. | Type-II SPDC + 贝尔态分析 | 高亮度偏振纠缠光子对源 $|\Phi^\pm\rangle\propto|HH\rangle\pm|VV\rangle$ | [24kp] |
+| 1960 | Maiman | 红宝石棒 + 闪光灯泵浦 | 首次受激辐射（红宝石激光），694.3 nm R 线发射 | [24ja] |
+| 1954/1958 | Tanabe–Sugano / Sugano–Tsujikawa | Cr³⁺:Al₂O₃ 吸收与塞曼光谱 | 建立晶体场能级（²E、⁴A₂）与 R 线零场分裂结构 | [24ir][24kt] |
+| 1955 | O'Brien | 烟晶 EPR | 超精细结构显示色心与 Al 杂质相关，提出 [AlO₄]⁰ 氧空穴模型 | [24ku] |
+| 1966 | Lehmann & Moore | 紫晶（天然+ X 射线辐照）EPR/吸收 | 色心为正空穴俘获于替代位 Fe³⁺，对应 545 nm 附近吸收 | [24kv] |
+| 2005 | da Silva et al. | 天然与中子辐照蓝托帕石 EPR/吸收 | O⁻(Al₂) 空穴中心与 620 nm 吸收带一一对应，证明其为辐照致色 | [24kw] |
+
+> **常见误读纠正（1）**：「方解石/石英双折射能把光变成纠缠态」是**错误**的。双折射把单光子偏振按 $o/e$ 分解为两个本征分量并引入相位延迟，输出仍是**单粒子的纯态（可分离）**；纠缠要求双粒子态不可写成直积，且必须有耦合两个子系统的相互作用（如 $\chi^{(2)}$ 参量过程）。在 SPDC 装置里**双折射只负责相位匹配，纠缠来自 $\chi^{(2)}$**，二事不可混淆 [24ko][24kq][24kp]。
+
+> **常见误读纠正（2）**：「红宝石的红色来自 694.3 nm R 线的吸收」是**颠倒因果**。R 线是 Cr³⁺ ²E→⁴A₂ 的**发射（荧光/激光）线**；红宝石显红是因为它在**蓝绿区有强宽带吸收**、透射/反射偏红。R 线处吸收本身极弱 [24ja][24ir][24kt]。
+
+> **常见误读纠正（3）**：「所有紫/烟色石英都是辐照致色」「辐照托帕石与天然蓝托帕石颜色成因一样」属**想当然**。烟晶、紫晶、辐照蓝托帕石的色心各不相同，且必须通过 EPR/吸收/热稳定性多重证据区分天然与处理 [24ku][24kv][24kw]。
+
+### 4.2 被排除的替代解释与实验局限
+
+- SPDC 光子对实验（[24kq][24kp]）排除了「双折射本身即可产生不可分离双粒子态」的朴素猜测——只要相互作用哈密顿量不含耦合项，光学演化保持乘积结构（见第六节的数值验证）。
+- 红宝石光谱（[24ja][24ir][24kt]）排除了「R 线为强吸收线」的误解：其锐线发射与宽带吸收分属不同初末态与不同振子强度。
+- **鉴定局限**：天然 vs 处理（如辐照托帕石）常非单一证据可定，需结合 EPR、吸收带位置、热稳定性与产地包裹体综合判定；部分处理（如某些辐照）可由 620 nm 带与 O⁻ 中心对应确认（[24kw]），但商业样品的「天然/处理」结论须个案举证，不能套用颜色直觉。
+
+---
+
+## 五、分类体系与物理机制
+
+### 5.1 五类误用辨析表
+
+| 编号 | 常见误用表述 | 严格结论 | 依据 |
+|---|---|---|---|
+| 误用 1 | 双折射晶体使光「产生纠缠」 | 线双折射是单粒子局部幺正，$\hat U\otimes\hat I$，输出恒为乘积态；纠缠需 $\chi^{(2)}$ 参量过程（SPDC） | [24ko][24kq][24kp] |
+| 误用 2 | R 线（694.3 nm）是红宝石的「吸收线」 | R 线是 ²E→⁴A₂ 的**发射**线；强吸收在蓝绿宽带（⁴A₂→⁴T₂,⁴T₁） | [24ja][24ir][24kt] |
+| 误用 3 | 紫色石英都=辐照致色；天然/处理色心混为一谈 | 色心归属须 EPR+吸收+热稳定性证据；烟晶=[AlO₄]⁰、紫晶=Fe³⁺空穴、辐照托帕石=O⁻(Al₂) 各不同 | [24ku][24kv][24kw] |
+| 误用 4 | 「量子能量」「量子共振」「量子 healing」 | 不对应任何厄米算符可观测量，不可证伪；量子力学可定义的仅有能级、跃迁频率与光子能量 $E=\hbar\omega$ | [24ko][24ir] |
+| 误用 5 | 荧光=磷光（只看颜色） | 荧光为允许单重态跃迁（ns），磷光经系间窜越/陷阱（ms–s），选择定则与中间态不同 | [24kx][24ko] |
+
+### 5.2 机制链条
+
+- **双折射→不增纠缠**：输入乘积态 → 经 $\hat U_{\text{bir}}^{(1)}\otimes\hat U_{\text{bir}}^{(2)}$ → 仍为乘积态；纠缠熵 $S(\rho_A)=0$。只有 $\hat a_s^\dagger\hat a_i^\dagger$ 这类耦合项才能把真空/泵浦中的两个子系统关联起来（第六节的 Bloch 球对照）。
+- **红宝石致色**：配位场分裂 d 轨道 → 基态 $^4A_2$ 与激发 $^2E,^4T_{1,2}$ → 蓝绿宽带吸收（透射偏红）+ 亚稳 $^2E$ 经 R1/R2 锐线发射。
+- **色心归属**：缺陷局域态引入带隙内能级 → 特定吸收/发光 + EPR 超精细指纹 → 与已知中心（[AlO₄]⁰、Fe³⁺-hole、O⁻(Al₂)）比对。
+- **荧光 vs 磷光**：跃迁选律决定速率量级；二者由中间态（单重 vs 三重/陷阱）区分，而非由颜色区分。
+
+### 5.3 概念辨析（并列，不站队）
+
+- **纠缠 vs 经典关联**：纠缠是不可分解为直积的双粒子量子关联，违反 Bell 不等式；经典关联（如两枚硬币分置）可因子化。双折射产生的是**经典可描述的偏振旋转**，不产生量子纠缠 [24ko][24kp]。
+- **发射 vs 吸收**：同一能级差既可发射也可吸收，由粒子数（反转）与初末态决定；R 线处发射远强于吸收，恰因 $^2E$ 亚稳、振子强度小 [24ja][24kt]。
+- **荧光 vs 磷光**：见 2.3 与 5.2，区别在于中间态与选律，非颜色 [24kx]。
+
+### 5.4 适用范围与失效边界
+
+- 上述「双折射不增纠缠」结论在**线性、无源、无泵浦**光学中成立；在强泵浦非线性（SPDC/SKS）或有源介质中，双折射仅作相位匹配条件，纠缠仍来自 $\chi^{(2)}$/$\chi^{(3)}$ 耦合项。
+- 晶体场模型（Tanabe–Sugano）适用于弱-中等配位场、dⁿ 离子的离散能级；强共价性或严重 Jahn–Teller 畸变时需修正 [24ir]。
+- 色心归属结论**不能外推**：同一颜色可由不同中心产生，必须个案举证（见 4.2）。
+
+---
+
+## 六、典型系统与可解模型
+
+### 6.1 模型 A（解析）：双折射下乘积态的纠缠熵为零
+
+取两枚独立单光子，输入均为 $|+\rangle=(|H\rangle+|V\rangle)/\sqrt2$，分别通过相延迟 $\delta_1,\delta_2$ 的双折射晶体。由 2.1 节：
+$$|\Psi_{\text{out}}\rangle = \frac{|H\rangle+e^{i\delta_1}|V\rangle}{\sqrt2}\otimes\frac{|H\rangle+e^{i\delta_2}|V\rangle}{\sqrt2}
+= \sum_{a,b\in\{H,V\}} c_{ab}|a\rangle|b\rangle$$
+其系数矩阵 $c_{ab}$ **秩为 1**（因为它是两个向量的外积），故约化密度矩阵 $\rho_A=\operatorname{Tr}_B(|\Psi\rangle\langle\Psi|)=|\phi_A\rangle\langle\phi_A|$ 为纯态，von Neumann 纠缠熵
+$$S(\rho_A)=-\operatorname{Tr}(\rho_A\log_2\rho_A)=0$$
+**结论**：无论 $\delta_1,\delta_2$ 取何值，纠缠熵恒为 0，双折射**不能**把可分离态变为纠缠态。这与 SPDC 的 $\sum_n|n\rangle_s|n\rangle_i$（系数矩阵秩 > 1，约化态为混态，熵 > 0）形成对照。
+
+### 6.2 模型 B（数值可视化）：Bloch 球对照
+
+脚本 `code/47_宝石学中的量子误用辨析_模型.py` 数值构造：
+- 左球（双折射输出）：单光子态 $|\psi(\delta)\rangle=(|H\rangle+e^{i\delta}|V\rangle)/\sqrt2$ 的约化密度矩阵 $\rho=\frac12(\hat I+\mathbf r\cdot\hat{\boldsymbol\sigma})$，Bloch 矢量长度 $|\mathbf r|=1$（纯态，球面上一点）。
+- 右球（纠缠对的约化态）：Bell 态 $|\Phi^+\rangle=(|HH\rangle+|VV\rangle)/\sqrt2$ 对子系统 A 求偏迹得 $\rho_A=\hat I/2$，Bloch 矢量 $\mathbf r=\mathbf 0$（最大混态，球心）。
+
+由此直观看到：双折射只把球面上的点移动，从不把它拉向球心；而纠缠对的单端约化态落在球心。图 1 即此对照。
+
+![Bloch-sphere comparison: a single-photon polarization state remains a pure separable point on the sphere after linear birefringence (left), whereas the reduced state of an entangled pair is maximally mixed at the sphere center (right); linear birefringence cannot generate entanglement.](figures/47_宝石学中的量子误用辨析_图1.svg)
+
+### 6.3 模型 C（数值）：红宝石 R 线能级与波长对应
+
+由 $E=hc/\lambda$ 与 $\tilde\nu=1/\lambda$ 计算 R1（694.3 nm）的能量与波数，并标出 R1/R2 零场分裂 $\approx29\,\text{cm}^{-1}$ 与蓝绿吸收带位置（约 550 nm、400 nm）。脚本同时输出红宝石 Cr³⁺ 简化能级示意图（图 2），用于对照「锐发射线 vs 宽吸收带」。
+
+![Ruby Cr3+ level scheme: sharp R-line emission 2E to 4A2 at 694.3 nm (red) versus broad 4A2 to 4T absorption bands in the blue-green; R1/R2 splitting is the zero-field splitting of 2E.](figures/47_宝石学中的量子误用辨析_图2.svg)
+
+---
+
+## 七、历史脉络与学术争议
+
+**提出动机**：量子力学自 1920–30 年代建立后，「量子」一词因其在微观世界的解释力而具有强说服力，遂被商业与科普借用。宝石学在 20 世纪后半叶才真正用上量子工具——晶体场理论解释致色（Tanabe–Sugano 1954 [24ir]）、色心的 EPR 指纹（O'Brien 1955 [24ku]）、激光与荧光机理（Maiman 1960 [24ja]）。但「量子」的科普比喻（叠加、纠缠、隧穿）常被未经换算地套用到宝石鉴定与营销，造成术语滥用。
+
+| 年份 | 人物 / 机构 | 贡献 | 文献 |
+|---|---|---|---|
+| 1954 / 1958 | Tanabe & Sugano；Sugano & Tsujikawa | 晶体场能级与 Cr³⁺:Al₂O₃ 的 R 线光谱/塞曼结构 | [24ir][24kt] |
+| 1960 | T. H. Maiman | 红宝石受激辐射（694.3 nm），确立 R 线为发射 | [24ja] |
+| 1955 | M. C. M. O'Brien | 烟晶色心的 [AlO₄]⁰ 氧空穴模型（EPR） | [24ku] |
+| 1966 | Lehmann & Moore | 紫晶色心 = Fe³⁺ 上俘获正空穴 | [24kv] |
+| 1970 / 1995 | Burnham & Weinberg；Kwiat et al. | SPDC 光子对与高亮度偏振纠缠源（厘清纠缠来源） | [24kq][24kp] |
+| 2005 | da Silva et al. | 辐照蓝托帕石 O⁻(Al₂) 中心与 620 nm 带对应 | [24kw] |
+| 2012 | Valeur & Berberan-Santos | 荧光/磷光的量子机制与寿命区分 | [24kx] |
+
+**当前争议与开放问题**（并列各方，不站队）：
+
+- **「量子」营销术语的边界**：一派（物理教育与消费者保护立场）认为「量子能量」「量子 healing」等不对应任何可测可观测量、不可证伪，应视作伪科学用语 [24ko]；另一派（部分商业与替代疗法从业者）主张这些词只作比喻或体验描述、不作物理断言。本笔记的立场限于：在可证伪的量子力学框架内，只有能级、跃迁频率与光子能量 $E=\hbar\omega$ 有操作定义（引用 [24ko][24ir]），其余表述不属于本套笔记的严格对象。
+- **天然/处理色心的判定标准**：宝石学实务以 EPR、吸收谱、热稳定性与包裹体联合判定（[24ku][24kv][24kw]）；但「处理」手段持续演化（如新型辐照/扩散处理），判定标准需随检测技术更新，存在方法学上的开放问题。
+- **诠释分歧**：本篇涉及的「荧光/磷光」「发射/吸收」「纠缠/可分离」均为**已有实验判据**的议题，不涉及量子力学诠释之争（如哥本哈根/多世界等）；仅在术语滥用层面指出「比喻不可当严格表述」（规范禁忌：科普简化须标注为通俗说法，见 [24kx] 对荧光/磷光机制的严格表述）。
+
+> 本节内容可能随检测技术与文献进展更新；文献以「已核实」标注者均经 Crossref/原文比对（见第八节）。
+
+---
+
+## 八、参考文献
+
+- [24ko] Scully M.O., Zubairy M.S. *Quantum Optics*. Cambridge University Press (1997). DOI: 10.1017/CBO9780511813993 — 量子光学权威教材，严谨给出线性偏振变换与 χ⁽²⁾ 参量下转换（纠缠光子源）的处理。 [已核实]（第 47 篇）
+- [24kp] Kwiat P.G., Mattle K., Weinfurter H., Zeilinger A., Sergienko A.V., Shih Y. *Physical Review Letters* **75**, 4337–4341 (1995). DOI: 10.1103/PhysRevLett.75.4337 — 提出高亮度偏振纠缠光子对源（SPDC + 贝尔态分析），是偏振纠缠的标准实验实现。 [已核实]（第 47 篇）
+- [24kq] Burnham D.C., Weinberg D.L. *Physical Review Letters* **25**, 84–87 (1970). DOI: 10.1103/PhysRevLett.25.84 — 首次观测参量下转换产生的光学光子对（SPDC 原始实验）。 [已核实]（第 47 篇）
+- [24kt] Sugano S., Tsujikawa I. *Journal of the Physical Society of Japan* **13**, 899–910 (1958). DOI: 10.1143/JPSJ.13.899 — Cr³⁺:Al₂O₃ 的 R 线光谱与塞曼效应实验研究，给出 ²E 零场分裂（R1/R2）结构。 [已核实]（第 47 篇）
+- [24ku] O'Brien M.C.M. *Proceedings of the Royal Society of London A* **231**, 404–414 (1955). DOI: 10.1098/rspa.1955.0183 — 烟晶色心结构：与 Al 杂质相关的氧空穴中心 [AlO₄]⁰ 的 EPR/超精细证据。 [已核实]（第 47 篇）
+- [24kv] Lehmann G., Moore W.J. *Science* **152**, 1061–1062 (1966). DOI: 10.1126/science.152.3725.1061 — 紫晶色心：EPR 表明色心为正空穴俘获在替代位 Fe³⁺ 上（电荷转移跃迁）。 [已核实]（第 47 篇）
+- [24kw] da Silva D.N., Guedes K.J., Pinheiro M.V.B., Spaeth J.-M., Krambrock K. *Physics and Chemistry of Minerals* **32**, 436–441 (2005). DOI: 10.1007/s00269-005-0018-1 — 辐照蓝托帕石的氧–铝空穴中心（O⁻）与 620 nm 吸收带的 EPR/吸收对应，证明其为处理致色。 [已核实]（第 47 篇）
+- [24kx] Valeur B., Berberan-Santos M.N. *Molecular Fluorescence: Principles and Applications* (2nd ed.). Wiley-VCH (2012). DOI: 10.1002/9783527650002 — 荧光与磷光的量子力学区分（自发辐射寿命、系间窜越、陷阱释放）。 [已核实]（第 47 篇）
+</script>
+<script>
+// 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏
+function protectMath(src){
+  var blocks = [];
+  // 先抽块级 $$...$$（可跨行）
+  src = src.replace(/\$\$([\s\S]+?)\$\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  // 再抽行内 $...$（不含换行、内部不含 $）
+  src = src.replace(/\$([^\$\n]+?)\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  return { src: src, blocks: blocks };
+}
+
+function boot(){
+  var raw = document.getElementById('src').textContent;
+  // 记录标题锚点（在保护公式之前，避免影响）
+  var md = raw.replace(/^(#{1,3})\s+(.+)$/gm, function(m, h, t){
+    var id = 'h-' + t.replace(/[^\w一-龥]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+    return h + ' <span id="' + id + '"></span>' + t;
+  });
+
+  // 保护数学公式
+  var prot = protectMath(md);
+  md = prot.src;
+
+  document.getElementById('content').innerHTML = marked.parse(md);
+
+  // 还原数学公式占位符
+  var content = document.getElementById('content');
+  var html = content.innerHTML.replace(/%%MATH(\d+)%%/g, function(m, n){
+    return prot.blocks[+n];
+  });
+  content.innerHTML = html;
+
+  // 生成目录
+  var hs = document.querySelectorAll('#content h2, #content h3');
+  var toc = document.getElementById('toc'), tocHtml = '';
+  hs.forEach(function(h){
+    var sp = h.querySelector('span[id]');
+    var id = sp ? sp.id : '';
+    var cls = h.tagName === 'H3' ? 'sub' : '';
+    tocHtml += '<a class="' + cls + '" href="#' + id + '">' + h.textContent.trim() + '</a>';
+  });
+  toc.innerHTML = tocHtml;
+
+  // 图片路径：正文里写 figures/xxx.svg
+  document.querySelectorAll('#content img').forEach(function(im){
+    if(/^figures\//.test(im.getAttribute('src')||'')) return;
+  });
+
+  if (window.renderMathInElement) {
+    renderMathInElement(document.getElementById('content'), {
+      delimiters:[
+        {left:'$$', right:'$$', display:true},
+        {left:'$',  right:'$',  display:false}
+      ],
+      ignoredTags:['script','noscript','style','textarea','pre','code'],
+      throwOnError:false
+    });
+  }
+
+  // 滚动高亮
+  var links = [].slice.call(toc.querySelectorAll('a'));
+  window.addEventListener('scroll', function(){
+    var cur = null;
+    hs.forEach(function(h){
+      if (h.getBoundingClientRect().top < 120) cur = h;
+    });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if (cur){
+      var sp = cur.querySelector('span[id]');
+      var act = toc.querySelector('a[href="#' + (sp?sp.id:'') + '"]');
+      if (act) act.classList.add('active');
+    }
+  }, {passive:true});
+}
+if (window.marked) boot();
+else window.addEventListener('load', boot);
+</script>
+</body>
+</html>

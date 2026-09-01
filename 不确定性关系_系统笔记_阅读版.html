@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>不确定性关系</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2024; --ink-dim:#5b6570;
+  --line:#dfe3e8; --line-soft:#eef0f3; --accent:#1f5fa8; --accent-soft:#e8f0fa;
+  --amber-bg:#fff8e6; --amber-line:#e5c168; --amber-ink:#6b5200;
+  --green:#1c7a4a; --green-bg:#e8f5ee; --red:#b03030; --red-bg:#fdecec;
+  --code-bg:#f6f7f9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,serif;
+  background:var(--bg); color:var(--ink); line-height:1.85; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.layout{display:flex; max-width:1280px; margin:0 auto; gap:28px; padding:0 24px}
+/* 侧栏目录 */
+.toc{
+  width:246px; flex-shrink:0; position:sticky; top:0; height:100vh;
+  overflow-y:auto; padding:28px 0 40px; font-family:"Noto Sans SC","PingFang SC",sans-serif;
+}
+.toc h4{font-size:11px; letter-spacing:1.6px; color:var(--ink-dim); text-transform:uppercase;
+  margin:0 0 12px; padding-left:2px; font-weight:600}
+.toc a{
+  display:block; font-size:13px; color:var(--ink-dim); text-decoration:none;
+  padding:5px 10px; border-left:2px solid transparent; line-height:1.5;
+}
+.toc a:hover{color:var(--accent); background:var(--accent-soft)}
+.toc a.sub{padding-left:24px; font-size:12.5px}
+.toc a.active{color:var(--accent); border-left-color:var(--accent); background:var(--accent-soft); font-weight:600}
+/* 正文 */
+.main{flex:1; min-width:0; padding:28px 0 120px}
+.paper{background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  padding:48px 56px; box-shadow:0 1px 3px rgba(16,24,40,.05)}
+h1{font-size:27px; line-height:1.45; margin:0 0 18px; letter-spacing:.3px; font-weight:700}
+h2{font-size:20px; margin:52px 0 18px; padding-bottom:9px; border-bottom:1.5px solid var(--ink);
+  letter-spacing:.3px}
+h3{font-size:16.5px; margin:32px 0 12px; color:var(--accent); font-weight:600}
+h4{font-size:15px; margin:22px 0 10px; font-weight:600}
+p{margin:0 0 15px; text-align:justify}
+blockquote{
+  margin:18px 0; padding:13px 18px; background:var(--amber-bg);
+  border-left:3px solid var(--amber-line); border-radius:0 4px 4px 0; color:var(--amber-ink);
+}
+blockquote p{margin:0 0 8px} blockquote p:last-child{margin:0}
+blockquote strong{color:#4a3800}
+ul,ol{margin:0 0 15px; padding-left:26px}
+li{margin:6px 0}
+table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14px;
+  font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th{background:#f0f2f5; text-align:left; padding:9px 12px; border:1px solid var(--line); font-weight:600}
+td{padding:9px 12px; border:1px solid var(--line); vertical-align:top}
+tbody tr:nth-child(even){background:#fafbfc}
+code{background:var(--code-bg); padding:2px 6px; border-radius:3px; font-size:13.5px;
+  font-family:"SF Mono",Menlo,Consolas,monospace}
+pre{background:var(--code-bg); padding:14px 16px; border-radius:5px; overflow-x:auto; margin:16px 0;
+  border:1px solid var(--line-soft)}
+pre code{background:none; padding:0}
+hr{border:none; border-top:1px solid var(--line-soft); margin:34px 0}
+strong{font-weight:700; color:#0f1419}
+a{color:var(--accent)}
+img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6px; background:#fff}
+.katex-display{margin:20px 0; overflow-x:auto; overflow-y:hidden; padding:2px 0}
+.katex{font-size:1.045em}
+.tag-note{font-family:"Noto Sans SC","PingFang SC",sans-serif; font-size:12px; color:var(--ink-dim);
+  margin-top:40px; padding-top:16px; border-top:1px solid var(--line-soft); line-height:1.9}
+@media(max-width:900px){
+  .toc{display:none}
+  .paper{padding:28px 22px}
+  .layout{padding:0 12px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc"><h4>目录</h4><div id="toc"></div></nav>
+  <main class="main"><article class="paper" id="content"></article></main>
+</div>
+
+<script type="text/plain" id="src">
+# 不确定性关系
+
+> **分类归属：第一部分 量子行为与基础概念 · 数学程度：L2（推导层）· 前置依赖：第 1 篇《量子行为》、第 2 篇《波粒二象性与德布罗意关系》、第 7 篇《物质波包与波粒统一》、第 9 篇《量子态与叠加原理》、第 12 篇《算符、对易关系与表象》**
+> **验证依据**：Heisenberg (1927)、Kennard (1927)、Robertson (1929)、Ozawa (2003)、Ehrenfest (1927)、CODATA (2022)
+
+# 第 8 篇 · 不确定性关系
+
+## 一、概念与定位
+
+不确定性关系（uncertainty relation）是量子力学对「可同时精确知道两个物理量」的根本限制：对一组**共轭可观测量**（位置–动量、能量–时间、角动量分量等），其标准差（标准偏差）乘积满足非零下界。它**不是**测量仪器不精密导致的技术缺陷，而是量子态本身的内在属性——源于共轭变量的算符不对易（第 12 篇）。
+
+本篇把第 1 篇「看一眼就破坏干涉」、第 2 篇「波粒二象性」、第 7 篇「波包扩散」统一为一条定量原理，并为第 9 篇（叠加与测量）、第 12 篇（对易关系）、第 16 篇（角动量分量）提供下界约束。
+
+## 二、数学结构
+
+### 2.1 一般 Robertson 关系（结果，详证见第 12 篇）
+
+对任意两厄米算符 $\hat A,\hat B$，在任意归一化态 $|\psi\rangle$ 上有
+
+$$ \Delta A\,\Delta B \ge \frac{1}{2}\bigl|\langle[\hat A,\hat B]\rangle\bigr| \tag{1} $$
+
+其中 $\Delta A=\sqrt{\langle\hat A^2\rangle-\langle\hat A\rangle^2}$。对 $[\hat x,\hat p]=i\hbar$（第 12 篇）代入得
+
+$$ \Delta x\,\Delta p \ge \frac{\hbar}{2} \tag{2} $$
+
+这是位置–动量的标准下界。等号成立当且仅当波函数为高斯型（见 §6）。
+
+### 2.2 傅里叶带宽定理视角（L2 直观推导）
+
+坐标表象与动量表象互为傅里叶变换（第 12 篇）
+
+$$ \phi(p)=\frac{1}{\sqrt{2\pi\hbar}}\int\psi(x)\,e^{-ipx/\hbar}\,dx \tag{3} $$
+
+函数与其傅里叶变换的带宽满足 $\Delta x\,\Delta k\ge\frac{1}{2}$（Parseval/方差关系），而 $p=\hbar k$，故
+
+$$ \Delta x\,\Delta p = \hbar\,\Delta x\,\Delta k \ge \frac{\hbar}{2} \tag{4} $$
+
+等号当且仅当 $\psi(x)$ 为高斯（高斯函数的傅里叶变换仍是高斯，且是带宽积最小的函数）。这从「波包必含波数展宽」给出 (2) 的物理图像：第 7 篇的波包扩散正是 (4) 的动力学后果。
+
+### 2.3 制备不确定度 vs 测量扰动（Ozawa 2003 修正）
+
+Heisenberg 1927 的「γ 显微镜」思想实验把不确定度表述为**测量扰动**：精确测位置会扰动动量。但严格区分应为两层：
+
+- **(i) 制备不确定度**：态本身就有的固有展宽，由 (1) 给出，与是否测量无关；
+- **(ii) 测量反作用**：测量 $\hat A$ 会扰动 $\hat B$ 的后续读数。
+
+Ozawa (2003) 给出分离后的普适不等式
+
+$$ \varepsilon(A)\,\eta(B) + \varepsilon(A)\,\sigma(B) + \sigma(A)\,\eta(B) \ge \frac{1}{2}\bigl|\langle[\hat A,\hat B]\rangle\bigr| \tag{5} $$
+
+其中 $\varepsilon(A)$ 为 $\hat A$ 的测量误差、$\eta(B)$ 为测量对 $\hat B$ 的反作用、$\sigma$ 为固有标准差。即「测量必扰动」是**近似**表述，精确定律是「误差、反作用、固有展宽三者之和」受共轭约束。
+
+### 2.4 能量–时间不确定度（特殊性）
+
+$$ \Delta E\,\Delta t \ge \frac{\hbar}{2} \tag{6} $$
+
+但**时间 $t$ 不是算符**（无共轭算符），故 (6) 与 (2) 有本质区别：$\Delta t$ 应理解为「演化特征时间」而非某可观测量的标准差。典型诠释：
+
+- **自然线宽**：寿命为 $\tau$ 的激发态，其能级宽度 $\Gamma$（自然线宽）满足 $\Gamma\,\tau = \hbar$，即 $\Delta E \sim \hbar/\tau$（对应 (6) 取 $\Delta t\sim\tau$）；
+- **Aharonov–Bohm 型**：$\Delta t$ 为某一可观测量变化特征时间。
+
+### 2.5 角动量分量（引第 16 篇）
+
+对 $\hat J_x,\hat J_y$，由 $[\hat J_x,\hat J_y]=i\hbar\hat J_z$ 得
+
+$$ \Delta J_x\,\Delta J_y \ge \frac{\hbar}{2}\bigl|\langle\hat J_z\rangle\bigr| \tag{7} $$
+
+是 (1) 的直接推论（第 16 篇详述）。
+
+## 三、物理量与特征尺度
+
+| 情形 | 约束 | 量级例 |
+|------|------|--------|
+| 原子内电子 | $\Delta x\sim 0.1\ \text{nm}$ | $\Delta p\gtrsim \hbar/(2\Delta x)\sim 5\times10^{-25}\ \text{kg·m/s}$，对应零点动能 $\sim 1\ \text{eV}$ 量级 |
+| 电子约束到核尺度 | $\Delta x\sim 1\ \text{fm}$ | $\Delta p\sim 5\times10^{-20}\ \text{kg·m/s}$，动能 $\sim 10\ \text{MeV}$，远超原子结合能 → 电子不能坍缩到核 |
+| 单缝（缝宽 $a$） | $\Delta x\sim a$ | $\Delta p_x\sim \hbar/a$ |
+| 激发态寿命 | $\Delta t\sim\tau$ | 自然线宽 $\Gamma\sim\hbar/\tau$ |
+
+**尺度判据**：(2) 给出的不是「仪器误差」而是**态的制备下限**——局域越紧（$\Delta x$ 越小），动量展宽越大，直至 §6 的可解模型所示。
+
+## 四、实验基础与观测证据
+
+1. **单缝/多缝衍射**（第 1 篇）：电子过单缝后出射角弥散，直接显示 $\Delta x\cdot\Delta p_x$ 受限；Jönsson 1974 多缝、Merli 1976 单电子累积为定量基础。
+2. **中子干涉**（Colella 1975，第 13 篇引用）：引力相移实验证明动量不确定导致路径相位弥散。
+3. **光子数–相位不确定度**（第 35 篇）：相干态数不确定最小、相位确定；数态反之——是 (2) 在光场上的体现。
+4. **Ozawa (2003) 实验检验**：误差–反作用分离后的不等式被弱测量/强测量混合实验验证（如 Rozema 2012 等）。
+
+## 五、分类体系与物理机制
+
+| 类型 | 下界来源 | 等号态 |
+|------|----------|--------|
+| 共轭可观测量（位置–动量、能量–时间） | 算符不对易 $[\hat A,\hat B]\neq0$ | 高斯 / 相干态（位置–动量） |
+| 角动量分量 | $[\hat J_x,\hat J_y]=i\hbar\hat J_z$ | 无（除非 $\langle J_z\rangle=0$ 退化） |
+| 相容可观测量（对易 $[\hat A,\hat B]=0$） | 无约束 | 可同时本征，无下界 |
+
+**机制**：(2) 是 (4) 的代数后果——任何局域波必含波数展宽，而波数展宽经色散 (第 7 篇) 导致不同分量速度分离。这是「波动性」与「局域性」不可兼得的定量核心。
+
+## 六、典型系统与可解模型
+
+**(a) 高斯波包（第 7 篇）**：最小不确定态，$\Delta x\,\Delta p=\hbar/2$ 精确取等号。配套脚本数值验证：乘积相对误差 $<10^{-3}$。
+
+**(b) 无限深方势阱基态**（第 14 篇）：基态 $\psi_1(x)=\sqrt{2/L}\sin(\pi x/L)$，
+
+$$ \Delta x = L\sqrt{\frac{\pi^2-6}{12\pi^2}} = 0.1808\,L,\qquad
+\Delta p = \frac{\pi\hbar}{L} \tag{8} $$
+
+乘积 $\Delta x\,\Delta p = 0.568\,\hbar > \hbar/2$（严格超等号）。配套脚本有限差分验证：$\Delta x=0.1808\,L$、$\Delta p=\pi\hbar/L$，乘积 $0.5679\,\hbar$，与解析吻合至 $10^{-4}$。
+
+**(c) 谐振子基态**（第 15 篇）：相干态/基态均为最小不确定态，$\Delta x\,\Delta p=\hbar/2$。
+
+## 七、历史脉络与学术争议
+
+- **Heisenberg 1927**（主序列 #9）：用 γ 显微镜等思想实验半定量提出 $\Delta x\,\Delta p\sim h$，但未给严格定义与证明。
+- **Kennard 1927**（24dl）：首次给出严格不等式 (2)，高斯波包取等号——数学上第一个正确形式。
+- **Robertson 1929**（24dd）：推广到任意两不对易可观测量 (1)，含角动量分量。
+- **Schrödinger 1930**：进一步强化为含反对易子的形式（第 12 篇亦引）。
+- **Ozawa 2003**（24de）：区分测量误差与反作用，给出 (5)。
+- **争议**：能量–时间是否「真」不确定度（因 $t$ 非算符）；「测量扰动是否必要」（弱测量实验显示可绕过单步扰动，但仍受 (5) 约束）。
+
+## 八、参考文献
+
+- Heisenberg, W. (1927). *Zeitschrift für Physik*, 43, 172 [主序列 #9，已核实；γ 显微镜思想实验].
+- Kennard, E.H. (1927). *Zeitschrift für Physik*, 44, 326 [24dl，已核实；严格不等式 $\Delta x\Delta p\ge\hbar/2$].
+- Robertson, H.P. (1929). *Physical Review*, 34, 163 [24dd，已核实；一般 Robertson 关系].
+- Ozawa, M. (2003). *Physical Review A*, 67, 042105 [24de，已核实；误差–反作用分离].
+- Ehrenfest, P. (1927). *Zeitschrift für Physik*, 45, 455 [24dk，已核实；Ehrenfest 定理].
+- CODATA (2022). *Fundamental Physical Constants* [主序列复用].
+</script>
+<script>
+// 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏
+function protectMath(src){
+  var blocks = [];
+  // 先抽块级 $$...$$（可跨行）
+  src = src.replace(/\$\$([\s\S]+?)\$\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  // 再抽行内 $...$（不含换行、内部不含 $）
+  src = src.replace(/\$([^\$\n]+?)\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  return { src: src, blocks: blocks };
+}
+
+function boot(){
+  var raw = document.getElementById('src').textContent;
+  // 记录标题锚点（在保护公式之前，避免影响）
+  var md = raw.replace(/^(#{1,3})\s+(.+)$/gm, function(m, h, t){
+    var id = 'h-' + t.replace(/[^\w一-龥]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+    return h + ' <span id="' + id + '"></span>' + t;
+  });
+
+  // 保护数学公式
+  var prot = protectMath(md);
+  md = prot.src;
+
+  document.getElementById('content').innerHTML = marked.parse(md);
+
+  // 还原数学公式占位符
+  var content = document.getElementById('content');
+  var html = content.innerHTML.replace(/%%MATH(\d+)%%/g, function(m, n){
+    return prot.blocks[+n];
+  });
+  content.innerHTML = html;
+
+  // 生成目录
+  var hs = document.querySelectorAll('#content h2, #content h3');
+  var toc = document.getElementById('toc'), tocHtml = '';
+  hs.forEach(function(h){
+    var sp = h.querySelector('span[id]');
+    var id = sp ? sp.id : '';
+    var cls = h.tagName === 'H3' ? 'sub' : '';
+    tocHtml += '<a class="' + cls + '" href="#' + id + '">' + h.textContent.trim() + '</a>';
+  });
+  toc.innerHTML = tocHtml;
+
+  // 图片路径：正文里写 figures/xxx.svg
+  document.querySelectorAll('#content img').forEach(function(im){
+    if(/^figures\//.test(im.getAttribute('src')||'')) return;
+  });
+
+  if (window.renderMathInElement) {
+    renderMathInElement(document.getElementById('content'), {
+      delimiters:[
+        {left:'$$', right:'$$', display:true},
+        {left:'$',  right:'$',  display:false}
+      ],
+      ignoredTags:['script','noscript','style','textarea','pre','code'],
+      throwOnError:false
+    });
+  }
+
+  // 滚动高亮
+  var links = [].slice.call(toc.querySelectorAll('a'));
+  window.addEventListener('scroll', function(){
+    var cur = null;
+    hs.forEach(function(h){
+      if (h.getBoundingClientRect().top < 120) cur = h;
+    });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if (cur){
+      var sp = cur.querySelector('span[id]');
+      var act = toc.querySelector('a[href="#' + (sp?sp.id:'') + '"]');
+      if (act) act.classList.add('active');
+    }
+  }, {passive:true});
+}
+if (window.marked) boot();
+else window.addEventListener('load', boot);
+</script>
+</body>
+</html>

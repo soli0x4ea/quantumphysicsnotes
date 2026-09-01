@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>反粒子与狄拉克海</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2024; --ink-dim:#5b6570;
+  --line:#dfe3e8; --line-soft:#eef0f3; --accent:#1f5fa8; --accent-soft:#e8f0fa;
+  --amber-bg:#fff8e6; --amber-line:#e5c168; --amber-ink:#6b5200;
+  --green:#1c7a4a; --green-bg:#e8f5ee; --red:#b03030; --red-bg:#fdecec;
+  --code-bg:#f6f7f9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,serif;
+  background:var(--bg); color:var(--ink); line-height:1.85; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.layout{display:flex; max-width:1280px; margin:0 auto; gap:28px; padding:0 24px}
+/* 侧栏目录 */
+.toc{
+  width:246px; flex-shrink:0; position:sticky; top:0; height:100vh;
+  overflow-y:auto; padding:28px 0 40px; font-family:"Noto Sans SC","PingFang SC",sans-serif;
+}
+.toc h4{font-size:11px; letter-spacing:1.6px; color:var(--ink-dim); text-transform:uppercase;
+  margin:0 0 12px; padding-left:2px; font-weight:600}
+.toc a{
+  display:block; font-size:13px; color:var(--ink-dim); text-decoration:none;
+  padding:5px 10px; border-left:2px solid transparent; line-height:1.5;
+}
+.toc a:hover{color:var(--accent); background:var(--accent-soft)}
+.toc a.sub{padding-left:24px; font-size:12.5px}
+.toc a.active{color:var(--accent); border-left-color:var(--accent); background:var(--accent-soft); font-weight:600}
+/* 正文 */
+.main{flex:1; min-width:0; padding:28px 0 120px}
+.paper{background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  padding:48px 56px; box-shadow:0 1px 3px rgba(16,24,40,.05)}
+h1{font-size:27px; line-height:1.45; margin:0 0 18px; letter-spacing:.3px; font-weight:700}
+h2{font-size:20px; margin:52px 0 18px; padding-bottom:9px; border-bottom:1.5px solid var(--ink);
+  letter-spacing:.3px}
+h3{font-size:16.5px; margin:32px 0 12px; color:var(--accent); font-weight:600}
+h4{font-size:15px; margin:22px 0 10px; font-weight:600}
+p{margin:0 0 15px; text-align:justify}
+blockquote{
+  margin:18px 0; padding:13px 18px; background:var(--amber-bg);
+  border-left:3px solid var(--amber-line); border-radius:0 4px 4px 0; color:var(--amber-ink);
+}
+blockquote p{margin:0 0 8px} blockquote p:last-child{margin:0}
+blockquote strong{color:#4a3800}
+ul,ol{margin:0 0 15px; padding-left:26px}
+li{margin:6px 0}
+table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14px;
+  font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th{background:#f0f2f5; text-align:left; padding:9px 12px; border:1px solid var(--line); font-weight:600}
+td{padding:9px 12px; border:1px solid var(--line); vertical-align:top}
+tbody tr:nth-child(even){background:#fafbfc}
+code{background:var(--code-bg); padding:2px 6px; border-radius:3px; font-size:13.5px;
+  font-family:"SF Mono",Menlo,Consolas,monospace}
+pre{background:var(--code-bg); padding:14px 16px; border-radius:5px; overflow-x:auto; margin:16px 0;
+  border:1px solid var(--line-soft)}
+pre code{background:none; padding:0}
+hr{border:none; border-top:1px solid var(--line-soft); margin:34px 0}
+strong{font-weight:700; color:#0f1419}
+a{color:var(--accent)}
+img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6px; background:#fff}
+.katex-display{margin:20px 0; overflow-x:auto; overflow-y:hidden; padding:2px 0}
+.katex{font-size:1.045em}
+.tag-note{font-family:"Noto Sans SC","PingFang SC",sans-serif; font-size:12px; color:var(--ink-dim);
+  margin-top:40px; padding-top:16px; border-top:1px solid var(--line-soft); line-height:1.9}
+@media(max-width:900px){
+  .toc{display:none}
+  .paper{padding:28px 22px}
+  .layout{padding:0 12px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc"><h4>目录</h4><div id="toc"></div></nav>
+  <main class="main"><article class="paper" id="content"></article></main>
+</div>
+
+<script type="text/plain" id="src">
+# 反粒子与狄拉克海
+
+> **分类归属：第五部分·相对论量子理论与前沿 · 数学程度：L2 · 前置依赖：第 38 篇《狄拉克方程》**
+
+> **验证依据**：Anderson (1932) Science、Dirac (1930) Proc. R. Soc. A、Feynman (1949) Phys. Rev.、Chamberlain et al. (1955) Phys. Rev.、Workman et al. (Particle Data Group) (2022) PTEP
+
+---
+
+## 一、概念与定位
+
+**一句话定义**：反粒子（antiparticle）是与某粒子质量相同、电荷及若干内禀相加量子数（重子数、轻子数、奇异数、宇称共轭量等）取相反符号的粒子；在量子场论中，反粒子是场算符中由电荷共轭算符 $C$ 作用于粒子态所得的激发。
+
+**词源**：
+- 前缀 `anti-` 源自希腊语 *anti-*（对立、相反），20 世纪 20–30 年代随 positron / antiproton 等命名进入物理文献，用于标记与原有粒子量子数相反的对应粒子。
+- "Dirac sea"（狄拉克海）由 Dirac 于 1930 年提出 [24hp]：为规避狄拉克方程负能解的"灾难"，假定所有负能单粒子态已被电子按泡利不相容原理填满，未填充的负能态缺位即为可观测的"洞"。
+
+**核心特征**（编号列举）：
+1. 正电子（$e^+$，positron）于 1932 年由 Anderson 在宇宙线云室中首次观测到 [24hn]，其质量与电子相等、电荷相反；1933 年 Anderson 以 1300 张云室照片确认其电荷为 $+e$、质量与电子同量级 [24hq]。
+2. 狄拉克海图像：狄拉克方程允许无穷多负能解；为消除电子向更低负能态无限衰变的"负能灾难"，Dirac 假设负能连续谱已被电子占满，缺位（洞）表现为带正电的粒子 [24hp]。
+3. 量子场论（QFT）视角：真空是无场激发的状态，反粒子是电荷共轭 $C$ 作用于粒子态所得的激发；"海"被正规序（normal ordering）取代，无需引入无穷背景 [24ht]。
+4. 费米子与玻色子都有反粒子：光子自身即为其反粒子（自共轭），中性 $\pi^0$、$\eta$ 等也自共轭；带电玻色子（如 $W^\pm$）的反粒子带相反电荷。
+5. CPT 定理保证粒子与其反粒子质量严格相等、总寿命相等、电荷等量异号、磁矩等量反向（现代陈述与实验检验见 PDG 综述 [24hv]）。
+
+**体系位置**：本篇属"相对论量子理论与前沿"部分。前置依赖第 38 篇《狄拉克方程》（负能解的来源）；后续通向量子场论、对称性与守恒量、粒子物理标准模型、对称破缺与 CP 破坏等主题。反粒子概念是把相对论性量子力学与量子场论衔接的枢纽。
+
+---
+
+## 二、数学结构
+
+**符号约定声明**：本文代数推导采用自然单位 $\hbar = c = 1$，末了恢复 SI 量纲以核对；度规号差取 $\eta_{\mu\nu}=\mathrm{diag}(+1,-1,-1,-1)$；狄拉克矩阵满足反对易关系 $\{\gamma^\mu,\gamma^\nu\}=2\eta^{\mu\nu}\mathbf 1$；四维动量 $p^\mu=(E,\mathbf p)$，四维缩并 $p\cdot x = Et-\mathbf p\cdot\mathbf x$。
+
+### 2.1 从狄拉克方程的负能解出发
+
+自由粒子的狄拉克方程为
+
+$$ (i\gamma^\mu \partial_\mu - m)\psi(x)=0, \tag{1} $$
+
+其中各符号量纲/含义如下：
+
+| 符号 | 含义 | 量纲（自然单位 $\hbar=c=1$） |
+|------|------|------------------------------|
+| $\psi(x)$ | 狄拉克旋量场（四分量） | 质量量纲 $^{3/2}$ |
+| $\gamma^\mu$ ($\mu=0,1,2,3$) | $4\times4$ 狄拉克矩阵 | 无量纲 |
+| $\partial_\mu$ | 偏导 $\partial/\partial x^\mu$ | 质量量纲 $1$ |
+| $m$ | 粒子静止质量 | 质量量纲 $1$ |
+
+平面波解取 $\psi(x)=u(\mathbf p)\,e^{-ip\cdot x}$（正能分支）与 $\psi(x)=v(\mathbf p)\,e^{+ip\cdot x}$（负能分支）。代入式 (1) 得动量与能量的代数关系
+
+$$ (\gamma^\mu p_\mu - m)u=0,\qquad (\gamma^\mu p_\mu + m)v=0. \tag{2} $$
+
+对 (2) 左乘 $(\gamma^\mu p_\mu + m)$ 并利用 $\{\gamma^\mu,\gamma^\nu\}=2\eta^{\mu\nu}$ 得
+
+$$ (p_\mu p^\mu - m^2)u = 0 \;\Rightarrow\; E^2 = \mathbf p^2 + m^2, \tag{3} $$
+
+恢复 $c$ 后 $E^2=\mathbf p^2 c^2 + m^2 c^4$。因此能量有两支
+
+$$ E = \pm\sqrt{\mathbf p^2 c^2 + m^2 c^4}. \tag{4} $$
+
+负支 $E<0$ 即负能解。若不加以处理，电子可从正能态经辐射光子无限落入更低负能态——"负能灾难"。
+
+### 2.2 狄拉克海与"洞"
+
+Dirac 1930 年的处置 [24hp]：假定所有负能单粒子态已被电子占据（多体态）。由于泡利不相容原理，额外电子不能再落入已填满的负能态，负能态成为不可观测的背景（"海"）。该多体基态的能量与电荷均为无穷大，但**可观测物理量**是相对此基态的改变量。
+
+设被移走（缺位）的负能电子原处于能量 $-E$（$E>0$）、电荷 $-e$。相对满海：
+
+| 量 | 缺位前（电子） | 缺位后（洞） |
+|----|----------------|--------------|
+| 电荷 $Q$ | $-e$ | $+e$ |
+| 相对能量 $\Delta E$ | $-E$ | $+E$ |
+| 质量 | $m_e$ | $m_e$ |
+
+故洞携带正电荷、正能量，静止质量仍为 $m_e$，其行为即正电子 $e^+$。这就是"洞 = 反粒子"的狄拉克海图像。电荷符号推导不跳步：满海总电荷 $Q_{\rm sea}=-\infty$；移走一个电荷 $-e$ 的电子后，剩余电荷 $Q_{\rm rem}=Q_{\rm sea}-(-e)=Q_{\rm sea}+e$，相对满海的变化量为 $+e$，故洞的电荷为 $+e$。
+
+### 2.3 电荷共轭算符 $C$
+
+电荷共轭算符 $C$ 把粒子解映射为其反粒子解，翻转电荷、磁矩等用量。在某个表示中（约定相关）$C\psi_c = i\gamma^2\gamma^0 \psi^*$（整体相位与表示有关）。作用效果：
+
+$$ C:\; \psi \mapsto \psi_c,\qquad Q \mapsto -Q,\qquad \text{磁矩}\;\boldsymbol\mu \mapsto -\boldsymbol\mu. \tag{5} $$
+
+$C$ 与宇称 $P$、时间反演 $T$ 共同构成 CPT 联合变换（见第七、八节）。
+
+### 2.4 量子场论视角（粒子 = 场激发，反粒子 = 电荷共轭激发）
+
+将狄拉克场量子化：
+
+$$ \psi(x)=\sum_s\int\!\frac{d^3p}{(2\pi)^3}\,
+\bigl[\,a_{\mathbf p,s}\,u_{\mathbf p,s}\,e^{-ip\cdot x}
++b_{\mathbf p,s}^\dagger\,v_{\mathbf p,s}\,e^{+ip\cdot x}\,\bigr], \tag{6} $$
+
+| 符号 | 含义 | 量纲 |
+|------|------|------|
+| $a_{\mathbf p,s}$ | 湮灭电子的算符 | 质量量纲 $^{-3/2}$ |
+| $b_{\mathbf p,s}^\dagger$ | 产生正电子（反粒子）的算符 | 质量量纲 $^{-3/2}$ |
+| $u_{\mathbf p,s},v_{\mathbf p,s}$ | 正/负能旋量基 | 质量量纲 $^{3/2}$ |
+
+真空 $|0\rangle$ 满足 $a|0\rangle=b|0\rangle=0$，即**无粒子也无反粒子**。负能解 $v\,e^{+ip\cdot x}$ 不再被解释为"负能粒子"，而被 $b^\dagger$ 解释为"产生一个正能反粒子"（Feynman–Stueckelberg 解释 [24ht]）。无穷背景由正规序 $:\bar\psi\psi:$ 消去，无需"海"。
+
+### 2.5 费米子海成立、玻色子无需海
+
+狄拉克海依赖**泡利不相容原理**：负能态填满后才阻止进一步衰变。玻色子不受不相容原理约束，负能玻色子海不稳定（可无限凝聚、无"占满"可言），因此玻色子的反粒子只能由场量子化经电荷共轭得到，不存在"玻色子狄拉克海"。这是费米子与玻色子反粒子起源的结构性差异（详见第五节）。
+
+---
+
+## 三、物理量与特征尺度
+
+下表给出关键常数与特征尺度，常数取自 CODATA 2018 或 PDG 2022 [24hv]，并标注不确定度/有效数字。
+
+| 物理量 | 符号 | 数值 / 量级 | 适用条件与说明 |
+|--------|------|-------------|----------------|
+| 电子 / 正电子静止质量 | $m_e=m_{e^+}$ | $0.51099895000(15)\ \mathrm{MeV}/c^2$ | CODATA 2018；等价质量 $9.1093837011(28)\times10^{-31}\ \mathrm{kg}$ |
+| 基本电荷 | $e$ | $1.602176634\times10^{-19}\ \mathrm{C}$ | 2019 SI 重新定义后精确值 |
+| 真空中光速 | $c$ | $299792458\ \mathrm{m/s}$ | 精确值 |
+| 单粒子静止能量 | $m_e c^2$ | $0.5110\ \mathrm{MeV}$ | 由脚本 1 算得 $0.510999\ \mathrm{MeV}$ |
+| $e^+e^-$ 对产生阈 | $2m_e c^2$ | $1.021998\ \mathrm{MeV}$（≈ $1.022\ \mathrm{MeV}$） | 核场中单光子产生对的无反冲近似；脚本 1 算得 $1.021998\ \mathrm{MeV}$ |
+| 质心系双光子湮灭光子能量 | $E_\gamma$ | $0.511\ \mathrm{MeV}$（每光子） | 静止 $e^+e^-$ 湮灭为两光子，各携 $m_e c^2$ |
+| 质子靶反冲修正阈值 | $2m_e c^2(1+m_e/m_p)$ | $1.022554\ \mathrm{MeV}$ | 脚本 1 算得（见第六节推导） |
+| 电子康普顿波长 | $\lambda_C=h/(m_e c)$ | $2.42631023867(73)\times10^{-12}\ \mathrm{m}$ | CODATA 2018 |
+| 精细结构常数 | $\alpha$ | $7.2973525693(11)\times10^{-3}$ | CODATA 2018；约 $1/137.036$ |
+| 正电子（在物质中）湮灭寿命 | $\tau$ | 量级 $10^{-10}\ \mathrm{s}$ | 真空中形成电子偶素：p-Ps$\to2\gamma$ 约 $1.25\times10^{-10}\ \mathrm{s}$，o-Ps$\to3\gamma$ 约 $1.42\times10^{-7}\ \mathrm{s}$（PDG 2022 [24hv] 汇编） |
+| 反质子质量 | $m_{\bar p}=m_p$ | $938.272\ \mathrm{MeV}/c^2$ | PDG 2022 [24hv]；与质子相等由 CPT 保证 |
+
+> 量级说明：对产生阈 $2m_e c^2\approx 1.022\ \mathrm{MeV}$ 是相对论性量子过程中"能否凭空造出一对有质量粒子"的判据；正电子寿命 $10^{-10}\ \mathrm{s}$ 量级是其在物质中热化后湮灭的典型时间尺度，强烈依赖材料（金属中约 $10^{-10}\ \mathrm{s}$，气体与正电子素中可更长）。
+
+---
+
+## 四、实验基础与观测证据
+
+本节为核心章节，按"关键实验—时间线—被排除的替代解释—常见误读纠正"展开。
+
+### 4.1 关键实验
+
+- **正电子的发现（Anderson 1932 [24hn]）**：在垂直云室（磁场约 $15\ \mathrm{kG}$，内置 $6\ \mathrm{mm}$ 铅板）中观测宇宙线径迹。径迹曲率与电离损失表明，该粒子质量与电子同量级、电荷符号为正，并穿过铅板后能量下降。Anderson 据此在 *Science* 简短报道"易偏转正电粒子"（easily deflectable positives）。
+- **正电子的确认（Anderson 1933 [24hq]）**：基于约 1300 张云室照片，指出 15 条正电径迹的质量不可能达到质子量级，电荷小于质子电荷的 2 倍且很可能恰好相等，质量小于电子质量的 20 倍，并命名 positrons（正电子）。
+- **对产生与湮灭的云室观测（Blackett & Occhialini 1933 [24hr]）**：用盖革–米勒计数器符合控制云室膨胀，使高能粒子"自拍"径迹，直接观测到穿透辐射中的 $e^+e^-$ 对产生与随后的湮灭。
+- **反质子的证认（Chamberlain et al. 1955 [24hu]）**：在伯克利 Bevatron 上以 $6.2\ \mathrm{GeV}$ 质子轰击铜靶，对动量分析为 $1190\ \mathrm{MeV}/c$ 的负电粒子用切伦科夫计数器鉴别，确认其为反质子（$\bar p$）。
+
+### 4.2 里程碑实验时间线
+
+| 年份 | 人物 / 实验 | 体系 / 装置 | 关键结果 | 文献 |
+|------|------------|-------------|----------|------|
+| 1928 | Dirac | 狄拉克方程 | 给出相对论性电子方程，预言负能解 | 见第 38 篇《狄拉克方程》 |
+| 1930 | Dirac | 空穴理论 | 负能态填满成"海"，洞=带正电粒子 | [24hp] |
+| 1932 | Anderson | 宇宙线云室（15 kG，6 mm Pb） | 正电子 $e^+$ 首现 | [24hn] |
+| 1933 | Anderson | 1300 张云室照片 | 确认 $e^+$ 质量≈$m_e$、电荷 $+e$ | [24hq] |
+| 1933 | Blackett & Occhialini | 符合控制云室 | 直接观测 $e^+e^-$ 对产生与湮灭 | [24hr] |
+| 1936 | Bhabha（理论） | $e^+e^-$ 散射 | Bhabha 散射截面（含交换项） | [24hs] |
+| 1949 | Feynman | 路径积分 / QED | 负能解 = 沿时间反向的正能粒子（Feynman–Stueckelberg） | [24ht] |
+| 1955 | Chamberlain, Segrè, Wiegand, Ypsilantis | 伯克利 Bevatron | 证认反质子 $\bar p$ | [24hu] |
+
+### 4.3 被排除 / 受限的替代解释
+
+- 狄拉克最初把"洞"设想为质子（质量差 $1836$ 倍），观测到正电子质量与电子相等后，该设想被排除；洞对应正电子而非质子。
+- 单光子在**自由真空**中产生 $e^+e^-$ 对被能量–动量守恒排除（见第六节），须在三体（核库仑场）或双光子碰撞中实现；这限死了"凭空成对产生"的实验条件。
+
+### 4.4 常见误读纠正
+
+> **误读 1：**"狄拉克海意味着真空具有负质量。"——错误。海是负能态被填满的背景，整体能量/电荷为无穷大的基准；一切可观测量都是相对满海的改变量（洞）。现代 QFT 用正规序消去该无穷背景，并不赋予真空负质量。
+
+> **误读 2：**"单个光子在真空中可直接产生 $e^+e^-$ 对。"——错误。自由空间中单光子的四动量 $p^\mu p_\mu=0$，无法同时满足末态两有质量粒子的能量与动量守恒；必须有第三者（核）吸收反冲，或两光子碰撞（$\gamma\gamma\to e^+e^-$）。阈值见第六节。
+
+> **误读 3：**"反粒子带负质量。"——错误。反粒子质量为正，与粒子相等（CPT 保证 [24hv]）；仅电荷及部分相加量子数相反。正电子质量严格等于电子质量。
+
+---
+
+## 五、分类体系与物理机制
+
+### 5.1 狄拉克海 vs 量子场论真空（重整化视角）
+
+| 维度 | 狄拉克海（空穴理论） | 量子场论真空 |
+|------|---------------------|--------------|
+| 真空是什么 | 所有负能态被费米子占满的多体态 | 无场激发的态 $\|0\rangle$ |
+| 反粒子来源 | 负能海中的缺位（洞） | 场算符 $b^\dagger$ 产生的电荷共轭激发 |
+| 背景问题 | 无穷负电荷 / 负能量密度 | 经正规序与电荷重整化消去 |
+| 适用粒子 | 仅费米子（依赖泡利不相容） | 费米子与玻色子统一 |
+| 理论地位 | 历史启发性图像，现代已不采用 | 标准表述（QED、标准模型） |
+
+### 5.2 费米子 vs 玻色子的反粒子
+
+- **费米子**：狄拉克海图像可直观解释其反粒子（泡利不相容使负能态可"填满"）；但其现代描述仍是场量子化 + 电荷共轭。中微子若为马约拉纳（Majorana）费米子，则粒子自身即反粒子（自共轭），与狄拉克费米子不同 [24hj 的相关二分量结构]。
+- **玻色子**：无不相容原理，不存在"玻色子狄拉克海"；其反粒子完全来自场量子化下的电荷共轭。带电玻色子（$W^\pm$）反粒子带相反电荷，中性玻色子（光子、$\pi^0$、$\eta$、$Z^0$）自共轭。
+
+### 5.3 中性粒子的自共轭
+
+光子是自身的反粒子；中性介子 $\pi^0$、$\eta$ 以及 $Z^0$ 亦自共轭（电荷共轭本征态）。这与带电粒子"成对有反粒子"形成对照，是概念辨析要点：**自共轭 ≠ 无反粒子概念，而是反粒子与粒子同一**。
+
+### 5.4 失效边界
+
+- 狄拉克海只适用于满足不相容原理的费米子；对玻色子失效。
+- 狄拉克海隐含无穷背景电荷密度，须靠重整化处理，这一"无穷背景困难"正是其被 QFT 真空取代的主因（见第七节争议）。
+- QFT 中"真空能"仍为开放问题（宇宙学常数问题），属解释层面，不与反粒子存在性冲突。
+
+---
+
+## 六、典型系统与可解模型
+
+### 6.1 解析可解：核场中 $e^+e^-$ 对产生阈值
+
+考虑单光子在静止核（质量 $M_N$）库仑场中产生对：
+
+$$ \gamma + N \to e^+ + e^- + N. \tag{7} $$
+
+用不变量 $s=(p_\gamma+p_N)^2$。实验室系中 $p_N=(M_N,\mathbf 0)$、$p_\gamma=(E_\gamma,E_\gamma\hat{\mathbf n})$（自然单位 $c=1$），故
+
+$$ s = M_N^2 + 2M_N E_\gamma. \tag{8} $$
+
+阈值时末态三体相对静止，等效为单一质量 $M_N+2m_e$ 的体系，故
+
+$$ s_{\rm th} = (M_N+2m_e)^2 = M_N^2 + 4M_N m_e + 4m_e^2. \tag{9} $$
+
+联立 (8)(9)：
+
+$$ M_N^2 + 2M_N E_\gamma = M_N^2 + 4M_N m_e + 4m_e^2
+\;\Rightarrow\; 2M_N E_\gamma = 4M_N m_e + 4m_e^2, \tag{10} $$
+
+$$ E_\gamma^{\min} = 2m_e + \frac{2m_e^2}{M_N}
+= 2m_e c^2\!\left(1+\frac{m_e}{M_N}\right). \tag{11} $$
+
+对重核 $M_N\gg m_e$ 得近似 $E_\gamma^{\min}\approx 2m_e c^2$。**结论**：对产生阈为 $2m_e c^2=1.021998\ \mathrm{MeV}$（脚本 1 算得值），质心系双光子湮灭各携 $m_e c^2=0.511\ \mathrm{MeV}$。自由空间单光子无阈值（被守恒律禁止），必须借助第三者反冲。
+
+### 6.2 数值：对产生阈值（脚本 + 图）
+
+脚本 `code/反粒子与狄拉克海_对产生阈值.py` 用 CODATA 2018 常数直接算得：
+- $m_e c^2 = 8.1871\times10^{-14}\ \mathrm{J} = 0.510999\ \mathrm{MeV}$；
+- $2m_e c^2 = 1.6374\times10^{-13}\ \mathrm{J} = 1.021998\ \mathrm{MeV}$（≈ $1.022\ \mathrm{MeV}$）；
+- 质子靶反冲修正阈值 $1.022554\ \mathrm{MeV}$，修正量 $5.57\times10^{-4}\ \mathrm{MeV}$。
+
+对应图形 `figures/反粒子与狄拉克海_对产生阈值.svg` 给出阈值能量示意图（亚阈值区与阈上区对照）。
+
+### 6.3 数值：狄拉克海的"洞"电荷/能量符号（脚本 + 图）
+
+脚本 `code/反粒子与狄拉克海_狄拉克海洞.py` 演示：取一个被移走的负能电子态（电荷 $-e$、能量 $-E$，$E=m_e c^2=0.511\ \mathrm{MeV}$），相对满海的缺位携带
+
+$$ Q_{\rm hole}=+e=+1.602\times10^{-19}\ \mathrm{C},\qquad
+E_{\rm hole}=+0.511\ \mathrm{MeV},\qquad m_{\rm hole}=m_e. \tag{12} $$
+
+即"洞 = 带正电、正能量、质量 $m_e$ 的粒子 = 正电子 $e^+$"。对应图形 `figures/反粒子与狄拉克海_狄拉克海洞.svg` 画出负能连续谱（狄拉克海）、费米能级 $E=0$、缺位（红圈）及其映射的正电子箭头。
+
+---
+
+## 七、历史脉络与学术争议
+
+**提出动机**：Dirac 1928 年方程成功后，负能解导致电子可向更低负能态无限衰变（负能灾难）。1930 年 Dirac 提出"负能态被填满成海"，洞最初被设想为质子；1932 年 Anderson 观测到质量与电子相等的正电粒子 [24hn]，迫使洞被重新解释为**正电子**（质量与电子相同的反粒子），空穴理论由此确立 [24hp]。
+
+**历史节点表**：
+
+| 年份 | 人物 | 贡献 | 文献 |
+|------|------|------|------|
+| 1929 | Weyl | 二分量旋量方程（手征 / 质量为零费米子），为反粒子与手征结构提供框架 | [24hj] |
+| 1930 | Dirac | 空穴理论 / 狄拉克海 | [24hp] |
+| 1932 | Anderson | 云室发现正电子 | [24hn] |
+| 1933 | Anderson | 确认正电子质量与电荷 | [24hq] |
+| 1933 | Blackett & Occhialini | 云室观测对产生与湮灭 | [24hr] |
+| 1936 | Bhabha | $e^+e^-$ 散射理论（Bhabha 散射） | [24hs] |
+| 1949 | Feynman | 负能解 = 沿时间反向的正能反粒子（Feynman–Stueckelberg 解释），并证与空穴理论等价 | [24ht] |
+| 1955 | Chamberlain et al. | 实验证认反质子 | [24hu] |
+| 1950s | Lüders、Pauli 等人 | CPT 定理表述（现代公理化证明由 Jost 等人给出） | 见 PDG 综述 [24hv] |
+
+**当代争议与开放问题（并列各方，不断言某方正确）**：
+
+- **狄拉克海 vs 量子场论真空**：一方认为狄拉克海是物理上直观且历史上正确的图像，负能海虽含无穷背景，却以最少概念解释了反粒子与正电子；另一方（现代 QFT 主流）认为"海"依赖费米子不相容、对玻色子失效，且引入无穷背景电荷密度，应代之以场量子化与正规序，反粒子即电荷共轭激发。两方在计算可观测截面（如 Bhabha 散射 [24hs]）时给出相同结果。
+- **CPT 定理的地位**：CPT 定理在标准局域洛伦兹不变 QFT 中严格成立（PDG 综述给出其表述与实验检验 [24hv]）；但亦有文献探讨 CPT 破坏的可能（如某些引力量子化或洛伦兹破坏模型）。实验上 CPT 对称性被极高精度检验，目前无确证违反。本笔记罗列双方，不站队。
+- **真空能 / 宇宙学常数**：正规序消去了狄拉克海的无穷背景，但 QFT 真空能期望值与观测宇宙学常数之间仍存在数量级鸿沟，此属解释层开放问题，不影响反粒子存在性。
+
+> 本节内容可能随研究进展更新。
+
+---
+
+## 八、参考文献
+
+- [24hn] Anderson C. D. *Science* **76**, 238–239 (1932). DOI: 10.1126/science.76.1967.238 — 宇宙线云室中正电子的首篇报道（"易偏转正电粒子"）。[已核实]（第 39 篇）
+- [24hp] Dirac P. A. M. *Proceedings of the Royal Society A* **126**, 360–365 (1930). DOI: 10.1098/rspa.1930.0013 — "电子与质子理论"：为消除负能灾难提出负能态被填满的"海"（空穴理论）。[已核实]（第 39 篇）
+- [24hq] Anderson C. D. *Physical Review* **43**, 491–494 (1933). DOI: 10.1103/PhysRev.43.491 — "正电子"：基于 1300 张云室照片确认正电子质量与电子同量级、电荷相反。[已核实]（第 39 篇）
+- [24hr] Blackett P. M. S., Occhialini G. P. S. *Proceedings of the Royal Society A* **139**, 699–726 (1933). DOI: 10.1098/rspa.1933.0048 — 用符合计数控制云室直接观测穿透辐射中的 $e^+e^-$ 对产生与湮灭。[已核实]（第 39 篇）
+- [24hs] Bhabha H. J. *Proceedings of the Royal Society A* **154**, 195–206 (1936). DOI: 10.1098/rspa.1936.0046 — 基于狄拉克正电子理论的 $e^+e^-$ 散射（含交换项），即 Bhabha 散射，现代 QED 之前驱。[已核实]（第 39 篇）
+- [24ht] Feynman R. P. *Physical Review* **76**, 749–759 (1949). DOI: 10.1103/PhysRev.76.749 — "正电子理论"：用负能解沿时间反向传播重新解释空穴，即 Feynman–Stueckelberg 解释。[已核实]（第 39 篇）
+- [24hu] Chamberlain O., Segrè E., Wiegand C., Ypsilantis T. *Physical Review* **100**, 947–950 (1955). DOI: 10.1103/PhysRev.100.947 — 伯克利 Bevatron 上用切伦科夫计数器证认反质子。[已核实]（第 39 篇）
+- [24hv] Workman R. L. et al. (Particle Data Group). *Progress of Theoretical and Experimental Physics* **2022**, 083C01 (2022). DOI: 10.1093/ptep/ptac097 — 粒子物理综述（PDG 2022）：汇编轻子 / 夸克 / 反粒子质量、寿命与 CPT 定理相关参数。[已核实]（第 39 篇）
+</script>
+<script>
+// 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏
+function protectMath(src){
+  var blocks = [];
+  // 先抽块级 $$...$$（可跨行）
+  src = src.replace(/\$\$([\s\S]+?)\$\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  // 再抽行内 $...$（不含换行、内部不含 $）
+  src = src.replace(/\$([^\$\n]+?)\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  return { src: src, blocks: blocks };
+}
+
+function boot(){
+  var raw = document.getElementById('src').textContent;
+  // 记录标题锚点（在保护公式之前，避免影响）
+  var md = raw.replace(/^(#{1,3})\s+(.+)$/gm, function(m, h, t){
+    var id = 'h-' + t.replace(/[^\w一-龥]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+    return h + ' <span id="' + id + '"></span>' + t;
+  });
+
+  // 保护数学公式
+  var prot = protectMath(md);
+  md = prot.src;
+
+  document.getElementById('content').innerHTML = marked.parse(md);
+
+  // 还原数学公式占位符
+  var content = document.getElementById('content');
+  var html = content.innerHTML.replace(/%%MATH(\d+)%%/g, function(m, n){
+    return prot.blocks[+n];
+  });
+  content.innerHTML = html;
+
+  // 生成目录
+  var hs = document.querySelectorAll('#content h2, #content h3');
+  var toc = document.getElementById('toc'), tocHtml = '';
+  hs.forEach(function(h){
+    var sp = h.querySelector('span[id]');
+    var id = sp ? sp.id : '';
+    var cls = h.tagName === 'H3' ? 'sub' : '';
+    tocHtml += '<a class="' + cls + '" href="#' + id + '">' + h.textContent.trim() + '</a>';
+  });
+  toc.innerHTML = tocHtml;
+
+  // 图片路径：正文里写 figures/xxx.svg
+  document.querySelectorAll('#content img').forEach(function(im){
+    if(/^figures\//.test(im.getAttribute('src')||'')) return;
+  });
+
+  if (window.renderMathInElement) {
+    renderMathInElement(document.getElementById('content'), {
+      delimiters:[
+        {left:'$$', right:'$$', display:true},
+        {left:'$',  right:'$',  display:false}
+      ],
+      ignoredTags:['script','noscript','style','textarea','pre','code'],
+      throwOnError:false
+    });
+  }
+
+  // 滚动高亮
+  var links = [].slice.call(toc.querySelectorAll('a'));
+  window.addEventListener('scroll', function(){
+    var cur = null;
+    hs.forEach(function(h){
+      if (h.getBoundingClientRect().top < 120) cur = h;
+    });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if (cur){
+      var sp = cur.querySelector('span[id]');
+      var act = toc.querySelector('a[href="#' + (sp?sp.id:'') + '"]');
+      if (act) act.classList.add('active');
+    }
+  }, {passive:true});
+}
+if (window.marked) boot();
+else window.addEventListener('load', boot);
+</script>
+</body>
+</html>

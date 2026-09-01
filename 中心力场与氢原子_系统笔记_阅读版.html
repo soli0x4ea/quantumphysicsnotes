@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中心力场与氢原子</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2024; --ink-dim:#5b6570;
+  --line:#dfe3e8; --line-soft:#eef0f3; --accent:#1f5fa8; --accent-soft:#e8f0fa;
+  --amber-bg:#fff8e6; --amber-line:#e5c168; --amber-ink:#6b5200;
+  --green:#1c7a4a; --green-bg:#e8f5ee; --red:#b03030; --red-bg:#fdecec;
+  --code-bg:#f6f7f9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,serif;
+  background:var(--bg); color:var(--ink); line-height:1.85; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.layout{display:flex; max-width:1280px; margin:0 auto; gap:28px; padding:0 24px}
+/* 侧栏目录 */
+.toc{
+  width:246px; flex-shrink:0; position:sticky; top:0; height:100vh;
+  overflow-y:auto; padding:28px 0 40px; font-family:"Noto Sans SC","PingFang SC",sans-serif;
+}
+.toc h4{font-size:11px; letter-spacing:1.6px; color:var(--ink-dim); text-transform:uppercase;
+  margin:0 0 12px; padding-left:2px; font-weight:600}
+.toc a{
+  display:block; font-size:13px; color:var(--ink-dim); text-decoration:none;
+  padding:5px 10px; border-left:2px solid transparent; line-height:1.5;
+}
+.toc a:hover{color:var(--accent); background:var(--accent-soft)}
+.toc a.sub{padding-left:24px; font-size:12.5px}
+.toc a.active{color:var(--accent); border-left-color:var(--accent); background:var(--accent-soft); font-weight:600}
+/* 正文 */
+.main{flex:1; min-width:0; padding:28px 0 120px}
+.paper{background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  padding:48px 56px; box-shadow:0 1px 3px rgba(16,24,40,.05)}
+h1{font-size:27px; line-height:1.45; margin:0 0 18px; letter-spacing:.3px; font-weight:700}
+h2{font-size:20px; margin:52px 0 18px; padding-bottom:9px; border-bottom:1.5px solid var(--ink);
+  letter-spacing:.3px}
+h3{font-size:16.5px; margin:32px 0 12px; color:var(--accent); font-weight:600}
+h4{font-size:15px; margin:22px 0 10px; font-weight:600}
+p{margin:0 0 15px; text-align:justify}
+blockquote{
+  margin:18px 0; padding:13px 18px; background:var(--amber-bg);
+  border-left:3px solid var(--amber-line); border-radius:0 4px 4px 0; color:var(--amber-ink);
+}
+blockquote p{margin:0 0 8px} blockquote p:last-child{margin:0}
+blockquote strong{color:#4a3800}
+ul,ol{margin:0 0 15px; padding-left:26px}
+li{margin:6px 0}
+table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14px;
+  font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th{background:#f0f2f5; text-align:left; padding:9px 12px; border:1px solid var(--line); font-weight:600}
+td{padding:9px 12px; border:1px solid var(--line); vertical-align:top}
+tbody tr:nth-child(even){background:#fafbfc}
+code{background:var(--code-bg); padding:2px 6px; border-radius:3px; font-size:13.5px;
+  font-family:"SF Mono",Menlo,Consolas,monospace}
+pre{background:var(--code-bg); padding:14px 16px; border-radius:5px; overflow-x:auto; margin:16px 0;
+  border:1px solid var(--line-soft)}
+pre code{background:none; padding:0}
+hr{border:none; border-top:1px solid var(--line-soft); margin:34px 0}
+strong{font-weight:700; color:#0f1419}
+a{color:var(--accent)}
+img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6px; background:#fff}
+.katex-display{margin:20px 0; overflow-x:auto; overflow-y:hidden; padding:2px 0}
+.katex{font-size:1.045em}
+.tag-note{font-family:"Noto Sans SC","PingFang SC",sans-serif; font-size:12px; color:var(--ink-dim);
+  margin-top:40px; padding-top:16px; border-top:1px solid var(--line-soft); line-height:1.9}
+@media(max-width:900px){
+  .toc{display:none}
+  .paper{padding:28px 22px}
+  .layout{padding:0 12px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc"><h4>目录</h4><div id="toc"></div></nav>
+  <main class="main"><article class="paper" id="content"></article></main>
+</div>
+
+<script type="text/plain" id="src">
+# 中心力场与氢原子
+
+> **分类归属：第二部分 形式体系与数学结构 · 数学程度：L3（推导层）· 前置依赖：第 12 篇《算符、对易关系与表象》、第 13 篇《薛定谔方程》、第 14 篇《一维势场》、第 16 篇《角动量与自旋》**
+
+> **验证依据**：Bohr (1913) *Philos. Mag.* 26, 1/476/857（旧量子论三篇）、Sommerfeld (1916) *Ann. Phys.* 51, 1（椭圆轨道 + 相对论精细结构）、Schrödinger (1926) *Ann. Phys.* 79/80/81（氢原子波动力学解）、Dirac (1928) *Proc. R. Soc. A* 117, 610（精细结构的自然导出）、CODATA (2022)（玻尔半径与里德伯能量）
+
+---
+
+## 一、概念与定位
+
+第 14 篇在一维 $V(x)$ 下建立了束缚态、散射与隧穿的全部积木。本篇把"势只依赖坐标模长"推广到三维中心力场 $V(r)$，并聚焦其最可解、最基准的实例——**氢原子**。氢原子的解之所以是整座原子物理的"罗塞塔石碑"，是因为它在库仑势 $-e^2/(4\pi\varepsilon_0 r)$ 下可解析求解，给出所有原子能级结构的零级近似（多电子原子 = 中心场近似 + 微扰，第 22 篇）。
+
+三条核心定位：
+
+1. **球对称 → 角动量守恒 → 分离变量**。中心势与角动量平方 $\hat L^2$ 对易，故可同时取能量、$\hat L^2$、$\hat L_z$ 的本征态（第 16 篇的角动量代数在此落地为量子数 $l,m$）。波函数分离为径向 $R(r)\times$ 球谐 $Y_l^m(\theta,\phi)$。
+2. **库仑势的偶然简并**。氢能级只依赖主量子数 $n$，简并度 $n^2$——这超出普通球对称势的 $(2l+1)$ 简并，源于库仑势隐藏的 SO(4) 对称性（与开普勒问题的对称性同源）。
+3. **与宝石学的接口**。本篇建立的"中心势 → 角动量本征态 → $l,m$ 量子数 → 径向节点"框架，正是宝石学中过渡金属离子 $d$ 轨道、色心（红宝石 Cr³⁺ 的 694 nm R 线）致色机制的理论地基（第 42/43 篇把自由离子的 $l$ 在晶体场中劈裂为 $e_g/t_{2g}$，本篇是那套理论的源头）。
+
+本篇是第二部分承上启下的终点：第 13 篇的定态方程是它的起点，第 16 篇的角动量提供球谐工具，第 14 篇的径向方程即本篇一维化的内核；其解又是第 22 篇（多电子原子）、第 38 篇（狄拉克方程的氢原子精细结构）与第六部分（晶体场）的直接上游。
+
+---
+
+## 二、数学结构
+
+### 2.1 两体约化与哈密顿量
+
+质子–电子两体问题先约化为质心运动 + 相对运动，相对坐标用**约化质量** $\mu=m_eM_p/(m_e+M_p)\approx m_e(1-m_e/M_p)$。氢原子哈密顿量（相对坐标 $r$）：
+$$\hat H=-\frac{\hbar^2}{2\mu}\nabla^2-\frac{e^2}{4\pi\varepsilon_0 r}.$$
+（核视为点电荷、忽略核有限体积与相对论修正；精细结构在第 5.3 节。）
+
+### 2.2 球坐标分离变量（不跳步）
+
+球坐标下
+$$\nabla^2=\frac{1}{r^2}\frac{\partial}{\partial r}\!\left(r^2\frac{\partial}{\partial r}\right)+\frac{1}{r^2\sin\theta}\frac{\partial}{\partial\theta}\!\left(\sin\theta\frac{\partial}{\partial\theta}\right)+\frac{1}{r^2\sin^2\theta}\frac{\partial^2}{\partial\phi^2}.$$
+设 $\psi(r,\theta,\phi)=R(r)Y(\theta,\phi)$，代入 $\hat H\psi=E\psi$ 并除以 $\psi$，乘 $r^2$ 得
+$$\frac{1}{R}\frac{d}{dr}\!\left(r^2\frac{dR}{dr}\right)+\frac{2\mu r^2}{\hbar^2}\left(E+\frac{e^2}{4\pi\varepsilon_0 r}\right)=-\frac{1}{Y}\hat\Lambda Y,$$
+其中 $\hat\Lambda$ 为角部分。左只依赖 $r$、右只依赖角度，各等于常数，记为 $l(l+1)$。于是角部分方程恰为第 16 篇的 $\hat L^2 Y=l(l+1)\hbar^2 Y$，解即球谐 $Y_l^m(\theta,\phi)$，$l=0,1,2,\dots$，$m=-l,\dots,l$。
+
+径向方程令 $u(r)=rR(r)$ 化为一维形式（第 14 篇径向化的标准技巧）：
+$$-\frac{\hbar^2}{2\mu}\frac{d^2u}{dr^2}+\left[\frac{l(l+1)\hbar^2}{2\mu r^2}-\frac{e^2}{4\pi\varepsilon_0 r}\right]u(r)=E\,u(r),\qquad u(0)=0.$$
+方括号内即"有效势"：离心项 $+l(l+1)\hbar^2/(2\mu r^2)$ 在 $r\to0$ 排斥，库仑项吸引。
+
+### 2.3 库仑势的解析解
+
+引入玻尔半径 $a_0=\dfrac{4\pi\varepsilon_0\hbar^2}{\mu e^2}$ 与无量纲变量 $\rho=2r/(na_0)$，方程化为合流超几何方程。束缚态要求径向量子数 $n_r=0,1,2,\dots\ge0$，主量子数 $n=n_r+l+1=1,2,3,\dots$，能级
+$$E_n=-\frac{\mu e^4}{2(4\pi\varepsilon_0)^2\hbar^2}\frac{1}{n^2}\equiv -\frac{\mathrm{Ry}}{n^2},\qquad \mathrm{Ry}=\frac{\mu e^4}{2(4\pi\varepsilon_0)^2\hbar^2}\approx 13.6\ \text{eV}.$$
+**基态**（$n=1,l=0$）：
+$$\psi_{100}(r)=\frac{1}{\sqrt{\pi a_0^3}}\,e^{-r/a_0},\qquad \langle r\rangle_{1s}=\tfrac32 a_0,\quad \text{径向节点数}=n_r=0.$$
+**简并度**：给定 $n$，$l=0,\dots,n-1$ 共 $n$ 个值，每 $l$ 有 $2l+1$ 个 $m$，合计 $\sum_{l=0}^{n-1}(2l+1)=n^2$。
+
+---
+
+## 三、物理量与特征尺度
+
+| 物理量 | 符号 | 数值（CODATA 2018/2022） | 说明 |
+|--------|------|--------------------------|------|
+| 玻尔半径 | $a_0=4\pi\varepsilon_0\hbar^2/(\mu e^2)$ | $5.291\,772\,109\,03(80)\times10^{-11}\ \text{m}$ | 基态轨道尺度 |
+| 里德伯能量 | $\mathrm{Ry}$ | $13.605\,693\,122\,994(26)\ \text{eV}$（电子质量 / 无限核质量定义）；氢原子用约化质量得 $13.5984\ \text{eV}$ | 电离能基准 |
+| 精细结构常数 | $\alpha=e^2/(4\pi\varepsilon_0\hbar c)$ | $7.297\,352\,5693(11)\times10^{-3}\approx1/137.036$ | 相对论修正尺度 $\sim\alpha^2\mathrm{Ry}$ |
+| 基态能量 | $E_1$ | $-13.598\ \text{eV}$（约化质量）/ $-13.606\ \text{eV}$（无限核质量） | 与光谱电离能一致 |
+| $n=2\to1$ 跃迁（Lyman-α） | $\lambda$ | $121.6\ \text{nm}$（紫外） | 天文红移标准尺 |
+| $n=3\to2$ 跃迁（Balmer-α） | $\lambda$ | $656.3\ \text{nm}$（红，可见） | 氢特征红线 |
+
+**能级间隔公式**（里德伯公式的量子力学来源）：
+$$\frac{1}{\lambda}=R_H\!\left(\frac{1}{n_f^2}-\frac{1}{n_i^2}\right),\qquad R_H=\frac{\mathrm{Ry}}{hc}\approx1.097\times10^7\ \text{m}^{-1}.$$
+
+---
+
+## 四、实验基础与观测证据
+
+- **氢光谱线系**：巴耳末（1885）经验公式、$n\to2$ 可见 Balmer 系；Lyman（1906–1916）$n\to1$ 紫外系；Paschen $n\to3$ 红外系。里德伯公式统一之。波动力学 $E_n\propto-1/n^2$ 直接导出该公式，是理论对实验的首个定量胜利。
+- **基态电离能**：实验值 $13.598\ \text{eV}$（约化质量修正后）与 2.3 节解析结果吻合至 $10^{-3}$ 量级；脚本（第 6.2 节）有限差分独立验证 $E_n\approx-13.6/n^2\ \text{eV}$。
+- **21 cm 超精细线**：基态超精细分裂（$\sim5.9\ \mu\text{eV}$）源于核–电子磁矩耦合（第 16 篇自旋 + 第 18 篇两态系统），天文观测标准尺；本篇不展开，记为与中心势框架相容。
+- **兰姆位移（Lamb & Retherford 1947）**：基态 $2S_{1/2}$ 与 $2P_{1/2}$ 的 $\sim1057\ \text{MHz}$ 分裂，揭示狄拉克方程（第 5.3 节）仍不足，需量子电动力学（辐射修正）。本篇将兰姆位移记为"狄拉克框架的边界"，不作展开（详见第 38 篇与 QED 专著）。
+- **宝石学交叉证据**：红宝石（Cr³⁺ 替代 Al₂O₃ 中 Al³⁺）的 $^4A_2\to{}^2E$ 跃迁给出 694 nm R 线（第 43 篇）——其 $d$ 轨道身份（$l=2$）即本篇角动量本征态在晶体场中的具体化；Cr³⁺ 的 $t_{2g}/e_g$ 劈裂幅度（~1.8 eV）由本篇中心势 + 第 42 篇晶体场理论共同决定。两套管线数值（如 $d$ 轨道能量尺度、跃迁波长）须与宝石学笔记一致。
+
+---
+
+## 五、分类体系与物理机制
+
+### 5.1 中心势的分类
+
+| 势 $V(r)$ | 可否解析 | 简并度 | 代表 |
+|-----------|---------|--------|------|
+| 库仑 $-k/r$ | 是（合流超几何） | $n^2$（偶然简并） | 氢原子、类氢离子 |
+| 三维各向同性谐振子 $\tfrac12\mu\omega^2r^2$ | 是 | $(n+1)(n+2)/2$ | 原子核壳模型 |
+| 刚性转子 / 方势阱 | 部分 | $2l+1$ | 分子转动、核势 |
+| 一般中心势 | 否（数值） | $2l+1$ | 碱金属价电子、晶体场 |
+
+### 5.2 偶然简并的物理来源
+
+普通球对称势仅有 $m$ 的 $(2l+1)$ 重简并（旋转对称）。库仑势额外有 $n$ 重（不同 $l$ 同能），根因是其拉普拉斯–龙格–楞次矢量守恒 → 动力学对称群 SO(4)。这是经典开普勒问题守恒量的量子对应，非一般性结论。
+
+### 5.3 精细结构（机制链）
+
+狄拉克方程（1928）对相对论性电子自然给出能级（第 38 篇）：
+$$E_{n,j}=mc^2\left[1+\frac{\alpha^2}{(n-|j+1/2|+\sqrt{(j+1/2)^2-\alpha^2})^2}\right]^{-1/2}-mc^2.$$
+非相对论展开到 $\alpha^2$ 量级：
+$$E_{n,j}\approx -\frac{\mathrm{Ry}}{n^2}+\frac{\mathrm{Ry}\,\alpha^2}{n^3}\left(\frac{1}{j+1/2}-\frac{3}{4n}\right),$$
+即精细结构只依赖 $n$ 与总角动量 $j$（而非单独 $l$），分裂尺度 $\sim\alpha^2\mathrm{Ry}\sim4.5\times10^{-5}\ \text{eV}$。它包含三部分之和：相对论动能修正、自旋–轨道耦合、达尔文项（Sommerfeld 1916 的旧量子论椭圆轨道已半定量给出同尺度分裂，见第 7.1 节）。**兰姆位移**是 QED 对它的进一步修正，量级更小。
+
+### 5.4 旧量子论 vs 波动力学（对应表）
+
+| 旧量子论（Bohr/Sommerfeld） | 波动力学（本篇） | 关系 |
+|------------------------------|------------------|------|
+| 主量子数 $n$ | 主量子数 $n$ | 同 |
+| 角量子数 $k$（$k=1,\dots,n$） | $l=n-k$（$l=0,\dots,n-1$） | Sommerfeld 的 $k\leftrightarrow n-l$ |
+| 磁量子数 $m_k$ | 磁量子数 $m=-l,\dots,l$ | 同 |
+| 椭圆轨道半长轴 / 偏心率 | 径向波函数 $R_{nl}(r)$、节点数 $n_r=n-l-1$ | 波动力学用概率幅取代"轨道" |
+
+---
+
+## 六、典型系统与可解模型
+
+### 6.1 基态解析验证
+
+基态 $\psi_{100}=(1/\sqrt{\pi a_0^3})e^{-r/a_0}$ 直接代入 2.2 节径向方程（$l=0$）可验：
+$$-\frac{\hbar^2}{2\mu}\frac{d^2u}{dr^2}-\frac{e^2}{4\pi\varepsilon_0 r}u=E u,\quad u=r\psi_{100}.$$
+因 $u\propto r e^{-r/a_0}$，$u''=(1/a_0^2-2/(a_0r))u$，代入并利用 $a_0=4\pi\varepsilon_0\hbar^2/(\mu e^2)$ 得 $E=-\mu e^4/(2(4\pi\varepsilon_0)^2\hbar^2)=-\mathrm{Ry}$。脚本（6.2 节）以有限差分重算，结果一致。
+
+### 6.2 径向方程有限差分数值验证（数值例）
+
+将 2.2 节径向方程在 $r\in(0,r_{\max}]$ 离散为对称三对角本征值问题（同第 13 篇有限差分法，去掉 scipy 依赖，用 `numpy.linalg.eigh`）。对 $l=0,1,2$ 分别取最低本征值，应得
+$$E_{n}\approx -\frac{13.6\ \text{eV}}{n^2},\qquad n=n_r+l+1.$$
+脚本 `code/中心力场与氢原子_径向方程.py` 输出：① 最低若干能级相对 $-13.6/n^2$ 的相对误差；② 径向概率密度 $|u(r)|^2/r$ 的若干态图；③ 能级–简并度示意图。输出 `figures/中心力场与氢原子_径向波函数.svg`、`figures/中心力场与氢原子_能级图.svg`。该数值例与 6.1 节解析结果互为印证，并满足规范"解析与数值各至少一例"的要求。
+
+### 6.3 与宝石学 Cr³⁺ 的接口（概念例，非求解）
+
+红宝石中 Cr³⁺ 的 $3d^3$ 电子在八面体晶体场（非纯库仑）下，$l=2$ 的五个 $d$ 轨道劈裂为低能 $t_{2g}$ 与高能 $e_g$（第 42 篇）。本篇的"中心势 $l,m$ 本征态"是这一劈裂的自由离子起点；晶体场的非球对称微扰（第 19 篇微扰论）把 $n^2$ 简并解除，产生红宝石的可见致色。此例说明本篇框架如何向下游交叉应用延展。
+
+---
+
+## 七、历史脉络与学术争议
+
+### 7.1 年份—人物—文献时间线
+
+| 年份 | 人物 | 贡献 | 文献 |
+|------|------|------|------|
+| 1913 | Bohr | 圆轨道定态 + 频率条件，解释氢光谱 | *Philos. Mag.* 26, 1/476/857 (#24cc) |
+| 1916 | Sommerfeld | 椭圆轨道 + 相对论修正，精细结构半定量 | *Ann. Phys.* 51, 1 (#24cb) |
+| 1926 | Schrödinger | 波动力学解氢原子，导出 $E_n\propto-1/n^2$ | Ann. Phys. 79/80/81 (#24bt–#24bw) |
+| 1928 | Dirac | 相对论狄拉克方程，自然给出精细结构 | *Proc. R. Soc. A* 117, 610 (#11/#24bi) |
+| 1947 | Lamb & Retherford | 兰姆位移，狄拉克 框架外仍有分裂 | *Phys. Rev.* 72, 241（非本篇核心，点到为止） |
+
+### 7.2 争议与并列
+
+- **"电子轨道"是否真实**。Bohr/Sommerfeld 的椭圆轨道是半经典图像；波动力学以概率幅 $R_{nl}(r)Y_l^m$ 取代"轨道"。本篇取最小实在论：量子数 $n,l,m$ 是算符本征值，可观测的是能级与跃迁概率；"轨道"作为直观脚手架保留但须标注为非严格说法（呼应序.md 第 4 条）。
+- **旧量子论的成败**。Bohr 模型给出正确的 $E_n\propto-1/n^2$ 与里德伯常数，但无法解释精细结构、塞曼效应、多电子原子；波动力学统一之。Sommerfeld 椭圆轨道预测量级正确的精细结构，却把 $l$ 与 $n$ 的关系写反方向（见 5.4 节对应表），波动力学纠正为 $l=n-k$。
+- **狄拉克海与反粒子**。狄拉克 1928 方程的负能解引出反粒子（第 39 篇），本篇不介入诠释之争，仅记录精细结构已被该方程自然包含。
+
+---
+
+## 八、参考文献
+
+24cc. Bohr, N. (1913). On the Constitution of Atoms and Molecules. *Philosophical Magazine*, 26(151), 1–25; (153), 476–502; (155), 857–875. `已核实`（旧量子论三篇；第 14 篇亦引）
+
+24cb. Sommerfeld, A. (1916). Zur Quantentheorie der Spektrallinien. *Annalen der Physik*, 51(17), 1–94. `已核实`（椭圆轨道 + 相对论精细结构；DOI 10.1002/andp.19163561702；第 14 篇亦引）
+
+24bt. Schrödinger, E. (1926). Quantisierung als Eigenwertproblem (Erste Mitteilung). *Annalen der Physik*, 79(4), 361–376. `已核实`（波动力学；DOI 10.1002/andp.19263840404；第 13/14 篇亦引）
+
+24bu. Schrödinger, E. (1926). Quantisierung als Eigenwertproblem (Zweite Mitteilung). *Annalen der Physik*, 79, 489–527. `已核实`（微扰与含时）
+
+24bv. Schrödinger, E. (1926). Quantisierung als Eigenwertproblem (Dritte Mitteilung). *Annalen der Physik*, 80, 437–490. `已核实`（含氢原子详细展开）
+
+24bw. Schrödinger, E. (1926). Quantisierung als Eigenwertproblem (Vierte Mitteilung). *Annalen der Physik*, 81, 109–139. `已核实`（含时方程）
+
+#11. Dirac, P.A.M. (1928). The Quantum Theory of the Electron. *Proceedings of the Royal Society of London A*, 117(778), 610–624. `已核实`（狄拉克方程；第 38 篇详述；本篇精细结构来源）
+
+#1. CODATA (2022). *Recommended Values of the Fundamental Physical Constants*. NIST. `已核实`（玻尔半径 $a_0$、里德伯能量、精细结构常数 $\alpha$ 均取自此）
+
+#25. Feynman, R.P., Leighton, R.B., & Sands, M. (2010). *The Feynman Lectures on Physics*, Vol. III. Basic Books. `已核实`（第 19 章氢原子超精细分裂 = 两态系统）
+
+#27. Landau, L.D., & Lifshitz, E.M. (1977). *Quantum Mechanics: Non-Relativistic Theory* (3rd ed., Vol. 3). Pergamon. `已核实`（库仑势 SO(4) 偶然简并的标准论证）
+
+#28. Sakurai, J.J., & Napolitano, J. (2011). *Modern Quantum Mechanics* (2nd ed.). Addison-Wesley.
+
+*第 17 篇《中心力场与氢原子》v1.0，2026年9月1日。Bohr (1913) 三篇、Sommerfeld (1916) 卷期页于本次撰写时回溯核实并标 `[已核实]`；基态能量 $-13.6\ \text{eV}/n^2$ 由有限差分数值独立验证（第 6.2 节）；宝石学 Cr³⁺ R 线接口仅作概念连接，数值以第 42/43 篇为准。*
+</script>
+<script>
+// 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏
+function protectMath(src){
+  var blocks = [];
+  // 先抽块级 $$...$$（可跨行）
+  src = src.replace(/\$\$([\s\S]+?)\$\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  // 再抽行内 $...$（不含换行、内部不含 $）
+  src = src.replace(/\$([^\$\n]+?)\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  return { src: src, blocks: blocks };
+}
+
+function boot(){
+  var raw = document.getElementById('src').textContent;
+  // 记录标题锚点（在保护公式之前，避免影响）
+  var md = raw.replace(/^(#{1,3})\s+(.+)$/gm, function(m, h, t){
+    var id = 'h-' + t.replace(/[^\w一-龥]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+    return h + ' <span id="' + id + '"></span>' + t;
+  });
+
+  // 保护数学公式
+  var prot = protectMath(md);
+  md = prot.src;
+
+  document.getElementById('content').innerHTML = marked.parse(md);
+
+  // 还原数学公式占位符
+  var content = document.getElementById('content');
+  var html = content.innerHTML.replace(/%%MATH(\d+)%%/g, function(m, n){
+    return prot.blocks[+n];
+  });
+  content.innerHTML = html;
+
+  // 生成目录
+  var hs = document.querySelectorAll('#content h2, #content h3');
+  var toc = document.getElementById('toc'), tocHtml = '';
+  hs.forEach(function(h){
+    var sp = h.querySelector('span[id]');
+    var id = sp ? sp.id : '';
+    var cls = h.tagName === 'H3' ? 'sub' : '';
+    tocHtml += '<a class="' + cls + '" href="#' + id + '">' + h.textContent.trim() + '</a>';
+  });
+  toc.innerHTML = tocHtml;
+
+  // 图片路径：正文里写 figures/xxx.svg
+  document.querySelectorAll('#content img').forEach(function(im){
+    if(/^figures\//.test(im.getAttribute('src')||'')) return;
+  });
+
+  if (window.renderMathInElement) {
+    renderMathInElement(document.getElementById('content'), {
+      delimiters:[
+        {left:'$$', right:'$$', display:true},
+        {left:'$',  right:'$',  display:false}
+      ],
+      ignoredTags:['script','noscript','style','textarea','pre','code'],
+      throwOnError:false
+    });
+  }
+
+  // 滚动高亮
+  var links = [].slice.call(toc.querySelectorAll('a'));
+  window.addEventListener('scroll', function(){
+    var cur = null;
+    hs.forEach(function(h){
+      if (h.getBoundingClientRect().top < 120) cur = h;
+    });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if (cur){
+      var sp = cur.querySelector('span[id]');
+      var act = toc.querySelector('a[href="#' + (sp?sp.id:'') + '"]');
+      if (act) act.classList.add('active');
+    }
+  }, {passive:true});
+}
+if (window.marked) boot();
+else window.addEventListener('load', boot);
+</script>
+</body>
+</html>

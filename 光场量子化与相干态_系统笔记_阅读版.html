@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>光场量子化与相干态</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2024; --ink-dim:#5b6570;
+  --line:#dfe3e8; --line-soft:#eef0f3; --accent:#1f5fa8; --accent-soft:#e8f0fa;
+  --amber-bg:#fff8e6; --amber-line:#e5c168; --amber-ink:#6b5200;
+  --green:#1c7a4a; --green-bg:#e8f5ee; --red:#b03030; --red-bg:#fdecec;
+  --code-bg:#f6f7f9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,serif;
+  background:var(--bg); color:var(--ink); line-height:1.85; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.layout{display:flex; max-width:1280px; margin:0 auto; gap:28px; padding:0 24px}
+/* 侧栏目录 */
+.toc{
+  width:246px; flex-shrink:0; position:sticky; top:0; height:100vh;
+  overflow-y:auto; padding:28px 0 40px; font-family:"Noto Sans SC","PingFang SC",sans-serif;
+}
+.toc h4{font-size:11px; letter-spacing:1.6px; color:var(--ink-dim); text-transform:uppercase;
+  margin:0 0 12px; padding-left:2px; font-weight:600}
+.toc a{
+  display:block; font-size:13px; color:var(--ink-dim); text-decoration:none;
+  padding:5px 10px; border-left:2px solid transparent; line-height:1.5;
+}
+.toc a:hover{color:var(--accent); background:var(--accent-soft)}
+.toc a.sub{padding-left:24px; font-size:12.5px}
+.toc a.active{color:var(--accent); border-left-color:var(--accent); background:var(--accent-soft); font-weight:600}
+/* 正文 */
+.main{flex:1; min-width:0; padding:28px 0 120px}
+.paper{background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  padding:48px 56px; box-shadow:0 1px 3px rgba(16,24,40,.05)}
+h1{font-size:27px; line-height:1.45; margin:0 0 18px; letter-spacing:.3px; font-weight:700}
+h2{font-size:20px; margin:52px 0 18px; padding-bottom:9px; border-bottom:1.5px solid var(--ink);
+  letter-spacing:.3px}
+h3{font-size:16.5px; margin:32px 0 12px; color:var(--accent); font-weight:600}
+h4{font-size:15px; margin:22px 0 10px; font-weight:600}
+p{margin:0 0 15px; text-align:justify}
+blockquote{
+  margin:18px 0; padding:13px 18px; background:var(--amber-bg);
+  border-left:3px solid var(--amber-line); border-radius:0 4px 4px 0; color:var(--amber-ink);
+}
+blockquote p{margin:0 0 8px} blockquote p:last-child{margin:0}
+blockquote strong{color:#4a3800}
+ul,ol{margin:0 0 15px; padding-left:26px}
+li{margin:6px 0}
+table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14px;
+  font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th{background:#f0f2f5; text-align:left; padding:9px 12px; border:1px solid var(--line); font-weight:600}
+td{padding:9px 12px; border:1px solid var(--line); vertical-align:top}
+tbody tr:nth-child(even){background:#fafbfc}
+code{background:var(--code-bg); padding:2px 6px; border-radius:3px; font-size:13.5px;
+  font-family:"SF Mono",Menlo,Consolas,monospace}
+pre{background:var(--code-bg); padding:14px 16px; border-radius:5px; overflow-x:auto; margin:16px 0;
+  border:1px solid var(--line-soft)}
+pre code{background:none; padding:0}
+hr{border:none; border-top:1px solid var(--line-soft); margin:34px 0}
+strong{font-weight:700; color:#0f1419}
+a{color:var(--accent)}
+img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6px; background:#fff}
+.katex-display{margin:20px 0; overflow-x:auto; overflow-y:hidden; padding:2px 0}
+.katex{font-size:1.045em}
+.tag-note{font-family:"Noto Sans SC","PingFang SC",sans-serif; font-size:12px; color:var(--ink-dim);
+  margin-top:40px; padding-top:16px; border-top:1px solid var(--line-soft); line-height:1.9}
+@media(max-width:900px){
+  .toc{display:none}
+  .paper{padding:28px 22px}
+  .layout{padding:0 12px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc"><h4>目录</h4><div id="toc"></div></nav>
+  <main class="main"><article class="paper" id="content"></article></main>
+</div>
+
+<script type="text/plain" id="src">
+# 光场量子化与相干态
+
+> **分类归属：第四部分·量子信息与量子光学 · 数学程度：L3 · 前置依赖：第 9 篇《量子态与叠加原理》、第 15 篇《量子谐振子》**
+> **验证依据**：Glauber (1963) Phys. Rev. Lett.、Glauber (1963) Phys. Rev.、Sudarshan (1963) Phys. Rev. Lett.、Cahill & Glauber (1969) Phys. Rev.、Yuen (1976) Phys. Rev. A、Hanbury Brown & Twiss (1956) Nature、Walls (1983) Nature、Glauber (2006) Rev. Mod. Phys.、Slusher et al. (1985) Phys. Rev. Lett.
+
+---
+
+## 一、概念与定位
+
+**光场量子化（quantized light field）** 把一支电磁场模式（mode）当作一个量子谐振子处理：其能量本征态是确定了光子数 $n$ 的 Fock 态 $|n\rangle$，光子湮灭/产生算符 $\hat a/\hat a^\dagger$ 满足 $[\hat a,\hat a^\dagger]=1$。**相干态（coherent state）** $|\alpha\rangle$ 是湮灭算符的本征态 $\hat a|\alpha\rangle=\alpha|\alpha\rangle$，是量子光学里最接近经典单色波的量子态；**压缩态（squeezed state）** 则把某一正交分量的量子涨落压到真空涨落以下。
+
+名称词源：*coherent* 源自 Glauber 用于描述「各阶相干函数同时满足完全相干条件」的场（Glauber 1963）[24gd][24ge]；*photon*（光子）由 Lewis 于 1926 年提出，但场的量子化与光子计数理论由 Glauber 在 1963 年系统建立（2005 年诺贝尔物理学奖的一半授予 Glauber，表彰其对光学相干性的量子理论）[24gk]。
+
+本篇须抓住的核心特征：
+
+1. **模式即谐振子**：一个单色、单偏振、单方向的电磁模式在腔体内等价于一个频率 $\omega$ 的一维量子谐振子，哈密顿量 $\hat H=\hbar\omega(\hat a^\dagger\hat a+1/2)$（见第 15 篇）。
+2. **Fock 态 $|n\rangle$**：光子数本征态，光子数 $n=0,1,2,\dots$ 取确定整数值，能量本征值 $\hbar\omega(n+1/2)$。
+3. **相干态 $|\alpha\rangle$**：湮灭算符本征态，光子数服从泊松分布（均值 $|\alpha|^2$、方差 $|\alpha|^2$），两正交分量等涨落、达到最小不确定度，最贴近经典电磁波。
+4. **压缩态**：某一正交分量的方差被压到真空涨落 $1/2$（无量纲单位）以下，另一分量相应增大，乘积仍满足不确定度关系；用于引力波探测降噪 [24gj]。
+5. **光子统计与 $g^{(2)}(0)$**：用二阶相干度 $g^{(2)}(0)=\langle\hat n(\hat n-1)\rangle/\langle\hat n\rangle^2$ 区分光场——相干态 $=1$、热态 $=2$、单模 Fock 态 $=0$，是非经典性的实验判据 [24gi][24gl]。
+
+本主题在体系中的位置：它是第 9 篇（态与叠加）与第 15 篇（谐振子）的直接延伸——相干态正是谐振子相干态在电磁模式上的体现；也是第四部分量子光学与量子信息的入口，通向量子测量与退相干（第 24/25 篇）、连续变量量子信息。本篇采用**单模、非相对论**的量子化方案（量子光学标准做法），不展开协变量子电动力学（QED）。
+
+---
+
+## 二、数学结构
+
+**符号约定声明**：采用 **SI 单位制**，普朗克常数 $h$、约化普朗克常数 $\hbar=h/(2\pi)$ 显式写出；单模腔体体积记为 $V$，模式角频率 $\omega$、波矢 $\mathbf k$、偏振单位矢量 $\mathbf e$（取横向，满足库仑规范 $\nabla\!\cdot\!\mathbf A=0$）。算符加帽（如 $\hat a$）。约定全空间模函数归一化 $\int |u(\mathbf r)|^2\,\mathrm d^3r = V$。本篇不涉及度规与傅里叶变换约定；多模情形以「对每个模式独立重复下述结构、再直积」处理。
+
+### 2.1 单模场量子化
+
+从经典场能量密度 $u=(1/2)(\varepsilon_0\mathbf E^2+\mu_0^{-1}\mathbf B^2)$ 出发，对一个被腔体约束的单模（模态函数 $u(\mathbf r)$，实函数且横向），把矢量势与共轭动量 $(\mathbf A,\boldsymbol\Pi=-\varepsilon_0\dot{\mathbf A})$ 作等时空量子化，满足
+$$[\hat A_i(\mathbf r),\hat\Pi_j(\mathbf r')]=i\hbar\,\delta_{ij}^\perp(\mathbf r-\mathbf r'),$$
+其中 $\delta_{ij}^\perp$ 为横向 $\delta$ 函数。将该模式展开为
+$$\hat{\mathbf A}(\mathbf r)=\sqrt{\frac{\hbar}{2\varepsilon_0\omega V}}\,\mathbf e\,u(\mathbf r)(\hat a+\hat a^\dagger),\qquad \hat{\mathbf\Pi}(\mathbf r)=-\varepsilon_0\dot{\hat{\mathbf A}}$$
+后，代入能量积分并作正则排序，得到单模哈密顿量
+
+$$
+\hat H=\hbar\omega\left(\hat a^\dagger\hat a+\tfrac{1}{2}\right).
+\tag{1}
+$$
+
+| 符号 | 含义 | 量纲 |
+|------|------|------|
+| $\hat a,\hat a^\dagger$ | 光子湮灭/产生算符 | 无量纲 |
+| $\omega$ | 模式角频率 | $\mathrm{s^{-1}}$ (rad/s) |
+| $V$ | 腔体模体积 | $\mathrm{m^3}$ |
+| $\varepsilon_0$ | 真空介电常数 | $\mathrm{F/m}$ |
+| $\hat{\mathbf A}$ | 矢量势算符 | $\mathrm{T\cdot m}$ |
+
+由模式展开可定义对易关系
+
+$$
+[\hat a,\hat a^\dagger]=1.
+\tag{2}
+$$
+
+为与第 15 篇谐振子对接，引入无量纲「位置/动量」正交算符
+
+$$
+\hat x=\frac{\hat a+\hat a^\dagger}{\sqrt 2},\qquad \hat p=\frac{\hat a-\hat a^\dagger}{i\sqrt 2},
+\tag{3}
+$$
+
+则 $[\hat x,\hat p]=i$，且 $\hat H=(\hbar\omega/2)(\hat x^2+\hat p^2)$，与一维谐振子形式完全一致（第 15 篇式 (1)），只是此处「质量/频率」被吸收进 $\omega$ 与场幅系数中。
+
+> 说明：实际电场算符为 $\hat{\mathbf E}(\mathbf r,t)=i\sqrt{\frac{\hbar\omega}{2\varepsilon_0 V}}\,\mathbf e\,u(\mathbf r)(\hat a\,e^{-i\omega t}-\hat a^\dagger e^{i\omega t})$。其两个正交分量（取实部后）可写成
+> $$\hat E_1=\sqrt{\frac{\hbar\omega}{2\varepsilon_0 V}}(\hat a+\hat a^\dagger),\qquad \hat E_2=-i\sqrt{\frac{\hbar\omega}{2\varepsilon_0 V}}(\hat a-\hat a^\dagger),$$
+> 二者满足 $[\hat E_1,\hat E_2]=i\,\hbar\omega/(\varepsilon_0 V)$，量纲均为电场强度 $\mathrm{V/m}$。无量纲算符 $\hat x,\hat p$ 与物理场仅差因子 $\sqrt{\hbar\omega/(2\varepsilon_0V)}$。
+
+### 2.2 Fock 态与光子数算符
+
+光子数算符 $\hat N=\hat a^\dagger\hat a$。由式 (2) 可得升降关系
+
+$$
+\hat a^\dagger|n\rangle=\sqrt{n+1}\,|n+1\rangle,\qquad \hat a|n\rangle=\sqrt n\,|n-1\rangle\quad(n\ge 1).
+\tag{4}
+$$
+
+基态（真空）$|0\rangle$ 满足 $\hat a|0\rangle=0$；任意 Fock 态由产生算符构造
+
+$$
+|n\rangle=\frac{(\hat a^\dagger)^n}{\sqrt{n!}}\,|0\rangle,
+\tag{5}
+$$
+
+且 $\hat N|n\rangle=n|n\rangle$，能量本征值 $E_n=\hbar\omega(n+1/2)$。光子数 $n$ 为无量纲整数。Fock 空间为 $\bigoplus_{n=0}^\infty \mathrm{span}\{|n\rangle\}$。
+
+### 2.3 相干态 $|\alpha\rangle$
+
+相干态定义为位移算符作用于真空：
+
+$$
+|\alpha\rangle=\hat D(\alpha)|0\rangle,\qquad \hat D(\alpha)=\exp(\alpha\hat a^\dagger-\alpha^*\hat a),
+\tag{6}
+$$
+
+展开为 Fock 基：
+
+$$
+|\alpha\rangle=e^{-|\alpha|^2/2}\sum_{n=0}^{\infty}\frac{\alpha^n}{\sqrt{n!}}\,|n\rangle.
+\tag{7}
+$$
+
+**本征性质推导**（不跳步）：由式 (4) 的第二式，
+$$\hat a|\alpha\rangle=e^{-|\alpha|^2/2}\sum_{n=0}^{\infty}\frac{\alpha^n}{\sqrt{n!}}\,\hat a|n\rangle
+=e^{-|\alpha|^2/2}\sum_{n=1}^{\infty}\frac{\alpha^n}{\sqrt{n!}}\sqrt n\,|n-1\rangle
+=e^{-|\alpha|^2/2}\sum_{n=1}^{\infty}\frac{\alpha^n}{\sqrt{(n-1)!}}|n-1\rangle.$$
+令 $m=n-1$，上式 $=e^{-|\alpha|^2/2}\sum_{m=0}^{\infty}\frac{\alpha^{m+1}}{\sqrt{m!}}|m\rangle=\alpha\,|\alpha\rangle$。故 $\hat a|\alpha\rangle=\alpha|\alpha\rangle$。其中 $\alpha$ 为复本征值，量纲无量纲，$|\alpha|^2$ 即平均光子数。
+
+光子数分布（由式 (7) 的内积 $\langle n|\alpha\rangle=e^{-|\alpha|^2/2}\alpha^n/\sqrt{n!}$）：
+
+$$
+P(n)=|\langle n|\alpha\rangle|^2=e^{-|\alpha|^2}\frac{|\alpha|^{2n}}{n!},
+\tag{8}
+$$
+
+即参数为 $\mu=|\alpha|^2$ 的泊松分布。均值与方差均为 $\mu$。
+
+正交分量涨落：在式 (3) 单位下，相干态满足 $\langle\hat x\rangle=\sqrt 2\,\mathrm{Re}\,\alpha$、$\langle\hat p\rangle=\sqrt 2\,\mathrm{Im}\,\alpha$，且
+
+$$
+\langle(\Delta\hat x)^2\rangle=\langle(\Delta\hat p)^2\rangle=\tfrac12,
+\tag{9}
+$$
+
+达到最小不确定度 $\Delta\hat x\,\Delta\hat p=1/2$（即 $\hbar/2$ 制）。
+
+### 2.4 压缩态
+
+压缩算符（单模）
+
+$$
+\hat S(\xi)=\exp\!\left[\tfrac12(\xi^*\hat a^2-\xi\hat a^{\dagger 2})\right],\qquad \xi=r\,e^{i\theta},
+\tag{10}
+$$
+
+作用于真空得**压缩真空** $|\xi\rangle=\hat S(\xi)|0\rangle$。取 $\theta=0$（沿 $\hat x$ 压缩），正交分量方差变为
+
+$$
+\langle(\Delta\hat x)^2\rangle=\tfrac12 e^{-2r},\qquad \langle(\Delta\hat p)^2\rangle=\tfrac12 e^{2r},
+\tag{11}
+$$
+
+乘积 $\tfrac14$ 仍满足最小不确定度；当 $r>0$ 时 $\hat x$ 分量方差低于真空值 $1/2$（亚真空噪声），代价是 $\hat p$ 分量相应增大。压缩度常用分贝表示：$10\log_{10}(e^{2r})\ \mathrm{dB}$（$r=1$ 约 $8.7\ \mathrm{dB}$）。压缩态光子数分布在偶数 $n$ 上非零且超泊松（bunching），本身是另一种非经典光。
+
+### 2.5 二阶相干度 $g^{(2)}(0)$
+
+零延迟二阶相干度定义为（单模平稳场）
+
+$$
+g^{(2)}(0)=\frac{\langle\hat a^\dagger\hat a^\dagger\hat a\hat a\rangle}{\langle\hat a^\dagger\hat a\rangle^2}
+=\frac{\langle\hat n(\hat n-1)\rangle}{\langle\hat n\rangle^2}.
+\tag{12}
+$$
+
+| 符号 | 含义 | 量纲 |
+|------|------|------|
+| $\hat n$ | 光子数算符 $\hat a^\dagger\hat a$ | 无量纲 |
+| $g^{(2)}(0)$ | 零延迟二阶相干度 | 无量纲 |
+
+判据：$g^{(2)}(0)=1$ 为完全相干（泊松），$g^{(2)}(0)>1$ 为光子聚束（bunching，如热光），$g^{(2)}(0)<1$ 为反聚束（antibunching，非经典）。
+
+---
+
+## 三、物理量与特征尺度
+
+本篇使用的常数均取自 **CODATA 2018**（与 SI 2019 重新定义导出值一致；$h,c,\varepsilon_0$ 由定义精确）：
+
+| 物理量 | 符号 | 数值/量级 | 适用条件 |
+|--------|------|-----------|----------|
+| 普朗克常数 | $h$ | $6.62607015\times10^{-34}\ \mathrm{J\cdot s}$（精确） | CODATA 2018 / SI 2019 |
+| 约化普朗克常数 | $\hbar=h/(2\pi)$ | $1.054571817\times10^{-34}\ \mathrm{J\cdot s}$（精确） | CODATA 2018 |
+| 真空介电常数 | $\varepsilon_0$ | $8.8541878128\times10^{-12}\ \mathrm{F/m}$ | CODATA 2018 |
+| 光速 | $c$ | $299792458\ \mathrm{m/s}$（精确） | 定义值 |
+| 单光子能量（Nd:YAG，$\lambda=1064\ \mathrm{nm}$） | $\hbar\omega=hc/\lambda$ | $1.87\times10^{-19}\ \mathrm{J}=1.17\ \mathrm{eV}$ | 单模近似 |
+| 真空场涨落幅度 | $\sqrt{\hbar\omega/(2\varepsilon_0 V)}$ | $\approx1.0\times10^{5}\ \mathrm{V/m}$（取 $V=(1\ \mu\mathrm m)^3$） | 单模、腔内 |
+| 相干态平均光子数 | $\langle\hat n\rangle=|\alpha|^2$ | 弱相干态（量子密钥）约 $0.1$；连续激光可 $>10^{10}$ | 取决于泵浦 |
+| 压缩参数 | $r$ | $r=1$ 对应约 $8.7\ \mathrm{dB}$；LIGO 用约 $10\ \mathrm{dB}$（$r\approx1.15$） | 压缩态 |
+| 二阶相干度 | $g^{(2)}(0)$ | 相干态 $1$、热态 $2$、Fock 态 $0$ | 零延迟 |
+
+**量子效应显著判据**：当腔体弛豫时间 $\tau_c$ 与单光子寿命 $\gg$ 观测时间、且模式数可控时，离散光子数结构显现；经典波近似在 $|\alpha|^2\gg1$ 且不考虑单光子探测时成立。真空场涨落 $\sim10^5\ \mathrm{V/m}$（光学频段、亚波长模体积）是「零点起伏」的可观测量级，并非零。
+
+---
+
+## 四、实验基础与观测证据
+
+1. **HBT 光子关联（1956）**：Hanbury Brown 与 Twiss 用强度干涉仪测量天狼星相干光及实验室混沌（热）光源的两探测器符合计数，发现热光中光子「聚束」——零延迟二阶相干度 $g^{(2)}(0)\approx2$（对混沌光的理论值）[24gi]。这首次直接显示光场涨落中的量子/统计关联，并为相干态 $g^{(2)}(0)=1$ 与热态 $g^{(2)}(0)=2$ 的区分提供了实验基准。
+2. **激光作为相干态**：激光器在阈值以上输出可用相干态描述，其强度起伏为散粒噪声（泊松，$g^{(2)}(0)=1$），与 Glauber 相干态理论一致 [24gd][24ge]。单模理想激光的 $g^{(2)}(0)$ 在阈值以上趋近 1。
+3. **反聚束与非经典光**：实验上，对单原子/单量子点共振荧光的测量实现了 $g^{(2)}(0)<1$（光子反聚束），是 Fock 类态或单光子源的直接证据；这是判断「非经典光」的标准实验判据之一（判据见式 (12)）。
+4. **压缩态的首观测（1985）**：Slusher 等人在光学腔内四波混频实验中首次产生并观测到压缩态，将某一正交分量噪声压到散粒噪声以下 [24gl]；Walls 于 1983 年的综述系统梳理了压缩态的理论与产生方案 [24gj]。
+5. **引力波探测应用**：当今 LIGO/Virgo 等探测器向臂中注入约 $10\ \mathrm{dB}$ 的压缩光，以降低量子散粒噪声、提升灵敏度 [24gj][24gk]。
+
+**误读纠正**：相干态 $|\alpha\rangle$ 常被通俗说成「就是经典电磁波」——严格表述为：它是*最接近*经典单色波的量子态（最小不确定度、泊松统计），但本身仍是 Fock 态的无限叠加（式 (7)），具备量子相干性与真空涨落；并非「没有量子性」。反之，热光 $g^{(2)}(0)=2$ 体现的是混沌源（多模/随机相位）的经典统计涨落，与单光子反聚束（$g^{(2)}(0)<1$）只能在量子理论中解释。
+
+---
+
+## 五、分类体系与物理机制
+
+### 5.1 单模光场态分类
+
+| 类型 | 光子数分布 | $g^{(2)}(0)$ | 正交分量方差 | 典型实例 |
+|------|-----------|-------------|--------------|----------|
+| Fock 态 $\|n\rangle$ | $\delta_{n,n_0}$ | $0$（$n_0\ge1$） | 无确定相位 | 单光子源、共振荧光 |
+| 相干态 $\|\alpha\rangle$ | 泊松 $e^{-\mu}\mu^n/n!$ | $1$ | 等涨落 $1/2$ | 理想激光 |
+| 热态（玻色-爱因斯坦） | $(1+\mu)^{-1}(\mu/(1+\mu))^n$ | $2$ | 大于真空 | 热黑体/混沌光 |
+| 压缩态 | 偶数项超泊松 | $>1$（压缩真空） | 一分量 $<1/2$ | 参量下转换、四波混频 |
+
+### 5.2 机制解释
+
+相干态的「经典性」来自其为正则位移算符作用于真空（式 (6)）：位移不改变真空涨落的大小，只是将其平移到相空间中振幅 $\alpha$ 处，因此 $\hat x,\hat p$ 方差保持 $1/2$ 且等号成立。热态是多个相干态按随机相位（玻色-爱因斯坦权重）的经典混合（P 表象中 $P(\alpha)$ 为高斯），混合破坏了相干性，使聚束 $g^{(2)}(0)=2$。压缩态则通过双线性（二次）哈密顿量 $\propto \hat a^2+\hat a^{\dagger 2}$ 使相空间椭球旋转压缩，把涨落重新分配（式 (10)(11)）。
+
+### 5.3 概念辨析与失效边界
+
+- **相干态 vs 经典场**：相干态在期望场强与一阶相干上等同经典单色波，但其光子数是概率性的（泊松），真空涨落始终存在；「经典场」在量子光学里更准确地说指「可用正 P 函数描述的态」。
+- **Fock 态 vs 相干态**：前者光子数确定、相位完全不确定；后者相位确定、光子数不确定。
+- **适用边界**：单模近似要求场可被单一 $({\bf k},\mathbf e)$ 模式主导；多模、强损耗、非线性展宽会偏离上述纯态公式。相干态描述仅在激光线宽远小于探测器带宽、且忽略技术噪声时有效。
+
+---
+
+## 六、典型系统与可解模型
+
+### 6.1 相干态与热态的光子数分布（解析 + 脚本1）
+
+取平均光子数 $\mu=|\alpha|^2=5$。相干态分布由式 (8)：
+$$P_{\mathrm{coh}}(n)=e^{-5}\frac{5^n}{n!}.$$
+其均值与方差均等于 $5$（泊松分布特征）。同均值热态（玻色-爱因斯坦）分布
+$$P_{\mathrm{th}}(n)=\frac{1}{1+\mu}\left(\frac{\mu}{1+\mu}\right)^n=\frac{1}{6}\left(\frac{5}{6}\right)^n,$$
+二者均值同为 $5$，但热态方差更大（超泊松）。
+
+脚本 `code/光场量子化_相干态与光子统计.py` 直接计算两分布并绘图（式 (8)(9) 对应）。**数值结果（脚本输出回写）**：相干态在 $\mu=5$ 时均值 $=5.000000$、方差 $=5.000000$；热态均值 $=5.000000$、方差 $=30.000000$。二者均值相等、方差比为 $6$，在图上表现为热态分布更「胖」、长尾更显著。详见 `figures/光场量子化_相干态光子数.svg`。
+
+### 6.2 二阶相干度三态对比与压缩态 Wigner 函数（脚本2）
+
+由式 (12) 解析求得三态零延迟二阶相干度：
+- 相干态：$\langle\hat n(\hat n-1)\rangle=|\alpha|^4=\langle\hat n\rangle^2\Rightarrow g^{(2)}(0)=1$。
+- 热态：对 $P_{\mathrm{th}}(n)=(1+\mu)^{-1}q^n$（$q=\mu/(1+\mu)$），$\langle\hat n(\hat n-1)\rangle=2\mu^2\Rightarrow g^{(2)}(0)=2$（与 $\mu$ 无关）。
+- 单模 Fock 态 $|1\rangle$：$\langle\hat n(\hat n-1)\rangle=0\Rightarrow g^{(2)}(0)=0$。
+
+脚本 `code/光场量子化_二阶相干度.py` 以 $\mu=5$ 数值验证并作柱状图（式 (12) 对应）；同时绘出压缩真空（$r=1$）的 Wigner 函数
+$$W(x,p)=\frac{1}{\pi}\exp\!\big(-x^2 e^{2r}-p^2 e^{-2r}\big)$$
+（无量纲单位，真空 Wigner 为 $(1/\pi)e^{-x^2-p^2}$），直观显示相空间椭球沿 $x$ 压缩、沿 $p$ 拉伸。**数值结果（脚本输出回写）**：相干态 $g^{(2)}(0)=1.000000$、热态 $g^{(2)}(0)=2.000000$、Fock($n=1$) $g^{(2)}(0)=0.000000$。可见压缩态的 Wigner 虽仍处处为正（非负性不区分压缩与经典高斯），但其椭球形状直接量化了方差的再分配。详见 `figures/光场量子化_二阶相干度.svg`。
+
+> 注：脚本使用隔离 venv 的 numpy + matplotlib（`Agg` 后端），未引入 scipy 或其他第三方库；SVG 内图注均为英文。
+
+---
+
+## 七、历史脉络与学术争议
+
+| 年份 | 人物 | 贡献 | 文献 |
+|------|------|------|------|
+| 1927 | Dirac | 辐射的量子发射/吸收理论（光子过程基础） | 见 [24gk] 引述 Dirac (1927) |
+| 1963 | Glauber | 相干态与光探测/高阶相干函数理论（PRL 短篇） | [24gd] |
+| 1963 | Glauber | 光学相干性的量子理论长文（相干函数体系） | [24ge] |
+| 1963 | Sudarshan | P 表象对角表示（相干态超完备基） | [24gf] |
+| 1969 | Cahill & Glauber | 玻色振幅算符的有序展开（s-有序、准概率分布） | [24gg] |
+| 1976 | Yuen | 双光子相干态（压缩态） | [24gh] |
+| 1983 | Walls | 压缩态综述 | [24gj] |
+| 1985 | Slusher et al. | 首次实验观测压缩光 | [24gl] |
+| 2005（2006 讲稿） | Glauber | 诺贝尔讲座：光量子百年 | [24gk] |
+
+**提出动机**：20 世纪 50 年代 Hanbury–Twiss 实验揭示了经典波动理论无法解释的光子关联；Glauber 建立统一的量子相干函数理论，把「相干性」从一阶推广到任意高阶，并引入相干态作为最接近经典的量子光场 [24gd][24ge]。随后 Sudarshan 的 P 表象 [24gf] 与 Cahill–Glauber 的有序展开 [24gg] 给出了相干态超完备基下的完整相空间描述；Yuen 把相干态推广到压缩态 [24gh]，Walls 系统化为可观测的量子资源 [24gj]。
+
+**当前争议与开放问题**（并列各方，不作裁决）：
+- **「光子」是否为可计数的粒子**：一种看法把光子严格视为「单个模式激发的量子数」（Fock 态 $|n\rangle$ 中的 $n$），认为「光子」概念仅在给定模式下有明确定义；另一种实用看法把弱的相干/热脉冲直接称为「$N$ 个光子」。两种表述在单模下一致，但在多模、连续自由传播场中「光子波函数」的恰当定义仍有争论（Glauber 2006 讲座对此有历史梳理）[24gk]。本笔记采用第一种（模式激发）表述，因其数学严格。
+- **相干态是否「经典」**：一方强调其最小不确定度与泊松统计「最接近经典场」；另一方指出它仍是无限 Fock 叠加、含真空涨落，本质上为量子态。本笔记立场：相干态是「经典极限下的量子态」，不站队。
+- **诠释分歧**：光场量子化本身独立于哥本哈根/多世界等量子力学诠释之争；上述态（Fock、相干、压缩）均可在任意诠释下定义，争议限于「光子本体论」层面，无实验可裁决之分。
+
+本节内容可能随研究进展更新。
+
+---
+
+## 八、参考文献
+
+[24gd] Glauber R. J. *Phys. Rev. Lett.* **10**, 84–86 (1963). DOI: 10.1103/PhysRevLett.10.84 — 相干态与光子计数/光探测理论（PRL 短篇，提出相干态与高阶关联）。 [已核实]
+
+[24ge] Glauber R. J. *Phys. Rev.* **130**, 2529–2539 (1963). DOI: 10.1103/PhysRev.130.2529 — 光学相干性的量子理论长文（n 阶相干函数体系）。 [已核实]
+
+[24gf] Sudarshan E. C. G. *Phys. Rev. Lett.* **10**, 277–279 (1963). DOI: 10.1103/PhysRevLett.10.277 — 统计光束的半经典与量子描述等价（P 表象对角表示）。 [已核实]
+
+[24gg] Cahill K. E., Glauber R. J. *Phys. Rev.* **177**, 1857–1881 (1969). DOI: 10.1103/PhysRev.177.1857 — 玻色振幅算符的有序展开（s-有序与准概率分布）。 [已核实]
+
+[24gh] Yuen H. P. *Phys. Rev. A* **13**, 2226–2243 (1976). DOI: 10.1103/PhysRevA.13.2226 — 双光子相干态（压缩态）的引入与性质。 [已核实]
+
+[24gi] Hanbury Brown R., Twiss E. *Nature* **177**, 27–29 (1956). DOI: 10.1038/177027a0 — 两束相干光中光子的关联（HBT 效应，聚束 $g^{(2)}\approx2$）。 [已核实]
+
+[24gj] Walls D. F. *Nature* **306**, 141–146 (1983). DOI: 10.1038/306141a0 — 压缩态综述（理论与产生方案）。 [已核实]
+
+[24gk] Glauber R. J. *Rev. Mod. Phys.* **78**, 1267–1278 (2006). DOI: 10.1103/RevModPhys.78.1267 — 诺贝尔讲座：光量子百年（历史与体系梳理）。 [已核实]
+
+[24gl] Slusher R. E., Hollberg L. W., Yurke B., Mertz J. C., Valley J. F. *Phys. Rev. Lett.* **55**, 2409–2412 (1985). DOI: 10.1103/PhysRevLett.55.2409 — 腔内四波混频产生并观测压缩态（首例实验）。 [已核实]
+</script>
+<script>
+// 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏
+function protectMath(src){
+  var blocks = [];
+  // 先抽块级 $$...$$（可跨行）
+  src = src.replace(/\$\$([\s\S]+?)\$\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  // 再抽行内 $...$（不含换行、内部不含 $）
+  src = src.replace(/\$([^\$\n]+?)\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  return { src: src, blocks: blocks };
+}
+
+function boot(){
+  var raw = document.getElementById('src').textContent;
+  // 记录标题锚点（在保护公式之前，避免影响）
+  var md = raw.replace(/^(#{1,3})\s+(.+)$/gm, function(m, h, t){
+    var id = 'h-' + t.replace(/[^\w一-龥]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+    return h + ' <span id="' + id + '"></span>' + t;
+  });
+
+  // 保护数学公式
+  var prot = protectMath(md);
+  md = prot.src;
+
+  document.getElementById('content').innerHTML = marked.parse(md);
+
+  // 还原数学公式占位符
+  var content = document.getElementById('content');
+  var html = content.innerHTML.replace(/%%MATH(\d+)%%/g, function(m, n){
+    return prot.blocks[+n];
+  });
+  content.innerHTML = html;
+
+  // 生成目录
+  var hs = document.querySelectorAll('#content h2, #content h3');
+  var toc = document.getElementById('toc'), tocHtml = '';
+  hs.forEach(function(h){
+    var sp = h.querySelector('span[id]');
+    var id = sp ? sp.id : '';
+    var cls = h.tagName === 'H3' ? 'sub' : '';
+    tocHtml += '<a class="' + cls + '" href="#' + id + '">' + h.textContent.trim() + '</a>';
+  });
+  toc.innerHTML = tocHtml;
+
+  // 图片路径：正文里写 figures/xxx.svg
+  document.querySelectorAll('#content img').forEach(function(im){
+    if(/^figures\//.test(im.getAttribute('src')||'')) return;
+  });
+
+  if (window.renderMathInElement) {
+    renderMathInElement(document.getElementById('content'), {
+      delimiters:[
+        {left:'$$', right:'$$', display:true},
+        {left:'$',  right:'$',  display:false}
+      ],
+      ignoredTags:['script','noscript','style','textarea','pre','code'],
+      throwOnError:false
+    });
+  }
+
+  // 滚动高亮
+  var links = [].slice.call(toc.querySelectorAll('a'));
+  window.addEventListener('scroll', function(){
+    var cur = null;
+    hs.forEach(function(h){
+      if (h.getBoundingClientRect().top < 120) cur = h;
+    });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if (cur){
+      var sp = cur.querySelector('span[id]');
+      var act = toc.querySelector('a[href="#' + (sp?sp.id:'') + '"]');
+      if (act) act.classList.add('active');
+    }
+  }, {passive:true});
+}
+if (window.marked) boot();
+else window.addEventListener('load', boot);
+</script>
+</body>
+</html>

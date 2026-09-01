@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物质波包</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2024; --ink-dim:#5b6570;
+  --line:#dfe3e8; --line-soft:#eef0f3; --accent:#1f5fa8; --accent-soft:#e8f0fa;
+  --amber-bg:#fff8e6; --amber-line:#e5c168; --amber-ink:#6b5200;
+  --green:#1c7a4a; --green-bg:#e8f5ee; --red:#b03030; --red-bg:#fdecec;
+  --code-bg:#f6f7f9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,serif;
+  background:var(--bg); color:var(--ink); line-height:1.85; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.layout{display:flex; max-width:1280px; margin:0 auto; gap:28px; padding:0 24px}
+/* 侧栏目录 */
+.toc{
+  width:246px; flex-shrink:0; position:sticky; top:0; height:100vh;
+  overflow-y:auto; padding:28px 0 40px; font-family:"Noto Sans SC","PingFang SC",sans-serif;
+}
+.toc h4{font-size:11px; letter-spacing:1.6px; color:var(--ink-dim); text-transform:uppercase;
+  margin:0 0 12px; padding-left:2px; font-weight:600}
+.toc a{
+  display:block; font-size:13px; color:var(--ink-dim); text-decoration:none;
+  padding:5px 10px; border-left:2px solid transparent; line-height:1.5;
+}
+.toc a:hover{color:var(--accent); background:var(--accent-soft)}
+.toc a.sub{padding-left:24px; font-size:12.5px}
+.toc a.active{color:var(--accent); border-left-color:var(--accent); background:var(--accent-soft); font-weight:600}
+/* 正文 */
+.main{flex:1; min-width:0; padding:28px 0 120px}
+.paper{background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  padding:48px 56px; box-shadow:0 1px 3px rgba(16,24,40,.05)}
+h1{font-size:27px; line-height:1.45; margin:0 0 18px; letter-spacing:.3px; font-weight:700}
+h2{font-size:20px; margin:52px 0 18px; padding-bottom:9px; border-bottom:1.5px solid var(--ink);
+  letter-spacing:.3px}
+h3{font-size:16.5px; margin:32px 0 12px; color:var(--accent); font-weight:600}
+h4{font-size:15px; margin:22px 0 10px; font-weight:600}
+p{margin:0 0 15px; text-align:justify}
+blockquote{
+  margin:18px 0; padding:13px 18px; background:var(--amber-bg);
+  border-left:3px solid var(--amber-line); border-radius:0 4px 4px 0; color:var(--amber-ink);
+}
+blockquote p{margin:0 0 8px} blockquote p:last-child{margin:0}
+blockquote strong{color:#4a3800}
+ul,ol{margin:0 0 15px; padding-left:26px}
+li{margin:6px 0}
+table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14px;
+  font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th{background:#f0f2f5; text-align:left; padding:9px 12px; border:1px solid var(--line); font-weight:600}
+td{padding:9px 12px; border:1px solid var(--line); vertical-align:top}
+tbody tr:nth-child(even){background:#fafbfc}
+code{background:var(--code-bg); padding:2px 6px; border-radius:3px; font-size:13.5px;
+  font-family:"SF Mono",Menlo,Consolas,monospace}
+pre{background:var(--code-bg); padding:14px 16px; border-radius:5px; overflow-x:auto; margin:16px 0;
+  border:1px solid var(--line-soft)}
+pre code{background:none; padding:0}
+hr{border:none; border-top:1px solid var(--line-soft); margin:34px 0}
+strong{font-weight:700; color:#0f1419}
+a{color:var(--accent)}
+img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6px; background:#fff}
+.katex-display{margin:20px 0; overflow-x:auto; overflow-y:hidden; padding:2px 0}
+.katex{font-size:1.045em}
+.tag-note{font-family:"Noto Sans SC","PingFang SC",sans-serif; font-size:12px; color:var(--ink-dim);
+  margin-top:40px; padding-top:16px; border-top:1px solid var(--line-soft); line-height:1.9}
+@media(max-width:900px){
+  .toc{display:none}
+  .paper{padding:28px 22px}
+  .layout{padding:0 12px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc"><h4>目录</h4><div id="toc"></div></nav>
+  <main class="main"><article class="paper" id="content"></article></main>
+</div>
+
+<script type="text/plain" id="src">
+# 物质波包
+
+> **分类归属：第一部分 量子行为与基础概念 · 数学程度：L2（推导层）· 前置依赖：第 1 篇《量子行为》、第 2 篇《波粒二象性与德布罗意关系》、第 9 篇《量子态与叠加原理》**
+> **验证依据**：de Broglie (1924)、Schrödinger (1926)、Ehrenfest (1927)、CODATA (2022)
+
+# 第 7 篇 · 物质波包与波粒统一
+
+## 一、概念与定位
+
+单个自由粒子既「有确定位置」（撞在屏上是一个点）又「有波动性」（能干涉）。调和二者的是**波包**：用一群频率/波数相近的平面波叠加，得到在空间上局域的波函数包络；包络峰值对应粒子的经典轨迹，内部快速振荡对应相位。本篇把第 2 篇的德布罗意关系 $p=h/\lambda,\ E=h\nu$ 上升为连续波包的**色散关系**，并回答「波怎么以粒子速度运动」这个经典疑问。
+
+本篇定位：第 1、2 篇建立了「粒子 ⇄ 波」对应；本篇给出数学载体（波包）与运动学（群速度=粒子速度），为第 9 篇波函数、第 13 篇薛定谔方程提供物理图像。
+
+## 二、数学结构
+
+### 2.1 德布罗意关系与色散关系
+
+对自由粒子，平面波写
+
+$$ \psi(x,t) = A e^{i(kx-\omega t)} \tag{1} $$
+
+德布罗意–爱因斯坦关系
+
+$$ p = \hbar k,\qquad E = \hbar\omega \tag{2} $$
+
+非相对论自由粒子 $E=p^2/(2m)$，故色散关系
+
+$$ \omega(k) = \frac{\hbar k^2}{2m} \tag{3} $$
+
+### 2.2 相速度与群速度
+
+**相速度**（等相面 $kx-\omega t=\text{const}$ 的速度）：
+
+$$ v_p = \frac{\omega}{k} = \frac{\hbar k}{2m} = \frac{p}{2m} = \frac{v}{2} \tag{4} $$
+
+其中 $v=p/m$ 是粒子经典速度。相速度 $v_p=v/2$ **小于**粒子速度，且不是任何可观测量的速度——它只是相位波前的传播速度。
+
+**群速度**（波包包络峰的速度，对 $\omega(k)$ 在中心波数 $k_0$ 展开取一阶）：
+
+$$ v_g = \left.\frac{d\omega}{dk}\right|_{k_0} = \frac{\hbar k_0}{m} = \frac{p_0}{m} = v \tag{5} $$
+
+**群速度恰好等于粒子经典速度**——这正是「波包代表粒子」的运动学保证：粒子以 $v$ 运动，波包峰值也以 $v$ 运动。
+
+### 2.3 波包扩散
+
+取初态高斯波包 $\psi(x,0)=\frac{1}{(2\pi\sigma_0^2)^{1/4}}e^{-x^2/(4\sigma_0^2)}e^{ik_0x}$，自由演化（薛定谔方程，第 13 篇）给出概率密度宽度
+
+$$ \sigma(t) = \sigma_0\sqrt{1+\left(\frac{\hbar t}{2m\sigma_0^2}\right)^2} \tag{6} $$
+
+即波包随时间**展宽**（色散）。当 $t\ll 2m\sigma_0^2/\hbar$ 时可视为近似定域；宏观物体 $\hbar$ 极小，展宽时间极长（见第 14 篇退相干尺度），故日常物体「不扩散」。
+
+### 2.4 Ehrenfest 定理（对应原理的严格形式）
+
+量子力学的期望值满足
+
+$$ \frac{d}{dt}\langle x\rangle = \frac{\langle p\rangle}{m},\qquad
+\frac{d}{dt}\langle p\rangle = -\left\langle\frac{\partial V}{\partial x}\right\rangle \tag{7} $$
+
+在势能缓变（$\langle\partial V/\partial x\rangle\approx\partial V/\partial x|_{\langle x\rangle}$）时退化为经典牛顿方程——即量子平均运动服从经典轨迹。这是第 2 篇「波包如粒子」的动力学根源（Ehrenfest 1927）。
+
+## 三、物理量与特征尺度
+
+| 量 | 符号 | 量级例（电子，$v=0.01c$） | 意义 |
+|----|------|---------------------------|------|
+| 德布罗意波长 | $\lambda$ | $\approx 242\ \text{pm}$（$v=0.01c$） | 振荡尺度 |
+| 相速度 | $v_p$ | $v/2$ | 非物理观测速度 |
+| 群速度 | $v_g$ | $=v$ | 粒子速度 |
+| 波包展宽时间 | $t_{\text{spread}}$ | $\sim2m\sigma_0^2/\hbar$ | 局域性存续尺度 |
+
+**尺度判据**：波包是否「够局域」由 $\sigma_0$ 与 $\lambda$ 之比决定；是否「够稳定」由 $t$ 与 $2m\sigma_0^2/\hbar$ 之比决定。电子在典型实验（$\sigma_0\sim\mu\text{m}$）下，展宽时间远长于实验时长，可清晰观察单粒子干涉（第 1/2 篇）。
+
+## 四、实验基础与观测证据
+
+1. **电子衍射**（第 2 篇）：Jönsson 1974 多缝、Merli 1976 与 Tonomura 1989 单电子累积，直接显示单个电子的波包通过双缝后产生干涉——是波包图像的实验基石。
+2. **中子干涉**：中子（有质量、无电荷）的干涉与引力相移（Colella 1975，第 13 篇引用），证明德布罗意关系对中性重粒子同样成立，波包不是电子特有。
+3. **原子干涉**：原子（更大质量）的 matter-wave 干涉（Kasevich–Chu 1991 等）进一步把波包推向宏观尺度，验证 (5)(6) 的普适性。
+
+## 五、分类体系与物理机制
+
+| 对象 | 描述 | 速度 |
+|------|------|------|
+| 平面波 $\psi\propto e^{i(kx-\omega t)}$ | 完全非局域、确定 $p$ | $v_p=v/2$（无粒子意义） |
+| 波包（叠加） | 局域、不确定 $\Delta p$ | $v_g=v$（粒子速度） |
+| 粒子（经典） | 点 | $v$ |
+
+**机制**：不确定性关系（第 8 篇）要求局域波包必含波数展宽 $\Delta k\sim1/\Delta x$，由 (3) 的色散导致不同 $k$ 分量以略不同群速度分离，从而波包扩散 (6)。这是「波动性」与「局域性」不可兼得的定量体现，也是第 8 篇不确定性关系的物理前奏。
+
+## 六、典型系统与可解模型
+
+**(a) 电子显微镜**：用短德布罗意波长（第 2 篇 50 kV 下 5.2 pm）获得原子级分辨，本质是利用波包的小 $\lambda$。
+**(b) 原子光学**：激光冷却原子制成慢波包（大 $\lambda$、长展宽时间），做高精度惯性/引力传感。
+**(c) 数值模型**：配套脚本演化高斯波包 $|\psi(x,t)|^2$，验证峰值以 $v_g=v$ 平移、宽度按 (6) 展宽，并对比相速度 $v/2$（仅相位波前，不载信息）。
+
+## 七、历史脉络与学术争议
+
+- **de Broglie 1924**：博士论文提出物质波，给出 (2) 的 $p=\hbar k$ 对应。
+- **Schrödinger 1926**：把物质波写成波动方程（第 13 篇），波包成为波函数的自然解。
+- **早期波包困境**：薛定谔曾希望波包永不扩散以充当「轨道电子」，但 (6) 表明自由波包必扩散（除非谐振子，第 15 篇的相干态才不扩散）——这促使 Born 概率诠释（第 9 篇）取代「波包=实体电子」。
+- **当代**：波包是量子输运、量子光学（第 35 篇波包与光子）、冷原子实验的标准语言。
+
+## 八、参考文献
+
+- de Broglie, L. (1924). *Ann. Phys. (Paris)*, 3, 22 [主序列 #7，已核实；物质波].
+- Schrödinger, E. (1926). *Annalen der Physik*, 79, 361 [主序列 #14/24bt，已核实；波动力学].
+- Ehrenfest, P. (1927). *Zeitschrift für Physik*, 45, 455 [24dk，已核实；Ehrenfest 定理].
+- CODATA (2022). *Fundamental Physical Constants* [主序列复用].
+</script>
+<script>
+// 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏
+function protectMath(src){
+  var blocks = [];
+  // 先抽块级 $$...$$（可跨行）
+  src = src.replace(/\$\$([\s\S]+?)\$\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  // 再抽行内 $...$（不含换行、内部不含 $）
+  src = src.replace(/\$([^\$\n]+?)\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  return { src: src, blocks: blocks };
+}
+
+function boot(){
+  var raw = document.getElementById('src').textContent;
+  // 记录标题锚点（在保护公式之前，避免影响）
+  var md = raw.replace(/^(#{1,3})\s+(.+)$/gm, function(m, h, t){
+    var id = 'h-' + t.replace(/[^\w一-龥]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+    return h + ' <span id="' + id + '"></span>' + t;
+  });
+
+  // 保护数学公式
+  var prot = protectMath(md);
+  md = prot.src;
+
+  document.getElementById('content').innerHTML = marked.parse(md);
+
+  // 还原数学公式占位符
+  var content = document.getElementById('content');
+  var html = content.innerHTML.replace(/%%MATH(\d+)%%/g, function(m, n){
+    return prot.blocks[+n];
+  });
+  content.innerHTML = html;
+
+  // 生成目录
+  var hs = document.querySelectorAll('#content h2, #content h3');
+  var toc = document.getElementById('toc'), tocHtml = '';
+  hs.forEach(function(h){
+    var sp = h.querySelector('span[id]');
+    var id = sp ? sp.id : '';
+    var cls = h.tagName === 'H3' ? 'sub' : '';
+    tocHtml += '<a class="' + cls + '" href="#' + id + '">' + h.textContent.trim() + '</a>';
+  });
+  toc.innerHTML = tocHtml;
+
+  // 图片路径：正文里写 figures/xxx.svg
+  document.querySelectorAll('#content img').forEach(function(im){
+    if(/^figures\//.test(im.getAttribute('src')||'')) return;
+  });
+
+  if (window.renderMathInElement) {
+    renderMathInElement(document.getElementById('content'), {
+      delimiters:[
+        {left:'$$', right:'$$', display:true},
+        {left:'$',  right:'$',  display:false}
+      ],
+      ignoredTags:['script','noscript','style','textarea','pre','code'],
+      throwOnError:false
+    });
+  }
+
+  // 滚动高亮
+  var links = [].slice.call(toc.querySelectorAll('a'));
+  window.addEventListener('scroll', function(){
+    var cur = null;
+    hs.forEach(function(h){
+      if (h.getBoundingClientRect().top < 120) cur = h;
+    });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if (cur){
+      var sp = cur.querySelector('span[id]');
+      var act = toc.querySelector('a[href="#' + (sp?sp.id:'') + '"]');
+      if (act) act.classList.add('active');
+    }
+  }, {passive:true});
+}
+if (window.marked) boot();
+else window.addEventListener('load', boot);
+</script>
+</body>
+</html>

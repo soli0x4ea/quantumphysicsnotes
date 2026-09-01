@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>量子隐形传态与密集编码</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2024; --ink-dim:#5b6570;
+  --line:#dfe3e8; --line-soft:#eef0f3; --accent:#1f5fa8; --accent-soft:#e8f0fa;
+  --amber-bg:#fff8e6; --amber-line:#e5c168; --amber-ink:#6b5200;
+  --green:#1c7a4a; --green-bg:#e8f5ee; --red:#b03030; --red-bg:#fdecec;
+  --code-bg:#f6f7f9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,serif;
+  background:var(--bg); color:var(--ink); line-height:1.85; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.layout{display:flex; max-width:1280px; margin:0 auto; gap:28px; padding:0 24px}
+/* 侧栏目录 */
+.toc{
+  width:246px; flex-shrink:0; position:sticky; top:0; height:100vh;
+  overflow-y:auto; padding:28px 0 40px; font-family:"Noto Sans SC","PingFang SC",sans-serif;
+}
+.toc h4{font-size:11px; letter-spacing:1.6px; color:var(--ink-dim); text-transform:uppercase;
+  margin:0 0 12px; padding-left:2px; font-weight:600}
+.toc a{
+  display:block; font-size:13px; color:var(--ink-dim); text-decoration:none;
+  padding:5px 10px; border-left:2px solid transparent; line-height:1.5;
+}
+.toc a:hover{color:var(--accent); background:var(--accent-soft)}
+.toc a.sub{padding-left:24px; font-size:12.5px}
+.toc a.active{color:var(--accent); border-left-color:var(--accent); background:var(--accent-soft); font-weight:600}
+/* 正文 */
+.main{flex:1; min-width:0; padding:28px 0 120px}
+.paper{background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  padding:48px 56px; box-shadow:0 1px 3px rgba(16,24,40,.05)}
+h1{font-size:27px; line-height:1.45; margin:0 0 18px; letter-spacing:.3px; font-weight:700}
+h2{font-size:20px; margin:52px 0 18px; padding-bottom:9px; border-bottom:1.5px solid var(--ink);
+  letter-spacing:.3px}
+h3{font-size:16.5px; margin:32px 0 12px; color:var(--accent); font-weight:600}
+h4{font-size:15px; margin:22px 0 10px; font-weight:600}
+p{margin:0 0 15px; text-align:justify}
+blockquote{
+  margin:18px 0; padding:13px 18px; background:var(--amber-bg);
+  border-left:3px solid var(--amber-line); border-radius:0 4px 4px 0; color:var(--amber-ink);
+}
+blockquote p{margin:0 0 8px} blockquote p:last-child{margin:0}
+blockquote strong{color:#4a3800}
+ul,ol{margin:0 0 15px; padding-left:26px}
+li{margin:6px 0}
+table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14px;
+  font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th{background:#f0f2f5; text-align:left; padding:9px 12px; border:1px solid var(--line); font-weight:600}
+td{padding:9px 12px; border:1px solid var(--line); vertical-align:top}
+tbody tr:nth-child(even){background:#fafbfc}
+code{background:var(--code-bg); padding:2px 6px; border-radius:3px; font-size:13.5px;
+  font-family:"SF Mono",Menlo,Consolas,monospace}
+pre{background:var(--code-bg); padding:14px 16px; border-radius:5px; overflow-x:auto; margin:16px 0;
+  border:1px solid var(--line-soft)}
+pre code{background:none; padding:0}
+hr{border:none; border-top:1px solid var(--line-soft); margin:34px 0}
+strong{font-weight:700; color:#0f1419}
+a{color:var(--accent)}
+img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6px; background:#fff}
+.katex-display{margin:20px 0; overflow-x:auto; overflow-y:hidden; padding:2px 0}
+.katex{font-size:1.045em}
+.tag-note{font-family:"Noto Sans SC","PingFang SC",sans-serif; font-size:12px; color:var(--ink-dim);
+  margin-top:40px; padding-top:16px; border-top:1px solid var(--line-soft); line-height:1.9}
+@media(max-width:900px){
+  .toc{display:none}
+  .paper{padding:28px 22px}
+  .layout{padding:0 12px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc"><h4>目录</h4><div id="toc"></div></nav>
+  <main class="main"><article class="paper" id="content"></article></main>
+</div>
+
+<script type="text/plain" id="src">
+# 量子隐形传态与密集编码
+
+> **分类归属：第四部分·量子信息与量子光学 · 数学程度：L2 · 前置依赖：第 29 篇《量子纠缠》、第 30 篇《EPR佯谬与贝尔不等式》**
+> **验证依据**：Bennett et al. (1993) PRL、Bennett & Wiesner (1992) PRL、Bouwmeester et al. (1997) Nature、Boschi et al. (1998) PRL、Pirandola et al. (2015) Nat. Photon.、Mattle et al. (1996) PRL、Furusawa et al. (1998) Science、Sherson et al. (2006) Nature
+
+---
+
+## 一、概念与定位
+
+**量子隐形传态（quantum teleportation）** 是在「经典信道」与「预共享纠缠」协同下，将一枚未知量子比特的态 $|\psi\rangle$ 从发送方 Alice 转移到接收方 Bob 的协议；原态在 Alice 处被其联合测量销毁（不可克隆定理保证不出现第二份副本）。它传输的是「态本身的信息」，而非承载态的粒子。
+
+**密集编码（dense coding / superdense coding）** 是利用预共享纠缠，使 Alice 仅向前发送 1 枚量子比特就向 Bob 传递 2 经典比特信息的协议，突破了单量子比特独立发送时的 Holevo 界（1 经典比特/量子比特）。
+
+名称词源：*teleportation* 由 *tele-*（远）+ *port-*（搬运）构成；Bennett 等人在 1993 年原始论文 [24fl] 中正式命名（Peres 曾提议用纯希腊词源的 *telepheresis*，但被 Bennett 以科幻既成用语说服改用 *teleportation*）。*dense coding* 由 Bennett 与 Wiesner 在 1992 年提出 [24fm]。
+
+本篇须抓住的核心特征：
+
+1. **两类协议都依赖预共享纠缠**：隐形传态消耗 1 ebit 纠缠 + 2 经典比特辅助信道；密集编码消耗 1 ebit 纠缠 + 1 量子比特前向信道。
+2. **传态转移且销毁原态**：不违反不可克隆定理（原态被 Alice 测量塌缩），也不超光速（辅助 2 经典比特受光速限制）。
+3. **密集编码的容量提升来自纠缠**：1 ebit 预共享 + 1 qubit 发送 → 2 经典比特，较无纠缠时翻倍。
+4. **保真度与容量有明确界限**：传态平均保真度的经典（可分信道）上限为 $2/3$，理想为 $1$；密集编码理想容量为 2 经典比特/发送量子比特，无纠缠时退化为 Holevo 界 1 经典比特。
+5. **实验成功率受贝尔测量限制**：标准光子线性光学只能区分 4 个贝尔态中的 1 个，成功率仅 $1/4$；Boschi 等人 1998 年实现可区分全部 4 个贝尔态的测量，理想成功率 $100\%$ [24fo]。
+
+本主题在体系中的位置：它是第 29 篇量子纠缠、第 30 篇 EPR 佯谬与贝尔不等式的直接应用，依赖第 测量理论 篇的密度矩阵与投影测量表述，并为量子通信、量子计算网络与量子中继等后续主题提供基本原语。
+
+---
+
+## 二、数学结构
+
+**符号约定声明**：采用计算基 $\{|0\rangle,|1\rangle\}$，贝尔基 $\{|\Phi^\pm\rangle,|\Psi^\pm\rangle\}$；单位制为 SI，信息量用「经典比特（bit）」与「纠缠比特（ebit）」表示（无量纲）。约定 $\hbar=1$ 的量子信息表象；泡利算符 $X=\sigma_x,\ Z=\sigma_z,\ Y=\sigma_y$ 以矩阵标准形式使用。
+
+### 2.1 贝尔基与资源态
+
+四个贝尔态为
+
+$$
+\begin{aligned}
+|\Phi^+\rangle &= \frac{1}{\sqrt{2}}(|00\rangle+|11\rangle), \qquad
+|\Phi^-\rangle = \frac{1}{\sqrt{2}}(|00\rangle-|11\rangle), \\
+|\Psi^+\rangle &= \frac{1}{\sqrt{2}}(|01\rangle+|10\rangle), \qquad
+|\Psi^-\rangle = \frac{1}{\sqrt{2}}(|01\rangle-|10\rangle).
+\end{aligned}
+\tag{1}
+$$
+
+其中每个态均归一化 $\langle\Phi^\pm|\Phi^\pm\rangle=\langle\Psi^\pm|\Psi^\pm\rangle=1$，且为两量子比特的最大纠缠态（约化密度矩阵为 $I/2$）。符号表：$\{|0\rangle,|1\rangle\}$ 为单量子比特计算基（无量纲）；下标标记不同量子比特。
+
+### 2.2 隐形传态协议（代数展开）
+
+设 Alice 持有未知态 $|\psi\rangle_1=\alpha|0\rangle_1+\beta|1\rangle_1$，其归一化约束为
+
+$$
+|\alpha|^2+|\beta|^2 = 1,
+\tag{2}
+$$
+
+Alice 与 Bob 共享资源态 $|\Phi^+\rangle_{23}$（Alice 持粒子 2，Bob 持粒子 3）。系统初态为
+
+$$
+|\psi\rangle_1\otimes|\Phi^+\rangle_{23}
+= \frac{1}{\sqrt{2}}\bigl(\alpha|0\rangle_1+\beta|1\rangle_1\bigr)
+  \bigl(|0\rangle_2|0\rangle_3+|1\rangle_2|1\rangle_3\bigr).
+\tag{3}
+$$
+
+逐项展开得
+
+$$
+|\psi\rangle_1|\Phi^+\rangle_{23}
+= \frac{1}{\sqrt{2}}\Bigl[
+  \alpha|0\rangle_1|0\rangle_2|0\rangle_3
++ \alpha|0\rangle_1|1\rangle_2|1\rangle_3
++ \beta|1\rangle_1|0\rangle_2|0\rangle_3
++ \beta|1\rangle_1|1\rangle_2|1\rangle_3
+\Bigr].
+\tag{4}
+$$
+
+在 Alice 的两枚量子比特 $(1,2)$ 上插入贝尔基分解（用到 $|00\rangle_{12}=|\Phi^+\rangle_{12}/\sqrt{2}+|\Phi^-\rangle_{12}/\sqrt{2}$ 等四个等式），逐项重写：
+
+$$
+\begin{aligned}
+\alpha|0\rangle_1|0\rangle_2|0\rangle_3 &= \frac{\alpha}{\sqrt{2}}\bigl(|\Phi^+\rangle_{12}+|\Phi^-\rangle_{12}\bigr)|0\rangle_3,\\
+\alpha|0\rangle_1|1\rangle_2|1\rangle_3 &= \frac{\alpha}{\sqrt{2}}\bigl(|\Psi^+\rangle_{12}+|\Psi^-\rangle_{12}\bigr)|1\rangle_3,\\
+\beta|1\rangle_1|0\rangle_2|0\rangle_3 &= \frac{\beta}{\sqrt{2}}\bigl(|\Psi^+\rangle_{12}-|\Psi^-\rangle_{12}\bigr)|0\rangle_3,\\
+\beta|1\rangle_1|1\rangle_2|1\rangle_3 &= \frac{\beta}{\sqrt{2}}\bigl(|\Phi^+\rangle_{12}-|\Phi^-\rangle_{12}\bigr)|1\rangle_3.
+\end{aligned}
+\tag{5}
+$$
+
+按贝尔分量归并，并利用 $Z|0\rangle=|0\rangle,\ Z|1\rangle=-|1\rangle$ 与 $X|0\rangle=|1\rangle,\ X|1\rangle=|0\rangle$，得
+
+$$
+\begin{aligned}
+|\psi\rangle_1|\Phi^+\rangle_{23}
+= \frac{1}{2}\Bigl[&
+  |\Phi^+\rangle_{12}\bigl(\alpha|0\rangle_3+\beta|1\rangle_3\bigr)
++ |\Phi^-\rangle_{12}\bigl(\alpha|0\rangle_3-\beta|1\rangle_3\bigr) \\
++& |\Psi^+\rangle_{12}\bigl(\alpha|1\rangle_3+\beta|0\rangle_3\bigr)
++ |\Psi^-\rangle_{12}\bigl(\alpha|1\rangle_3-\beta|0\rangle_3\bigr)
+\Bigr].
+\end{aligned}
+\tag{6}
+$$
+
+即
+
+$$
+|\psi\rangle_1|\Phi^+\rangle_{23}
+= \frac{1}{2}\Bigl[
+  |\Phi^+\rangle_{12}\,|\psi\rangle_3
++ |\Phi^-\rangle_{12}\,Z|\psi\rangle_3
++ |\Psi^+\rangle_{12}\,X|\psi\rangle_3
++ |\Psi^-\rangle_{12}\,XZ|\psi\rangle_3
+\Bigr].
+\tag{7}
+$$
+
+符号表：$\alpha,\beta$ 为未知态的复振幅（无量纲，满足式 (2)）；$X,Z$ 为泡利算符；$XZ=-iY$ 与 $Y$ 相差全局相位（物理等价）；下标 $1,2,3$ 标记三枚量子比特。
+
+Alice 对粒子 $(1,2)$ 做联合贝尔测量（投影到 4 个贝尔态之一）。由式 (7) 各贝尔分量系数模方均为 $1/4$，故每个测量结果概率均为
+
+$$
+P(\text{任一贝尔结果}) = \frac{1}{4}.
+\tag{8}
+$$
+
+Alice 通过经典信道把「哪个贝尔态」这 2 经典比特告知 Bob；Bob 据此施加相应修正幺正：
+
+$$
+|\Phi^+\rangle\to I,\quad |\Phi^-\rangle\to Z,\quad |\Psi^+\rangle\to X,\quad |\Psi^-\rangle\to XZ.
+\tag{9}
+$$
+
+修正后 Bob 的粒子 3 精确等于原未知态 $|\psi\rangle$。不可克隆定理保证：Alice 的联合测量使其粒子塌缩，原未知态在 Alice 处被销毁，仅 Bob 处重建出唯一副本。
+
+### 2.3 密集编码协议（代数展开）
+
+Alice 与 Bob 共享 $|\Phi^+\rangle_{12}$（Alice 持 1，Bob 持 2）。Alice 对粒子 1 施加四种幺正之一，编码 2 经典比特消息 $m\in\{00,01,10,11\}$：
+
+$$
+\begin{array}{c|c}
+m & \text{Alice 施加的幺正 } U_m \\ \hline
+00 & I \\
+01 & Z \\
+10 & X \\
+11 & XZ
+\end{array}
+\tag{10}
+$$
+
+作用结果为 $U_m|\Phi^+\rangle_{12}$ 分别对应 $|\Phi^+\rangle,\ |\Phi^-\rangle,\ |\Psi^+\rangle,\ |\Psi^-\rangle$（$XZ|\Phi^+\rangle=-|\Psi^-\rangle$，差全局相位，物理等价）。Alice 将粒子 1 发给 Bob；Bob 对 $(1,2)$ 做贝尔测量，4 个结果等概率且一一对应 $m$，从而读取 2 经典比特。资源消耗：1 ebit 预共享 + 1 量子比特前向发送 → 2 经典比特。符号表：$m$ 为 2 经典比特消息（无量纲）；$I,X,Z,XZ$ 为单比特幺正/泡利算符（无量纲）。
+
+### 2.4 平均保真度与密集编码容量（L2 计算式）
+
+设共享资源为去极化贝尔态
+
+$$
+\rho(p)=p\,|\Phi^+\rangle\langle\Phi^+|+(1-p)\,\frac{I}{4},\qquad p\in[0,1],
+\tag{11}
+$$
+
+其与理想贝尔态的重叠（单态分数）为
+
+$$
+f=\langle\Phi^+|\rho|\Phi^+\rangle = \frac{3p+1}{4}.
+\tag{12}
+$$
+
+标准隐形传态协议下，对任意纯输入态的平均保真度为 [24fl] 后的单态分数公式（Horodecki 等关于可分判据与传态保真度的结果）
+
+$$
+F = \frac{2f+1}{3} = \frac{p+1}{2}.
+\tag{13}
+$$
+
+- $p=1$（纯贝尔态）$\rightarrow F=1$（完美）；
+- $p=1/3$（对应 $f=1/2$，可分资源边界）$\rightarrow F=2/3$（经典/可分信道的保真度上限）；
+- $p=0$（$I/4$ 最大混合态）$\rightarrow F=1/2$。
+
+密集编码的可达互信息（每发送 1 量子比特可承载的经典比特数）为
+
+$$
+C_{\text{extra}} = S(\rho_B)-S(\rho_{AB}),\qquad
+I_{\text{total}} = 1+\max\bigl(0,\ C_{\text{extra}}\bigr),
+\tag{14}
+$$
+
+其中 $S$ 为冯·诺依曼熵，$\rho_B=\mathrm{Tr}_A\rho=I/2$ 故 $S(\rho_B)=1\ \mathrm{bit}$。本资源态 $\rho(p)$ 的特征值为 $\lambda_0=(3p+1)/4$（重数 1）与 $\lambda_{1,2,3}=(1-p)/4$，故
+
+$$
+S(\rho) = -\Bigl[\lambda_0\log_2\lambda_0 + 3\,\frac{1-p}{4}\log_2\frac{1-p}{4}\Bigr].
+\tag{15}
+$$
+
+- $p=1$（纯贝尔）$\rightarrow S(\rho)=0 \rightarrow C_{\text{extra}}=1 \rightarrow I_{\text{total}}=2\ \mathrm{bit}$；
+- $p=0$（$I/4$）$\rightarrow S(\rho)=2\ \mathrm{bit} \rightarrow C_{\text{extra}}<0 \rightarrow I_{\text{total}}=1\ \mathrm{bit}$（即 Holevo 界）。
+
+上述两式的数值计算与绘图由第六节脚本完成并回写。
+
+---
+
+## 三、物理量与特征尺度
+
+| 物理量 | 符号 | 数值 / 量级 | 适用条件 |
+|--------|------|-------------|----------|
+| 传态所需经典辅助比特 | $c$ | $2\ \mathrm{bit}$ | 每传输 1 未知量子比特（理想贝尔资源） |
+| 传态所需纠缠资源 | $E$ | $1\ \mathrm{ebit}$ | 每传输 1 未知量子比特 |
+| 标准光子贝尔测量成功率 | $\eta$ | $1/4 = 25\%$ | 线性光学仅能识别 4 贝尔态中的 $|\Psi^-\rangle$ [24fn] |
+| 全贝尔态测量理想成功率 | $\eta_{\text{full}}$ | $100\%$ | 可区分全部 4 贝尔态的测量（如 Boschi 1998）[24fo] |
+| 传态平均保真度（经典/可分上限） | $F_{\text{cl}}$ | $2/3 \approx 0.6667$ | 任何可分或经典信道 [24fl] |
+| 传态平均保真度（理想） | $F_{\text{ideal}}$ | $1$ | 纯贝尔资源 $p=1$ |
+| 连续变量传态实测保真度 | $F_{\text{CV}}$ | $0.58\pm0.02$ | Furusawa 等 1998 相干态隐形传态，经典界为 $1/2$ [24fr] |
+| 光–物质传态实测保真度 | $F_{\text{lm}}$ | $0.58\pm0.02$（$n=20$）；$0.60\pm0.02$（$n=5$） | Sherson 等 2006 铯系综上，均值光子数 $n$ [24fs] |
+| 密集编码理想容量 | $I_{\text{total}}$ | $2\ \mathrm{bit}/$发送量子比特 | 1 ebit + 1 发送 qubit（最大纠缠）[24fm] |
+| 密集编码无纠缠容量（Holevo 界） | $I_{\text{Holevo}}$ | $1\ \mathrm{bit}/$发送量子比特 | 无预共享纠缠 [24fm] |
+| 密集编码实验消息量 | — | $1\ \mathrm{trit}\approx1.58\ \mathrm{bit}$ | Mattle 等 1996，用 5 trits 替代 8 bits 传 ASCII [24fq] |
+| 光–物质传态距离 | $L$ | $0.5\ \mathrm{m}$ | Sherson 等 2006 实验 [24fs] |
+| 原子系综原子数 | $N$ | $\sim10^{12}$ | Sherson 等 2006 铯原子系综 [24fs] |
+
+> 注：本主题协议本身无量纲（信息/纠缠单位），不引入基本常数；上述尺度均为实验实现中的具体量级，条件与不确定度已随数值一并给出。
+
+---
+
+## 四、实验基础与观测证据
+
+1. **首个隐形传态实验（1997）**：Bouwmeester 等在 Innsbruck 用参量下转换产生偏振纠缠光子对，对未知偏振光子与共享光子做联合贝尔测量（仅能识别 $|\Psi^-\rangle$ 分量），在相符的三重符合事件中实现偏振态转移，成功率为 $1/4$ [24fn]。该实验首次在物理系统中演示了态的「拆解—经典信息—重建」全过程。
+2. **全贝尔态分析隐形传态（1998）**：Boschi 等用量子光学装置实现了可同时区分全部 4 个贝尔态的贝尔测量，理想成功率 $100\%$；对线偏振与椭圆偏振输入均测得重建，并证明结果无法单独由经典信道解释 [24fo]。
+3. **连续变量无条件隐形传态（1998）**：Furusawa 等利用压缩态纠缠，对光学相干态做连续变量隐形传态，实验测得保真度 $F^{\text{(exp)}}=0.58\pm0.02$，高于相干态的经典极限 $1/2$，为首个「无条件」隐形传态（每个进入装置的态都被传送）[24fr]。
+4. **光–物质间隐形传态（2006）**：Sherson 等将编码于光脉冲的量子态传送到含约 $10^{12}$ 个铯原子的宏观原子系综上（飞行量子比特→静止量子比特），对均值光子数达数百的相干态集合确定性传态；保真度 $0.58\pm0.02$（$n=20$）与 $0.60\pm0.02$（$n=5$）均高于任何经典态传输上限，传输距离 $0.5\ \mathrm{m}$ [24fs]。
+5. **密集编码实验（1996）**：Mattle 等通过操控两纠缠光子中的一枚，仅用 1 枚粒子即送出 3 种选择之一（1 trit $\approx1.58$ 经典比特）；并用 5 个 trits 替代通常的 8 经典比特传输 ASCII 字符，验证了纠缠带来的信道容量提升 [24fq]。
+
+**里程碑实验时间线**
+
+| 年份 | 实验者 | 体系 / 装置 | 关键结果 |
+|------|--------|------------|----------|
+| 1997 | Bouwmeester et al. | 偏振纠缠光子对（参量下转换） | 首个隐形传态，成功率 $1/4$ [24fn] |
+| 1998 | Boschi et al. | 量子光学（路径+偏振贝尔分析） | 全贝尔态测量，理想成功率 $100\%$ [24fo] |
+| 1998 | Furusawa et al. | 压缩态纠缠（光场正交分量） | CV 无条件传态，$F=0.58\pm0.02$ [24fr] |
+| 2006 | Sherson et al. | 光脉冲 → 铯原子系综 | 光–物质传态，$N\sim10^{12}$，$L=0.5\ \mathrm{m}$ [24fs] |
+| 1996 | Mattle et al. | 偏振纠缠光子（线性光学） | 密集编码，1 trit/粒子，5 trits 替 8 bits [24fq] |
+
+**常见误读纠正**
+
+> 隐形传态不是「瞬间移动物质或粒子」，而是转移量子态的信息；它不违反相对论——必须辅以 2 经典比特的经典信道（传播速度 ≤ 光速），且原态在 Alice 处被销毁。
+
+> 隐形传态不违反不可克隆定理——Bob 处重建的是唯一副本，原态已被 Alice 的联合测量塌缩销毁，没有产生第二份副本。
+
+> 密集编码不是说「1 个量子比特携带 2 个量子比特的信息」，而是「1 ebit 预共享纠缠 + 1 枚发送的量子比特」共同承载 2 经典比特；去掉预共享纠缠则退化为 Holevo 界 1 经典比特。
+
+---
+
+## 五、分类体系与物理机制
+
+### 5.1 分类
+
+| 分类维度 | 类型 | 特征 | 典型实例 |
+|----------|------|------|----------|
+| 自由度 | 离散变量（DV） | 偏振 / 自旋两能级 | Bouwmeester 1997、Boschi 1998 [24fn][24fo] |
+| 自由度 | 连续变量（CV） | 光场正交分量 / 相干态 | Furusawa 1998 [24fr] |
+| 载体 | 光–光 | 飞行光子间 | Bouwmeester 1997 [24fn] |
+| 载体 | 光–物质 | 飞行光子 → 原子系综 | Sherson 2006 [24fs] |
+| 确定性 | 概率性 | 贝尔测量仅识别 $1/4$ | 线性光学光子方案 |
+| 确定性 | 确定性 | 全贝尔分析 / CV | Boschi 1998、Furusawa 1998 [24fo][24fr] |
+
+### 5.2 物理机制
+
+两类协议的物理核心是「纠缠作为非局域量子信道」：在隐形传态中，Alice 的联合贝尔测量把未知态与共享纠缠关联起来，使得 Bob 仅需一个局域幺正修正（由 2 经典比特指定）即可还原未知态；在密集编码中，Alice 对半边纠缠粒子施加的四种幺正会把共享态整体映射到 4 个正交贝尔态之一，Bob 的联合测量据此无歧义解码 2 经典比特。纠缠本身不传递能量或物质，只提供「索引空间」的扩展。
+
+### 5.3 概念辨析
+
+- **传态 vs 克隆**：传态使原态销毁、仅在他处重建唯一副本；克隆（产生第二份副本）被不可克隆定理禁止。二者互不相容。
+- **密集编码 vs 普通通信**：普通单量子比特独立发送受 Holevo 界约束 ≤ 1 经典比特；密集编码经 1 ebit 预共享提升至 2 经典比特。差异全在「预共享纠缠」这一资源，而非量子比特本身容量改变。
+
+### 5.4 失效边界
+
+- **纠缠质量不足**：当共享态退相干/噪声使单态分数 $f<1/2$（即可分）时，平均保真度 $F\le 2/3$，协议退化为经典信道、失去量子优势（见式 (13)）。
+- **贝尔测量效率受限**：标准线性光学只能识别 4 个贝尔态中的 1 个，成功率上限 $1/4$，构成离散变量体系的根本瓶颈。
+- **传输损耗**：光子方案受信道损耗限制（光纤/自由空间衰减），远距离需量子中继弥补。
+
+---
+
+## 六、典型系统与可解模型
+
+### 6.1 单量子比特隐形传态（解析可解）
+
+对纯贝尔资源 $|\Phi^+\rangle_{23}$ 与未知态 $|\psi\rangle_1=\alpha|0\rangle_1+\beta|1\rangle_1$，由式 (7) 直接可见：Alice 的 4 个贝尔测量结果各以概率 $1/4$ 出现，Bob 施以对应修正（式 (9)）后粒子 3 精确等于 $|\psi\rangle_3$。该实例完全解析、无近似，重建保真度精确为
+
+$$
+F = 1 \quad (\text{纯贝尔资源}).
+\tag{16}
+$$
+
+### 6.2 去极化信道下的平均保真度（脚本数值例）
+
+资源态取式 (11) 的去极化贝尔态 $\rho(p)=p|\Phi^+\rangle\langle\Phi^+|+(1-p)I/4$，平均保真度由式 (13) 给出 $F(p)=(p+1)/2$。脚本 `code/量子隐形传态_保真度.py` 数值验证（见图 `量子隐形传态_保真度.svg`）：
+
+- $p=1$（纯贝尔态）$\rightarrow F = 1.000000$（完美）；
+- $p=1/3$（对应单态分数 $f=1/2$，可分资源边界）$\rightarrow F = 0.666667 = 2/3$（经典极限）；
+- $p=0$（$I/4$ 最大混合态）$\rightarrow F = 0.500000$。
+
+曲线清楚显示保真度从经典极限 $2/3$ 单调升至完美 $1$。
+
+### 6.3 密集编码容量（脚本数值例）
+
+对同一去极化资源态，可达互信息由式 (14)(15) 给出 $I_{\text{total}}(p)=1+\max(0,\,1-S(\rho(p)))$。脚本 `code/量子隐形传态_密集编码容量.py` 数值验证（见图 `量子隐形传态_密集编码容量.svg`）：
+
+- $p=1$（纯贝尔）$\rightarrow S(\rho)=0 \rightarrow I_{\text{total}} = 2.000000\ \mathrm{bit}$（2 经典比特：1 ebit + 1 发送 qubit）；
+- $p=0$（$I/4$）$\rightarrow S(\rho)=2\ \mathrm{bit} \rightarrow I_{\text{total}} = 1.000000\ \mathrm{bit}$（Holevo 界，无纠缠增益）。
+
+曲线显示容量随信道纯度 $p$ 从 Holevo 界 1 bit 单调升至最大 2 bit。
+
+---
+
+## 七、历史脉络与学术争议
+
+- **1992 Bennett & Wiesner**：提出密集编码，证明单枚自旋-$1/2$ 粒子借助 EPR 对可可靠编码 2 经典比特 [24fm]。
+- **1993 Bennett, Brassard, Crépeau, Jozsa, Peres, Wootters**：提出量子隐形传态协议并正式命名 *teleportation* [24fl]。
+- **1996 Mattle et al.**：首个密集编码实验，用纠缠光子演示 1 trit/粒子传输 [24fq]。
+- **1997 Bouwmeester et al.**：首个隐形传态实验（光子偏振）[24fn]。
+- **1998 Boschi et al.**：全贝尔态分析的隐形传态实验，理想成功率 $100\%$ [24fo]。
+- **1998 Furusawa et al.**：连续变量（压缩态）无条件隐形传态 [24fr]。
+- **2006 Sherson et al.**：光–物质间隐形传态（光脉冲 → 铯原子系综）[24fs]。
+- **2015 Pirandola et al.**：隐形传态理论与实验进展的权威综述 [24fp]。
+
+**学术争议与开放问题**（并列各方，不站队）：
+
+- **「传态是否真的转移了某物」的诠释分歧**：信息论/哥本哈根视角认为被转移的是「量子信息」本身，态并不在空间中「旅行」，只是 Bob 处的粒子经修正后与原态不可区分；多世界诠释、德布罗意–玻姆理论等则各有其本体论表述。本篇仅描述协议操作流程，不对诠释做优劣断言。
+- **噪声信道下的容量与实用性**：实际信道退相干使单态分数下降，保真度/容量退化的量化与纠错（纠缠纯化、量子纠错）仍是开放问题。
+- **贝尔测量瓶颈**：标准线性光学只能识别 $1/4$ 贝尔态，是离散变量体系核心限制，催生了纠缠交换、量子中继、多光子资源等研究方向。
+
+本节内容可能随研究进展更新。
+
+---
+
+## 八、参考文献
+
+[24fl] Bennett C. H., Brassard G., Crépeau C., Jozsa R., Peres A., Wootters W. K. *Phys. Rev. Lett.* **70**, 1895–1899 (1993). DOI: 10.1103/PhysRevLett.70.1895 — 量子隐形传态原始论文，提出协议并命名。 `[已核实]`
+
+[24fm] Bennett C. H., Wiesner S. J. *Phys. Rev. Lett.* **69**, 2881–2884 (1992). DOI: 10.1103/PhysRevLett.69.2881 — 密集编码原始论文，证明 1 ebit 预共享 + 1 qubit 可传 2 经典比特。 `[已核实]`
+
+[24fn] Bouwmeester D., Pan J.-W., Mattle K., Eibl M., Weinfurter H., Zeilinger A. *Nature* **390**, 575–579 (1997). DOI: 10.1038/37539 — 首个实验实现的量子隐形传态（光子偏振）。 `[已核实]`
+
+[24fo] Boschi D., Branca S., De Martini F., Hardy L., Popescu S. *Phys. Rev. Lett.* **80**, 1121–1125 (1998). DOI: 10.1103/PhysRevLett.80.1121 — 可区分全部 4 贝尔态的隐形传态实验，理想成功率 100%。 `[已核实]`
+
+[24fp] Pirandola S., Eisert J., Weedbrook C., Furusawa A., Braunstein S. L. *Nat. Photon.* **9**, 641–652 (2015). DOI: 10.1038/nphoton.2015.154 — 量子隐形传态理论与实验进展综述。 `[已核实]`
+
+[24fq] Mattle K., Weinfurter H., Kwiat P. G., Zeilinger A. *Phys. Rev. Lett.* **76**, 4656–4659 (1996). DOI: 10.1103/PhysRevLett.76.4656 — 密集编码实验，1 trit/粒子传输并演示 ASCII 字符传送。 `[已核实]`
+
+[24fr] Furusawa A., Sørensen J. L., Braunstein S. L., Fuchs C. A., Kimble H. J., Polzik E. S. *Science* **282**, 706–709 (1998). DOI: 10.1126/science.282.5389.706 — 连续变量（压缩态）无条件隐形传态，实测保真度 $0.58\pm0.02$。 `[已核实]`
+
+[24fs] Sherson J. F., Krauter H., Olsson R. K., Julsgaard B., Hammerer K., Cirac J. I., Polzik E. S. *Nature* **443**, 557–560 (2006). DOI: 10.1038/nature05136 — 光–物质间隐形传态（光脉冲 → 铯原子系综）。 `[已核实]`
+</script>
+<script>
+// 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏
+function protectMath(src){
+  var blocks = [];
+  // 先抽块级 $$...$$（可跨行）
+  src = src.replace(/\$\$([\s\S]+?)\$\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  // 再抽行内 $...$（不含换行、内部不含 $）
+  src = src.replace(/\$([^\$\n]+?)\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  return { src: src, blocks: blocks };
+}
+
+function boot(){
+  var raw = document.getElementById('src').textContent;
+  // 记录标题锚点（在保护公式之前，避免影响）
+  var md = raw.replace(/^(#{1,3})\s+(.+)$/gm, function(m, h, t){
+    var id = 'h-' + t.replace(/[^\w一-龥]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+    return h + ' <span id="' + id + '"></span>' + t;
+  });
+
+  // 保护数学公式
+  var prot = protectMath(md);
+  md = prot.src;
+
+  document.getElementById('content').innerHTML = marked.parse(md);
+
+  // 还原数学公式占位符
+  var content = document.getElementById('content');
+  var html = content.innerHTML.replace(/%%MATH(\d+)%%/g, function(m, n){
+    return prot.blocks[+n];
+  });
+  content.innerHTML = html;
+
+  // 生成目录
+  var hs = document.querySelectorAll('#content h2, #content h3');
+  var toc = document.getElementById('toc'), tocHtml = '';
+  hs.forEach(function(h){
+    var sp = h.querySelector('span[id]');
+    var id = sp ? sp.id : '';
+    var cls = h.tagName === 'H3' ? 'sub' : '';
+    tocHtml += '<a class="' + cls + '" href="#' + id + '">' + h.textContent.trim() + '</a>';
+  });
+  toc.innerHTML = tocHtml;
+
+  // 图片路径：正文里写 figures/xxx.svg
+  document.querySelectorAll('#content img').forEach(function(im){
+    if(/^figures\//.test(im.getAttribute('src')||'')) return;
+  });
+
+  if (window.renderMathInElement) {
+    renderMathInElement(document.getElementById('content'), {
+      delimiters:[
+        {left:'$$', right:'$$', display:true},
+        {left:'$',  right:'$',  display:false}
+      ],
+      ignoredTags:['script','noscript','style','textarea','pre','code'],
+      throwOnError:false
+    });
+  }
+
+  // 滚动高亮
+  var links = [].slice.call(toc.querySelectorAll('a'));
+  window.addEventListener('scroll', function(){
+    var cur = null;
+    hs.forEach(function(h){
+      if (h.getBoundingClientRect().top < 120) cur = h;
+    });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if (cur){
+      var sp = cur.querySelector('span[id]');
+      var act = toc.querySelector('a[href="#' + (sp?sp.id:'') + '"]');
+      if (act) act.classList.add('active');
+    }
+  }, {passive:true});
+}
+if (window.marked) boot();
+else window.addEventListener('load', boot);
+</script>
+</body>
+</html>

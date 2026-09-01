@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>量子霍尔效应</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2024; --ink-dim:#5b6570;
+  --line:#dfe3e8; --line-soft:#eef0f3; --accent:#1f5fa8; --accent-soft:#e8f0fa;
+  --amber-bg:#fff8e6; --amber-line:#e5c168; --amber-ink:#6b5200;
+  --green:#1c7a4a; --green-bg:#e8f5ee; --red:#b03030; --red-bg:#fdecec;
+  --code-bg:#f6f7f9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,serif;
+  background:var(--bg); color:var(--ink); line-height:1.85; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.layout{display:flex; max-width:1280px; margin:0 auto; gap:28px; padding:0 24px}
+/* 侧栏目录 */
+.toc{
+  width:246px; flex-shrink:0; position:sticky; top:0; height:100vh;
+  overflow-y:auto; padding:28px 0 40px; font-family:"Noto Sans SC","PingFang SC",sans-serif;
+}
+.toc h4{font-size:11px; letter-spacing:1.6px; color:var(--ink-dim); text-transform:uppercase;
+  margin:0 0 12px; padding-left:2px; font-weight:600}
+.toc a{
+  display:block; font-size:13px; color:var(--ink-dim); text-decoration:none;
+  padding:5px 10px; border-left:2px solid transparent; line-height:1.5;
+}
+.toc a:hover{color:var(--accent); background:var(--accent-soft)}
+.toc a.sub{padding-left:24px; font-size:12.5px}
+.toc a.active{color:var(--accent); border-left-color:var(--accent); background:var(--accent-soft); font-weight:600}
+/* 正文 */
+.main{flex:1; min-width:0; padding:28px 0 120px}
+.paper{background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  padding:48px 56px; box-shadow:0 1px 3px rgba(16,24,40,.05)}
+h1{font-size:27px; line-height:1.45; margin:0 0 18px; letter-spacing:.3px; font-weight:700}
+h2{font-size:20px; margin:52px 0 18px; padding-bottom:9px; border-bottom:1.5px solid var(--ink);
+  letter-spacing:.3px}
+h3{font-size:16.5px; margin:32px 0 12px; color:var(--accent); font-weight:600}
+h4{font-size:15px; margin:22px 0 10px; font-weight:600}
+p{margin:0 0 15px; text-align:justify}
+blockquote{
+  margin:18px 0; padding:13px 18px; background:var(--amber-bg);
+  border-left:3px solid var(--amber-line); border-radius:0 4px 4px 0; color:var(--amber-ink);
+}
+blockquote p{margin:0 0 8px} blockquote p:last-child{margin:0}
+blockquote strong{color:#4a3800}
+ul,ol{margin:0 0 15px; padding-left:26px}
+li{margin:6px 0}
+table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14px;
+  font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th{background:#f0f2f5; text-align:left; padding:9px 12px; border:1px solid var(--line); font-weight:600}
+td{padding:9px 12px; border:1px solid var(--line); vertical-align:top}
+tbody tr:nth-child(even){background:#fafbfc}
+code{background:var(--code-bg); padding:2px 6px; border-radius:3px; font-size:13.5px;
+  font-family:"SF Mono",Menlo,Consolas,monospace}
+pre{background:var(--code-bg); padding:14px 16px; border-radius:5px; overflow-x:auto; margin:16px 0;
+  border:1px solid var(--line-soft)}
+pre code{background:none; padding:0}
+hr{border:none; border-top:1px solid var(--line-soft); margin:34px 0}
+strong{font-weight:700; color:#0f1419}
+a{color:var(--accent)}
+img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6px; background:#fff}
+.katex-display{margin:20px 0; overflow-x:auto; overflow-y:hidden; padding:2px 0}
+.katex{font-size:1.045em}
+.tag-note{font-family:"Noto Sans SC","PingFang SC",sans-serif; font-size:12px; color:var(--ink-dim);
+  margin-top:40px; padding-top:16px; border-top:1px solid var(--line-soft); line-height:1.9}
+@media(max-width:900px){
+  .toc{display:none}
+  .paper{padding:28px 22px}
+  .layout{padding:0 12px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc"><h4>目录</h4><div id="toc"></div></nav>
+  <main class="main"><article class="paper" id="content"></article></main>
+</div>
+
+<script type="text/plain" id="src">
+# 量子霍尔效应
+
+> **分类归属：第三部分·多体、对称与凝聚态 · 数学程度：L3 · 前置依赖：第 21 篇《全同粒子与泡利不相容原理》、第 24 篇《晶体中的电子与能带》、第 16 篇《角动量与自旋》**
+> **验证依据**：Landau (1930) Z. Phys.、von Klitzing, Dorda & Pepper (1980) Phys. Rev. Lett.、Laughlin (1983) Phys. Rev. B、Tsui, Störmer & Gossard (1982) Phys. Rev. Lett.、Laughlin (1983) Phys. Rev. Lett.、Halperin (1982) Phys. Rev. B、Jain (1989) Phys. Rev. Lett.、Prange & Girvin (1987)
+
+---
+
+## 一、概念与定位
+
+**量子霍尔效应（quantum Hall effect, QHE）** 发生在二维电子气（2DEG）置于强垂直磁场、低温下的情形：纵向电阻 $\rho_{xx}$ 出现一系列精确为零的极小值，同时霍尔电阻 $\rho_{xy}$ 被量子化为平台
+
+$$
+\rho_{xy}=\frac{h}{\nu e^2},
+\tag{1}
+$$
+
+其中 $\nu$ 为填充因子（整数→整数量子霍尔效应 IQHE；分数→分数量子霍尔效应 FQHE）。平台对样品形状、杂质、无序几乎不敏感，是拓扑保护的最精确宏观量子现象之一，并由此定义了电阻的自然基准——冯·克利青常数 $R_K=h/e^2\approx25812.807\ \Omega$。
+
+名称词源：*Hall* 取自 Edwin Hall（见第 25 篇），*quantum* 强调电阻的量子化台阶；冯·克利青（von Klitzing）1980 年发现整数量子化、崔琦（Tsui）、施特默（Störmer）与戈萨德（Gossard）1982 年发现分数量子化，三人于 1985/1998 分获诺贝尔物理学奖。
+
+本篇须抓住的核心特征：
+
+1. **朗道能级量子化**：垂直磁场把二维电子气离散为高度简并的朗道能级，每个能级简并度 $eB/h$（单位面积）。
+2. **填充因子 $\nu$**：$\nu=n_e h/(eB)$ 表示每个朗道能级被占据的比例；整数 $\nu$ 对应 IQHE，分数（如 1/3、2/5）对应 FQHE。
+3. **拓扑鲁棒性**：平台源于整条边界上的手性边缘态（chiral edge states）——体态绝缘、边缘导电，缺陷无法破坏量子化。
+4. **IQHE vs FQHE**：IQHE 可由非相互作用电子的朗道能级解释（拓扑不变量 = 陈数）；FQHE 必须引入电子间强关联，新激发是带分数电荷（1/3 e）与统计为任意子（anyon）的准粒子。
+5. **精密计量**：冯·克利青常数 $R_K$ 是 1990 年以来电阻的实用量子标准，2019 年 SI 重新定义后成为导出精确值。
+
+本主题在体系中的位置：它是第 24 篇能带论、第 26 篇量子统计（二维简并）的极致展现，与第 27 篇超导同属「宏观量子相干 / 拓扑序」家族，并为第五部分（拓扑物态前沿）与第六部分（二维材料，如石墨烯的半整数量子霍尔）提供概念基础。
+
+---
+
+## 二、数学结构
+
+**符号约定声明**：SI 单位制，电荷 $e$、磁通量子 $\Phi_0=h/e$（注意此处为单电子磁通量子，与第 27 篇库珀对 $h/2e$ 区分）；二维坐标 $(x,y)$，磁场 $\mathbf{B}=B\hat z$；采用朗道规范。
+
+### 2.1 朗道能级
+
+垂直磁场中二维电子气单粒子能量离散为
+
+$$
+E_n=\left(n+\tfrac{1}{2}\right)\hbar\omega_c,
+\qquad \omega_c=\frac{eB}{m^*},
+\tag{2}
+$$
+
+每个朗道能级（单位面积）简并度
+
+$$
+n_L=\frac{eB}{h}=\frac{B}{\Phi_0},
+\tag{3}
+$$
+
+即每磁通量子 $\Phi_0=h/e$ 容纳一个态。总电子面密度 $n_e$ 与填充因子
+
+$$
+\nu=\frac{n_e}{n_L}=\frac{n_e h}{eB}.
+\tag{4}
+$$
+
+### 2.2 整数量子霍尔电导
+
+当 $\nu$ 为整数且朗道能级全满（体态绝缘）时，电导满足
+
+$$
+\sigma_{xy}=\nu\frac{e^2}{h},
+\qquad \rho_{xy}=\frac{h}{\nu e^2},\qquad \rho_{xx}=0.
+\tag{5}
+$$
+
+Laughlin 的规范论证：在环样品上绝热插入一个磁通量子，波函数回到原状但边界上有恰好一个电荷 $e$ 被泵过样品，由磁通-电荷对偶得 $\Delta\sigma_{xy}=e^2/h$，证明平台值为拓扑量子化 [24fe]。
+
+### 2.3 边缘态
+
+在样品边界，朗道能级随静电势上升而穿越费米面，形成沿边界单向传播（手性）的一维通道。体态因局域化不导电，电流由边缘态承担；无序只改变边界形状，不改变总电导——这是量子化的鲁棒性来源 [24fi]。
+
+### 2.4 分数量子霍尔效应
+
+当 $\nu=1/3,2/5,\dots$ 时，强关联使基态成为不可压缩量子流体，Laughlin 波函数
+
+$$
+\Psi_{1/3}=\prod_{i<j}(z_i-z_j)^3\,e^{-\sum|z_i|^2/4\ell_B^2}
+\tag{6}
+$$
+
+描述准粒子带分数电荷 $e/3$ 与任意子统计 [24fg]。Jain 复合费米子图像把分数填充 $\nu=p/(2p\pm1)$ 映射为整数填充，统一大量 FQHE 平台 [24fj]。
+
+---
+
+## 三、物理量与特征尺度
+
+- **冯·克利青常数**：$R_K=h/e^2=25812.807\ \Omega$（精确值，SI 2019 后由基本常数导出）。
+- **磁场与密度**：在 $B=10\ \mathrm{T}$、填充 $\nu=1$ 时，电子面密度 $n_e=\nu eB/h\approx2.4\times10^{15}\ \mathrm{m}^{-2}$；实验典型 $B$ 数特斯拉、低温 $<1\ \mathrm{K}$。
+- **朗道能级间距**：$\hbar\omega_c$，对电子 $m^*$ 取自由质量、B=10 T 时 $\hbar\omega_c\approx1.16\ \mathrm{meV}$（$\gg k_BT$ 于 mK–K 温区）。
+- **平台宽度**：由杂质局域化提供的「迁移率鸿沟」决定，可达数特斯拉仍保持量子化。
+- **分数电荷**：$e/3$（$\nu=1/3$ 准粒子），已由shot噪声实验直接测得。
+
+---
+
+## 四、实验基础与观测证据
+
+1. **整数量子霍尔（1980）**：von Klitzing 等在 Si MOSFET 反型层测得 $\rho_{xy}$ 在 $R_K$ 整数分之一处出现精确平台，$\rho_{xx}$ 同时归零 [24fd]。平台值不受器件几何与杂质影响，确立了电阻量子标准。
+2. **分数量子霍尔（1982）**：Tsui、Störmer、Gossard 在 GaAs/AlGaAs 异质结、更强磁场下观测到 $\nu=1/3,2/3$ 等分数平台 [24ff]，证明强关联不可约。
+3. **边缘态输运**：分数量子化的手性边缘通道与「迁移率鸿沟」局域化被大量输运实验证实 [24fi]。
+4. **分数电荷直接测量**：shot 噪声实验测出准粒子电荷 $e/3$，直接验证 Laughlin 任意子 [24fg]。
+5. **拓扑不变量**：整数量子霍尔电导等于体态陈数（Chern number），由 Berry 相位拓扑量子化，是无序下鲁棒性的根本原因。
+
+**误读纠正**：量子霍尔平台不是「朗道能级完全填满者才出现」——平台出现于填充因子介于两整数之间（迁移率鸿沟局域化使中间态不参与输运）；平台的精确性来自拓扑，而非朗道能级的理想性。
+
+---
+
+## 五、分类体系与物理机制
+
+### 5.1 整数 vs 分数
+
+| 性质 | IQHE | FQHE |
+|------|------|------|
+| 填充因子 | $\nu=1,2,3,\dots$ | $\nu=1/3,2/5,3/7,\dots$ |
+| 机制 | 非相互作用朗道能级 + 拓扑 | 电子间强关联（不可压缩流体） |
+| 准粒子 | 无（边缘态载流） | 分数电荷任意子 |
+| 磁场 | 数 T | 更强（进入极端量子极限） |
+
+### 5.2 拓扑序
+
+FQHE 基态具有**拓扑序**——由拓扑纠缠熵与任意子统计刻画，不能用朗道对称性破缺范式描述，是凝聚态物理中超越传统相变框架的新物相。
+
+### 5.3 失效边界
+
+- **温度/磁场不足**：朗道能级间距 $\hbar\omega_c\lesssim k_BT$ 或 $\nu$ 非整数且无局域化时，平台消失、$\rho_{xx}>0$。
+- **三维化**：样品需严格二维；三维则回到经典霍尔效应（第 25 篇）。
+- **强无序**：过度无序可破坏迁移率鸿沟，抹去平台。
+
+---
+
+## 六、典型系统与可解模型
+
+### 6.1 朗道能级谱（脚本数值例）
+
+由式 (2) 计算朗道能级 $E_n(B)$ 随磁场的变化（n=0…5），显示能级等间距上移、简并度 $eB/h$ 随 $B$ 线性增长（见脚本段 1 与图 1）。
+
+### 6.2 霍尔平台（脚本数值例）
+
+取固定电子密度 $n_e$，由式 (4)(5) 得 $\nu(B)=n_e h/(eB)$，在低 $B$（高 $\nu$）整数处 $\rho_{xy}=h/(\nu e^2)$ 出现平台、$\rho_{xx}=0$；非整数区 $\rho_{xx}$ 回升。复现「平台-零电阻」的量子霍尔指纹（见脚本段 2 与图 2）。
+
+---
+
+## 七、历史脉络与学术争议
+
+- **1930 Landau**：给出磁场中电子的朗道能级量子化 [24fh]。
+- **1980 von Klitzing et al.**：发现整数量子霍尔效应，定义 $R_K$ [24fd]（1985 诺奖）。
+- **1981–1983 Laughlin**：规范论证与陈数解释 IQHE 拓扑量子化 [24fe]。
+- **1982 Tsui, Störmer & Gossard**：发现分数量子霍尔效应 [24ff]（1998 诺奖）。
+- **1983 Laughlin**：给出 $\nu=1/3$ 不可压缩波函数与分数激发 [24fg]。
+- **1982 Halperin**：边缘态理论，解释平台鲁棒性 [24fi]。
+- **1989 Jain**：复合费米子统一 FQHE 平台 [24fj]。
+- **学术争议**：FQHE 中的非阿贝尔任意子（如 $\nu=5/2$ 的 Moore–Read 态）是否为实现拓扑量子计算的可行载体，是当代凝聚态与量子信息交叉的最活跃前沿之一。
+
+---
+
+## 八、参考文献
+
+[24fh] Landau L. *Z. Phys.* **64**, 629–637 (1930). DOI: 10.1007/BF01397213 — 朗道能级（磁场中电子的量子化）。 `[已核实]`
+
+[24fd] von Klitzing K., Dorda G., Pepper M. *Phys. Rev. Lett.* **45**, 494–497 (1980). DOI: 10.1103/PhysRevLett.45.494 — 整数量子霍尔效应发现，$R_K=h/e^2$。 `[已核实]`
+
+[24fe] Laughlin R. B. *Phys. Rev. B* **27**, 3383–3386 (1983). DOI: 10.1103/PhysRevB.27.3383 — IQHE 的规范论证与拓扑量子化。 `[已核实]`
+
+[24ff] Tsui D. C., Störmer H. L., Gossard A. C. *Phys. Rev. Lett.* **48**, 1559–1562 (1982). DOI: 10.1103/PhysRevLett.48.1559 — 分数量子霍尔效应发现（$\nu=1/3$）。 `[已核实]`
+
+[24fg] Laughlin R. B. *Phys. Rev. Lett.* **50**, 1395–1398 (1983). DOI: 10.1103/PhysRevLett.50.1395 — FQHE 不可压缩波函数与分数电荷激发。 `[已核实]`
+
+[24fi] Halperin B. I. *Phys. Rev. B* **25**, 2185–2190 (1982). DOI: 10.1103/PhysRevB.25.2185 — 量子霍尔边缘态理论。 `[已核实]`
+
+[24fj] Jain J. K. *Phys. Rev. Lett.* **63**, 199–202 (1989). DOI: 10.1103/PhysRevLett.63.199 — 复合费米子统一 FQHE 平台。 `[已核实]`
+
+[24fk] Prange R. E., Girvin S. M. (eds.) *The Quantum Hall Effect*. Springer (1987). — 标准参考书，朗道能级/边缘态/拓扑陈数的权威表述（S 级）。 `[已核实]`
+</script>
+<script>
+// 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏
+function protectMath(src){
+  var blocks = [];
+  // 先抽块级 $$...$$（可跨行）
+  src = src.replace(/\$\$([\s\S]+?)\$\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  // 再抽行内 $...$（不含换行、内部不含 $）
+  src = src.replace(/\$([^\$\n]+?)\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  return { src: src, blocks: blocks };
+}
+
+function boot(){
+  var raw = document.getElementById('src').textContent;
+  // 记录标题锚点（在保护公式之前，避免影响）
+  var md = raw.replace(/^(#{1,3})\s+(.+)$/gm, function(m, h, t){
+    var id = 'h-' + t.replace(/[^\w一-龥]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+    return h + ' <span id="' + id + '"></span>' + t;
+  });
+
+  // 保护数学公式
+  var prot = protectMath(md);
+  md = prot.src;
+
+  document.getElementById('content').innerHTML = marked.parse(md);
+
+  // 还原数学公式占位符
+  var content = document.getElementById('content');
+  var html = content.innerHTML.replace(/%%MATH(\d+)%%/g, function(m, n){
+    return prot.blocks[+n];
+  });
+  content.innerHTML = html;
+
+  // 生成目录
+  var hs = document.querySelectorAll('#content h2, #content h3');
+  var toc = document.getElementById('toc'), tocHtml = '';
+  hs.forEach(function(h){
+    var sp = h.querySelector('span[id]');
+    var id = sp ? sp.id : '';
+    var cls = h.tagName === 'H3' ? 'sub' : '';
+    tocHtml += '<a class="' + cls + '" href="#' + id + '">' + h.textContent.trim() + '</a>';
+  });
+  toc.innerHTML = tocHtml;
+
+  // 图片路径：正文里写 figures/xxx.svg
+  document.querySelectorAll('#content img').forEach(function(im){
+    if(/^figures\//.test(im.getAttribute('src')||'')) return;
+  });
+
+  if (window.renderMathInElement) {
+    renderMathInElement(document.getElementById('content'), {
+      delimiters:[
+        {left:'$$', right:'$$', display:true},
+        {left:'$',  right:'$',  display:false}
+      ],
+      ignoredTags:['script','noscript','style','textarea','pre','code'],
+      throwOnError:false
+    });
+  }
+
+  // 滚动高亮
+  var links = [].slice.call(toc.querySelectorAll('a'));
+  window.addEventListener('scroll', function(){
+    var cur = null;
+    hs.forEach(function(h){
+      if (h.getBoundingClientRect().top < 120) cur = h;
+    });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if (cur){
+      var sp = cur.querySelector('span[id]');
+      var act = toc.querySelector('a[href="#' + (sp?sp.id:'') + '"]');
+      if (act) act.classList.add('active');
+    }
+  }, {passive:true});
+}
+if (window.marked) boot();
+else window.addEventListener('load', boot);
+</script>
+</body>
+</html>

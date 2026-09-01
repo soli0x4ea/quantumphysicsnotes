@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>康普顿散射</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2024; --ink-dim:#5b6570;
+  --line:#dfe3e8; --line-soft:#eef0f3; --accent:#1f5fa8; --accent-soft:#e8f0fa;
+  --amber-bg:#fff8e6; --amber-line:#e5c168; --amber-ink:#6b5200;
+  --green:#1c7a4a; --green-bg:#e8f5ee; --red:#b03030; --red-bg:#fdecec;
+  --code-bg:#f6f7f9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,serif;
+  background:var(--bg); color:var(--ink); line-height:1.85; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.layout{display:flex; max-width:1280px; margin:0 auto; gap:28px; padding:0 24px}
+/* 侧栏目录 */
+.toc{
+  width:246px; flex-shrink:0; position:sticky; top:0; height:100vh;
+  overflow-y:auto; padding:28px 0 40px; font-family:"Noto Sans SC","PingFang SC",sans-serif;
+}
+.toc h4{font-size:11px; letter-spacing:1.6px; color:var(--ink-dim); text-transform:uppercase;
+  margin:0 0 12px; padding-left:2px; font-weight:600}
+.toc a{
+  display:block; font-size:13px; color:var(--ink-dim); text-decoration:none;
+  padding:5px 10px; border-left:2px solid transparent; line-height:1.5;
+}
+.toc a:hover{color:var(--accent); background:var(--accent-soft)}
+.toc a.sub{padding-left:24px; font-size:12.5px}
+.toc a.active{color:var(--accent); border-left-color:var(--accent); background:var(--accent-soft); font-weight:600}
+/* 正文 */
+.main{flex:1; min-width:0; padding:28px 0 120px}
+.paper{background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  padding:48px 56px; box-shadow:0 1px 3px rgba(16,24,40,.05)}
+h1{font-size:27px; line-height:1.45; margin:0 0 18px; letter-spacing:.3px; font-weight:700}
+h2{font-size:20px; margin:52px 0 18px; padding-bottom:9px; border-bottom:1.5px solid var(--ink);
+  letter-spacing:.3px}
+h3{font-size:16.5px; margin:32px 0 12px; color:var(--accent); font-weight:600}
+h4{font-size:15px; margin:22px 0 10px; font-weight:600}
+p{margin:0 0 15px; text-align:justify}
+blockquote{
+  margin:18px 0; padding:13px 18px; background:var(--amber-bg);
+  border-left:3px solid var(--amber-line); border-radius:0 4px 4px 0; color:var(--amber-ink);
+}
+blockquote p{margin:0 0 8px} blockquote p:last-child{margin:0}
+blockquote strong{color:#4a3800}
+ul,ol{margin:0 0 15px; padding-left:26px}
+li{margin:6px 0}
+table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14px;
+  font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th{background:#f0f2f5; text-align:left; padding:9px 12px; border:1px solid var(--line); font-weight:600}
+td{padding:9px 12px; border:1px solid var(--line); vertical-align:top}
+tbody tr:nth-child(even){background:#fafbfc}
+code{background:var(--code-bg); padding:2px 6px; border-radius:3px; font-size:13.5px;
+  font-family:"SF Mono",Menlo,Consolas,monospace}
+pre{background:var(--code-bg); padding:14px 16px; border-radius:5px; overflow-x:auto; margin:16px 0;
+  border:1px solid var(--line-soft)}
+pre code{background:none; padding:0}
+hr{border:none; border-top:1px solid var(--line-soft); margin:34px 0}
+strong{font-weight:700; color:#0f1419}
+a{color:var(--accent)}
+img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6px; background:#fff}
+.katex-display{margin:20px 0; overflow-x:auto; overflow-y:hidden; padding:2px 0}
+.katex{font-size:1.045em}
+.tag-note{font-family:"Noto Sans SC","PingFang SC",sans-serif; font-size:12px; color:var(--ink-dim);
+  margin-top:40px; padding-top:16px; border-top:1px solid var(--line-soft); line-height:1.9}
+@media(max-width:900px){
+  .toc{display:none}
+  .paper{padding:28px 22px}
+  .layout{padding:0 12px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc"><h4>目录</h4><div id="toc"></div></nav>
+  <main class="main"><article class="paper" id="content"></article></main>
+</div>
+
+<script type="text/plain" id="src">
+# 康普顿散射
+
+> **分类归属：第一部分 量子行为与基础概念 · 数学程度：L2（推导层）· 前置依赖：第 1 篇《量子行为》、第 2 篇《波粒二象性与德布罗意关系》、第 3 篇《黑体辐射与能量量子化》**
+> **验证依据**：Compton (1923)、Compton & Simon (1925)、de Broglie (1924)、CODATA (2022)
+
+# 第 5 篇 · 康普顿散射
+
+## 一、概念与定位
+
+**康普顿散射**：X 射线（或 γ 射线）被自由电子散射后，散射光波长变长，且波长增量 $\Delta\lambda$ 只与散射角 $\theta$ 有关、与入射波长无关。这是光子**携带动量** $p=h/\lambda$ 的决定性证据——至此「光子」不再是能量包，而是有能量有动量的完整粒子，与第 2 篇的德布罗意物质波、第 4 篇的光电效应构成早期量子论的完整图景。
+
+本篇定位：第 4 篇只用能量守恒（光子 $E=h\nu$）；本篇必须同时用**能量 + 动量**守恒（相对论性），才能推出波长偏移。它是「粒子性」最硬的实验判据，也是量子电动力学（第 35 篇）最低阶过程（Compton 散射 $e\gamma\to e\gamma$）的经典极限。
+
+## 二、数学结构
+
+### 2.1 康普顿位移的推导（不跳步）
+
+设入射光子四动量 $(h\nu/c,\,h\nu/c,\,0,\,0)$，静止电子 $(m_ec,\,0,0,0)$（用能量/动量单位，c=1 暂记）。散射光子能量 $h\nu'$、方向角 $\theta$；反冲电子动量 $\mathbf p_e$、角 $\phi$。
+
+**能量守恒**：
+
+$$ h\nu + m_ec^2 = h\nu' + \sqrt{p_e^2c^2 + m_e^2c^4} \tag{1} $$
+
+**动量守恒**（分量）：
+
+$$ \frac{h\nu}{c} = \frac{h\nu'}{c}\cos\theta + p_e\cos\phi,\qquad
+0 = \frac{h\nu'}{c}\sin\theta - p_e\sin\phi \tag{2} $$
+
+消去 $\phi$：将 (2) 两式平方相加得
+
+$$ p_e^2 = \left(\frac{h\nu}{c}\right)^2 + \left(\frac{h\nu'}{c}\right)^2
+- 2\frac{h^2\nu\nu'}{c^2}\cos\theta \tag{3} $$
+
+将 (1) 写为 $\sqrt{p_e^2c^2+m_e^2c^4}=h\nu-h\nu'+m_ec^2$，两边平方：
+
+$$ p_e^2c^2 + m_e^2c^4 = (h\nu-h\nu')^2 + m_e^2c^4 + 2m_ec^2(h\nu-h\nu') \tag{4} $$
+
+消去 $m_e^2c^4$，并把 (3) 的 $p_e^2c^2$ 代入左端：
+
+$$ (h\nu)^2 + (h\nu')^2 - 2h^2\nu\nu'\cos\theta
+= (h\nu)^2 + (h\nu')^2 - 2h^2\nu\nu' + 2m_ec^2(h\nu-h\nu') \tag{5} $$
+
+约去公共项，整理：
+
+$$ -2h^2\nu\nu'(\cos\theta-1) = 2m_ec^2h(\nu-\nu') \tag{6} $$
+
+两边除以 $2h\nu\nu'm_ec^2$ 并移项：
+
+$$ \frac{1}{\nu'} - \frac{1}{\nu} = \frac{h}{m_ec^2}(1-\cos\theta) \tag{7} $$
+
+用 $\lambda=c/\nu$ 转成波长：
+
+$$ \Delta\lambda \equiv \lambda' - \lambda = \frac{h}{m_ec}(1-\cos\theta) \tag{8} $$
+
+定义**康普顿波长**
+
+$$ \lambda_C \equiv \frac{h}{m_ec} = 2.426\,310\,238(73)\times10^{-12}\ \text{m} = 2.426\ \text{pm} \tag{9} $$
+
+于是 $\Delta\lambda=\lambda_C(1-\cos\theta)$，与入射波长无关，仅由散射角决定——这正是康普顿实验的核心结论。
+
+### 2.2 反冲电子能量
+
+由 (1)：
+
+$$ K_e = h\nu - h\nu' = \frac{hc}{\lambda} - \frac{hc}{\lambda+\lambda_C(1-\cos\theta)}
+= h\nu\,\frac{\lambda_C(1-\cos\theta)}{\lambda+\lambda_C(1-\cos\theta)} \tag{10} $$
+
+$K_e$ 在 $\theta=0$ 时为 0（无散射），$\theta=\pi$（反向）时最大。
+
+### 2.3 经典极限：汤姆逊散射
+
+若光子能量 $h\nu\ll m_ec^2$（可见光/低频），$\Delta\lambda\approx0$，波长几乎不变，退回经典**汤姆逊散射**（弹性、无频移）；频移显著当且仅当 $h\nu\sim m_ec^2$（X/γ 射线）。因此「是否观测到康普顿位移」的尺度由无量纲数 $\eta\equiv h\nu/(m_ec^2)$ 决定：$\eta\ll1$ 经典、$\eta\sim1$ 量子。
+
+## 三、物理量与特征尺度
+
+| 量 | 符号 | 数值（CODATA 2022） | 意义 |
+|----|------|---------------------|------|
+| 电子康普顿波长 | $\lambda_C$ | $2.426\,310\times10^{-12}\ \text{m}$ | 最大波长偏移（$1-\cos\theta$ 上限 $2\lambda_C$） |
+| 电子静止能 | $m_ec^2$ | $510.998\,950\ \text{keV}$ | 频移显著的阈值能 |
+| 入射 X 射线（Mo Kα） | $\lambda$ | $\approx 71\ \text{pm}$ | 典型康普顿实验源 |
+| $\theta=90^\circ$ 偏移 | $\Delta\lambda$ | $\lambda_C=2.43\ \text{pm}$ | 与 $\lambda$ 无关 |
+
+**量级例**：入射 $\lambda=71\ \text{pm}$（$h\nu\approx17.5\ \text{keV}$），$\theta=90^\circ$ 时 $\lambda'=73.4\ \text{pm}$，$\Delta\lambda/\lambda\approx3.4\%$（可测）；反冲电子 $K_e\approx h\nu\cdot\frac{\lambda_C}{\lambda+\lambda_C}\approx0.59\ \text{keV}$。若用可见光 $\lambda=500\ \text{nm}$，则 $\Delta\lambda/\lambda\sim5\times10^{-6}$，淹没在仪器分辨率下——故经典汤姆逊散射长期未被发现位移。
+
+## 四、实验基础与观测证据
+
+1. **Compton 1923**：测量 X 射线经石墨散射后的波长，确证 $\Delta\lambda$ 随 $\theta$ 从 0 增至 $2\lambda_C$（$\theta=180^\circ$），且与 (8) 吻合。这是光子动量 $h/\lambda$ 的首个直接证实。
+2. **Compton–Simon 1925（符合实验）**：同时测量散射光子与反冲电子的方向与能量，验证二者满足 (2)(10) 的联合守恒（方向符合、能量配平），排除了「部分能量先存于电子」等替代解释，把单个事件的能量-动量守恒钉死。
+3. **现代精度**：同步辐射与高纯锗探测器下，$\Delta\lambda$ 与 (8) 的相对偏差 $<10^{-3}$，康普顿波长 $\lambda_C$ 本身也是测定 $h$ 的路径之一（与第 3/4 篇交叉）。
+
+## 五、分类体系与物理机制
+
+| 散射类型 | 条件 | 波长变化 | 理论 |
+|----------|------|----------|------|
+| 瑞利（弹性） | 束缚电子、$\lambda\gg$ 原子尺度 | 不变 | 经典偶极辐射 |
+| 汤姆逊 | 自由电子、$h\nu\ll m_ec^2$ | 近似不变 | 经典电子散射 |
+| **康普顿** | 自由电子、$h\nu\sim m_ec^2$ | $\Delta\lambda=\lambda_C(1-\cos\theta)$ | 光子-电子相对论二体碰撞 |
+
+**机制**：入射光子像一个粒子，把一部分能量和动量「撞」给电子，自身变成较低能量（较长波长）的光子。这不能用任何经典波动图像解释——波动说只能给出频率不变的弹性散射（汤姆逊）。康普顿位移是「碰撞粒子」图像专有的指纹。
+
+## 六、典型系统与可解模型
+
+**(a) 医学/天体 X 射线与 γ 谱**：康普顿散射是 X/γ 与物质相互作用的主要通道之一，决定成像对比度与剂量（与光电吸收竞争）。
+**(b) 反向康普顿**：低能光子被高能电子反弹可获 GeV 级 γ，是逆康普顿光源机制（天体高能辐射、激光康普顿光源）。
+**(c) 数值模型**：配套脚本按 (8) 计算 $\Delta\lambda(\theta)$ 并绘图（标注 $\lambda_C$ 上限），按 (10) 计算反冲电子动能随 $\theta$ 的曲线，验证 $\theta=0$ 时 $K_e=0$、$\theta=180^\circ$ 时最大。
+
+## 七、历史脉络与学术争议
+
+- **Compton 1923**：发表 X 射线散射频移，起初学界质疑（经典散射应无频移）；后重复实验确认。
+- **与 de Broglie 呼应**：康普顿动量 $h/\lambda$ 与 de Broglie 1924 物质波波长 $\lambda=h/p$ 用同一常数 $h$，二者互相支撑「波粒二象性」的普适性。
+- **地位**：康普顿散射与第 4 篇光电效应、第 3 篇黑体辐射，共同使「光由能量 $h\nu$、动量 $h/\lambda$ 的光子组成」成为不可辩驳的事实，为 Dirac 1927（第 15 篇）的辐射场二次量子化铺平道路。
+
+## 八、参考文献
+
+- Compton, A.H. (1923). *Physical Review*, 21, 483–502 [主序列 #6，已核实；康普顿散射原始论文].
+- Compton, A.H., & Simon, A.W. (1925). *Physical Review*, 26, 289–299 [24dj，已核实；符合实验].
+- de Broglie, L. (1924). *Ann. Phys. (Paris)*, 3, 22 [主序列 #7，已核实；物质波].
+- CODATA (2022). *Fundamental Physical Constants* [主序列复用；m_e, h, c 精确定义].
+</script>
+<script>
+// 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏
+function protectMath(src){
+  var blocks = [];
+  // 先抽块级 $$...$$（可跨行）
+  src = src.replace(/\$\$([\s\S]+?)\$\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  // 再抽行内 $...$（不含换行、内部不含 $）
+  src = src.replace(/\$([^\$\n]+?)\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  return { src: src, blocks: blocks };
+}
+
+function boot(){
+  var raw = document.getElementById('src').textContent;
+  // 记录标题锚点（在保护公式之前，避免影响）
+  var md = raw.replace(/^(#{1,3})\s+(.+)$/gm, function(m, h, t){
+    var id = 'h-' + t.replace(/[^\w一-龥]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+    return h + ' <span id="' + id + '"></span>' + t;
+  });
+
+  // 保护数学公式
+  var prot = protectMath(md);
+  md = prot.src;
+
+  document.getElementById('content').innerHTML = marked.parse(md);
+
+  // 还原数学公式占位符
+  var content = document.getElementById('content');
+  var html = content.innerHTML.replace(/%%MATH(\d+)%%/g, function(m, n){
+    return prot.blocks[+n];
+  });
+  content.innerHTML = html;
+
+  // 生成目录
+  var hs = document.querySelectorAll('#content h2, #content h3');
+  var toc = document.getElementById('toc'), tocHtml = '';
+  hs.forEach(function(h){
+    var sp = h.querySelector('span[id]');
+    var id = sp ? sp.id : '';
+    var cls = h.tagName === 'H3' ? 'sub' : '';
+    tocHtml += '<a class="' + cls + '" href="#' + id + '">' + h.textContent.trim() + '</a>';
+  });
+  toc.innerHTML = tocHtml;
+
+  // 图片路径：正文里写 figures/xxx.svg
+  document.querySelectorAll('#content img').forEach(function(im){
+    if(/^figures\//.test(im.getAttribute('src')||'')) return;
+  });
+
+  if (window.renderMathInElement) {
+    renderMathInElement(document.getElementById('content'), {
+      delimiters:[
+        {left:'$$', right:'$$', display:true},
+        {left:'$',  right:'$',  display:false}
+      ],
+      ignoredTags:['script','noscript','style','textarea','pre','code'],
+      throwOnError:false
+    });
+  }
+
+  // 滚动高亮
+  var links = [].slice.call(toc.querySelectorAll('a'));
+  window.addEventListener('scroll', function(){
+    var cur = null;
+    hs.forEach(function(h){
+      if (h.getBoundingClientRect().top < 120) cur = h;
+    });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if (cur){
+      var sp = cur.querySelector('span[id]');
+      var act = toc.querySelector('a[href="#' + (sp?sp.id:'') + '"]');
+      if (act) act.classList.add('active');
+    }
+  }, {passive:true});
+}
+if (window.marked) boot();
+else window.addEventListener('load', boot);
+</script>
+</body>
+</html>

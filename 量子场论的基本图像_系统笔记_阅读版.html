@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>量子场论的基本图像</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2024; --ink-dim:#5b6570;
+  --line:#dfe3e8; --line-soft:#eef0f3; --accent:#1f5fa8; --accent-soft:#e8f0fa;
+  --amber-bg:#fff8e6; --amber-line:#e5c168; --amber-ink:#6b5200;
+  --green:#1c7a4a; --green-bg:#e8f5ee; --red:#b03030; --red-bg:#fdecec;
+  --code-bg:#f6f7f9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,serif;
+  background:var(--bg); color:var(--ink); line-height:1.85; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.layout{display:flex; max-width:1280px; margin:0 auto; gap:28px; padding:0 24px}
+/* 侧栏目录 */
+.toc{
+  width:246px; flex-shrink:0; position:sticky; top:0; height:100vh;
+  overflow-y:auto; padding:28px 0 40px; font-family:"Noto Sans SC","PingFang SC",sans-serif;
+}
+.toc h4{font-size:11px; letter-spacing:1.6px; color:var(--ink-dim); text-transform:uppercase;
+  margin:0 0 12px; padding-left:2px; font-weight:600}
+.toc a{
+  display:block; font-size:13px; color:var(--ink-dim); text-decoration:none;
+  padding:5px 10px; border-left:2px solid transparent; line-height:1.5;
+}
+.toc a:hover{color:var(--accent); background:var(--accent-soft)}
+.toc a.sub{padding-left:24px; font-size:12.5px}
+.toc a.active{color:var(--accent); border-left-color:var(--accent); background:var(--accent-soft); font-weight:600}
+/* 正文 */
+.main{flex:1; min-width:0; padding:28px 0 120px}
+.paper{background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  padding:48px 56px; box-shadow:0 1px 3px rgba(16,24,40,.05)}
+h1{font-size:27px; line-height:1.45; margin:0 0 18px; letter-spacing:.3px; font-weight:700}
+h2{font-size:20px; margin:52px 0 18px; padding-bottom:9px; border-bottom:1.5px solid var(--ink);
+  letter-spacing:.3px}
+h3{font-size:16.5px; margin:32px 0 12px; color:var(--accent); font-weight:600}
+h4{font-size:15px; margin:22px 0 10px; font-weight:600}
+p{margin:0 0 15px; text-align:justify}
+blockquote{
+  margin:18px 0; padding:13px 18px; background:var(--amber-bg);
+  border-left:3px solid var(--amber-line); border-radius:0 4px 4px 0; color:var(--amber-ink);
+}
+blockquote p{margin:0 0 8px} blockquote p:last-child{margin:0}
+blockquote strong{color:#4a3800}
+ul,ol{margin:0 0 15px; padding-left:26px}
+li{margin:6px 0}
+table{border-collapse:collapse; width:100%; margin:18px 0; font-size:14px;
+  font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th{background:#f0f2f5; text-align:left; padding:9px 12px; border:1px solid var(--line); font-weight:600}
+td{padding:9px 12px; border:1px solid var(--line); vertical-align:top}
+tbody tr:nth-child(even){background:#fafbfc}
+code{background:var(--code-bg); padding:2px 6px; border-radius:3px; font-size:13.5px;
+  font-family:"SF Mono",Menlo,Consolas,monospace}
+pre{background:var(--code-bg); padding:14px 16px; border-radius:5px; overflow-x:auto; margin:16px 0;
+  border:1px solid var(--line-soft)}
+pre code{background:none; padding:0}
+hr{border:none; border-top:1px solid var(--line-soft); margin:34px 0}
+strong{font-weight:700; color:#0f1419}
+a{color:var(--accent)}
+img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6px; background:#fff}
+.katex-display{margin:20px 0; overflow-x:auto; overflow-y:hidden; padding:2px 0}
+.katex{font-size:1.045em}
+.tag-note{font-family:"Noto Sans SC","PingFang SC",sans-serif; font-size:12px; color:var(--ink-dim);
+  margin-top:40px; padding-top:16px; border-top:1px solid var(--line-soft); line-height:1.9}
+@media(max-width:900px){
+  .toc{display:none}
+  .paper{padding:28px 22px}
+  .layout{padding:0 12px}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+  <nav class="toc"><h4>目录</h4><div id="toc"></div></nav>
+  <main class="main"><article class="paper" id="content"></article></main>
+</div>
+
+<script type="text/plain" id="src">
+# 量子场论的基本图像
+
+> **分类归属：第五部分·相对论量子理论与前沿 · 数学程度：L3 · 前置依赖：第 21 篇《全同粒子》、第 38 篇《狄拉克方程》、第 9 篇《量子态与叠加原理》**
+> **验证依据**：Feynman (1948) Rev. Mod. Phys.、Feynman (1949) Phys. Rev.、Schwinger (1948) Phys. Rev.、Tomonaga (1946) Prog. Theor. Phys.、Dyson (1949) Phys. Rev.、't Hooft (1971) Nucl. Phys. B、Wilson (1974) Phys. Rev. D、Casimir & Polder (1948) Phys. Rev.、Srednicki (2007) Cambridge University Press、CODATA (2018)
+
+---
+
+## 一、概念与定位
+
+**量子场论（quantum field theory, QFT）** 把"场"而非"粒子"作为基本对象：对经典场作正则量子化（即对场的每个模式引入产生/湮灭算符，常被称为"二次量子化" second quantization），场的量化激发即对应粒子。粒子数因此不再是固定的，而是可变的；粒子被理解为场在某一模式上的一个量子化激发。一句话定义：**场是基本的，粒子是场的激发**。
+
+名称词源：*quantum field theory* 直译为"量子场论"；*second quantization*（二次量子化）用以区别于对单粒子波函数 Ψ(x) 的"一次量子化"（Schrödinger/Heisenberg 表述），其含义是把波函数本身提升为算符、并把多粒子态空间从固定的 N 粒子 Hilbert 空间扩充为所有 N 直和的 Fock 空间。本篇采用此术语而不对某位作者做出具体年份归属。
+
+本篇须抓住的核心特征：
+
+1. **场算符 φ̂(x)**：时空每一点（在等时面上为每一空间点）配置一个算符，取代一次量子化里作为 c-数波函数的 Ψ(x)；场的动力学由拉氏量密度 ℒ[φ, ∂_μ φ] 给出。
+2. **产生/湮灭算符 â†_k、â_k**：将场按模式展开，对每个模式 k 引入升降算符，满足 [â_k, â†_{k'}] = (2π)³ δ³(k − k')（自然单位 ħ = 1）。
+3. **粒子数可变**：态空间为所有粒子数子空间的直和（Fock 空间），粒子数算符 N̂ = ∫ d³k â†_k â_k，其本征值可取 0,1,2,…；真空态 |0⟩ 满足 â_k|0⟩ = 0。
+4. **费曼图作为微扰展开图解法**：在相互作用项中，散射振幅按耦合常数展开，每一项对应一张图（内线=传播子、顶点=相互作用），是微扰量子场论的标准计算语言（图的规则与约定相关，本篇不站队具体约定细节）。
+5. **真空涨落**：真空态 |0⟩ 下场算符的涨落非零，每一模式的零点能 (1/2)ħω_k 不为零；这些涨落本身不可直接观测，但其可观测后果经 Casimir 力、Lamb 位移、自发辐射等体现（见第四节误读纠正）。
+
+本主题在体系中的位置：它建立在第 9 篇（态与叠加原理）、第 21 篇（全同粒子的 Fock 空间与粒子数可变结构）、第 38 篇（狄拉克方程给出的旋量场结构）之上，并为后续的量子电动力学/规范场论（如第 41 篇）与标准模型提供统一的形式框架。本篇只建立"基本图像"：标量场的正则量子化、粒子数可变、传播子与费曼图、真空涨落，不展开具体规范理论的完整重整化。
+
+---
+
+## 二、数学结构
+
+**符号约定声明**：本节的推导采用**自然单位 ħ = c = 1**；涉及具体数值的第三节、第六节恢复 SI 并显式写出 ħ、c。度规取**号差 η_{μν} = diag(+1, −1, −1, −1)**（mostly-minus）。四维点乘记为 k·x = k_μ x^μ = k_0 x_0 − k⃗·x⃗，其中 x_0 = t（取 c = 1 时 t 即时间坐标）。傅里叶展开约定 ∫ d³k/(2π)³，平面波归一化为 ∫ d³x e^{i(k−k')·x} = (2π)³ δ³(k − k')。算符均加帽（如 φ̂）；在自然单位下对易子形式为 [A, B]，其量纲由量纲分析确定。
+
+### 2.1 自由实标量场的正则量子化
+
+从经典实标量场拉氏量密度（自由场，质量 m）出发
+$$ \mathcal L = \tfrac{1}{2}\,\partial_\mu\phi\,\partial^\mu\phi - \tfrac{1}{2}\,m^2\phi^2. \tag{1} $$
+
+| 符号 | 含义 | 量纲（自然单位，能量幂次） |
+|------|------|---------------------------|
+| φ(x) | 实标量场（经典为 c-数，量子为算符） | [质量]^1 |
+| ∂_μ = ∂/∂x^μ | 对四维坐标的偏导 | [质量]^1 |
+| m | 场的质量参数 | [质量]^1 |
+| ℒ | 拉氏量密度 | [质量]^4 |
+
+共轭动量密度（对时坐标 x_0 = t 求偏导）
+$$ \pi(x) \equiv \frac{\partial\mathcal L}{\partial(\partial_0\phi)} = \partial_0\phi = \dot\phi. \tag{2} $$
+
+| 符号 | 含义 | 量纲 |
+|------|------|------|
+| π(x) | 与 φ 共轭的动量密度 | [质量]^3 |
+| ∂_0 = ∂/∂t | 对时间的偏导 | [质量]^1 |
+
+正则量子化把 φ、π 提升为等时对易算符，满足等时正则对易关系（ħ = 1）
+$$ [\hat\phi(t,\mathbf x),\hat\pi(t,\mathbf y)] = i\,\delta^3(\mathbf x-\mathbf y),\qquad [\hat\phi,\hat\phi]=0,\qquad [\hat\pi,\hat\pi]=0. \tag{3} $$
+
+| 符号 | 含义 | 量纲 |
+|------|------|------|
+| δ³(x−y) | 三维狄拉克 δ 函数 | [长度]^{−3} = [质量]^3 |
+| i | 虚数单位 | 无量纲 |
+
+**模式展开与 [a, a†] 的推导（不跳步）**。引入频率 ω_k ≡ √(k² + m²)（k ≡ |k⃗|，量纲 [质量]），把场写为平面波模式的叠加：
+$$ \hat\phi(x) = \int_{\mathbf k}\frac{1}{\sqrt{2\omega_k}}\Big(\hat a_{\mathbf k}\,e^{-ik\cdot x} + \hat a_{\mathbf k}^\dagger\,e^{+ik\cdot x}\Big),\qquad \int_{\mathbf k}\equiv\int\frac{d^3k}{(2\pi)^3}. \tag{4} $$
+对时间求导得共轭动量
+$$ \hat\pi(x)=\partial_0\hat\phi = \int_{\mathbf k}\frac{-i\sqrt{\omega_k}}{\sqrt{2}}\Big(\hat a_{\mathbf k}\,e^{-ik\cdot x} - \hat a_{\mathbf k}^\dagger\,e^{+ik\cdot x}\Big). \tag{5} $$
+其中 k·x = ω_k x_0 − k⃗·x⃗，故 e^{±ik·x} 对 x_0 求导带来因子 ∓iω_k。
+
+现计算等时对易子 [φ̂(t,x), π̂(t,y)]。设未知对易子 [â_k, â_p†] = C(k,p)，而 [â_k, â_p] = [â_k†, â_p†] = 0。把式 (4)(5) 代入并只保留非零项：
+$$ [\hat\phi,\hat\pi] = \int_{\mathbf k}\!\int_{\mathbf p}\frac{1}{\sqrt{2\omega_k}}\frac{-i\sqrt{\omega_p}}{\sqrt{2}}\Big([\hat a_{\mathbf k},\hat a_{\mathbf p}^\dagger]\,e^{-ik\cdot x}e^{+ip\cdot y} - [\hat a_{\mathbf k}^\dagger,\hat a_{\mathbf p}]\,e^{+ik\cdot x}e^{-ip\cdot y}\Big). $$
+（其余项因 [a,a]=0 或 [a†,a†]=0 而消失；注意 e^{−ik·x} 在等时已含 e^{−iω_k t}，e^{+ip·y} 含 e^{+iω_p t}。）利用 [a_k, a_p†]=C(k,p)、[a_k†, a_p]=−C(p,k)，合并得
+$$ [\hat\phi,\hat\pi] = \int_{\mathbf k}\!\int_{\mathbf p}\frac{-i}{2}\sqrt{\frac{\omega_p}{\omega_k}}\,C(k,p)\Big(e^{-i\omega_k t+i\mathbf k\cdot\mathbf x}e^{+i\omega_p t-i\mathbf p\cdot\mathbf y} + e^{+i\omega_k t-i\mathbf k\cdot\mathbf x}e^{-i\omega_p t+i\mathbf p\cdot\mathbf y}\Big). $$
+设 C(k,p) = N\,(2π)³δ³(k−p)（N 为待定常数）；在 δ 支撑上 ω_p = ω_k，且 √(ω_p/ω_k)=1，于是
+$$ [\hat\phi,\hat\pi] = \int_{\mathbf k}\frac{-i}{2}N\Big(e^{i\mathbf k\cdot(\mathbf x-\mathbf y)} + e^{-i\mathbf k\cdot(\mathbf x-\mathbf y)}\Big) = iN\int_{\mathbf k}\cos\!\big(\mathbf k\cdot(\mathbf x-\mathbf y)\big). $$
+由平面波完备性 ∫_k e^{i k·(x−y)} = δ³(x−y)，其偶函数部分（余弦）即 δ³(x−y)（奇函数正弦部分积分为零），故
+$$ [\hat\phi(t,\mathbf x),\hat\pi(t,\mathbf y)] = iN\,\delta^3(\mathbf x-\mathbf y). $$
+与式 (3) 的等时正则对易关系 [φ̂, π̂] = i δ³(x−y)（ħ=1）比较，得 N = 1。于是
+$$ [\hat a_{\mathbf k},\hat a_{\mathbf p}^\dagger] = (2\pi)^3\delta^3(\mathbf k-\mathbf p),\qquad [\hat a_{\mathbf k},\hat a_{\mathbf p}]=[\hat a_{\mathbf k}^\dagger,\hat a_{\mathbf p}^\dagger]=0. \tag{6} $$
+
+| 符号 | 含义 | 量纲 |
+|------|------|------|
+| â_k, â_k† | 模式 k 的湮灭、产生算符 | 无量纲 |
+| ω_k = √(k²+m²) | 模式频率 | [质量] |
+| (2π)³δ³(k−p) | 模式正交归一因子 | [质量]^3 |
+
+**粒子数算符与单粒子态**。定义模式占据数算符 n̂_k = â_k† â_k，总粒子数算符
+$$ \hat N = \int d^3k\,\hat a_{\mathbf k}^\dagger\hat a_{\mathbf k}. \tag{7} $$
+真空 |0⟩ 满足 â_k|0⟩ = 0；单粒子态 |k⟩ = â_k†|0⟩ 满足 N̂|k⟩ = |k⟩。多粒子态由多个 â† 作用得到，天然允许"粒子数可变"。
+
+**两点函数（传播子）**。海森堡绘景下 Feynman 传播子定义为时间序乘积极值
+$$ D_F(x-y) \equiv \langle 0|\,T\{\hat\phi(x)\hat\phi(y)\}\,|0\rangle = \int\frac{d^4p}{(2\pi)^4}\,\frac{i\,e^{-ip\cdot(x-y)}}{p^2-m^2+i\varepsilon}. \tag{8} $$
+它把"一个粒子从 y 传播到 x"的振幅编码为动量的积分；iε 规定 Feynman 边界条件（规定传播子的因果解析延拓，不在此站队其物理诠释）。
+
+| 符号 | 含义 | 量纲 |
+|------|------|------|
+| D_F(x−y) | Feynman 传播子（两点函数） | [质量]^{−2}（因 ∫d⁴p/p²） |
+| p | 四维动量 | [质量] |
+| ε → 0⁺ | 无穷小正参数，规定因果性 | 无量纲 |
+
+**对称性与守恒量（Noether 定理）**。由式 (1) 对时空平移 x^μ → x^μ + a^μ 的不变性，得守恒能动量张量
+$$ T^{\mu\nu} = \partial^\mu\phi\,\partial^\nu\phi - \eta^{\mu\nu}\mathcal L,\qquad \partial_\mu T^{\mu\nu}=0, \tag{9} $$
+其第 0 分量积分给出四动量 P^μ = ∫ d³x T^{0μ}（P⁰ = 能量，P⃗ = 动量）。对复标量场 φ → e^{iα}φ 的全局 U(1) 相位不变性，得守恒流 j^μ = i(φ†∂^μφ − ∂^μφ† φ) 与电荷 Q = ∫ d³x j⁰；这是"粒子数/电荷守恒"的对称根源。
+
+**费曼图作为微扰展开图解法**。加入相互作用项（例如标量自相互作用 ℒ_int = −λ φ⁴/4!，或旋量–矢量耦合，见第五节），散射振幅 S 矩阵按耦合常数展开；每阶对应若干费曼图，其中**内线 = 传播子 D_F、顶点 = 相互作用、闭合圈 = 虚粒子求和**。图的求值规则（动量流、对称因子、指标收缩）属约定范畴，本篇仅陈述其作为微扰计算语言的地位，不在此判定具体约定优劣。
+
+---
+
+## 三、物理量与特征尺度
+
+本表数值除特别说明外取 **CODATA 2018** 推荐值；自然单位下的量级另以 ħ = c = 1 标注。
+
+| 物理量 | 符号 | 数值 / 量级 | 适用条件与说明 |
+|--------|------|------------|----------------|
+| 约化普朗克常数 | ħ | 1.054571817(0)×10⁻³⁴ J·s | CODATA 2018；2019 国际单位制重定义后 h 为精确值，故 ħ 亦精确 |
+| 光速 | c | 2.99792458×10⁸ m/s | 精确 |
+| 精细结构常数 | α | 7.2973525693(11)×10⁻³ ≈ 1/137.036 | CODATA 2018；QED 无量纲耦合，决定电磁相互作用强度 |
+| 电子质量 | m_e | 9.1093837015(28)×10⁻³¹ kg（≡ 0.511 MeV/c²） | CODATA 2018 |
+| Casimir 压强系数 | π²ħc/240 | 1.300×10⁻²⁷ J·m³ | 理想导体平行板；|F|/A = (π²ħc/240)/d⁴（脚本 2 验证） |
+| 场零点能密度（一维链模型） | u₀ | 2.68×10⁻¹³ J/m（紫外截止 a = 0.5 nm） | 脚本 1；连续极限（a→0）下按 1/a² 发散，见第六节 |
+| 典型能量尺度 | — | m_e c² ≈ 0.511 MeV；Z 玻色子 ≈ 91.2 GeV；LHC 质心能 ≈ 13 TeV；普朗克质量 M_Pl ≈ 1.22×10¹⁹ GeV | 标准模型到低能、电弱、高能对撞与量子引力边界 |
+| 观测暗能量密度 | ρ_Λ | ≈ 5.97×10⁻¹⁰ J/m³ = (2.26 meV)⁴ | 宇宙学观测；与 QFT 零点能的朴素估计相差约 10¹¹⁹–10¹²¹ 倍（见第七节） |
+
+> 量级说明：精细结构常数 α 给出"自然单位下电磁耦合"的量级（≈ 1/137），微扰 QED 的有效性在很大范围内由 α ≪ 1 保证。Casimir 系数的量纲为 [能量·长度³] = J·m³，故 |F|/A ∝ d⁻⁴ 的量纲为 [能量]/[长度⁴] = 压强，自洽。
+
+---
+
+## 四、实验基础与观测证据
+
+量子场论（特别是量子电动力学 QED）是实验验证最精确的物理理论之一；其可观测效应以"可测量之差"形式出现，而非"直接看见真空涨落"。
+
+**关键实验与精度**：
+- **电子反常磁矩 a_e = (g−2)/2**：QED 计算（含到 α 的十阶微扰）与实验在约 10⁻¹² 相对精度上互相比较，是 QED 最精确的检验之一。需注意：自 2018 年起，实验测量值与最新 QED 理论值出现数 σ（several-σ）量级的偏差；该偏差究竟源于新物理、还是理论/实验的系统误差，目前仍属开放问题，本篇不站队。
+- **Lamb 位移**：1947 年 Lamb 与 Retherford 测得氢 2S_{1/2} 与 2P_{1/2} 能级分裂约 1.06×10³ MHz（≈ 4.4×10⁻⁶ eV）。狄拉克方程在忽略 QED 修正时这两能级简并，该分裂由 QED 的真空极化与电子自能解释，是场论重整化的早期成功。
+- **Casimir 力**：1948 年 Casimir（与 Polder）由推迟的 van der Waals 力导出两导体板间的吸引压强；1997 年 Lamoreaux 在 0.6–6 μm 间距内以约 5% 精度直接测出该力，其后 Bressi 等（2002）与 Decca 等将精度提高到 1% 以内。详见第六节与图 `figures/量子场论的基本图像_Casimir.svg`。
+- **对撞机截面**：LHC 等在 TeV 能标测量 QED/QCD/电弱过程的散射截面（如 Drell–Yan、Higgs 产生），其数值与标准模型（量子场论框架）的微扰预言一致，构成高能区 QFT 的检验。
+
+**里程碑实验时间线**：
+
+| 年份 | 体系 / 实验者 | 关键结果 |
+|------|--------------|----------|
+| 1947 | Lamb & Retherford（氢光谱） | 2S_{1/2}–2P_{1/2} 分裂 ≈ 1.06×10³ MHz，开启 QED 重整化 |
+| 1948 | Casimir & Polder（理论） | 导出两导体板吸引压强 P = −π²ħc/(240 d⁴) |
+| 1997 | Lamoreaux（直接测量） | 0.6–6 μm 间距内验证 Casimir 力，~5% 精度 |
+| 2002 | Bressi et al. | 平行金属面间 Casimir 力，精度 ~1% |
+| 2012 | ATLAS/CMS（LHC） | 发现 Higgs 玻色子，截面与标准模型 QFT 预言一致 |
+
+**常见误读纠正**：
+
+> 误读："真空涨落可以被直接观测。"
+> 正解：真空涨落（真空态下场算符的非零涨落、零点能 (1/2)ħω 的存在）本身不是直接可观测量；可被直接测量的是其**后果**——Casimir 力（两块板间的净吸引）、Lamb 位移（能级移动）、自发辐射（激发态寿命）等。把"真空涨落"当作可直接"看见"的实体是通俗化说法，严格表述为"真空期望值偏离经典零场，其可观测效应经上述实验体现"。
+
+**实验局限**：QFT 在标准模型范围内高度成功，但至今未把引力纳入一致的可重整量子场论框架（见第五、七节失效边界）。
+
+---
+
+## 五、分类体系与物理机制
+
+**按场的自旋/统计分类**：
+
+| 场类型 | 代表场 | 自由拉氏量结构 | 典型实例 |
+|--------|--------|----------------|----------|
+| 标量场（自旋 0） | φ(x)，实/复 | (1/2)∂_μφ∂^μφ − (1/2)m²φ² − V(φ) | Higgs 场、π 介子有效场 |
+| 旋量场（自旋 1/2） | ψ(x)（Dirac） | iψ̄γ^μ∂_μψ − m ψ̄ψ | 电子/夸克场（第 38 篇狄拉克方程） |
+| 矢量场（自旋 1） | A_μ(x) | −(1/4)F_{μν}F^{μν}（Proca/Maxwell，质量项 m²A_μA^μ） | 光子、W/Z 玻色子 |
+
+**按相互作用类型**：
+- **φ⁴ 自相互作用**：ℒ_int = −λ φ⁴/4!，标量场自耦合，重整化理论中研究临界现象与对称自发破缺的原型。
+- **QED（旋量–矢量最小耦合）**：ℒ_int = −e ψ̄γ^μ ψ A_μ，电子与光子的电磁相互作用（第 38 篇给出旋量结构，本篇与其衔接）。
+- **Yukawa 耦合**：ℒ_int = −g ψ̄ψ φ，标量场与旋量场的耦合，描述核力与费米子质量的希格斯机制来源。
+
+**微扰 vs 非微扰**：
+- 微扰：耦合常数小（如 α ≈ 1/137）时，按耦合常数展开、用费曼图逐阶计算（第四节 QED 精度即此）。
+- 非微扰：强耦合（如低能 QCD、强关联系统）微扰失效，需格点规范理论（Wilson 1974，见第七、八节）或解析非微扰方法。
+
+**概念辨析（不站队、只澄清）**：
+- **一次量子化 vs 二次量子化**：一次量子化把单粒子波函数 ψ(x) 当作态幅，粒子数固定；二次量子化把 ψ 提升为场算符 φ̂(x)、态空间扩充为 Fock 空间，粒子数可变、自然容纳全同粒子（第 21 篇）。二者在固定粒子数子空间内数学等价，区别在于是否把"多粒子数"纳入同一框架。
+- **真空涨落 vs 重整化**：真空涨落指真空态下场算符的非零涨落与非零零点能；重整化指把计算中出现的发散（如无截断的零点能求和、圈图发散）吸收进质量/电荷/耦合的重新定义，使可观测量有限。二者是不同层面：前者是态的性质，后者是处理发散的程序。本篇只陈述概念，不作"哪种诠释更正确"的判定。
+
+**适用范围与失效边界**：
+- 失效边界一：**引力未纳入**。把广义相对论量子化会得到不可重整的发散；至今不存在与标准模型一致的量子引力（弦论、圈量子引力等超出本篇范围）。
+- 失效边界二：**强耦合需非微扰**。当耦合不再小，费曼图微扰展开不再收敛，须用格点或非微扰方法。
+
+---
+
+## 六、典型系统与可解模型
+
+### 6.1 谐振子链 → 场模式量子化（解析 + 数值）
+
+把一维 N 格点单原子链（近邻弹性）当作"一维场"的离散模式：每个模式是一个量子谐振子，整条链即"场"的有限模逼近。色散（声学支）为
+$$ \omega_k = 2\,\frac{v}{a}\left|\sin\!\Big(\frac{k a}{2}\Big)\right|,\qquad k = \frac{2\pi m}{N a},\; m = -\tfrac{N}{2},\dots,\tfrac{N}{2}-1. \tag{10} $$
+其中 a 为晶格常数（同时充当紫外截止），v 为声速，满足 v = a√(K/m_atom)。每一模式的零点能为 (1/2)ħω_k（恢复 SI 单位），整条链的总零点能
+$$ E_0 = \sum_k \frac{1}{2}\hbar\omega_k. \tag{11} $$
+热平衡下各模式的平均占据数服从玻色–爱因斯坦分布
+$$ \langle n_k\rangle = \frac{1}{\exp\!\big(\hbar\omega_k/(k_B T)\big)-1}. \tag{12} $$
+
+**数值结果（脚本 `code/量子场论的基本图像_模式量子化.py`，参数 N = 50、a = 5.0×10⁻¹⁰ m、v = 1.0×10³ m/s）**：
+- 带宽上限 ω_max = 4.00×10¹² s⁻¹（4.00 THz）。
+- 链总零点能 E_0 = 6.71×10⁻²¹ J（≈ 4.19×10⁻² eV），每格点零点能 1.34×10⁻²² J（≈ 8.38×10⁻⁴ eV）。
+- 零点能密度 u₀ = E_0/(N a) = 2.68×10⁻¹³ J/m（截止 a = 0.5 nm）。
+- **紫外截断发散**：把 a 当作连续化截止、令 a 依次取 5×10⁻¹⁰、5×10⁻¹¹、5×10⁻¹²、5×10⁻¹³ m，对应 u 为 2.68×10⁻¹³、2.68×10⁻¹¹、2.68×10⁻⁹、2.68×10⁻⁷ J/m，满足 u·a² ≈ 6.71×10⁻³² J·m 为常数，即 **u ∝ 1/a²**——直观显示场论零点能在无紫外截断（a→0，即真实连续场）时发散。这正是"真空能/宇宙学常数问题"的一个来源（见第七节）。
+- 占据数：T = 300 K 时最低非零模 ⟨n_k⟩ ≈ 1.56×10²、最高模 ≈ 9.3；T = 10 K 时分别为 ≈ 4.7 与 ≈ 4.9×10⁻²，显示低温下热占据急剧下降、零点能占主导。
+
+> 上述数值与图 `figures/量子场论的基本图像_模式量子化.svg` 对应（含色散、各模零点能、玻色占据数三子图）。脚本仅用 numpy + matplotlib（`Agg` 后端），未引入 scipy 或其他第三方库。
+
+### 6.2 Casimir 力随板距 F ∝ 1/d⁴（数值）
+
+对两块理想导体平行平板（面积 A、间距 d），量子场论在导体边界条件下对真空模求和，给出吸引压强
+$$ \frac{F}{A} = -\,\frac{\pi^2\hbar c}{240\,d^4},\qquad \big|\tfrac{F}{A}\big| = \frac{\pi^2\hbar c}{240\,d^4}. \tag{13} $$
+负号表示吸引；|F|/A 的量纲为压强（N/m²），与第三节系数 π²ħc/240 = 1.300×10⁻²⁷ J·m³ 自洽。
+
+**数值结果（脚本 `code/量子场论的基本图像_Casimir.py`）**：由式 (13) 直接计算得
+
+| 板距 d | |F|/A（压强） |
+|--------|--------------|
+| 0.1 μm (1×10⁻⁷ m) | 1.30×10¹ Pa |
+| 1 μm (1×10⁻⁶ m) | 1.30×10⁻³ Pa |
+| 10 μm (1×10⁻⁵ m) | 1.30×10⁻⁷ Pa |
+
+在双对数坐标中 |F|/A 对 d 的斜率恰为 −4（脚本第二子图给出局部幂律指数 ≈ −4），验证了 1/d⁴ 律。对面积 A = 1 cm² = 1×10⁻⁴ m²、d = 1 μm，吸引力 F = 1.30×10⁻⁷ N。该量级虽小，却在 MEMS（微机电系统）尺度可观测，是真空涨落可观测后果的典型例子。对应图 `figures/量子场论的基本图像_Casimir.svg`。
+
+---
+
+## 七、历史脉络与学术争议
+
+**提出动机**：20 世纪 40 年代，早期 QED 的微扰计算出现发散（自能、真空极化导致无穷大），且 Tomonaga、Schwinger、Feynman 三套看似不同的表述互不等价的外表下需要统一；随后"如何把无穷大吸收进可观测参数"成为核心问题，并最终由重整化解决。
+
+| 年份 | 人物 | 贡献 | 文献 |
+|------|------|------|------|
+| 1946 | Tomonaga | 给出波场的可相对性不变表述（多体 QED 的协变基础） | [24hz] |
+| 1948 | Feynman | 路径积分/空间-时间表述，奠定费曼图与微扰规则 | [24cr]（路径积分）、[24hx]（QED 与图） |
+| 1948 | Schwinger | QED 的协变表述（作用量原理、正确处理发散） | [24hy] |
+| 1949 | Dyson | 证明 Tomonaga–Schwinger–Feynman 三套表述等价，并给出 S 矩阵框架 | [24ia] |
+| 1971 | 't Hooft | 证明（无质量/有质量）杨–米尔斯规范场可重整 | [24ib] |
+| 1974 | Wilson | 格点规范理论给出夸克禁闭机制，建立非微扰 QFT | [24ic] |
+| 1948 | Casimir & Polder | 导出推迟 van der Waals / 两导体板吸引（Casimir 效应） | [24id] |
+| 2007 | Srednicki | 研究生教材，系统给出从标量场到规范场、重整化群的标准表述 | [24ie] |
+
+**当前争议与开放问题（并列各方，不作裁决）**：
+
+- **真空能 / 宇宙学常数问题**：QFT 给每个场模式贡献零点能 (1/2)ħω_k，朴素估计（以普朗克尺度为紫外截止）的零点能密度约为观测暗能量密度的 **10¹¹⁹–10¹²¹ 倍**（常引为约 120 个数量级）。各方立场：
+  - （i）**有效场论/重整化观点**：零点能的无穷大与有限部分只在耦合到引力时相关，可重整化把任意大的常数吸收进一个待定重整化宇宙学常数；观测到的 ρ_Λ 只是该重整化常数的实测值，并非"应该"等于朴素估计。
+  - （ii）**物理截断观点**：紫外截断应取在实在的新物理尺度（如超对称破缺尺度、中微子质量尺度），由此得到更小的估计，但仍远高于观测值，缺口依旧存在。
+  - （iii）**新物理/机制观点**：缺口暗示真空能并不按朴素方式贡献引力（如真空能隔离 sequestering、非局域引力、或"只有真空能之差才引力可见"），需超出标准 QFT+GR 的框架。
+  三种立场都承认"朴素估计与观测的巨大缺口"这一事实，分歧在于如何解释与弥补。本篇不站队。
+
+- **诠释与边界**：QFT 作为计算框架独立于量子力学诠释之争（哥本哈根/多世界/玻姆等），但"真空涨落是否'实在'""重整化是物理还是技巧"仍有概念层面的讨论；这些均属诠释范畴，无实验可裁决之分。
+
+本节内容可能随研究进展更新。
+
+---
+
+## 八、参考文献
+
+
+[24hx] Feynman R. P. *Phys. Rev.* **76**, 769–789 (1949). DOI: 10.1103/PhysRev.76.769 — 量子电动力学的空间-时间方法，引入费曼图与微扰规则。 [已核实]（第 40 篇）
+
+[24hy] Schwinger J. *Phys. Rev.* **74**, 1439–1461 (1948). DOI: 10.1103/PhysRev.74.1439 — 量子电动力学 I：协变表述。 [已核实]（第 40 篇）
+
+[24hz] Tomonaga S. *Prog. Theor. Phys.* **1**, 27–42 (1946). DOI: 10.1143/PTP.1.27 — 波场的可相对性不变表述（超多时间理论）。 [已核实]（第 40 篇）
+
+[24ia] Dyson F. J. *Phys. Rev.* **75**, 1736–1755 (1949). DOI: 10.1103/PhysRev.75.1736 — 量子电动力学中的 S 矩阵，统一三套表述。 [已核实]（第 40 篇）
+
+[24ib] 't Hooft G. *Nucl. Phys. B* **33**, 173–199 (1971). DOI: 10.1016/0550-3213(71)90395-6 — 无质量杨–米尔斯场的可重整化。 [已核实]（第 40 篇）
+
+[24ic] Wilson K. G. *Phys. Rev. D* **10**, 2445–2459 (1974). DOI: 10.1103/PhysRevD.10.2445 — 夸克禁闭与格点规范理论（非微扰 QFT）。 [已核实]（第 40 篇）
+
+[24id] Casimir H. B. G., Polder D. *Phys. Rev.* **73**, 360–372 (1948). DOI: 10.1103/PhysRev.73.360 — 推迟效应对 London–van der Waals 力的影响（两导体板吸引，即 Casimir 效应之导体极限）。 [已核实]（第 40 篇）
+
+[24ie] Srednicki M. *Quantum Field Theory*. Cambridge University Press, 660 pp. (2007). DOI: 10.1017/CBO9780511813917 — 研究生标准教材，覆盖标量/旋量/矢量场量子化、费曼图与重整化群。 [已核实]（第 40 篇）
+</script>
+<script>
+// 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏
+function protectMath(src){
+  var blocks = [];
+  // 先抽块级 $$...$$（可跨行）
+  src = src.replace(/\$\$([\s\S]+?)\$\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  // 再抽行内 $...$（不含换行、内部不含 $）
+  src = src.replace(/\$([^\$\n]+?)\$/g, function(m){
+    blocks.push(m);
+    return '%%MATH' + (blocks.length - 1) + '%%';
+  });
+  return { src: src, blocks: blocks };
+}
+
+function boot(){
+  var raw = document.getElementById('src').textContent;
+  // 记录标题锚点（在保护公式之前，避免影响）
+  var md = raw.replace(/^(#{1,3})\s+(.+)$/gm, function(m, h, t){
+    var id = 'h-' + t.replace(/[^\w一-龥]+/g,'-').replace(/^-+|-+$/g,'').slice(0,40);
+    return h + ' <span id="' + id + '"></span>' + t;
+  });
+
+  // 保护数学公式
+  var prot = protectMath(md);
+  md = prot.src;
+
+  document.getElementById('content').innerHTML = marked.parse(md);
+
+  // 还原数学公式占位符
+  var content = document.getElementById('content');
+  var html = content.innerHTML.replace(/%%MATH(\d+)%%/g, function(m, n){
+    return prot.blocks[+n];
+  });
+  content.innerHTML = html;
+
+  // 生成目录
+  var hs = document.querySelectorAll('#content h2, #content h3');
+  var toc = document.getElementById('toc'), tocHtml = '';
+  hs.forEach(function(h){
+    var sp = h.querySelector('span[id]');
+    var id = sp ? sp.id : '';
+    var cls = h.tagName === 'H3' ? 'sub' : '';
+    tocHtml += '<a class="' + cls + '" href="#' + id + '">' + h.textContent.trim() + '</a>';
+  });
+  toc.innerHTML = tocHtml;
+
+  // 图片路径：正文里写 figures/xxx.svg
+  document.querySelectorAll('#content img').forEach(function(im){
+    if(/^figures\//.test(im.getAttribute('src')||'')) return;
+  });
+
+  if (window.renderMathInElement) {
+    renderMathInElement(document.getElementById('content'), {
+      delimiters:[
+        {left:'$$', right:'$$', display:true},
+        {left:'$',  right:'$',  display:false}
+      ],
+      ignoredTags:['script','noscript','style','textarea','pre','code'],
+      throwOnError:false
+    });
+  }
+
+  // 滚动高亮
+  var links = [].slice.call(toc.querySelectorAll('a'));
+  window.addEventListener('scroll', function(){
+    var cur = null;
+    hs.forEach(function(h){
+      if (h.getBoundingClientRect().top < 120) cur = h;
+    });
+    links.forEach(function(a){ a.classList.remove('active'); });
+    if (cur){
+      var sp = cur.querySelector('span[id]');
+      var act = toc.querySelector('a[href="#' + (sp?sp.id:'') + '"]');
+      if (act) act.classList.add('active');
+    }
+  }, {passive:true});
+}
+if (window.marked) boot();
+else window.addEventListener('load', boot);
+</script>
+</body>
+</html>

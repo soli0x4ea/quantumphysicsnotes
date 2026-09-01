@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 440" font-family="Helvetica, Arial, sans-serif">
+  <!-- background -->
+  <rect x="0" y="0" width="760" height="440" fill="#ffffff"/>
+  <text x="20" y="28" font-size="16" font-weight="bold" fill="#1f4e79">QKD protocol schematic: BB84 (prepare-measure) vs E91 / MDI (entanglement-based)</text>
+
+  <!-- ============ Left panel: BB84 ============ -->
+  <rect x="20" y="48" width="350" height="372" fill="#f5f8fc" stroke="#1f4e79" stroke-width="1.2"/>
+  <text x="34" y="72" font-size="13" font-weight="bold" fill="#1f4e79">BB84  (single photon, prepare-and-measure)</text>
+
+  <!-- Alice box -->
+  <rect x="44" y="92" width="110" height="56" fill="#e7eef8" stroke="#333" stroke-width="1"/>
+  <text x="99" y="112" font-size="11" text-anchor="middle" fill="#222">Alice</text>
+  <text x="99" y="128" font-size="10" text-anchor="middle" fill="#444">random bit + basis</text>
+  <text x="99" y="141" font-size="10" text-anchor="middle" fill="#444">(Z or X)</text>
+
+  <!-- 4 states arrow to channel -->
+  <line x1="154" y1="120" x2="250" y2="120" stroke="#1f4e79" stroke-width="2"/>
+  <text x="186" y="112" font-size="10" text-anchor="middle" fill="#1f4e79">one of 4 states</text>
+
+  <!-- channel -->
+  <rect x="250" y="104" width="60" height="32" fill="#fff3d6" stroke="#b8860b" stroke-width="1"/>
+  <text x="280" y="124" font-size="10" text-anchor="middle" fill="#7a5c00">quantum</text>
+  <text x="280" y="135" font-size="10" text-anchor="middle" fill="#7a5c00">channel</text>
+
+  <!-- Bob box -->
+  <rect x="310" y="92" width="44" height="56" fill="#e7eef8" stroke="#333" stroke-width="1"/>
+  <text x="332" y="112" font-size="11" text-anchor="middle" fill="#222">Bob</text>
+  <text x="332" y="128" font-size="10" text-anchor="middle" fill="#444">random</text>
+  <text x="332" y="141" font-size="10" text-anchor="middle" fill="#444">basis</text>
+
+  <!-- basis legend -->
+  <text x="34" y="186" font-size="11" font-weight="bold" fill="#222">Bases (Pauli eigenbases):</text>
+  <!-- Z axis -->
+  <line x1="60" y1="210" x2="60" y2="300" stroke="#b00020" stroke-width="2"/>
+  <circle cx="60" cy="210" r="4" fill="#b00020"/>
+  <circle cx="60" cy="300" r="4" fill="#b00020"/>
+  <text x="74" y="214" font-size="11" fill="#b00020">|H&gt;  (Z basis, bit 0)</text>
+  <text x="74" y="304" font-size="11" fill="#b00020">|V&gt;  (Z basis, bit 1)</text>
+  <!-- X axis (45 deg) -->
+  <line x1="200" y1="210" x2="200" y2="300" stroke="#1f7a3d" stroke-width="2" transform="rotate(0 200 255)"/>
+  <circle cx="200" cy="210" r="4" fill="#1f7a3d"/>
+  <circle cx="200" cy="300" r="4" fill="#1f7a3d"/>
+  <text x="214" y="214" font-size="11" fill="#1f7a3d">|+&gt; 45 deg (X basis)</text>
+  <text x="214" y="304" font-size="11" fill="#1f7a3d">|-&gt; 135 deg (X basis)</text>
+  <text x="34" y="330" font-size="10" fill="#555">Non-orthogonal states: |&lt;H|+&gt;|^2 = 1/2</text>
+  <text x="34" y="346" font-size="10" fill="#555">Intercept-resend attack -&gt; QBER = 25%</text>
+  <text x="34" y="362" font-size="10" fill="#555">Secure iff Q &lt; 11% (one-way)</text>
+  <text x="34" y="396" font-size="10" fill="#888">Security root: no-cloning + measurement disturbance</text>
+
+  <!-- ============ Right panel: E91 / MDI ============ -->
+  <rect x="390" y="48" width="350" height="372" fill="#f5f8fc" stroke="#1f4e79" stroke-width="1.2"/>
+  <text x="404" y="72" font-size="13" font-weight="bold" fill="#1f4e79">E91 / BBM92  (entanglement-based)</text>
+
+  <!-- source -->
+  <circle cx="565" cy="120" r="22" fill="#fff3d6" stroke="#b8860b" stroke-width="1.5"/>
+  <text x="565" y="116" font-size="11" text-anchor="middle" fill="#7a5c00">S</text>
+  <text x="565" y="130" font-size="9" text-anchor="middle" fill="#7a5c00">|Phi+&gt;</text>
+
+  <!-- arms -->
+  <line x1="543" y1="120" x2="470" y2="120" stroke="#1f4e79" stroke-width="2"/>
+  <line x1="587" y1="120" x2="660" y2="120" stroke="#1f4e79" stroke-width="2"/>
+  <!-- Alice / Bob measure boxes -->
+  <rect x="430" y="96" width="40" height="48" fill="#e7eef8" stroke="#333" stroke-width="1"/>
+  <text x="450" y="116" font-size="10" text-anchor="middle" fill="#222">Alice</text>
+  <text x="450" y="130" font-size="9" text-anchor="middle" fill="#444">meas Z/X</text>
+  <rect x="630" y="96" width="40" height="48" fill="#e7eef8" stroke="#333" stroke-width="1"/>
+  <text x="650" y="116" font-size="10" text-anchor="middle" fill="#222">Bob</text>
+  <text x="650" y="130" font-size="9" text-anchor="middle" fill="#444">meas Z/X</text>
+
+  <text x="404" y="170" font-size="10" fill="#555">Correlations: CHSH S up to 2*sqrt(2) ~ 2.828</text>
+  <text x="404" y="186" font-size="10" fill="#555">Eavesdropping drops S toward local bound 2</text>
+  <text x="404" y="202" font-size="10" fill="#555">-&gt; Bell violation = eavesdropping detector</text>
+
+  <!-- MDI sub-box -->
+  <rect x="404" y="232" width="322" height="86" fill="#eef6ee" stroke="#1f7a3d" stroke-width="1.2"/>
+  <text x="418" y="252" font-size="12" font-weight="bold" fill="#1f7a3d">MDI-QKD  (measurement-device-independent)</text>
+  <line x1="430" y1="300" x2="520" y2="270" stroke="#888" stroke-width="1.5"/>
+  <line x1="700" y1="300" x2="610" y2="270" stroke="#888" stroke-width="1.5"/>
+  <rect x="500" y="258" width="60" height="34" fill="#fff" stroke="#333" stroke-width="1"/>
+  <text x="530" y="279" font-size="9" text-anchor="middle" fill="#333">Charlie</text>
+  <text x="530" y="290" font-size="8" text-anchor="middle" fill="#333">(untrusted)</text>
+  <text x="418" y="312" font-size="9" fill="#555">Detectors outsourced to Eve-equivalent node</text>
+
+  <text x="404" y="350" font-size="10" fill="#555">Real networks (京沪干线 / Micius) use</text>
+  <text x="404" y="366" font-size="10" fill="#555">TRUSTED RELAYS: each node sees plaintext,</text>
+  <text x="404" y="382" font-size="10" fill="#555">so not end-to-end quantum-secure.</text>
+  <text x="404" y="406" font-size="10" fill="#888">End-to-end needs quantum repeater or DI-QKD.</text>
+</svg>
