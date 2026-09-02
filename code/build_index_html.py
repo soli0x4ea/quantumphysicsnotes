@@ -18,6 +18,7 @@ from pathlib import Path
 from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent.parent
+REPO = "https://github.com/soli0x4ea/quantumphysicsnotes"
 SEQUENCE_FILE = ROOT / "序.md"
 OUTPUT = ROOT / "index.html"
 NOJEKYLL = ROOT / ".nojekyll"
@@ -125,15 +126,12 @@ __AUX__
 
 <h2>配套资产</h2>
 <p class="assets">
-  <a href="code/">code/ 可复现脚本</a>
-  <a href="figures/">figures/ 图表</a>
-  <a href="data/">data/ 常数表</a>
-  <a href="%E9%A2%84%E8%A7%88%E7%89%88/">预览版/</a>
+__ASSETS__
 </p>
 
 <footer>
   由机械姬 Soli 整理 · 阅读版基于 KaTeX + marked 渲染，公式离线可用 ·
-  架构版本 v1.0（2026-09）
+  <a href="__REPO__">GitHub 仓库</a> · 架构版本 v1.0（2026-09）
 </footer>
 
 <script>
@@ -227,6 +225,26 @@ def count_refs():
     return len(main) + len(supp)
 
 
+def count_dir(name):
+    d = ROOT / name
+    return len([p for p in d.glob("*") if p.is_file()]) if d.is_dir() else 0
+
+
+def build_assets(ncode, nfig, ndata):
+    """GitHub Pages 不提供目录自动索引（/code/ 会 404），故目录类资产指向仓库目录树；
+       预览版是具体 HTML 文件，可站内直链。"""
+    items = [
+        f'<a href="{REPO}/tree/main/code">code/ 可复现脚本（{ncode}）</a>',
+        f'<a href="{REPO}/tree/main/figures">figures/ 图表（{nfig}）</a>',
+        f'<a href="{REPO}/tree/main/data">data/ 常数表（{ndata}）</a>',
+    ]
+    preview = ROOT / "预览版" / "量子力学笔记_预览版.html"
+    if preview.exists():
+        rel = preview.relative_to(ROOT).as_posix()
+        items.append(f'<a href="{quote(rel)}">预览版入口</a>')
+    return items
+
+
 def main():
     parts, rows = parse_sequence()
     mds, htmls = collect_files()
@@ -282,12 +300,13 @@ def main():
             f'  <li><a href="{quote(fn)}">{name}</a><span class="d">{desc}</span></li>'
         )
 
-    ncode = len(list((ROOT / "code").glob("*"))) if (ROOT / "code").is_dir() else 0
-    nfig = len(list((ROOT / "figures").glob("*"))) if (ROOT / "figures").is_dir() else 0
+    ncode, nfig, ndata = count_dir("code"), count_dir("figures"), count_dir("data")
 
     out = (TEMPLATE
            .replace("__SECTIONS__", "\n".join(sections))
            .replace("__AUX__", "\n".join(aux))
+           .replace("__ASSETS__", "\n  ".join(build_assets(ncode, nfig, ndata)))
+           .replace("__REPO__", REPO)
            .replace("__NREF__", str(count_refs()))
            .replace("__NCODE__", str(ncode))
            .replace("__NFIG__", str(nfig)))
