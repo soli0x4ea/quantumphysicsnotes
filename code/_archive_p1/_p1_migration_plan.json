@@ -1,0 +1,1159 @@
+{
+ "01": {
+  "match": [
+   [
+    "feynman",
+    "2010",
+    "#25",
+    "- Feynman, R.P., Leighton, R.B., & Sands, M. (2010). *The Feynman Lect"
+   ],
+   [
+    "codata",
+    "2022",
+    "#1",
+    "- CODATA (2022). *CODATA Recommended Values of the Fundamental Physica"
+   ]
+  ],
+  "new": []
+ },
+ "02": {
+  "match": [
+   [
+    "feynman",
+    "2010",
+    "#25",
+    "- Feynman, R.P., Leighton, R.B., & Sands, M. (2010). *The Feynman Lect"
+   ],
+   [
+    "codata",
+    "2022",
+    "#1",
+    "- CODATA (2022). *CODATA Recommended Values of the Fundamental Physica"
+   ]
+  ],
+  "new": []
+ },
+ "03": {
+  "match": [
+   [
+    "planck",
+    "1901",
+    "#3",
+    "- Planck, M. (1901). *Annalen der Physik*, 4, 553–563 [主序列 #3，已核实；能量量子"
+   ],
+   [
+    "wien",
+    "1896",
+    "24cu",
+    "- Wien, W. (1896). *Annalen der Physik*, 58, 662–670 [24cu，已核实；维恩位移定律]"
+   ],
+   [
+    "rayleigh",
+    "1900",
+    "24cv",
+    "- Rayleigh, Lord (1900). *Philosophical Magazine*, 49, 539–540 [24cv，已"
+   ],
+   [
+    "stefan",
+    "1879",
+    "24cw",
+    "- Stefan, J. (1879). *Sitzungsberichte Kaiserl. Akad. Wiss. Wien (Abt."
+   ],
+   [
+    "boltzmann",
+    "1884",
+    "24cx",
+    "- Boltzmann, L. (1884). *Wiedemann's Annalen*, 22, 291–294 [24cx，已核实；斯"
+   ],
+   [
+    "einstein",
+    "1905",
+    "#4",
+    "- Einstein, A. (1905). *Annalen der Physik*, 17, 132–148 [主序列 #4，已核实；光"
+   ],
+   [
+    "codata",
+    "2022",
+    "#1",
+    "- CODATA (2022). *Fundamental Physical Constants*（NIST SP 961，精确定义值与测量"
+   ]
+  ],
+  "new": []
+ },
+ "04": {
+  "match": [
+   [
+    "hertz",
+    "1887",
+    "24cz",
+    "- Hertz, H. (1887). *Sitzungsberichte Preuss. Akad. Wiss. Berlin*, 583"
+   ],
+   [
+    "lenard",
+    "1902",
+    "24da",
+    "- Lenard, P. (1902). *Annalen der Physik*, 8, 149–198 [24da，已核实；阴极射线定量"
+   ],
+   [
+    "einstein",
+    "1905",
+    "#4",
+    "- Einstein, A. (1905). *Annalen der Physik*, 17, 132–148 [主序列 #4，已核实；光"
+   ],
+   [
+    "millikan",
+    "1916",
+    "24cy",
+    "- Millikan, R.A. (1916). *Physical Review*, 7, 355–388 [24cy，已核实；精密验证 "
+   ],
+   [
+    "codata",
+    "2022",
+    "#1",
+    "- CODATA (2022). *Fundamental Physical Constants* [主序列复用；e, h, c 精确定义值"
+   ]
+  ],
+  "new": []
+ },
+ "05": {
+  "match": [
+   [
+    "compton",
+    "1923",
+    "#6",
+    "- Compton, A.H. (1923). *Physical Review*, 21, 483–502 [主序列 #6，已核实；康普顿"
+   ],
+   [
+    "compton",
+    "1925",
+    "24dj",
+    "- Compton, A.H., & Simon, A.W. (1925). *Physical Review*, 26, 289–299 "
+   ],
+   [
+    "codata",
+    "2022",
+    "#1",
+    "- CODATA (2022). *Fundamental Physical Constants* [主序列复用；m_e, h, c 精确定"
+   ]
+  ],
+  "new": []
+ },
+ "06": {
+  "match": [
+   [
+    "balmer",
+    "1885",
+    "24db",
+    "- Balmer, J.J. (1885). *Annalen der Physik*, 25, 80–85 [24db，已核实；氢原子可见"
+   ],
+   [
+    "rydberg",
+    "1890",
+    "24dc",
+    "- Rydberg, J.R. (1890). *K. Sven. Vetensk. Akad. Handl.*, 23(11) [24dc"
+   ],
+   [
+    "bohr",
+    "1913",
+    "#5/24cc",
+    "- Bohr, N. (1913). *Philosophical Magazine*, 26, 1–25, 476–502, 857–87"
+   ],
+   [
+    "sommerfeld",
+    "1916",
+    "24cb",
+    "- Sommerfeld, A. (1916). *Annalen der Physik*, 51, 1–94 [24cb，已核实；椭圆轨道"
+   ],
+   [
+    "codata",
+    "2022",
+    "#1",
+    "- CODATA (2022). *Fundamental Physical Constants* [主序列复用；a₀, R∞, m_e, "
+   ]
+  ],
+  "new": []
+ },
+ "07": {
+  "match": [
+   [
+    "ehrenfest",
+    "1927",
+    "24dk",
+    "- Ehrenfest, P. (1927). *Zeitschrift für Physik*, 45, 455 [24dk，已核实；Eh"
+   ],
+   [
+    "codata",
+    "2022",
+    "#1",
+    "- CODATA (2022). *Fundamental Physical Constants* [主序列复用]."
+   ]
+  ],
+  "new": []
+ },
+ "08": {
+  "match": [
+   [
+    "heisenberg",
+    "1927",
+    "#9",
+    "- Heisenberg, W. (1927). *Zeitschrift für Physik*, 43, 172 [主序列 #9，已核实"
+   ],
+   [
+    "kennard",
+    "1927",
+    "24dl",
+    "- Kennard, E.H. (1927). *Zeitschrift für Physik*, 44, 326 [24dl，已核实；严格"
+   ],
+   [
+    "robertson",
+    "1929",
+    "24dd",
+    "- Robertson, H.P. (1929). *Physical Review*, 34, 163 [24dd，已核实；一般 Robe"
+   ],
+   [
+    "ozawa",
+    "2003",
+    "24de",
+    "- Ozawa, M. (2003). *Physical Review A*, 67, 042105 [24de，已核实；误差–反作用分离"
+   ],
+   [
+    "ehrenfest",
+    "1927",
+    "24dk",
+    "- Ehrenfest, P. (1927). *Zeitschrift für Physik*, 45, 455 [24dk，已核实；Eh"
+   ],
+   [
+    "codata",
+    "2022",
+    "#1",
+    "- CODATA (2022). *Fundamental Physical Constants* [主序列复用]."
+   ]
+  ],
+  "new": []
+ },
+ "09": {
+  "match": [
+   [
+    "born",
+    "1926",
+    "24bb/24dm",
+    "- Born, M. (1926). Zur Quantenmechanik der Stoßvorgänge. *Zeitschrift "
+   ],
+   [
+    "davisson",
+    "1927",
+    "#10",
+    "- Davisson, C., & Germer, L.H. (1927). Diffraction of Electrons by a C"
+   ],
+   [
+    "dirac",
+    "1930",
+    "24bd/24hp",
+    "- Dirac, P.A.M. (1930). *The Principles of Quantum Mechanics*. Oxford "
+   ],
+   [
+    "colella",
+    "1975",
+    "24bc",
+    "- Colella, R., Overhauser, A.W., & Werner, S.A. (1975). Observation of"
+   ],
+   [
+    "tonomura",
+    "1989",
+    "#22",
+    "- Tonomura, A., Endo, J., Matsuda, T., Kawasaki, T., & Ezawa, H. (1989"
+   ],
+   [
+    "feynman",
+    "2010",
+    "#25",
+    "- Feynman, R.P., Leighton, R.B., & Sands, M. (2010). *The Feynman Lect"
+   ],
+   [
+    "sakurai",
+    "2011",
+    "#28",
+    "- Sakurai, J.J., & Napolitano, J. (2011). *Modern Quantum Mechanics* ("
+   ],
+   [
+    "codata",
+    "2022",
+    "#1",
+    "- CODATA (2022). *Recommended Values of the Fundamental Physical Const"
+   ]
+  ],
+  "new": []
+ },
+ "10": {
+  "match": [
+   [
+    "born",
+    "1926",
+    "24bb/24dm",
+    "- Born, M. (1926). *Zeitschrift für Physik*, 37, 863 [24dm，已核实；Born 规则"
+   ],
+   [
+    "misra",
+    "1977",
+    "24df",
+    "- Misra, B., & Sudarshan, E.C.G. (1977). *J. Math. Phys.*, 18, 756 [24"
+   ],
+   [
+    "itano",
+    "1990",
+    "24dg",
+    "- Itano, W.M., et al. (1990). *Phys. Rev. A*, 41, 2295 [24dg，已核实；芝诺实验]"
+   ],
+   [
+    "robertson",
+    "1929",
+    "24dd",
+    "- Robertson, H.P. (1929). *Phys. Rev.*, 34, 163 [24dd，已核实；谱定理/PVM 基础]."
+   ],
+   [
+    "codata",
+    "2022",
+    "#1",
+    "- CODATA (2022). *Fundamental Physical Constants* [主序列复用]."
+   ]
+  ],
+  "new": []
+ },
+ "11": {
+  "match": [
+   [
+    "dirac",
+    "1930",
+    "24bd/24hp",
+    "- Dirac, P.A.M. (1930). *The Principles of Quantum Mechanics*. Oxford "
+   ],
+   [
+    "sakurai",
+    "2011",
+    "#28",
+    "- Sakurai, J.J., & Napolitano, J. (2011). *Modern Quantum Mechanics* ("
+   ],
+   [
+    "cohentannoudji",
+    "1977",
+    "#29",
+    "- Cohen-Tannoudji, C., Diu, B., & Laloë, F. (1977). *Quantum Mechanics"
+   ],
+   [
+    "feynman",
+    "2010",
+    "#25",
+    "- Feynman, R.P., Leighton, R.B., & Sands, M. (2010). *The Feynman Lect"
+   ],
+   [
+    "codata",
+    "2022",
+    "#1",
+    "- CODATA (2022). *Recommended Values of the Fundamental Physical Const"
+   ]
+  ],
+  "new": [
+   [
+    "nielsen",
+    "2010",
+    "- Nielsen, M.A., & Chuang, I.L. (2010). *Quantum Computation and Quant"
+   ]
+  ]
+ },
+ "16": {
+  "match": [
+   [
+    "stern",
+    "1922",
+    "24bf",
+    "- Stern W., Gerlach W. (1922). Der experimentelle Nachweis der Richtun"
+   ],
+   [
+    "uhlenbeck",
+    "1925",
+    "24bg",
+    "- Uhlenbeck G. E., Goudsmit S. (1925). Ersetzung der Hypothese vom unm"
+   ],
+   [
+    "pauli",
+    "1927",
+    "24bh",
+    "- Pauli W. (1927). Zur Quantenmechanik des magnetischen Elektrons. *Ze"
+   ],
+   [
+    "dirac",
+    "1928",
+    "#11/24bi/24hf",
+    "- Dirac P. A. M. (1928). The Quantum Theory of the Electron. *Proceedi"
+   ],
+   [
+    "einstein",
+    "1915",
+    "24bj",
+    "- Einstein A., de Haas W. J. (1915). Experimental proof of the existen"
+   ],
+   [
+    "thomas",
+    "1926",
+    "24bk",
+    "- Thomas L. H. (1926). The Motion of the Spinning Electron. *Nature*, "
+   ],
+   [
+    "thomas",
+    "1927",
+    "24bl",
+    "- Thomas L. H. (1927). The Kinematics of the Motion of the Spinning El"
+   ],
+   [
+    "condon",
+    "1935",
+    "24bm",
+    "- Condon E. U., Shortley G. H. (1935). *The Theory of Atomic Spectra*."
+   ],
+   [
+    "sakurai",
+    "2011",
+    "#28",
+    "- Sakurai J. J., Napolitano J. (2011). *Modern Quantum Mechanics* (2nd"
+   ],
+   [
+    "feynman",
+    "2010",
+    "#25",
+    "- Feynman R. P., Leighton R. B., Sands M. (2010). *The Feynman Lecture"
+   ],
+   [
+    "codata",
+    "2022",
+    "#1",
+    "- CODATA (2022). *Recommended Values of the Fundamental Physical Const"
+   ]
+  ],
+  "new": [
+   [
+    "lederman",
+    "2004",
+    "- Lederman L. M., Hill C. T. (2004). *Quantum Physics for Poets*. Prom"
+   ]
+  ]
+ },
+ "18": {
+  "match": [
+   [
+    "dirac",
+    "1927",
+    "24bn/24ch",
+    "- Dirac P. A. M. (1927). The Quantum Theory of the Emission and Absorp"
+   ],
+   [
+    "landau",
+    "1927",
+    "24bp",
+    "- Landau L. D. (1927). Das Dämpfungsproblem in der Wellenmechanik. *Ze"
+   ],
+   [
+    "sakurai",
+    "2011",
+    "#28",
+    "- Sakurai J. J., Napolitano J. (2011). *Modern Quantum Mechanics* (2nd"
+   ],
+   [
+    "feynman",
+    "2010",
+    "#25",
+    "- Feynman R. P., Leighton R. B., Sands M. (2010). *The Feynman Lecture"
+   ],
+   [
+    "codata",
+    "2022",
+    "#1",
+    "- CODATA (2022). *Recommended Values of the Fundamental Physical Const"
+   ]
+  ],
+  "new": [
+   [
+    "nielsen",
+    "2010",
+    "- Nielsen M. A., Chuang I. L. (2010). *Quantum Computation and Quantum"
+   ]
+  ]
+ },
+ "19": {
+  "match": [
+   [
+    "dirac",
+    "1927",
+    "24bn/24ch",
+    "- Dirac (1927) 含时微扰与辐射量子理论，可复用本系列 24ch 条（Proc. R. Soc. A 114, 243–265，"
+   ],
+   [
+    "sakurai",
+    "2011",
+    "#28",
+    "- Sakurai, J.J. & Napolitano, J. (2011). *Modern Quantum Mechanics* (2"
+   ],
+   [
+    "landau",
+    "1977",
+    "#27",
+    "- Landau, L.D. & Lifshitz, E.M. (1977). *Quantum Mechanics: Non-Relati"
+   ],
+   [
+    "feynman",
+    "2010",
+    "#25",
+    "- Feynman, R.P., Leighton, R.B. & Sands, M. (2010). *The Feynman Lectu"
+   ]
+  ],
+  "new": [
+   [
+    "codata",
+    "2018",
+    "- CODATA (2018) 推荐值（NIST）：Hartree 能量 $E_h=27.211\\,386\\,245\\,988(53)\\ \\"
+   ]
+  ]
+ },
+ "21": {
+  "match": [
+   [
+    "bose",
+    "1924",
+    "24ds",
+    "- Bose S.N. (1924). Plancks Gesetz und Lichtquantenhypothese. *Zeitsch"
+   ],
+   [
+    "einstein",
+    "1924",
+    "24dq",
+    "- Einstein A. (1924). Quantentheorie des einatomigen idealen Gases. *S"
+   ],
+   [
+    "einstein",
+    "1925",
+    "24dr",
+    "- Einstein A. (1925). Quantentheorie des einatomigen idealen Gases. *S"
+   ],
+   [
+    "pauli",
+    "1925",
+    "24dp",
+    "- Pauli W. (1925). Über den Zusammenhang des Abschlusses der Elektrone"
+   ],
+   [
+    "fermi",
+    "1926",
+    "24dt",
+    "- Fermi E. (1926). Zur Quantelung des idealen einatomigen Gases. *Zeit"
+   ],
+   [
+    "dirac",
+    "1926",
+    "24du",
+    "- Dirac P.A.M. (1926). On the Theory of Quantum Mechanics. *Proceeding"
+   ],
+   [
+    "pauli",
+    "1940",
+    "24do",
+    "- Pauli W. (1940). The Connection Between Spin and Statistics. *Physic"
+   ],
+   [
+    "hong",
+    "1987",
+    "24dv",
+    "- Hong C.K., Ou Z.Y., Mandel L. (1987). Measurement of subpicosecond t"
+   ],
+   [
+    "sakurai",
+    "2011",
+    "#28",
+    "- Sakurai J.J., Napolitano J. (2011). *Modern Quantum Mechanics* (2nd "
+   ],
+   [
+    "feynman",
+    "2010",
+    "#25",
+    "- Feynman R.P., Leighton R.B., Sands M. (2010). *The Feynman Lectures "
+   ]
+  ],
+  "new": []
+ },
+ "22": {
+  "match": [
+   [
+    "moseley",
+    "1913",
+    "24dw",
+    "- Moseley H.G.J. (1913). The High-Frequency Spectra of the Elements. *"
+   ],
+   [
+    "slater",
+    "1930",
+    "24dx",
+    "- Slater J.C. (1930). Atomic Shielding Constants. *Physical Review*, 3"
+   ],
+   [
+    "hund",
+    "1925",
+    "24dy",
+    "- Hund F. (1925). Zur Deutung verwickelter Spektren, insbesondere der "
+   ],
+   [
+    "hartree",
+    "1928",
+    "24dz",
+    "- Hartree D.R. (1928). The Wave Mechanics of an Atom with a Non-Coulom"
+   ],
+   [
+    "bohr",
+    "1913",
+    "#5/24cc",
+    "- Bohr N. (1913). On the Constitution of Atoms and Molecules. *Philoso"
+   ],
+   [
+    "pauli",
+    "1925",
+    "24dp",
+    "- Pauli W. (1925). Über den Zusammenhang des Abschlusses der Elektrone"
+   ],
+   [
+    "sakurai",
+    "2011",
+    "#28",
+    "- Sakurai J.J., Napolitano J. (2011). *Modern Quantum Mechanics* (2nd "
+   ]
+  ],
+  "new": [
+   [
+    "nist",
+    "2022",
+    "- NIST (2022). NIST Atomic Spectra Database (version 5.10). https://ph"
+   ]
+  ]
+ },
+ "23": {
+  "match": [
+   [
+    "heitler",
+    "1927",
+    "24ea",
+    "- Heitler W., London F. (1927). Wechselwirkung neutraler Atome und hom"
+   ],
+   [
+    "hund",
+    "1927",
+    "24eb",
+    "- Hund F. (1927). Allgemeine Quantenmechanik des Atom- und Molekelbaue"
+   ],
+   [
+    "mulliken",
+    "1928",
+    "24ec",
+    "- Mulliken R.S. (1928). The Assignment of Quantum Numbers for Electron"
+   ],
+   [
+    "pauling",
+    "1931",
+    "24ed",
+    "- Pauling L. (1931). The Nature of the Chemical Bond. *Journal of the "
+   ],
+   [
+    "bloch",
+    "1929",
+    "24ee",
+    "- Bloch F. (1929). Über die Quantenmechanik der Elektronen in Kristall"
+   ],
+   [
+    "sakurai",
+    "2011",
+    "#28",
+    "- Sakurai J.J., Napolitano J. (2011). *Modern Quantum Mechanics* (2nd "
+   ]
+  ],
+  "new": [
+   [
+    "herzberg",
+    "1950",
+    "- Herzberg G. (1950). *Molecular Spectra and Molecular Structure. I. S"
+   ],
+   [
+    "atkins",
+    "2011",
+    "- Atkins P., Friedman R. (2011). *Molecular Quantum Mechanics* (5th ed"
+   ]
+  ]
+ },
+ "29": {
+  "match": [
+   [
+    "einstein",
+    "1935",
+    "#12",
+    "- Einstein, A., Podolsky, B., & Rosen, N. (1935). Can Quantum-Mechanic"
+   ],
+   [
+    "bell",
+    "1964",
+    "#16",
+    "- Bell, J.S. (1964). On the Einstein Podolsky Rosen Paradox. *Physics "
+   ],
+   [
+    "horodecki",
+    "2009",
+    "#24",
+    "- Horodecki, R., Horodecki, P., Horodecki, M., & Horodecki, K. (2009)."
+   ],
+   [
+    "codata",
+    "2022",
+    "#1",
+    "- CODATA (2022). *Recommended Values of the Fundamental Physical Const"
+   ]
+  ],
+  "new": [
+   [
+    "werner",
+    "1989",
+    "- Werner, R.F. (1989). Quantum States with Einstein-Podolsky-Rosen Cor"
+   ],
+   [
+    "peres",
+    "1996",
+    "- Peres, A. (1996). Separability Criterion for Density Matrices. *Phys"
+   ],
+   [
+    "horodecki",
+    "1996",
+    "- Horodecki, M., Horodecki, P., & Horodecki, R. (1996). Separability o"
+   ],
+   [
+    "horodecki",
+    "1997",
+    "- Horodecki, P. (1997). Separability Criterion and Inseparable Mixed S"
+   ],
+   [
+    "wootters",
+    "1998",
+    "- Wootters, W.K. (1998). Entanglement of Formation of an Arbitrary Sta"
+   ],
+   [
+    "bennett",
+    "1996",
+    "- Bennett, C.H., Di Vincenzo, D.P., Smolin, J.A., & Wootters, W.K. (19"
+   ],
+   [
+    "vidal",
+    "2002",
+    "- Vidal, G., & Werner, R.F. (2002). Computable Measure of Entanglement"
+   ],
+   [
+    "nielsen",
+    "2010",
+    "- Nielsen, M.A., & Chuang, I.L. (2010). *Quantum Computation and Quant"
+   ]
+  ]
+ },
+ "30": {
+  "match": [
+   [
+    "einstein",
+    "1935",
+    "#12",
+    "- Einstein A., Podolsky B., Rosen N. (1935). Can Quantum-Mechanical De"
+   ],
+   [
+    "bell",
+    "1964",
+    "#16",
+    "- Bell J.S. (1964). On the Einstein Podolsky Rosen Paradox. *Physics*,"
+   ],
+   [
+    "clauser",
+    "1969",
+    "#18",
+    "- Clauser J.F., Horne M.A., Shimony A., Holt R.A. (1969). Proposed Exp"
+   ],
+   [
+    "aspect",
+    "1981",
+    "#19",
+    "- Aspect A., Grangier P., Roger G. (1981). Experimental Tests of Reali"
+   ],
+   [
+    "aspect",
+    "1982",
+    "#20/#21",
+    "- Aspect A., Grangier P., Roger G. (1982). Experimental Realization of"
+   ],
+   [
+    "aspect",
+    "1982",
+    "#20/#21",
+    "- Aspect A., Dalibard J., Roger G. (1982). Experimental Test of Bell's"
+   ],
+   [
+    "weihs",
+    "1998",
+    "#23",
+    "- Weihs G., Jennewein T., Simon C., Weinfurter H., Zeilinger A. (1998)"
+   ],
+   [
+    "bohm",
+    "1957",
+    "#17",
+    "- Bohm D., Aharonov Y. (1957). Discussion of Experimental Proof for th"
+   ],
+   [
+    "bohr",
+    "1935",
+    "#13",
+    "- Bohr N. (1935). Can Quantum-Mechanical Description of Physical Reali"
+   ],
+   [
+    "codata",
+    "2022",
+    "#1",
+    "- CODATA (2022). Recommended Values of the Fundamental Physical Consta"
+   ],
+   [
+    "sakurai",
+    "2011",
+    "#28",
+    "- Sakurai J.J., Napolitano J. (2011). *Modern Quantum Mechanics* (2nd "
+   ],
+   [
+    "feynman",
+    "2010",
+    "#25",
+    "- Feynman R.P., Leighton R.B., Sands M. (2010). *The Feynman Lectures "
+   ]
+  ],
+  "new": [
+   [
+    "freedman",
+    "1972",
+    "- Freedman S.J., Clauser J.F. (1972). Experimental Test of Local Hidde"
+   ],
+   [
+    "cirelson",
+    "1980",
+    "- Cirel'son B.S. (1980). Quantum Generalizations of Bell's Inequality."
+   ],
+   [
+    "rowe",
+    "2001",
+    "- Rowe M.A., Kielpinski D., Meyer V., Sackett C.A., Itano W.M., Monroe"
+   ],
+   [
+    "hensen",
+    "2015",
+    "- Hensen B., Bernien H., Dréau A.E., Reiserer A., Kalb N., Blok M.S., "
+   ],
+   [
+    "giustina",
+    "2015",
+    "- Giustina M., Versteegh M.A.M., Wengerowsky S., Handsteiner J., Hochr"
+   ],
+   [
+    "shalm",
+    "2015",
+    "- Shalm L.K., Meyer-Scott E., Christensen B.G., Bierhorst P., Wayne M."
+   ],
+   [
+    "kocher",
+    "1967",
+    "- Kocher C.A., Commins E.D. (1967). Polarization Correlation of Photon"
+   ],
+   [
+    "tan",
+    "1991",
+    "- Tan S.M., Walls D.F., Collett M.J. (1991). Nonlocality of a Single P"
+   ],
+   [
+    "eberhard",
+    "1993",
+    "- Eberhard P.H. (1993). Background Level and Counter Efficiencies Requ"
+   ],
+   [
+    "bell",
+    "1966",
+    "- Bell J.S. (1966). On the Problem of Hidden Variables in Quantum Mech"
+   ],
+   [
+    "wu",
+    "1950",
+    "- Wu C.S., Shaknov I. (1950). The Angular Correlation of Scattered Ann"
+   ],
+   [
+    "giustina",
+    "2013",
+    "- Giustina M., Mech A., Ramelow S., Wittmann B., Kofler J., Beyer J., "
+   ],
+   [
+    "nielsen",
+    "2010",
+    "- Nielsen M.A., Chuang I.L. (2010). *Quantum Computation and Quantum I"
+   ],
+   [
+    "brunner",
+    "2014",
+    "- Brunner N., Cavalcanti D., Pironio S., Scarani V., Wehner S. (2014)."
+   ],
+   [
+    "clauser",
+    "1974",
+    "- Clauser J.F., Horne M.A. (1974). *Physical Review D* 10, 526."
+   ],
+   [
+    "werner",
+    "1989",
+    "- Werner R.F. (1989). *Physical Review A* 40, 4277."
+   ],
+   [
+    "gisin",
+    "1991",
+    "- Gisin N. (1991).；Popescu S., Rohrlich D. (1992).；Greenberger D.M., H"
+   ],
+   [
+    "hensen",
+    "2016",
+    "- Hensen B. et al. (2016). 追加 300 次试验的结果（$S = 2.38 \\pm 0.14$，2.7σ）."
+   ],
+   [
+    "handsteiner",
+    "2017",
+    "- Handsteiner J. et al. (2017). Cosmic Bell Test.；Rauch D. et al. (201"
+   ]
+  ]
+ },
+ "31": {
+  "match": [
+   [
+    "wigner",
+    "1963",
+    "24ah",
+    "- Wigner, E.P. (1963). The Problem of Measurement. *American Journal o"
+   ],
+   [
+    "ghirardi",
+    "1986",
+    "24aa",
+    "- Ghirardi, G.C., Rimini, A., & Weber, T. (1986). Unified Dynamics for"
+   ],
+   [
+    "brune",
+    "1996",
+    "24ae/24gs",
+    "- Brune, M., Hagley, E., Dreyer, J., Maître, X., Maali, A., Wunderlich"
+   ],
+   [
+    "myatt",
+    "2000",
+    "24af",
+    "- Myatt, C.J., King, B.E., Turchette, Q.A., Sackett, C.A., Kielpinski,"
+   ],
+   [
+    "tegmark",
+    "2000",
+    "24ag",
+    "- Tegmark, M. (2000). The Importance of Quantum Decoherence in Brain P"
+   ],
+   [
+    "zurek",
+    "2003",
+    "24ac",
+    "- Zurek, W.H. (2003). Decoherence, Einselection, and the Quantum Origi"
+   ],
+   [
+    "schlosshauer",
+    "2004",
+    "24ad",
+    "- Schlosshauer, M. (2004). Decoherence, the Measurement Problem, and I"
+   ],
+   [
+    "codata",
+    "2022",
+    "#1",
+    "- CODATA (2022). *Recommended Values of the Fundamental Physical Const"
+   ]
+  ],
+  "new": [
+   [
+    "bohm",
+    "1952",
+    "- Bohm, D. (1952). A Suggested Interpretation of the Quantum Theory in"
+   ],
+   [
+    "zurek",
+    "1981",
+    "- Zurek, W.H. (1981). Pointer Basis of Quantum Apparatus: Into What Mi"
+   ],
+   [
+    "zurek",
+    "1982",
+    "- Zurek, W.H. (1982). Environment-Induced Superselection Rules. *Physi"
+   ],
+   [
+    "caldeira",
+    "1983",
+    "- Caldeira, A.O., & Leggett, A.J. (1983). Path Integral Approach to Qu"
+   ],
+   [
+    "griffiths",
+    "1984",
+    "- Griffiths, R.B. (1984). Consistent Histories and the Interpretation "
+   ],
+   [
+    "joos",
+    "1985",
+    "- Joos, E., & Zeh, H.D. (1985). The Emergence of Classical Properties "
+   ],
+   [
+    "zurek",
+    "1991",
+    "- Zurek, W.H. (1991). Decoherence and the Transition from Quantum to C"
+   ],
+   [
+    "nielsen",
+    "2010",
+    "- Nielsen, M.A., & Chuang, I.L. (2010). *Quantum Computation and Quant"
+   ]
+  ]
+ },
+ "32": {
+  "match": [
+   [
+    "bennett",
+    "1984",
+    "24ai",
+    "- Bennett C.H., Brassard G. (1984). Quantum cryptography: Public key d"
+   ],
+   [
+    "ekert",
+    "1991",
+    "24aj",
+    "- Ekert A.K. (1991). Quantum cryptography based on Bell's theorem. *Ph"
+   ],
+   [
+    "wootters",
+    "1982",
+    "24ak",
+    "- Wootters W.K., Zurek W.H. (1982). A single quantum cannot be cloned."
+   ],
+   [
+    "dieks",
+    "1982",
+    "24al",
+    "- Dieks D. (1982). Communication by EPR devices. *Physics Letters A*, "
+   ],
+   [
+    "shor",
+    "2000",
+    "24am",
+    "- Shor P.W., Preskill J. (2000). Simple proof of security of the BB84 "
+   ],
+   [
+    "bennett",
+    "1992",
+    "24an/24ay/24fm",
+    "- Bennett C.H., Bessette F., Brassard G., Salvail L., Smolin J. (1992)"
+   ],
+   [
+    "brassard",
+    "2000",
+    "24ao",
+    "- Brassard G., Lütkenhaus N., Mor T., Sanders B.C. (2000). Limitations"
+   ],
+   [
+    "hwang",
+    "2003",
+    "24ap",
+    "- Hwang W.-Y. (2003). Quantum Key Distribution with High Loss: Toward "
+   ],
+   [
+    "lo",
+    "2005",
+    "24aq",
+    "- Lo H.-K., Ma X., Chen K. (2005). Decoy State Quantum Key Distributio"
+   ],
+   [
+    "wang",
+    "2005",
+    "24ar",
+    "- Wang X.-B. (2005). Beating the Photon-Number-Splitting Attack in Pra"
+   ],
+   [
+    "ma",
+    "2005",
+    "24as",
+    "- Ma X., Qi B., Zhao Y., Lo H.-K. (2005). Practical decoy state for qu"
+   ],
+   [
+    "lo",
+    "1999",
+    "24at",
+    "- Lo H.-K., Chau H.F. (1999). Unconditional Security of Quantum Key Di"
+   ],
+   [
+    "mayers",
+    "2001",
+    "24au",
+    "- Mayers D. (2001). Unconditional Security in Quantum Cryptography. *J"
+   ],
+   [
+    "lo",
+    "2012",
+    "24av",
+    "- Lo H.-K., Curty M., Qi B. (2012). Measurement-Device-Independent Qua"
+   ],
+   [
+    "gisin",
+    "2002",
+    "24aw",
+    "- Gisin N., Ribordy G., Tittel W., Zbinden H. (2002). Quantum cryptogr"
+   ],
+   [
+    "scarani",
+    "2009",
+    "24ax",
+    "- Scarani V., Bechmann-Pasquinucci H., Cerf N.J., Dušek M., Lütkenhaus"
+   ],
+   [
+    "bennett",
+    "1992",
+    "24an/24ay/24fm",
+    "- Bennett C.H., Brassard G., Mermin N.D. (1992). Quantum cryptography "
+   ],
+   [
+    "yin",
+    "2017",
+    "24az",
+    "- Yin J. et al. (2017). Satellite-based entanglement distribution over"
+   ],
+   [
+    "chen",
+    "2021",
+    "24ba",
+    "- Chen Y.-A. et al. (2021). An integrated space-to-ground quantum comm"
+   ],
+   [
+    "codata",
+    "2022",
+    "#1",
+    "- CODATA (2022). *Recommended Values of the Fundamental Physical Const"
+   ]
+  ],
+  "new": [
+   [
+    "wiesner",
+    "1983",
+    "- Wiesner S. (1983). Conjugate Coding. *SIGACT News*, 15(1), 78–88.（QK"
+   ],
+   [
+    "lucamarini",
+    "2018",
+    "- Lucamarini M. et al. (2018). Overcoming the rate–distance limit of q"
+   ]
+  ]
+ }
+}

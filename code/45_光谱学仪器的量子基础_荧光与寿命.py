@@ -14,13 +14,14 @@ import matplotlib
 matplotlib.use("Agg")
 import numpy as np
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
-h = 6.62607015e-34
-hbar = 1.054571817e-34
-c = 299792458.0
-eps0 = 8.8541878128e-12
-e = 1.602176634e-19
-a0 = 5.29177210903e-11
+h = C["h"]
+hbar = C["hbar"]
+c = C["c"]
+eps0 = C["epsilon_0"]
+e = C["e"]
+a0 = C["a0"]
 D = 3.33564095e-30   # 1 Debye in C·m
 
 

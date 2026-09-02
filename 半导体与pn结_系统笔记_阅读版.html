@@ -87,8 +87,7 @@ img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6
   <main class="main"><article class="paper" id="content"></article></main>
 </div>
 
-<script type="text/plain" id="src">
-# 半导体与pn结
+<script type="text/plain" id="src"># 半导体与pn结
 
 > **分类归属：第三部分·多体、对称与凝聚态 · 数学程度：L2 · 前置依赖：第 21 篇《全同粒子与泡利不相容原理》、第 24 篇《晶体中的电子与能带》**
 > **验证依据**：Hall (1879) Am. J. Math.、Wilson (1931) Proc. R. Soc. A、Bardeen & Brattain (1948) Phys. Rev.、Shockley (1949) Bell Syst. Tech. J.、Shockley (1950) *Electrons and Holes in Semiconductors*、Esaki (1958) Phys. Rev.、Sze & Ng (2007)
@@ -177,9 +176,11 @@ $$
 垂直磁场中载流子偏转产生横向电场，霍尔系数
 
 $$
-R_H=\frac{E_y}{j_xB_z}=\frac{1}{ne}\quad(\text{电子}),\qquad R_H=-\frac{1}{pe}\quad(\text{空穴}),
+R_H=\frac{E_y}{j_xB_z}=-\frac{1}{ne}\quad(\text{电子}),\qquad R_H=+\frac{1}{pe}\quad(\text{空穴}),
 \tag{7}
 $$
+
+其中约定 $j_x$ 沿 $+x$、$B_z$ 沿 $+z$。注意一个易错点：同一电流方向下电子与空穴的漂移方向相反（电子沿 $-x$、空穴沿 $+x$），速度反号与电荷反号相消，两者所受洛伦兹力 $\boldsymbol F=q\boldsymbol v\times\boldsymbol B$ 都指向 $-y$、向**同一侧**壁偏转；$R_H$ 符号的差别来自**积累电荷的符号**：电子在 $-y$ 壁积累负电荷，霍尔场 $E_y<0$，故 $R_H<0$；空穴在同一壁积累正电荷，$E_y>0$，故 $R_H>0$。两种载流子并存时 $R_H=(p\mu_p^2-n\mu_n^2)/e(p\mu_p+n\mu_n)^2$，符号由迁移率加权的多数载流子决定。
 
 符号直接给出载流子类型，大小给出浓度——这是判别 n/p 型与测量载流子密度的实验基础（见第 4 节）。
 
@@ -261,6 +262,8 @@ $$
 
 ---
 
+> 本节内容随研究进展可能更新。
+
 ## 八、参考文献
 
 [24el] Hall E. H. *Am. J. Math.* **2**, 287–292 (1879). DOI: 10.2307/2369229 — 霍尔效应原始论文。 `[已核实]`
@@ -276,6 +279,10 @@ $$
 [24ep] Esaki L. *Phys. Rev.* **109**, 603–604 (1958). DOI: 10.1103/PhysRev.109.603 — 隧道二极管负微分电导，量子隧穿证据。 `[已核实]`
 
 [24eq] Sze S. M., Ng K. K. *Physics of Semiconductor Devices*, 3rd ed. Wiley (2007). — 标准参考书，载流子浓度/结方程/迁移率的权威表述（S 级）。 `[已核实]`
+
+---
+
+*本篇版本：v1.2，2026年9月2日（P0 整改轮升 v1.1；P1 整改轮：第七节末补更新句）*
 </script>
 <script>
 // 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏

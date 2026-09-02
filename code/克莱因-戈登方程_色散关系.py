@@ -8,11 +8,12 @@ import matplotlib
 matplotlib.use('Agg')
 import numpy as np
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---------- CODATA 2018 输入（来源：NIST 2018 CODATA adjustment）----------
-c = 299792458.0                 # 光速，m/s，精确
-m_e = 9.1093837015e-31          # 电子质量，kg，CODATA 2018: 9.1093837015(28)e-31
-eV = 1.602176634e-19            # 1 eV = 1.602176634e-19 J，精确（2019 SI 定义）
+c = C["c"]                 # 光速，m/s，精确
+m_e = C["m_e"]          # 电子质量，kg，CODATA 2018: 9.1093837015(28)e-31
+eV = C["e"]            # 1 eV = 1.602176634e-19 J，精确（2019 SI 定义）
 MeV = 1.0e6 * eV                # 1 MeV in J
 
 m0_MeV = (m_e * c**2) / MeV     # 电子静能 m_e c^2，单位 MeV

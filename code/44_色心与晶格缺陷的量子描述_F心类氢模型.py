@@ -10,10 +10,11 @@ import matplotlib
 matplotlib.use("Agg")
 import numpy as np
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- CODATA 2018 常数 ----
-a0 = 5.29177210903e-11       # 玻尔半径 [m]
-R_H_eV = 13.605693009        # 氢原子里德伯能量 [eV]（R_inf * hc，CODATA 2018）
+a0 = C["a0"]       # 玻尔半径 [m]
+R_H_eV = C["R_inf_hc_eV"]  # 氢原子里德伯能量 [eV]（R_inf * hc，CODATA 2018，取自常数表）
 HC_eV_nm = 1239.841984       # hc（用于 eV -> nm 换算）[eV·nm]
 
 # ---- 各卤化物：光学介电常数 eps_inf ≈ n_opt^2 与实验 F 带（峰值）能量 ----

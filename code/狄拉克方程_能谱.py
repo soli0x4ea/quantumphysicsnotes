@@ -7,9 +7,10 @@ import matplotlib
 matplotlib.use('Agg')
 import numpy as np
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- 常数（CODATA 2018，见参考文献 24hk）----
-MEV = 0.51099895000          # 电子静能 m_e c^2，单位 MeV
+MEV = C["me_c2_MeV"]          # 电子静能 m_e c^2，单位 MeV
 # 自然单位下取 c=1；动量 p 以 MeV/c 输入，则 p*c 数值上等于 p (MeV)
 
 # ---- Dirac（标准）表象下的 alpha_z 与 beta（4x4，无量纲）----

@@ -14,13 +14,14 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
-HBAR = 1.054571817e-34
-ME = 9.1093837015e-31
-MP = 1.67262192369e-27
-EV = 1.602176634e-19
-EPS0 = 8.8541878128e-12
-E_CHARGE = 1.602176634e-19
+HBAR = C["hbar"]
+ME = C["m_e"]
+MP = C["m_p"]
+EV = C["e"]
+EPS0 = C["epsilon_0"]
+E_CHARGE = C["e"]
 
 MU = ME * MP / (ME + MP)          # reduced mass
 A0 = 4 * np.pi * EPS0 * HBAR**2 / (MU * E_CHARGE**2)   # Bohr radius (m)

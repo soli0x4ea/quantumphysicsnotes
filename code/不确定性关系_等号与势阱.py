@@ -13,11 +13,12 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 FIG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "figures")
 os.makedirs(FIG_DIR, exist_ok=True)
 
-hbar = 1.054571817e-34
+hbar = C["hbar"]
 
 
 def trapz(y, x):

@@ -1,0 +1,1696 @@
+{
+ "01": {
+  "file": "01_量子行为_系统笔记.md",
+  "has_groups": false,
+  "entries": [
+   {
+    "line": "> 编号 24cu 起为本篇及第一部分新增的插入式条目（接续第 20 篇后的 24ct）；主序列与既有块直接引用。全部条目已回溯核实。",
+    "id": null,
+    "level": null,
+    "verified": false,
+    "note": "导语/复用行(保留原样)"
+   },
+   {
+    "line": "24cu. Hertz, H. (1887). Über einen Einfluss des ultravioletten Lichtes auf die elektrische Entladung. *Sitzungsberichte der Königlich Preußischen Akademie der Wissenschaften zu Berlin*, 1887（光电效应的首次发现：紫外光使火花间隙放电更容易；会议报告，无标准卷页记载，另刊于 *Annalen der Physik* 同年重印版）. `已核实`（发现事实与年份；本套笔记仅引用发现本身，不依赖具体页码；第 4 篇详述）",
+    "id": "24cu",
+    "level": null,
+    "verified": true,
+    "note": "已有编号"
+   },
+   {
+    "line": "24cv. Jönsson, C. (1961). Elektroneninterferenzen an mehreren künstlich hergestellten Feinspalten. *Zeitschrift für Physik*, 161(4), 454–474. `已核实`（电子多缝干涉首次实现；DOI 10.1007/BF01342460；第 1 篇）",
+    "id": "24cv",
+    "level": null,
+    "verified": true,
+    "note": "已有编号"
+   },
+   {
+    "line": "24cw. Jönsson, C. (1974). Electron Diffraction at Multiple Slits. *American Journal of Physics*, 42(1), 4–11. `已核实`（1961 工作的英文整理与扩充；DOI 10.1119/1.1987592；第 1 篇）",
+    "id": "24cw",
+    "level": null,
+    "verified": true,
+    "note": "已有编号"
+   },
+   {
+    "line": "24cx. Merli, P.G., Missiroli, G.F., & Pozzi, G. (1976). On the statistical aspect of electron interference phenomena. *American Journal of Physics*, 44(3), 306–307. `已核实`（单电子双缝干涉首次实现；DOI 10.1119/1.10184；第 1 篇）",
+    "id": "24cx",
+    "level": null,
+    "verified": true,
+    "note": "已有编号"
+   },
+   {
+    "line": "24cy. Tonomura, A., Endo, J., Matsuda, T., Kawasaki, T., & Ezawa, H. (1989). Demonstration of single-electron buildup of an interference pattern. *American Journal of Physics*, 57(2), 117–120. `已核实`（束流 <1000 e/s、探测效率近 100%、20 分钟累积；第 1 篇）",
+    "id": "24cy",
+    "level": null,
+    "verified": true,
+    "note": "已有编号"
+   },
+   {
+    "line": "24cz. Davisson, C.J., & Germer, L.H. (1927). Diffraction of Electrons by a Crystal of Nickel. *Physical Review*, 30(5), 705–740. `已核实`（电子衍射首次实现；DOI 10.1103/PhysRev.30.705；第 2 篇详述）",
+    "id": "24cz",
+    "level": null,
+    "verified": true,
+    "note": "已有编号"
+   },
+   {
+    "line": "24da. Steeds, J., Merli, P.G., Pozzi, G., Missiroli, G.F., & Tonomura, A. (2003). The double-slit experiment with single electrons. *Physics World*, 16(5), 20–21. `已核实`（五人联合澄清历史优先权；DOI 10.1088/2058-7058/16/5/24；第 1 篇）",
+    "id": "24da",
+    "level": null,
+    "verified": true,
+    "note": "已有编号"
+   },
+   {
+    "line": "24db. Heisenberg, W. (1927). Über den anschaulichen Inhalt der quantentheoretischen Kinematik und Mechanik. *Zeitschrift für Physik*, 43(3–4), 172–198. `已核实`（不确定性关系；DOI 10.1007/BF01397280；第 8 篇详述）",
+    "id": "24db",
+    "level": null,
+    "verified": true,
+    "note": "已有编号"
+   },
+   {
+    "line": "- Feynman, R.P., Leighton, R.B., & Sands, M. (2010). *The Feynman Lectures on Physics*, Vol. III, Chapters 1–2（New Millennium ed.）. Basic Books. [主序列 #25，`已核实`：本地 PDF 版权页]（第 1 篇主线依据：子弹/水波/电子三实验对照、概率幅概念、\"描述自然但不解释自然\"）",
+    "id": "#25",
+    "level": "A",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- CODATA (2022). *CODATA Recommended Values of the Fundamental Physical Constants*（$h$、$m_e$、$e$ 数值来源）. [主序列条目，`已核实`]",
+    "id": "#1",
+    "level": "S",
+    "verified": true,
+    "note": "人工裁决匹配"
+   }
+  ]
+ },
+ "02": {
+  "file": "02_波粒二象性_系统笔记.md",
+  "has_groups": false,
+  "entries": [
+   {
+    "line": "> 24cu–24da 已在第 1 篇列出；本篇新增 24db 起（接续第 1 篇后），全部回溯核实。",
+    "id": null,
+    "level": null,
+    "verified": false,
+    "note": "导语/复用行(保留原样)"
+   },
+   {
+    "line": "24db. Lenard, P. (1902). Über die lichtelektrische Wirkung. *Annalen der Physik*, 8(4), 149–198. `已核实`（光电效应规律的实验确立：最大动能与光强无关、与波长有关；第 4 篇详述）",
+    "id": "24db",
+    "level": null,
+    "verified": true,
+    "note": "已有编号"
+   },
+   {
+    "line": "24dc. Compton, A.H. (1923). A Quantum Theory of the Scattering of X-rays by Light Elements. *Physical Review*, 21(5), 483–502. `已核实`（光子动量的判决性证据；DOI 10.1103/PhysRev.21.483；第 5 篇详述）",
+    "id": "24dc",
+    "level": null,
+    "verified": true,
+    "note": "已有编号"
+   },
+   {
+    "line": "24dd. Bothe, W., & Geiger, H. (1925). Experimentalles zur Theorie von Bohr, Kramers und Slater. *Zeitschrift für Physik*, 32(1), 639–663. `已核实`（逐事件符合实验，判 BKS 出局；DOI 10.1007/BF01331702）",
+    "id": "24dd",
+    "level": null,
+    "verified": true,
+    "note": "已有编号"
+   },
+   {
+    "line": "24de. Compton, A.H., & Simon, A.W. (1925). Directed Quanta of Scattered X-rays. *Physical Review*, 26(3), 289–299. `已核实`（云室角度关联；DOI 10.1103/PhysRev.26.289）",
+    "id": "24de",
+    "level": null,
+    "verified": true,
+    "note": "已有编号"
+   },
+   {
+    "line": "24df. de Broglie, L. (1925). Recherches sur la théorie des quanta. *Annales de Physique*, 3(10), 22–128. `已核实`（1924 年巴黎大学博士论文的期刊版；物质波假说；DOI 未收录于原始刊面，以卷期页为准）",
+    "id": "24df",
+    "level": null,
+    "verified": true,
+    "note": "已有编号"
+   },
+   {
+    "line": "24dg. Jönsson, C. (1961). Elektroneninterferenzen an mehreren künstlich hergestellten Feinspalten. *Zeitschrift für Physik*, 161(4), 454–474. `已核实`（同 24cv，第 2 篇引用其与晶体无关的干涉路线）",
+    "id": "24dg",
+    "level": null,
+    "verified": true,
+    "note": "已有编号"
+   },
+   {
+    "line": "24dh. Ehrenfest, P. (1927). Bemerkung über die angenäherte Gültigkeit der klassischen Mechanik innerhalb der Quantenmechanik. *Zeitschrift für Physik*, 45(7–8), 455–457. `已核实`（期望值服从牛顿方程的精确关系；DOI 10.1007/BF01329203；第 7 篇详述）",
+    "id": "24dh",
+    "level": null,
+    "verified": true,
+    "note": "已有编号"
+   },
+   {
+    "line": "- Feynman, R.P., Leighton, R.B., & Sands, M. (2010). *The Feynman Lectures on Physics*, Vol. III, Chapter 1 后半与 Chapter 2（New Millennium ed.）. Basic Books. [主序列 #25]（德布罗意关系与二象性的教学处理）",
+    "id": "#25",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- CODATA (2022). *CODATA Recommended Values of the Fundamental Physical Constants*. [主序列]",
+    "id": "#1",
+    "level": "S",
+    "verified": false,
+    "note": "人工裁决匹配"
+   }
+  ]
+ },
+ "03": {
+  "file": "03_黑体辐射_系统笔记.md",
+  "has_groups": false,
+  "entries": [
+   {
+    "line": "- Planck, M. (1901). *Annalen der Physik*, 4, 553–563 [主序列 #3，已核实；能量量子化起点]。",
+    "id": "#3",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Wien, W. (1896). *Annalen der Physik*, 58, 662–670 [24cu，已核实；维恩位移定律].",
+    "id": "24cu",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Rayleigh, Lord (1900). *Philosophical Magazine*, 49, 539–540 [24cv，已核实；瑞利–金斯初形].",
+    "id": "24cv",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Stefan, J. (1879). *Sitzungsberichte Kaiserl. Akad. Wiss. Wien (Abt. II)*, 79, 391–428 [24cw，已核实；斯特藩定律].",
+    "id": "24cw",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Boltzmann, L. (1884). *Wiedemann's Annalen*, 22, 291–294 [24cx，已核实；斯特藩–玻尔兹曼推导].",
+    "id": "24cx",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Einstein, A. (1905). *Annalen der Physik*, 17, 132–148 [主序列 #4，已核实；光量子].",
+    "id": "#4",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- CODATA (2022). *Fundamental Physical Constants*（NIST SP 961，精确定义值与测量值）[主序列多处复用].",
+    "id": "#1",
+    "level": "S",
+    "verified": false,
+    "note": "人工裁决匹配"
+   }
+  ]
+ },
+ "04": {
+  "file": "04_光电效应_系统笔记.md",
+  "has_groups": false,
+  "entries": [
+   {
+    "line": "- Hertz, H. (1887). *Sitzungsberichte Preuss. Akad. Wiss. Berlin*, 583–590 [24cz，已核实；紫外致电火花].",
+    "id": "24cz",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Lenard, P. (1902). *Annalen der Physik*, 8, 149–198 [24da，已核实；阴极射线定量].",
+    "id": "24da",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Einstein, A. (1905). *Annalen der Physik*, 17, 132–148 [主序列 #4，已核实；光量子与光电方程].",
+    "id": "#4",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Millikan, R.A. (1916). *Physical Review*, 7, 355–388 [24cy，已核实；精密验证 h/e].",
+    "id": "24cy",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- CODATA (2022). *Fundamental Physical Constants* [主序列复用；e, h, c 精确定义值].",
+    "id": "#1",
+    "level": "S",
+    "verified": false,
+    "note": "人工裁决匹配"
+   }
+  ]
+ },
+ "05": {
+  "file": "05_康普顿散射_系统笔记.md",
+  "has_groups": false,
+  "entries": [
+   {
+    "line": "- Compton, A.H. (1923). *Physical Review*, 21, 483–502 [主序列 #6，已核实；康普顿散射原始论文].",
+    "id": "#6",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Compton, A.H., & Simon, A.W. (1925). *Physical Review*, 26, 289–299 [24dj，已核实；符合实验].",
+    "id": "24dj",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- de Broglie, L. (1924). *Ann. Phys. (Paris)*, 3, 22 [主序列 #7，已核实；物质波].",
+    "id": "#7",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- CODATA (2022). *Fundamental Physical Constants* [主序列复用；m_e, h, c 精确定义].",
+    "id": "#1",
+    "level": "S",
+    "verified": false,
+    "note": "人工裁决匹配"
+   }
+  ]
+ },
+ "06": {
+  "file": "06_原子光谱与玻尔模型_系统笔记.md",
+  "has_groups": false,
+  "entries": [
+   {
+    "line": "- Balmer, J.J. (1885). *Annalen der Physik*, 25, 80–85 [24db，已核实；氢原子可见谱公式].",
+    "id": "24db",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Rydberg, J.R. (1890). *K. Sven. Vetensk. Akad. Handl.*, 23(11) [24dc，已核实；里德伯通用公式].",
+    "id": "24dc",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Bohr, N. (1913). *Philosophical Magazine*, 26, 1–25, 476–502, 857–875 [24cc，已核实；旧量子论三篇].",
+    "id": "#5",
+    "level": "S",
+    "verified": true,
+    "note": "人工裁决匹配"
+   },
+   {
+    "line": "- Sommerfeld, A. (1916). *Annalen der Physik*, 51, 1–94 [24cb，已核实；椭圆轨道+精细结构].",
+    "id": "24cb",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- CODATA (2022). *Fundamental Physical Constants* [主序列复用；a₀, R∞, m_e, m_p].",
+    "id": "#1",
+    "level": "S",
+    "verified": false,
+    "note": "人工裁决匹配"
+   }
+  ]
+ },
+ "07": {
+  "file": "07_物质波包_系统笔记.md",
+  "has_groups": false,
+  "entries": [
+   {
+    "line": "- de Broglie, L. (1924). *Ann. Phys. (Paris)*, 3, 22 [主序列 #7，已核实；物质波].",
+    "id": "#7",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Schrödinger, E. (1926). *Annalen der Physik*, 79, 361 [主序列 #14/24bt，已核实；波动力学].",
+    "id": "24bt",
+    "level": "S",
+    "verified": true,
+    "note": "多候选取24bt"
+   },
+   {
+    "line": "- Ehrenfest, P. (1927). *Zeitschrift für Physik*, 45, 455 [24dk，已核实；Ehrenfest 定理].",
+    "id": "24dk",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- CODATA (2022). *Fundamental Physical Constants* [主序列复用].",
+    "id": "#1",
+    "level": "S",
+    "verified": false,
+    "note": "人工裁决匹配"
+   }
+  ]
+ },
+ "08": {
+  "file": "08_不确定性关系_系统笔记.md",
+  "has_groups": false,
+  "entries": [
+   {
+    "line": "- Heisenberg, W. (1927). *Zeitschrift für Physik*, 43, 172 [主序列 #9，已核实；γ 显微镜思想实验].",
+    "id": "#9",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Kennard, E.H. (1927). *Zeitschrift für Physik*, 44, 326 [24dl，已核实；严格不等式 $\\Delta x\\Delta p\\ge\\hbar/2$].",
+    "id": "24dl",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Robertson, H.P. (1929). *Physical Review*, 34, 163 [24dd，已核实；一般 Robertson 关系].",
+    "id": "24dd",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Ozawa, M. (2003). *Physical Review A*, 67, 042105 [24de，已核实；误差–反作用分离].",
+    "id": "24de",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Ehrenfest, P. (1927). *Zeitschrift für Physik*, 45, 455 [24dk，已核实；Ehrenfest 定理].",
+    "id": "24dk",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- CODATA (2022). *Fundamental Physical Constants* [主序列复用].",
+    "id": "#1",
+    "level": "S",
+    "verified": false,
+    "note": "人工裁决匹配"
+   }
+  ]
+ },
+ "09": {
+  "file": "09_量子态与叠加原理_系统笔记.md",
+  "has_groups": true,
+  "entries": [
+   {
+    "line": "- de Broglie, L. (1924). *Recherches sur la théorie des quanta*. PhD Thesis, Université de Paris. `已核实`（物质波假说；1925 正式发表于 *Ann. Phys. (Paris)* 3, 22）",
+    "id": "#7",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Schrödinger, E. (1926). Quantisierung als Eigenwertproblem. *Annalen der Physik*, 79, 361–376. `已核实`（波动力学四篇之一）",
+    "id": "24bt",
+    "level": "S",
+    "verified": true,
+    "note": "多候选取24bt"
+   },
+   {
+    "line": "- Born, M. (1926). Zur Quantenmechanik der Stoßvorgänge. *Zeitschrift für Physik*, 37(12), 863–867. `已核实`（概率诠释 / Born 规则，作为脚注提出；DOI 10.1007/BF01397477）",
+    "id": "24bb",
+    "level": "S",
+    "verified": true,
+    "note": "人工裁决匹配"
+   },
+   {
+    "line": "- Davisson, C., & Germer, L.H. (1927). Diffraction of Electrons by a Crystal of Nickel. *Physical Review*, 30(6), 705–740. `已核实`（电子衍射；DOI 10.1103/PhysRev.30.705）",
+    "id": "#10",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Dirac, P.A.M. (1930). *The Principles of Quantum Mechanics*. Oxford University Press. `已核实`（态矢量、变换理论、符号奠基）",
+    "id": "24bd",
+    "level": "S",
+    "verified": true,
+    "note": "人工裁决匹配"
+   },
+   {
+    "line": "- Colella, R., Overhauser, A.W., & Werner, S.A. (1975). Observation of Gravitationally Induced Quantum Interference. *Physical Review Letters*, 34(23), 1472–1474. `已核实`（引力致相位移动；DOI 10.1103/PhysRevLett.34.1472）",
+    "id": "24bc",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Tonomura, A., Endo, J., Matsuda, T., Kawasaki, T., & Ezawa, H. (1989). Demonstration of Single-Electron Buildup of an Interference Pattern. *American Journal of Physics*, 57(2), 117–120. `已核实`（单电子自干涉；DOI 10.1119/1.16104）",
+    "id": "#22",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Feynman, R.P., Leighton, R.B., & Sands, M. (2010). *The Feynman Lectures on Physics, Vol. III* (Millennium ed.). Basic Books.（本套笔记\"本地优先\"一手资料，叠加原理主线见 Ch. 1–8）",
+    "id": "#25",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Sakurai, J.J., & Napolitano, J. (2011). *Modern Quantum Mechanics* (2nd ed.). Addison-Wesley.（态矢量与叠加的标准教材）",
+    "id": "#28",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- CODATA (2022). *Recommended Values of the Fundamental Physical Constants*. NIST.（$h$、$\\hbar$ 常数版本）",
+    "id": "#1",
+    "level": "A",
+    "verified": false,
+    "note": "人工裁决匹配"
+   }
+  ]
+ },
+ "10": {
+  "file": "10_测量理论_系统笔记.md",
+  "has_groups": false,
+  "entries": [
+   {
+    "line": "- Born, M. (1926). *Zeitschrift für Physik*, 37, 863 [24dm，已核实；Born 规则].",
+    "id": "24bb",
+    "level": "S",
+    "verified": true,
+    "note": "人工裁决匹配"
+   },
+   {
+    "line": "- von Neumann, J. (1932). *Mathematische Grundlagen der Quantenmechanik*, Springer [主序列 #24be，已核实；测量公理].",
+    "id": "24be",
+    "level": "A",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Lüders, G. (1951). *Annalen der Physik* (Leipzig), 8, 322 [24dn，已核实；Lüders 坍缩规则].",
+    "id": null,
+    "level": null,
+    "verified": false,
+    "note": "非标准条目(人工处理)"
+   },
+   {
+    "line": "- Misra, B., & Sudarshan, E.C.G. (1977). *J. Math. Phys.*, 18, 756 [24df，已核实；量子芝诺].",
+    "id": "24df",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Itano, W.M., et al. (1990). *Phys. Rev. A*, 41, 2295 [24dg，已核实；芝诺实验].",
+    "id": "24dg",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Robertson, H.P. (1929). *Phys. Rev.*, 34, 163 [24dd，已核实；谱定理/PVM 基础].",
+    "id": "24dd",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- CODATA (2022). *Fundamental Physical Constants* [主序列复用].",
+    "id": "#1",
+    "level": "S",
+    "verified": false,
+    "note": "人工裁决匹配"
+   }
+  ]
+ },
+ "11": {
+  "file": "11_希尔伯特空间与狄拉克符号_系统笔记.md",
+  "has_groups": true,
+  "entries": [
+   {
+    "line": "- von Neumann, J. (1932). *Mathematische Grundlagen der Quantenmechanik*. Springer, Berlin.（Grundlehren Bd. XXXVIII, 262 S.）`已核实`（希尔伯特空间公理化的奠基；英文版 *Mathematical Foundations of Quantum Mechanics*, Princeton University Press, 1955）",
+    "id": "24be",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Dirac, P.A.M. (1930). *The Principles of Quantum Mechanics*. Oxford University Press. `已核实`（态矢量、变换理论、bra-ket 符号奠基；同第 9 篇条目 24bd）",
+    "id": "24bd",
+    "level": "S",
+    "verified": true,
+    "note": "人工裁决匹配"
+   },
+   {
+    "line": "- Sakurai, J.J., & Napolitano, J. (2011). *Modern Quantum Mechanics* (2nd ed.). Addison-Wesley.（bra-ket 与谱分解标准教材）",
+    "id": "#28",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Cohen-Tannoudji, C., Diu, B., & Laloë, F. (1977). *Quantum Mechanics*. Wiley.（态空间与表象变换）",
+    "id": "#29",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Nielsen, M.A., & Chuang, I.L. (2010). *Quantum Computation and Quantum Information*. Cambridge University Press.（两能级空间与量子比特，第 32–34 篇接口）",
+    "id": "#30",
+    "level": "A",
+    "verified": false,
+    "note": "人工裁决匹配"
+   },
+   {
+    "line": "- Feynman, R.P., Leighton, R.B., & Sands, M. (2010). *The Feynman Lectures on Physics, Vol. III* (Millennium ed.). Basic Books.（本套\"本地优先\"一手资料，态矢量与符号见 Ch. 8）",
+    "id": "#25",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- CODATA (2022). *Recommended Values of the Fundamental Physical Constants*. NIST.（常数版本）",
+    "id": "#1",
+    "level": "A",
+    "verified": false,
+    "note": "人工裁决匹配"
+   }
+  ]
+ },
+ "16": {
+  "file": "16_角动量与自旋_系统笔记.md",
+  "has_groups": false,
+  "entries": [
+   {
+    "line": "- Stern W., Gerlach W. (1922). Der experimentelle Nachweis der Richtungsquantelung im Magnetfeld. *Zeitschrift für Physik*, 9(1), 349–352. [已核实]",
+    "id": "24bf",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Uhlenbeck G. E., Goudsmit S. (1925). Ersetzung der Hypothese vom unmechanischen Zwang durch eine Forderung bezüglich des inneren Verhaltens jedes einzelnen Elektrons. *Naturwissenschaften*, 13(47), 953–954. [已核实]",
+    "id": "24bg",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Pauli W. (1927). Zur Quantenmechanik des magnetischen Elektrons. *Zeitschrift für Physik*, 43(5–6), 601–623. [已核实]",
+    "id": "24bh",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Dirac P. A. M. (1928). The Quantum Theory of the Electron. *Proceedings of the Royal Society of London A*, 117(778), 610–624. DOI: 10.1098/rspa.1928.0023 [已核实]",
+    "id": "24bi",
+    "level": "S",
+    "verified": true,
+    "note": "人工裁决匹配"
+   },
+   {
+    "line": "- Einstein A., de Haas W. J. (1915). Experimental proof of the existence of Ampère's molecular currents. *KNAW Proceedings*, 18 I, 696–711. [已核实]",
+    "id": "24bj",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Thomas L. H. (1926). The Motion of the Spinning Electron. *Nature*, 117, 514. DOI: 10.1038/117514a0 [已核实]",
+    "id": "24bk",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Thomas L. H. (1927). The Kinematics of the Motion of the Spinning Electron. *Philosophical Magazine*, 3(13), 1–23. [已核实]",
+    "id": "24bl",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Condon E. U., Shortley G. H. (1935). *The Theory of Atomic Spectra*. Cambridge University Press, Cambridge. [已核实]",
+    "id": "24bm",
+    "level": "A",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Sakurai J. J., Napolitano J. (2011). *Modern Quantum Mechanics* (2nd ed.). Addison-Wesley.",
+    "id": "#28",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Feynman R. P., Leighton R. B., Sands M. (2010). *The Feynman Lectures on Physics, Vol. III* (New Millennium ed.). Basic Books. Ch. 10–11.",
+    "id": "#25",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Lederman L. M., Hill C. T. (2004). *Quantum Physics for Poets*. Prometheus Books. Ch. 9 (Spin).",
+    "id": "#45",
+    "level": "B",
+    "verified": false,
+    "note": "人工裁决匹配"
+   },
+   {
+    "line": "- CODATA (2022). *Recommended Values of the Fundamental Physical Constants*. NIST. https://physics.nist.gov/cuu/Constants/ [已核实]",
+    "id": "#1",
+    "level": "S",
+    "verified": true,
+    "note": "人工裁决匹配"
+   }
+  ]
+ },
+ "18": {
+  "file": "18_绘景变换与密度矩阵_系统笔记.md",
+  "has_groups": false,
+  "entries": [
+   {
+    "line": "- Dirac P. A. M. (1927). The Quantum Theory of the Emission and Absorption of Radiation. *Proceedings of the Royal Society of London A*, 114(767), 243–265. [已核实]",
+    "id": "24bn",
+    "level": "S",
+    "verified": true,
+    "note": "人工裁决匹配"
+   },
+   {
+    "line": "- von Neumann J. (1927). Wahrscheinlichkeitstheoretischer Aufbau der Quantenmechanik. *Göttinger Nachrichten*, 1, 245–272. [已核实]",
+    "id": "24bo",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Landau L. D. (1927). Das Dämpfungsproblem in der Wellenmechanik. *Zeitschrift für Physik*, 45(5–6), 430–441. DOI: 10.1007/BF01343064 [已核实]",
+    "id": "24bp",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Schrödinger E. (1935). Die gegenwärtige Situation in der Quantenmechanik. *Naturwissenschaften*, 23, 807–812, 823–828, 844–849. [已核实]",
+    "id": "24bq",
+    "level": "S",
+    "verified": true,
+    "note": "多候选取24bq"
+   },
+   {
+    "line": "- Sakurai J. J., Napolitano J. (2011). *Modern Quantum Mechanics* (2nd ed.). Addison-Wesley.",
+    "id": "#28",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Nielsen M. A., Chuang I. L. (2010). *Quantum Computation and Quantum Information* (10th anniv. ed.). Cambridge University Press.",
+    "id": "#30",
+    "level": "A",
+    "verified": false,
+    "note": "人工裁决匹配"
+   },
+   {
+    "line": "- Feynman R. P., Leighton R. B., Sands M. (2010). *The Feynman Lectures on Physics, Vol. III* (New Millennium ed.). Basic Books. Ch. 8.",
+    "id": "#25",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- CODATA (2022). *Recommended Values of the Fundamental Physical Constants*. NIST. https://physics.nist.gov/cuu/Constants/ [已核实]",
+    "id": "#1",
+    "level": "S",
+    "verified": true,
+    "note": "人工裁决匹配"
+   }
+  ]
+ },
+ "19": {
+  "file": "19_微扰论与变分法_系统笔记.md",
+  "has_groups": false,
+  "entries": [
+   {
+    "line": "- Schrödinger (1926) 第四篇：微扰思想进入波力学，可复用本系列 24bv 条（Ann. Phys. 81, 109–139，DOI 10.1002/andp.19262450504，已核实）。",
+    "id": "24bt",
+    "level": "S",
+    "verified": true,
+    "note": "多候选取24bt"
+   },
+   {
+    "line": "- Dirac (1927) 含时微扰与辐射量子理论，可复用本系列 24ch 条（Proc. R. Soc. A 114, 243–265，DOI 10.1098/rspa.1927.0039，已核实）。",
+    "id": "24bn",
+    "level": "S",
+    "verified": true,
+    "note": "人工裁决匹配"
+   },
+   {
+    "line": "- 24cm. Fermi, E. (1932). Quantum Theory of Radiation. *Reviews of Modern Physics*, 4(1), 87–132. `已核实`（Fermi 黄金规则 (17) 的系统化表述；DOI 10.1103/RevModPhys.4.87；第 19 篇）",
+    "id": null,
+    "level": null,
+    "verified": false,
+    "note": "非标准条目(人工处理)"
+   },
+   {
+    "line": "- 24cn. Ritz, W. (1909). Über eine neue Methode zur Lösung gewisser Variationsprobleme der mathematischen Physik. *Journal für die reine und angewandte Mathematik*, 135, 1–61. `已核实`（Ritz 变分法 / Rayleigh–Ritz 方法原创；DOI 10.1515/crll.1909.135.1；第 19 篇）",
+    "id": null,
+    "level": null,
+    "verified": false,
+    "note": "非标准条目(人工处理)"
+   },
+   {
+    "line": "- 24co. Hylleraas, E.A. (1929). Neue Berechnung der Energie des Heliums im Grundzustande, sowie des tiefsten Terms von Ortho-Helium. *Zeitschrift für Physik*, 54(4), 347–366. `已核实`（氦原子基态变分，1 参数 $-2.8477\\ \\text{Ha}$、10 参数 $-2.90363\\ \\text{Ha}$；第 19 篇）",
+    "id": null,
+    "level": null,
+    "verified": false,
+    "note": "非标准条目(人工处理)"
+   },
+   {
+    "line": "- 24cp. Rayleigh, J.W.S. (1877). *The Theory of Sound*, Vol. I. Macmillan, London, pp. 119–126（瑞利商作为基频近似上限；古籍，无 DOI；第 19 篇）",
+    "id": null,
+    "level": null,
+    "verified": false,
+    "note": "非标准条目(人工处理)"
+   },
+   {
+    "line": "- Sakurai, J.J. & Napolitano, J. (2011). *Modern Quantum Mechanics* (2nd ed.). Addison-Wesley.（非简并/简并微扰、含时微扰、黄金规则的现代标准推导）",
+    "id": "#28",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Landau, L.D. & Lifshitz, E.M. (1977). *Quantum Mechanics: Non-Relativistic Theory* (3rd ed., Vol. 3). Pergamon.（§38 微扰论、§40 变分法）",
+    "id": "#27",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Feynman, R.P., Leighton, R.B. & Sands, M. (2010). *The Feynman Lectures on Physics*, Vol. III, ch. 9（二态系统与微扰的直观处理）",
+    "id": "#25",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- CODATA (2018) 推荐值（NIST）：Hartree 能量 $E_h=27.211\\,386\\,245\\,988(53)\\ \\text{eV}$（本系列统一采用 CODATA 2018，与第 17 篇里德伯能量口径一致）",
+    "id": "24hk",
+    "level": "S",
+    "verified": false,
+    "note": "人工裁决匹配"
+   }
+  ]
+ },
+ "21": {
+  "file": "21_全同粒子_系统笔记.md",
+  "has_groups": false,
+  "entries": [
+   {
+    "line": "- Bose S.N. (1924). Plancks Gesetz und Lichtquantenhypothese. *Zeitschrift für Physik*, 26(3), 178–181. `[已核实]`（光子统计源头，Planck 律的量子统计推导）",
+    "id": "24ds",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Einstein A. (1924). Quantentheorie des einatomigen idealen Gases. *Sitzungsberichte der Preussischen Akademie der Wissenschaften (Berlin)*, 261–267. `[已核实]`（Bose 统计推广到物质粒子）",
+    "id": "24dq",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Einstein A. (1925). Quantentheorie des einatomigen idealen Gases. *Sitzungsberichte der Preussischen Akademie der Wissenschaften (Berlin)*, 3–14. `[已核实]`（BEC 预言）",
+    "id": "24dr",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Pauli W. (1925). Über den Zusammenhang des Abschlusses der Elektronengruppen im Atom mit der Komplexstruktur der Spektren. *Zeitschrift für Physik*, 31(1), 765–783. `[已核实]`（不相容原理经验提出）",
+    "id": "24dp",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Fermi E. (1926). Zur Quantelung des idealen einatomigen Gases. *Zeitschrift für Physik*, 36(11–12), 902–912. `[已核实]`（费米-狄拉克统计）",
+    "id": "24dt",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Dirac P.A.M. (1926). On the Theory of Quantum Mechanics. *Proceedings of the Royal Society A*, 112(762), 661–677. `[已核实]`（反对称统计/变换理论）",
+    "id": "24du",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Pauli W. (1940). The Connection Between Spin and Statistics. *Physical Review*, 58(8), 716–722. `[已核实]`（自旋-统计定理，相对论性证明；DOI 10.1103/PhysRev.58.716）",
+    "id": "24do",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Hong C.K., Ou Z.Y., Mandel L. (1987). Measurement of subpicosecond time intervals between two photons by interference. *Physical Review Letters*, 59(18), 2044–2046. `[已核实]`（HOM 双光子聚束，全同性干涉验证；DOI 10.1103/PhysRevLett.59.2044）",
+    "id": "24dv",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Sakurai J.J., Napolitano J. (2011). *Modern Quantum Mechanics* (2nd ed.). Addison-Wesley. （第 7 章全同粒子，对称化/Slater 行列式推导）",
+    "id": "#28",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Feynman R.P., Leighton R.B., Sands M. (2010). *The Feynman Lectures on Physics, Vol. III* (New Millennium ed.). Basic Books. （Ch. 4 全同粒子， bosons/fermions 与 HOM 前身讨论）",
+    "id": "#25",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   }
+  ]
+ },
+ "22": {
+  "file": "22_多电子原子_系统笔记.md",
+  "has_groups": false,
+  "entries": [
+   {
+    "line": "- Moseley H.G.J. (1913). The High-Frequency Spectra of the Elements. *Philosophical Magazine*, 26(10), 1024–1034. `[已核实]`（X 射线频率与原子序数的线性关系，确立 Z 排序；第 22 篇）",
+    "id": "24dw",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Slater J.C. (1930). Atomic Shielding Constants. *Physical Review*, 36(1), 57–64. `[已核实]`（Slater 屏蔽规则与 Madelung 填充序的经验基础；DOI 10.1103/PhysRev.36.57；第 22 篇）",
+    "id": "24dx",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Hund F. (1925). Zur Deutung verwickelter Spektren, insbesondere der Elemente Scandium bis Nickel. *Zeitschrift für Physik*, 33(5–6), 345–371. `[已核实]`（洪特规则，最大多重度最低能；第 22 篇）",
+    "id": "24dy",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Hartree D.R. (1928). The Wave Mechanics of an Atom with a Non-Coulomb Central Field. *Proceedings of the Cambridge Philosophical Society*, 24(1), 89–110. `[已核实]`（自洽场近似，中心场 V_eff；第 22 篇）",
+    "id": "24dz",
+    "level": "A",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Bohr N. (1913). On the Constitution of Atoms and Molecules. *Philosophical Magazine*, 26(151), 1–25; 476–502; 857–875. `[已核实]`（玻尔模型，本套第 6 篇已引；第 22 篇复用其 Z 排序与定态概念）",
+    "id": "#5",
+    "level": "S",
+    "verified": true,
+    "note": "人工裁决匹配"
+   },
+   {
+    "line": "- Pauli W. (1925). Über den Zusammenhang des Abschlusses der Elektronengruppen im Atom mit der Komplexstruktur der Spektren. *Zeitschrift für Physik*, 31(1), 765–783. `[已核实]`（不相容原理，第 21 篇 24dp 已入统一汇编）",
+    "id": "24dp",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- NIST (2022). NIST Atomic Spectra Database (version 5.10). https://physics.nist.gov/asd. `[已核实]`（前 20 号元素第一电离能实验值来源，用于 §4.2/§6.2 数值）",
+    "id": "la",
+    "level": null,
+    "verified": true,
+    "note": "新编号la"
+   },
+   {
+    "line": "- Sakurai J.J., Napolitano J. (2011). *Modern Quantum Mechanics* (2nd ed.). Addison-Wesley. （第 2 章角动量、第 7 章全同粒子）",
+    "id": "#28",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   }
+  ]
+ },
+ "23": {
+  "file": "23_分子结构_系统笔记.md",
+  "has_groups": false,
+  "entries": [
+   {
+    "line": "- Heitler W., London F. (1927). Wechselwirkung neutraler Atome und homöopolare Bindung nach der Quantenmechanik. *Zeitschrift für Physik*, 44(6), 455–472. `[已核实]`（共价键量子理论开端，H₂ 变分；第 23 篇）",
+    "id": "24ea",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Hund F. (1927). Allgemeine Quantenmechanik des Atom- und Molekelbaues. *Zeitschrift für Physik*, 40(10–11), 742–764. `[已核实]`（分子轨道/项理论早期；第 23 篇）",
+    "id": "24eb",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Mulliken R.S. (1928). The Assignment of Quantum Numbers for Electrons in Molecules. *Physical Review*, 32(2), 186–222. `[已核实]`（分子轨道理论命名与框架；第 23 篇）",
+    "id": "24ec",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Pauling L. (1931). The Nature of the Chemical Bond. *Journal of the American Chemical Society*, 53(4), 1367–1400. `[已核实]`（杂化轨道与共振论，价键理论完善；第 23 篇）",
+    "id": "24ed",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Bloch F. (1929). Über die Quantenmechanik der Elektronen in Kristallgittern. *Zeitschrift für Physik*, 52(7–8), 555–600. `[已核实]`（Bloch 定理，MO 的固体极限；第 24 篇共用）",
+    "id": "24ee",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Herzberg G. (1950). *Molecular Spectra and Molecular Structure. I. Spectra of Diatomic Molecules* (2nd ed.). Van Nostrand. （H₂ 键长/离解能实验数据来源，$R_e=0.741\\ \\mathrm{Å}$、$D_e=4.52\\ \\mathrm{eV}$）",
+    "id": "lb",
+    "level": null,
+    "verified": false,
+    "note": "新编号lb"
+   },
+   {
+    "line": "- Atkins P., Friedman R. (2011). *Molecular Quantum Mechanics* (5th ed.). Oxford University Press. （LCAO、Hückel、H₂ 变分推导）",
+    "id": "lc",
+    "level": null,
+    "verified": false,
+    "note": "新编号lc"
+   },
+   {
+    "line": "- Sakurai J.J., Napolitano J. (2011). *Modern Quantum Mechanics* (2nd ed.). Addison-Wesley. （全同粒子与对称性的第 7 章，支撑 §1/§5 交换干涉观点）",
+    "id": "#28",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   }
+  ]
+ },
+ "29": {
+  "file": "29_量子纠缠_系统笔记.md",
+  "has_groups": false,
+  "entries": [
+   {
+    "line": "- Schrödinger, E. (1935). Discussion of Probability Relations between Separated Systems. *Mathematical Proceedings of the Cambridge Philosophical Society*, 31, 555–563. `[已核实]`（第 14 条，本文撰写时回溯核实）",
+    "id": "24bq",
+    "level": "S",
+    "verified": true,
+    "note": "多候选取24bq"
+   },
+   {
+    "line": "- Einstein, A., Podolsky, B., & Rosen, N. (1935). Can Quantum-Mechanical Description of Physical Reality Be Considered Complete? *Physical Review*, 47(10), 777–780. `[已核实]`（第 12 条）",
+    "id": "#12",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Bell, J.S. (1964). On the Einstein Podolsky Rosen Paradox. *Physics Physique Физика*, 1(3), 195–200. `[已核实]`（第 16 条；注：部分文献因出版年标作 1965，本套统一采用 1964）",
+    "id": "#16",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Werner, R.F. (1989). Quantum States with Einstein-Podolsky-Rosen Correlations Admitting a Hidden-Variable Model. *Physical Review A*, 40(8), 4277–4281. `[已核实]`",
+    "id": "24m",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Peres, A. (1996). Separability Criterion for Density Matrices. *Physical Review Letters*, 77(8), 1413–1415. `[已核实]`",
+    "id": "24n",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Horodecki, M., Horodecki, P., & Horodecki, R. (1996). Separability of Mixed States: Necessary and Sufficient Conditions. *Physics Letters A*, 223(1–2), 1–8. `[已核实]`",
+    "id": "24o",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Horodecki, P. (1997). Separability Criterion and Inseparable Mixed States with Positive Partial Transpose. *Physics Letters A*, 232(5), 333–339. `[已核实]`",
+    "id": "24p",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Wootters, W.K. (1998). Entanglement of Formation of an Arbitrary State of Two Qubits. *Physical Review Letters*, 80(10), 2245–2248. `[已核实]`",
+    "id": "24q",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Horodecki, R., Horodecki, P., Horodecki, M., & Horodecki, K. (2009). Quantum Entanglement. *Reviews of Modern Physics*, 81(2), 865–942. `[已核实]`（第 24 条）",
+    "id": "#24",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Bennett, C.H., Di Vincenzo, D.P., Smolin, J.A., & Wootters, W.K. (1996). Mixed State Entanglement and Quantum Error Correction. *Physical Review A*, 54(5), 3824–3851. （形成纠缠与蒸馏概念）",
+    "id": "24r",
+    "level": "S",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Vidal, G., & Werner, R.F. (2002). Computable Measure of Entanglement. *Physical Review A*, 65(3), 032314. （负度 / 对数负度）",
+    "id": "24s",
+    "level": "S",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Nielsen, M.A., & Chuang, I.L. (2010). *Quantum Computation and Quantum Information* (10th anniversary ed.). Cambridge University Press. （第 30 条；可分态定义、纠缠度量章节）",
+    "id": "#30",
+    "level": "A",
+    "verified": false,
+    "note": "人工裁决匹配"
+   },
+   {
+    "line": "- CODATA (2022). *Recommended Values of the Fundamental Physical Constants*. NIST. https://physics.nist.gov/cuu/Constants/ `[已核实]`（第 1 条）",
+    "id": "#1",
+    "level": "S",
+    "verified": true,
+    "note": "人工裁决匹配"
+   }
+  ]
+ },
+ "30": {
+  "file": "30_EPR佯谬与贝尔不等式_系统笔记.md",
+  "has_groups": true,
+  "entries": [
+   {
+    "line": "- Einstein A., Podolsky B., Rosen N. (1935). Can Quantum-Mechanical Description of Physical Reality Be Considered Complete? *Physical Review*, 47(10), 777–780.",
+    "id": "#12",
+    "level": "S",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Bell J.S. (1964). On the Einstein Podolsky Rosen Paradox. *Physics*, 1, 195–200.（期刊封面名三语 *Physics Physique Физика*；部分文献标注为 1965 年，见 7.2 节说明）",
+    "id": "#16",
+    "level": "S",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Clauser J.F., Horne M.A., Shimony A., Holt R.A. (1969). Proposed Experiment to Test Local Hidden-Variable Theories. *Physical Review Letters*, 23(15), 880–884.",
+    "id": "#18",
+    "level": "S",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Freedman S.J., Clauser J.F. (1972). Experimental Test of Local Hidden-Variable Theories. *Physical Review Letters*, 28(14), 938–941.",
+    "id": "24a",
+    "level": "S",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Aspect A., Grangier P., Roger G. (1981). Experimental Tests of Realistic Local Theories via Bell's Theorem. *Physical Review Letters*, 47(7), 460–463.",
+    "id": "#19",
+    "level": "S",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Aspect A., Grangier P., Roger G. (1982). Experimental Realization of Einstein-Podolsky-Rosen-Bohm Gedankenexperiment: A New Violation of Bell's Inequalities. *Physical Review Letters*, 49(2), 91–94.",
+    "id": "#20",
+    "level": "S",
+    "verified": false,
+    "note": "30篇合著者裁决"
+   },
+   {
+    "line": "- Aspect A., Dalibard J., Roger G. (1982). Experimental Test of Bell's Inequalities Using Time-Varying Analyzers. *Physical Review Letters*, 49(25), 1804–1807.",
+    "id": "#21",
+    "level": "S",
+    "verified": false,
+    "note": "30篇合著者裁决"
+   },
+   {
+    "line": "- Cirel'son B.S. (1980). Quantum Generalizations of Bell's Inequality. *Letters in Mathematical Physics*, 4(2), 93–100.（作者姓氏亦转写为 Tsirelson）",
+    "id": "24b",
+    "level": "S",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Weihs G., Jennewein T., Simon C., Weinfurter H., Zeilinger A. (1998). Violation of Bell's Inequality under Strict Einstein Locality Conditions. *Physical Review Letters*, 81(23), 5039–5043.",
+    "id": "#23",
+    "level": "S",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Rowe M.A., Kielpinski D., Meyer V., Sackett C.A., Itano W.M., Monroe C., Wineland D.J. (2001). Experimental Violation of a Bell's Inequality with Efficient Detection. *Nature*, 409(6822), 791–794.",
+    "id": "24g",
+    "level": "S",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Hensen B., Bernien H., Dréau A.E., Reiserer A., Kalb N., Blok M.S., Ruitenberg J., Vermeulen R.F.L., Schouten R.N., Abellán C., Amaya W., Pruneri V., Mitchell M.W., Markham M., Twitchen D.J., Elkouss D., Wehner S., Taminiau T.H., Hanson R. (2015). Loophole-free Bell Inequality Violation Using Electron Spins Separated by 1.3 Kilometres. *Nature*, 526(7575), 682–686.",
+    "id": "24i",
+    "level": "S",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Giustina M., Versteegh M.A.M., Wengerowsky S., Handsteiner J., Hochrainer A., Phelan K., Steinlechner F., Kofler J., Larsson J.-Å., Abellán C., Amaya W., Pruneri V., Mitchell M.W., Beyer J., Gerrits T., Lita A.E., Shalm L.K., Nam S.W., Scheidl T., Ursin R., Wittmann B., Zeilinger A. (2015). Significant-Loophole-Free Test of Bell's Theorem with Entangled Photons. *Physical Review Letters*, 115(25), 250401.",
+    "id": "24j",
+    "level": "S",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Shalm L.K., Meyer-Scott E., Christensen B.G., Bierhorst P., Wayne M.A., Stevens M.J., Gerrits T., Glancy S., Hamel D.R., Allman M.S., Coakley K.J., Dyer S.D., Hodge C., Lita A.E., Verma V.B., Lambrocco C., Tortorici E., Migdall A.L., Zhang Y., Kumor D.R., Farr W.H., Marsili F., Shaw M.D., Stern J.A., Abellán C., Amaya W., Pruneri V., Jennewein T., Mitchell M.W., Kwiat P.G., Bienfang J.C., Mirin R.P., Knill E., Nam S.W. (2015). Strong Loophole-Free Test of Local Realism. *Physical Review Letters*, 115(25), 250402.",
+    "id": "24k",
+    "level": "S",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Bohm D., Aharonov Y. (1957). Discussion of Experimental Proof for the Paradox of Einstein, Rosen, and Podolski. *Physical Review*, 108(4), 1070–1076.",
+    "id": "#17",
+    "level": "S",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Kocher C.A., Commins E.D. (1967). Polarization Correlation of Photons Emitted in an Atomic Cascade. *Physical Review Letters*, 18(15), 575–577.",
+    "id": "24c",
+    "level": "S",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Bohr N. (1935). Can Quantum-Mechanical Description of Physical Reality Be Considered Complete? *Physical Review*, 48(8), 696–702.",
+    "id": "#13",
+    "level": "S",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Tan S.M., Walls D.F., Collett M.J. (1991). Nonlocality of a Single Photon. *Physical Review Letters*, 66(3), 252–255.",
+    "id": "24e",
+    "level": "S",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Eberhard P.H. (1993). Background Level and Counter Efficiencies Required for a Loophole-Free Einstein-Podolsky-Rosen Experiment. *Physical Review A*, 47(2), R747–R750.",
+    "id": "24f",
+    "level": "S",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- CODATA (2022). Recommended Values of the Fundamental Physical Constants. NIST. https://physics.nist.gov/cuu/Constants/",
+    "id": "#1",
+    "level": "S",
+    "verified": false,
+    "note": "人工裁决匹配"
+   },
+   {
+    "line": "- The Nobel Prize in Physics 2022（Alain Aspect, John F. Clauser, Anton Zeilinger）. Nobel Foundation. https://www.nobelprize.org/prizes/physics/2022/summary/",
+    "id": null,
+    "level": "S",
+    "verified": false,
+    "note": "非标准条目(人工处理)"
+   },
+   {
+    "line": "- Bell J.S. (1966). On the Problem of Hidden Variables in Quantum Mechanics. *Reviews of Modern Physics*, 38(3), 447–452.",
+    "id": "ld",
+    "level": "A",
+    "verified": false,
+    "note": "新编号ld"
+   },
+   {
+    "line": "- Wu C.S., Shaknov I. (1950). The Angular Correlation of Scattered Annihilation Radiation. *Physical Review*, 77(1), 136.",
+    "id": "24d",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Giustina M., Mech A., Ramelow S., Wittmann B., Kofler J., Beyer J., Lita A., Calkins B., Gerrits T., Nam S.W., Ursin R., Zeilinger A. (2013). Bell Violation Using Entangled Photons without the Fair-Sampling Assumption. *Nature* (2013). DOI: 10.1038/nature12012（卷期页待回溯核实）",
+    "id": "24h",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Nielsen M.A., Chuang I.L. (2010). *Quantum Computation and Quantum Information* (10th anniversary ed.). Cambridge University Press.",
+    "id": "#30",
+    "level": "A",
+    "verified": false,
+    "note": "人工裁决匹配"
+   },
+   {
+    "line": "- Sakurai J.J., Napolitano J. (2011). *Modern Quantum Mechanics* (2nd ed.). Addison-Wesley.",
+    "id": "#28",
+    "level": "A",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Feynman R.P., Leighton R.B., Sands M. (2010). *The Feynman Lectures on Physics*, Vol. III (New Millennium ed.). Basic Books. §18-3 \"The Annihilation of Positronium\"，页 18-7 至 18-9 讨论 EPR。（本地藏书：`WORKS/物理/The Feynman Lectures on Physics, Vol. III.pdf`）",
+    "id": "#25",
+    "level": "B",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Brunner N., Cavalcanti D., Pironio S., Scarani V., Wehner S. (2014). Bell Nonlocality. *Reviews of Modern Physics*, 86, 419–478.（arXiv:1303.2849；卷期页待回溯核实）",
+    "id": "le",
+    "level": "B",
+    "verified": false,
+    "note": "新编号le"
+   },
+   {
+    "line": "- Larsson J., Gill R. 关于 Bell 检验漏洞的综述（2014）。*Journal of Physics A*, 47, 424003.（卷期页待回溯核实）",
+    "id": null,
+    "level": "B",
+    "verified": false,
+    "note": "非标准条目(人工处理)"
+   },
+   {
+    "line": "- Stanford Encyclopedia of Philosophy, \"Bell's Theorem\"（Goldstein et al. 修订版）——作为**立场并列的线索来源**，任何具体数值仍回溯原始论文。",
+    "id": null,
+    "level": "B",
+    "verified": false,
+    "note": "非标准条目(人工处理)"
+   },
+   {
+    "line": "- 施郁 (2023). 贝尔不等式的违反是如何确立的. 中科院物理所「量子春秋」专栏。（中文二手综述，仅作线索，数值已回溯 S 级来源）",
+    "id": null,
+    "level": "B",
+    "verified": false,
+    "note": "非标准条目(人工处理)"
+   },
+   {
+    "line": "- Clauser J.F., Horne M.A. (1974). *Physical Review D* 10, 526.",
+    "id": "lf",
+    "level": "B",
+    "verified": false,
+    "note": "新编号lf"
+   },
+   {
+    "line": "- Werner R.F. (1989). *Physical Review A* 40, 4277.",
+    "id": "24m",
+    "level": "B",
+    "verified": false,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Gisin N. (1991).；Popescu S., Rohrlich D. (1992).；Greenberger D.M., Horne M.A., Zeilinger A. (1989).",
+    "id": "lg",
+    "level": "B",
+    "verified": false,
+    "note": "新编号lg"
+   },
+   {
+    "line": "- Hensen B. et al. (2016). 追加 300 次试验的结果（$S = 2.38 \\pm 0.14$，2.7σ）.",
+    "id": "lh",
+    "level": "B",
+    "verified": false,
+    "note": "新编号lh"
+   },
+   {
+    "line": "- Handsteiner J. et al. (2017). Cosmic Bell Test.；Rauch D. et al. (2018). 类星体设置选择实验.",
+    "id": "li",
+    "level": "B",
+    "verified": false,
+    "note": "新编号li"
+   }
+  ]
+ },
+ "31": {
+  "file": "31_量子测量与退相干_系统笔记.md",
+  "has_groups": true,
+  "entries": [
+   {
+    "line": "- von Neumann, J. (1932/1955). *Mathematische Grundlagen der Quantenmechanik* / *Mathematical Foundations of Quantum Mechanics* (English transl. Princeton University Press, 1955). （投影公设、测量耦合模型；经典专著）",
+    "id": null,
+    "level": "S",
+    "verified": false,
+    "note": "非标准条目(人工处理)"
+   },
+   {
+    "line": "- Lüders, G. (1951). Über die Zustandsänderung durch den Messprozess. *Annalen der Physik*, 8(5–6), 322–328. `[已核实]`（第 24ab 条；Lüders 规则，式 2.3）",
+    "id": null,
+    "level": "S",
+    "verified": false,
+    "note": "非标准条目(人工处理)"
+   },
+   {
+    "line": "- Bohm, D. (1952). A Suggested Interpretation of the Quantum Theory in Terms of \"Hidden\" Variables. *Physical Review*, 85(2), 166–179 & 180–193. `[已核实]`（第 24y 条；导波 / 隐变量诠释）",
+    "id": "24y",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Wigner, E.P. (1963). The Problem of Measurement. *American Journal of Physics*, 31(1), 6–15. `[已核实]`（第 24ah 条；测量问题剖析）",
+    "id": "24ah",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Zurek, W.H. (1981). Pointer Basis of Quantum Apparatus: Into What Mixture Does the Wave Packet Collapse? *Physical Review D*, 24(6), 1516–1525. `[已核实]`（第 24t 条；指针基）",
+    "id": "24t",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Zurek, W.H. (1982). Environment-Induced Superselection Rules. *Physical Review D*, 26(8), 1862–1880. `[已核实]`（第 24u 条；einselection）",
+    "id": "24u",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Caldeira, A.O., & Leggett, A.J. (1983). Path Integral Approach to Quantum Brownian Motion. *Physica A*, 121(3), 587–616. `[已核实]`（第 24x 条；量子布朗运动主方程，式 2.7）",
+    "id": "24x",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Griffiths, R.B. (1984). Consistent Histories and the Interpretation of Quantum Mechanics. *Journal of Statistical Physics*, 36(1–2), 219–272. `[已核实]`（第 24z 条；一致性历史）",
+    "id": "24z",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Joos, E., & Zeh, H.D. (1985). The Emergence of Classical Properties Through Interaction with the Environment. *Zeitschrift für Physik B*, 59(2), 223–243. `[已核实]`（第 24v 条；首个综合退相干模型）",
+    "id": "24v",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Ghirardi, G.C., Rimini, A., & Weber, T. (1986). Unified Dynamics for Microscopic and Macroscopic Systems. *Physical Review D*, 34(2), 470–491. `[已核实]`（第 24aa 条；GRW 自发坍缩）",
+    "id": "24aa",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Zurek, W.H. (1991). Decoherence and the Transition from Quantum to Classical. *Physics Today*, 44(10), 36–44. `[已核实]`（第 24w 条；退相干科普里程碑）",
+    "id": "24w",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Brune, M., Hagley, E., Dreyer, J., Maître, X., Maali, A., Wunderlich, C., Raimond, J.M., & Haroche, S. (1996). Observing the Progressive Decoherence of the \"Mesoscopic Quantum Superpositions\" in a Cavity. *Physical Review Letters*, 77(24), 4887–4890. `[已核实]`（第 24ae 条；腔 QED 猫态退相干观测）",
+    "id": "24ae",
+    "level": "S",
+    "verified": true,
+    "note": "人工裁决匹配"
+   },
+   {
+    "line": "- Myatt, C.J., King, B.E., Turchette, Q.A., Sackett, C.A., Kielpinski, D., Itano, W.M., Monroe, C., & Wineland, D.J. (2000). Decoherence of Quantum Superpositions through Coupling to Engineered Reservoirs. *Nature*, 403(6767), 269–273. `[已核实]`（第 24af 条；工程化退相干）",
+    "id": "24af",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Tegmark, M. (2000). The Importance of Quantum Decoherence in Brain Processes. *Physical Review E*, 61(4), 4194–4206. `[已核实]`（第 24ag 条；日常物体退相干时标量级）",
+    "id": "24ag",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Zurek, W.H. (2003). Decoherence, Einselection, and the Quantum Origins of the Classical. *Reviews of Modern Physics*, 75(3), 715–775. `[已核实]`（第 24ac 条；权威综述）",
+    "id": "24ac",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Schlosshauer, M. (2004). Decoherence, the Measurement Problem, and Interpretations of Quantum Mechanics. *Reviews of Modern Physics*, 76(4), 1267–1305. `[已核实]`（第 24ad 条；退相干与测量问题综述）",
+    "id": "24ad",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Nielsen, M.A., & Chuang, I.L. (2010). *Quantum Computation and Quantum Information* (10th anniversary ed.). Cambridge University Press. （第 30 条；POVM 与 Naimark 扩张，§2.4）",
+    "id": "#30",
+    "level": "S",
+    "verified": false,
+    "note": "人工裁决匹配"
+   },
+   {
+    "line": "- CODATA (2022). *Recommended Values of the Fundamental Physical Constants*. NIST. https://physics.nist.gov/cuu/Constants/ `[已核实]`（第 1 条；§3 基本常数）",
+    "id": "#1",
+    "level": "S",
+    "verified": true,
+    "note": "人工裁决匹配"
+   }
+  ]
+ },
+ "32": {
+  "file": "32_量子密钥分发_系统笔记.md",
+  "has_groups": true,
+  "entries": [
+   {
+    "line": "- Bennett C.H., Brassard G. (1984). Quantum cryptography: Public key distribution and coin tossing. *Proceedings of the IEEE International Conference on Computers, Systems and Signal Processing*, Bangalore, pp. 175–179.（重印于 *Theoretical Computer Science* 560, 7–11, 2014）`[已核实]`（BB84 协议）",
+    "id": "24ai",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Ekert A.K. (1991). Quantum cryptography based on Bell's theorem. *Physical Review Letters*, 67(6), 661–663. `已核实`（E91 协议；DOI 10.1103/PhysRevLett.67.661）",
+    "id": "24aj",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Wootters W.K., Zurek W.H. (1982). A single quantum cannot be cloned. *Nature*, 299(5886), 802–803. `已核实`（无克隆定理；DOI 10.1038/299802a0）",
+    "id": "24ak",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Dieks D. (1982). Communication by EPR devices. *Physics Letters A*, 92(6), 271–272. `已核实`（无克隆定理，独立给出；与 Wootters–Zurek 同期）",
+    "id": "24al",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Shor P.W., Preskill J. (2000). Simple proof of security of the BB84 quantum key distribution protocol. *Physical Review Letters*, 85(2), 441–444. `已核实`（BB84 信息论安全性，CSS 码）",
+    "id": "24am",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Bennett C.H., Bessette F., Brassard G., Salvail L., Smolin J. (1992). Experimental quantum cryptography. *Journal of Cryptology*, 5(1), 3–28. `已核实`（首个 QKD 实验；DOI 10.1007/BF00191318）",
+    "id": "24an",
+    "level": "S",
+    "verified": true,
+    "note": "32篇合著者裁决"
+   },
+   {
+    "line": "- Brassard G., Lütkenhaus N., Mor T., Sanders B.C. (2000). Limitations on Practical Quantum Cryptography. *Physical Review Letters*, 85(6), 1330–1333. `已核实`（PNS 光子数分离攻击）",
+    "id": "24ao",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Hwang W.-Y. (2003). Quantum Key Distribution with High Loss: Toward Global Secure Communication. *Physical Review Letters*, 91(5), 057901. `已核实`（诱饵态思想；DOI 10.1103/PhysRevLett.91.057901）",
+    "id": "24ap",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Lo H.-K., Ma X., Chen K. (2005). Decoy State Quantum Key Distribution. *Physical Review Letters*, 94(23), 230504. `已核实`（诱饵态严格化）",
+    "id": "24aq",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Wang X.-B. (2005). Beating the Photon-Number-Splitting Attack in Practical Quantum Cryptography. *Physical Review Letters*, 94(23), 230503. `已核实`（诱饵态实用协议）",
+    "id": "24ar",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Ma X., Qi B., Zhao Y., Lo H.-K. (2005). Practical decoy state for quantum key distribution. *Physical Review A*, 72(1), 012326. `已核实`（双诱骗态 / 真空诱骗态理论）",
+    "id": "24as",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Lo H.-K., Chau H.F. (1999). Unconditional Security of Quantum Key Distribution. *Science*, 283(5410), 2050–2056. `已核实`（纠缠纯化路线安全性证明）",
+    "id": "24at",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Mayers D. (2001). Unconditional Security in Quantum Cryptography. *Journal of the ACM*, 48(3), 351–406. `已核实`（JACM 版本；初版见 Crypto '96）",
+    "id": "24au",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Lo H.-K., Curty M., Qi B. (2012). Measurement-Device-Independent Quantum Key Distribution. *Physical Review Letters*, 108(13), 130503. `已核实`（MDI-QKD）",
+    "id": "24av",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Gisin N., Ribordy G., Tittel W., Zbinden H. (2002). Quantum cryptography. *Reviews of Modern Physics*, 74(2), 145–195. `已核实`（QKD 权威综述；DOI 10.1103/RevModPhys.74.145）",
+    "id": "24aw",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Scarani V., Bechmann-Pasquinucci H., Cerf N.J., Dušek M., Lütkenhaus N., Peev M. (2009). The security of practical quantum key distribution. *Reviews of Modern Physics*, 81(3), 1301–1350. `已核实`（实际 QKD 安全性综述）",
+    "id": "24ax",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Bennett C.H., Brassard G., Mermin N.D. (1992). Quantum cryptography without Bell's theorem. *Physical Review Letters*, 68(5), 557–559. `已核实`（BBM92；等效于 BB84）",
+    "id": "24ay",
+    "level": "S",
+    "verified": true,
+    "note": "32篇合著者裁决"
+   },
+   {
+    "line": "- Yin J. et al. (2017). Satellite-based entanglement distribution over 1200 kilometers. *Science*, 356(6343), 1140–1144. `已核实`（墨子号；Bell 违反 $2.37\\pm0.09$）",
+    "id": "24az",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Chen Y.-A. et al. (2021). An integrated space-to-ground quantum communication network over 4,600 kilometres. *Nature*, 589(7841), 214–219. `已核实`（天地一体化网络；DOI 10.1038/s41586-020-03093-8）",
+    "id": "24ba",
+    "level": "S",
+    "verified": true,
+    "note": "唯一匹配"
+   },
+   {
+    "line": "- Nielsen M.A., Chuang I.L. (2000/2010). *Quantum Computation and Quantum Information*. Cambridge University Press.（无克隆定理、Holevo 界、CSS 码的标准来源）",
+    "id": null,
+    "level": "A",
+    "verified": false,
+    "note": "非标准条目(人工处理)"
+   },
+   {
+    "line": "- CODATA (2022). *Recommended Values of the Fundamental Physical Constants*. NIST.（本套笔记常数第一优先级；本篇数值不依赖它，但约定沿用）",
+    "id": "#1",
+    "level": "A",
+    "verified": false,
+    "note": "人工裁决匹配"
+   },
+   {
+    "line": "- Wiesner S. (1983). Conjugate Coding. *SIGACT News*, 15(1), 78–88.（QKD 概念前身；思想源自 1960 年代未发表笔记；经典历史文献，按本套惯例入参考文献但不标 `已核实` 精确卷期页已在上文给出）",
+    "id": "lj",
+    "level": "B",
+    "verified": true,
+    "note": "新编号lj"
+   },
+   {
+    "line": "- Lucamarini M. et al. (2018). Overcoming the rate–distance limit of quantum key distribution without quantum repeaters. *Nature* 557, 400.（双场 TF-QKD；作为 §5.1 与 §7.3 的延伸线索，数值未直接引用）",
+    "id": "lk",
+    "level": "B",
+    "verified": false,
+    "note": "新编号lk"
+   },
+   {
+    "line": "- 双场（TF-QKD）原始实验距离纪录（随年份更新）——以最新综述为准。",
+    "id": null,
+    "level": "B",
+    "verified": false,
+    "note": "非标准条目(人工处理)"
+   },
+   {
+    "line": "- 探测器致盲攻击 Makarov et al. (2008) 原始 PRL 卷期页——以 Scarani et al. 2009 综述转引，未单独回溯。",
+    "id": null,
+    "level": "B",
+    "verified": false,
+    "note": "非标准条目(人工处理)"
+   },
+   {
+    "line": "- 时移攻击 Zhao et al. (2008) 原始卷期页——同上。",
+    "id": null,
+    "level": "B",
+    "verified": false,
+    "note": "非标准条目(人工处理)"
+   }
+  ]
+ }
+}

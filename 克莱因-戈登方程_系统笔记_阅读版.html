@@ -87,12 +87,11 @@ img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6
   <main class="main"><article class="paper" id="content"></article></main>
 </div>
 
-<script type="text/plain" id="src">
-# 克莱因-戈登方程
+<script type="text/plain" id="src"># 克莱因-戈登方程
 
 > **分类归属：第五部分·相对论量子理论与前沿 · 数学程度：L3 · 前置依赖：第 9 篇《量子态与叠加原理》、第 13 篇《薛定谔方程》**
 
-> **验证依据**：Klein (1926) *Z. Phys.*、Gordon (1926) *Z. Phys.*、Fock (1926) *Z. Phys.*、Schrödinger (1926) *Ann. Phys.*、Dirac (1928) *Proc. R. Soc. A*、Feshbach & Villars (1958) *Rev. Mod. Phys.*、Kragh (1984) *Am. J. Phys.*、Klein (1929) *Z. Phys.*、ATLAS Collab. (2012) *Phys. Lett. B*
+> **验证依据**：Klein (1926) *Z. Phys.* 37, 895、Gordon (1926) *Z. Phys.* 40, 117、Fock (1926) *Z. Phys.* 38, 242、Schrödinger (1926) *Ann. Phys.* 81, 109、Dirac (1928) *Proc. R. Soc. Lond. A* 117, 610、Klein (1929) *Z. Phys.* 53, 157、Yukawa (1935) *Proc. Phys.-Math. Soc. Jpn.* 17, 48、Lattes, Occhialini & Powell (1947) *Nature* 160, 453、Rochester & Butler (1947) *Nature* 160, 855、Feshbach & Villars (1958) *Rev. Mod. Phys.* 30, 24、Kragh (1984) *Am. J. Phys.* 52, 1024、ATLAS Collab. (2012) *Phys. Lett. B* 716, 1（均为已核实 S/A 级来源，条目见第八节）
 
 ---
 
@@ -242,21 +241,44 @@ KG 方程刻画**自旋 0 的标量（或赝标量）场**：复标量场（如�
 | Higgs 玻色子质量 | $M_H$ | $125\!-\!126\ \mathrm{GeV}$（ATLAS：$126.0\pm0.4\pm0.4\ \mathrm{GeV}$） | 标量自旋 0 场，KG 型场方程 [24hd] |
 | KG 适用判据 | 自旋 $s$ | $s = 0$ | 标量 / 赝标量粒子；自旋 1/2 → 狄拉克 [24bi] |
 
-**量级判据**：当粒子动量满足 $pc \sim m c^2$（即德布罗意/康普顿尺度可比）时，相对论修正不可忽略，必须用 KG（或狄拉克）替代非相对论薛定谔方程。对电子该拐点在 $p c = m_e c^2 \approx 0.511\ \mathrm{MeV}$（对应动量 $p \approx 2.73\times10^{-22}\ \mathrm{kg\cdot m/s}$）；更一般的标量粒子以各自静能 $mc^2$ 为尺度。
+**相对论（量子）效应显著的判据**（独立条目）：
+- **动量判据 $pc\sim mc^2$**：德布罗意波长与约化康普顿波长可比（$\lambda_{\rm dB}\sim\bar\lambda_C$）时，相对论修正不可忽略，必须用 KG（自旋 0）或狄拉克（自旋 1/2）替代非相对论薛定谔方程。对电子该拐点在 $pc=m_ec^2\approx0.511\ \mathrm{MeV}$（对应动量 $p\approx2.73\times10^{-22}\ \mathrm{kg\cdot m/s}$）；一般标量粒子以各自静能 $mc^2$ 为尺度。
+- **势场判据 $V\sim mc^2$**：外势能与静能同量级时，非相对论展开失效，且单粒子诠释开始出现 Klein 佯谬（见第 5.3 节）——须以量子场论处理可变粒子数。
+- **适用对象判据 $s=0$**：KG 描述自旋 0 的标量/赝标量粒子（π、K、Higgs）；自旋 1/2 须狄拉克方程 [24bi]，自旋 1 须 Proca/Maxwell。该判据是"选方程"的第一道筛选，先于能标判据。
 
 ---
 
 ## 四、实验基础与观测证据
 
-KG 方程本身作为一个"场方程"的预言效力，由自然界中存在的自旋 0 标量粒子的实验确认得到支撑：
+KG 方程作为一个"场方程"，其预言效力由自然界中自旋 0 标量粒子的存在与其自由传播的色散描述得到支撑。
 
-- **π 介子（pion）**：π±、π0 为自旋 0 的标量 / 赝标量粒子，是 KG 方程（复标量 / 实标量场）描述的标准对象；其存在与性质自 1947 年起由宇宙线与加速器实验确立。
-- **K 介子（kaon）**：自旋 0，属标量场描述范畴。
-- **Higgs 玻色子**：自旋 0 的标量场，2012 年由 ATLAS 与 CMS 在 LHC 发现，测得质量约 $125\!-\!126\ \mathrm{GeV}$（ATLAS 给出 $126.0\pm0.4(\mathrm{stat})\pm0.4(\mathrm{sys})\ \mathrm{GeV}$，显著性 $5.9\sigma$ [24hd]）。Higgs 场作为标量场，其在势能极小点附近微扰展开得到的经典运动方程即为 KG 型（带质量项），是 KG 方程描述真实标量场的直接证据。
+### 4.1 关键实验
 
-**常见误读纠正**（blockquote）：
+1. **π 介子（pion）**：π±、π0 为自旋 0 的赝标量粒子，是 KG 方程（复标量 / 实标量场）描述的标准对象。**证据链**：Yukawa（1935）以 KG 型介子场预言核力媒介粒子（质量约 $100\ \mathrm{MeV}/c^2$）[24la] → Lattes、Occhialini 与 Powell（1947）用照相乳胶在宇宙线中观测到 $\pi\to\mu\to e$ 衰变链，确立 π 介子的存在与质量（$\sim140\ \mathrm{MeV}/c^2$）[24ky] → 其自旋 0 由细致平衡与衰变角分布间接判定 → 自由传播的能量-动量关系即 KG 色散 (17)。
+2. **K 介子（kaon）**：自旋 0 的赝标量粒子。Rochester 与 Butler（1947）在云室中首次观测到"V 粒子"（后证认为 K⁰ 等奇异粒子）[24kz]；其存在与性质自 1947 年起由宇宙线与加速器实验确立，自旋 0 同样由衰变动力学判定。
+3. **Higgs 玻色子**：自旋 0 的标量（非赝标量）场，2012 年由 ATLAS 与 CMS 在 LHC 独立发现，测得质量约 $125\!-\!126\ \mathrm{GeV}$（ATLAS 给出 $126.0\pm0.4(\mathrm{stat})\pm0.4(\mathrm{sys})\ \mathrm{GeV}$，显著性 $5.9\sigma$ [24hd]）。**证据链**：Higgs 场在势能极小点附近微扰展开的经典运动方程即 KG 型（带质量项与自相互作用项）→ 实验由 $H\to\gamma\gamma$、$H\to ZZ^*\to4\ell$ 衰变角分布确定其自旋-宇称为 $0^+$（2013 年后）→ 是 KG 方程描述**基本**标量场的最直接实例。
+
+### 4.2 里程碑实验时间线
+
+| 年份 | 实验者 | 装置/体系 | 关键结果 | 文献 |
+|------|--------|----------|---------|------|
+| 1935 | Yukawa（理论） | 介子场论 | 预言核力媒介介子（KG 型场，质量约 100 MeV） | *Proc. Phys.-Math. Soc. Jpn.* 17, 48[24la] |
+| 1947 | Lattes, Occhialini & Powell | 照相乳胶（宇宙线） | $\pi\to\mu\to e$ 衰变链，π 介子确立 | *Nature* 160, 453[24ky] |
+| 1947 | Rochester & Butler | 云室（宇宙线穿透簇射） | V 粒子（K 介子等奇异粒子）首次观测 | *Nature* 160, 855[24kz] |
+| 2012 | ATLAS（CMS 同期独立） | LHC（pp 对撞） | 发现自旋 $0^+$ 的 Higgs 玻色子，约 125–126 GeV | *Phys. Lett. B* 716, 1[24hd] |
+
+> 说明：表中"自旋 0"均为间接论证（细致平衡、衰变角分布），这正是第三节"适用对象判据 $s=0$"在实验层面的实现方式。
+
+### 4.3 常见误读纠正
 
 > "KG 方程描述所有粒子"——错误。KG 方程仅适用于**自旋 0** 的标量 / 赝标量粒子；自旋 1/2 的粒子（电子、夸克等）须用狄拉克方程 [24bi]，自旋 1 的矢量粒子须用 Proca / Maxwell 方程。另一极端"KG 方程是错的"同样片面：在量子场论框架内，KG 方程是自旋 0 场的正确二阶运动方程；其"负概率密度困难"源于把 $\phi$ 当作单粒子波函数，而非源于方程本身错误。
+
+### 4.4 实验局限与适用边界
+
+- **KG 不预言任何具体粒子**：方程本身不含质量数值——π、K、Higgs 的质量均为实验输入而非理论输出。KG 提供的是"自旋 0 场的自由传播形式"，其验证属于**结构对应**（色散关系、自旋-宇称），而非逐点数值预言。
+- **π/K 介子是复合粒子**：在 QCD 中 π 与 K 为夸克-反夸克束缚态，KG 只在"波长 ≫ 束缚态尺度"的低能有效层面描述其自由传播；散射与产生等强相互作用过程须用场论完整处理。
+- **自旋判定的间接性**：自旋 0 无直接测量，判定依赖衰变动力学的理论链条（细致平衡、角分布）；对短寿命粒子该链条环节较多，其确定性弱于直接可观测量的测量。
+- **Higgs 的特殊性**：Higgs 是目前唯一已知的基本标量场，但其运动方程含自相互作用势与规范耦合，"自由 KG"仅为其真空期待值附近的近似形态。
 
 ---
 
@@ -352,11 +374,13 @@ $$\phi(x,t) = e^{i(k_1 x - \omega_1 t)} + \beta\,e^{-i(k_2 x + \omega_2 t)},\qqu
 - **二者关系**：并非"谁正确谁错误"的二选一。立场 A 适用于固定粒子数、低能弱场的近似语境，却无法处理负能与对产生；立场 B 是描述可变粒子数的完整理论。KG 方程作为一个场方程，在两种立场下数学形式一致，差别只在 $\phi$ 的物理解释。
 - 关于"KG 方程最早的独立发现者究竟是谁"的史实归属，Kragh (1984) [24hb] 已有详细考证，确认 1926 年存在多位独立贡献者，本节依此并列，不单方面强调某一作者。
 
-本节内容可能随研究进展更新。
+> 本节内容随研究进展可能更新。
 
 ---
 
 ## 八、参考文献
+
+**S 级（奠基原始文献与标准数据）**
 
 - [24gv] Klein O. Quantentheorie und fünfdimensionale Relativitätstheorie. *Z. Phys.* **37**, 895–906 (1926). DOI: 10.1007/BF01397481 — 于五维卡鲁扎-克莱因框架导出相对论性波动方程，并给出固定能量下的四维 KG 形式。 [已核实]（第 37 篇）
 - [24gw] Gordon W. Der Comptoneffekt nach der Schrödingerschen Theorie. *Z. Phys.* **40**, 117–133 (1926). DOI: 10.1007/BF01390840 — 将相对论标量波方程用于康普顿散射计算。 [已核实]（第 37 篇）
@@ -366,6 +390,14 @@ $$\phi(x,t) = e^{i(k_1 x - \omega_1 t)} + \beta\,e^{-i(k_2 x + \omega_2 t)},\qqu
 - [24hb] Kragh H. Equation with the many fathers. The Klein-Gordon equation in 1926. *Am. J. Phys.* **52**, 1024–1033 (1984). DOI: 10.1119/1.13782 — 考证 KG 方程在 1926 年由 Klein、Gordon、Fock、Schrödinger 各自独立发现的史实。 [已核实]（第 37 篇）
 - [24hc] Klein O. Die Reflexion von Elektronen an einem Potentialsprung nach der relativistischen Dynamik von Dirac. *Z. Phys.* **53**, 157–165 (1929). DOI: 10.1007/BF01339716 — 提出 Klein 佯谬：强阶跃势下透射系数可超过 1，单粒子诠释失效。 [已核实]（第 37 篇）
 - [24hd] ATLAS Collaboration. Observation of a new particle in the search for the Standard Model Higgs boson with the ATLAS detector at the LHC. *Phys. Lett. B* **716**, 1–29 (2012). DOI: 10.1016/j.physletb.2012.08.020 — 发现标量 Higgs 玻色子（质量 $126.0\pm0.4\pm0.4\ \mathrm{GeV}$），其场方程为 KG 型。 [已核实]（第 37 篇）
+- [24bi] Dirac, P. A. M. The Quantum Theory of the Electron. *Proceedings of the Royal Society of London. Series A* **117**, 610–624 (1928). DOI: 10.1098/rspa.1928.0023 — 狄拉克方程首篇论文；其平方回退为 KG 方程，确立自旋 1/2 须用狄拉克方程（本篇交叉引用）。 [已核实]（第 37、38 篇）
+- [24ky] Lattes, C. M. G.; Occhialini, G. P. S.; Powell, C. F. Observations on the Tracks of Slow Mesons in Photographic Emulsions. *Nature* **160**, 453–456 (1947). DOI: 10.1038/160453a0 — 用照相乳胶观测 $\pi\to\mu\to e$ 衰变链，确立 π 介子（自旋 0 赝标量粒子的标准实例）。 [已核实]（第 37 篇）
+- [24kz] Rochester, G. D.; Butler, C. C. Evidence for the Existence of New Unstable Elementary Particles. *Nature* **160**, 855–857 (1947). DOI: 10.1038/160855a0 — 云室中首次观测"V 粒子"（后证认为 K 介子等奇异粒子）。 [已核实]（第 37 篇）
+- [24la] Yukawa, H. On the Interaction of Elementary Particles. I. *Proceedings of the Physico-Mathematical Society of Japan* **17**, 48–57 (1935). 重刊于 *Prog. Theor. Phys. Suppl.* **1**, 1–10 (1955), DOI: 10.1143/PTPS.1.1 — 以 KG 型介子场预言核力媒介粒子，π 介子发现之先声。 [已核实]（第 37 篇）
+
+---
+
+*本篇版本：v1.2，2026年9月2日（P0 整改轮升 v1.1；P1 整改轮：中文括号引用统一为方括号（4 处）、第八节按 S/A/B 分组重排、更新句统一为基准 blockquote 句式）*
 </script>
 <script>
 // 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏

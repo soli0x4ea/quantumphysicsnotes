@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>量子力学笔记 P0 整改完成报告</title>
+<style>
+:root{
+  --bg:#f4f5f7; --panel:#ffffff; --ink:#1c2024; --ink-dim:#5b6570;
+  --line:#dfe3e8; --accent:#1f5fa8; --accent-soft:#e8f0fa;
+  --green:#1c7a4a; --green-bg:#e8f5ee; --red:#b03030; --red-bg:#fdecec;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,serif;
+  background:var(--bg); color:var(--ink); line-height:1.85; font-size:16px;
+  -webkit-font-smoothing:antialiased; padding:36px 20px 80px}
+.wrap{max-width:960px; margin:0 auto}
+.paper{background:var(--panel); border:1px solid var(--line); border-radius:8px;
+  padding:44px 52px; box-shadow:0 1px 3px rgba(16,24,40,.05)}
+h1{font-size:25px; margin-bottom:6px; letter-spacing:.3px}
+.meta{color:var(--ink-dim); font-size:13.5px; margin-bottom:26px;
+  padding-bottom:18px; border-bottom:1.5px solid var(--ink)}
+h2{font-size:19px; margin:40px 0 14px; padding-bottom:8px; border-bottom:1.5px solid var(--ink)}
+h3{font-size:16px; margin:24px 0 10px; color:var(--accent); font-weight:600}
+p{margin:0 0 13px; text-align:justify}
+ul,ol{margin:0 0 14px; padding-left:24px}
+li{margin:6px 0}
+table{border-collapse:collapse; width:100%; margin:16px 0; font-size:13.5px;
+  font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th{background:#f0f2f5; text-align:left; padding:8px 11px; border:1px solid var(--line); font-weight:600}
+td{padding:8px 11px; border:1px solid var(--line); vertical-align:top}
+tbody tr:nth-child(even){background:#fafbfc}
+.ok{color:var(--green); font-weight:600}
+.bad{color:var(--red); font-weight:600}
+.tag{display:inline-block; font-size:12px; padding:1px 8px; border-radius:10px;
+  background:var(--green-bg); color:var(--green); font-weight:600; margin-left:6px}
+.note{background:#fff8e6; border-left:3px solid #e5c168; border-radius:0 4px 4px 0;
+  padding:12px 16px; margin:16px 0; color:#6b5200; font-size:14.5px}
+code{background:#f6f7f9; padding:1px 6px; border-radius:3px; font-size:13px;
+  font-family:"SF Mono",Menlo,Consolas,monospace}
+.foot{color:var(--ink-dim); font-size:13px; margin-top:34px; padding-top:16px; border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="paper">
+
+<h1>量子力学笔记 P0 整改完成报告</h1>
+<div class="meta">
+依据《量子力学笔记审核报告》P0 级（严重问题）整改计划 · 整改日期：2026 年 9 月 2 日 ·
+整改范围：9 篇笔记 v1.1、3 个脚本常数、2 张常数表、修订记录留痕
+</div>
+
+<h2>一、结论</h2>
+<p>审核报告 §8.1「P0 · 立即整改」清单<strong>七项全部完成</strong>，并顺带完成 5 项 P1 级条目。终验四项检查（霍尔符号、引用解析、常数表一致性、HTML 同步）全部通过，<strong>P0 整改可关闭</strong>。</p>
+
+<h2>二、P0 七项逐项核销</h2>
+<table>
+<thead><tr><th style="width:6%">#</th><th style="width:30%">审核项</th><th>整改结果</th><th style="width:10%">状态</th></tr></thead>
+<tbody>
+<tr><td>①</td><td>25 篇式 (7) 霍尔系数符号写反（全库唯一硬物理错误）</td><td>修正为电子 $R_H=-1/(ne)$、空穴 $R_H=+1/(pe)$；重写 §2.4 机制解释（两类载流子洛伦兹力同向偏转，符号差来自积累电荷符号）；核查第四节叙述一致；配套脚本不含霍尔计算，无需连带修正</td><td class="ok">✓ 完成</td></tr>
+<tr><td>②</td><td>47 篇「双折射与纠缠」口径与第 30 篇、宝石学笔记不一致</td><td>补「单光子偏振-路径纠缠边界」段落，区分双光子纠缠与单粒子偏振-路径纠缠两个层次，对齐第 30 篇 §5.3 口径</td><td class="ok">✓ 完成</td></tr>
+<tr><td>③</td><td>20 篇第八节无文献列表</td><td>补齐 [24cq]/[24cr]/[24cs]/[24ct] 四条完整条目；顺带修正验证依据 CODATA 版本标注（2022→2018）并补卷页</td><td class="ok">✓ 完成</td></tr>
+<tr><td>④</td><td>42 篇 CODATA [24hk] 溯源断裂</td><td>第八节补入 [24hk]（Tiesinga et al. 2021, RMP 93, 025010）条目；验证依据行重写为「作者+年份+期刊+卷页」格式</td><td class="ok">✓ 完成</td></tr>
+<tr><td>⑤</td><td>data/ 目录空置，常数表承诺未兑现</td><td>新建 <code>constants_2018.json</code> 与 <code>constants_2022.json</code>（各 35 项常数，含版本/出处/DOI/核对说明），数值以 NIST 官方全表逐项核对</td><td class="ok">✓ 完成</td></tr>
+<tr><td>⑥</td><td>[24xx] 孤儿编号与 [24ei] 重复定义</td><td>修订记录中占位符全部替换为具体编号区间；[24ei] 保留 24 篇定义、25 篇加「本篇复用」声明</td><td class="ok">✓ 完成</td></tr>
+<tr><td>⑦</td><td>41 篇时间线表缺 Bekenstein 行</td><td>补入 1973 年 Bekenstein 黑洞熵条目（[24if]，PRD 7, 2333），补版本行</td><td class="ok">✓ 完成</td></tr>
+</tbody>
+</table>
+
+<h2>三、连带修正（P0-6 数据一致性）</h2>
+<table>
+<thead><tr><th style="width:42%">脚本</th><th>修正</th><th style="width:10%">状态</th></tr></thead>
+<tbody>
+<tr><td><code>反粒子与狄拉克海_对产生阈值.py</code></td><td>电子质量 9.1093837011e-31 → <strong>9.1093837015e-31</strong> kg（CODATA 2018）</td><td class="ok">✓ 重跑一致</td></tr>
+<tr><td><code>反粒子与狄拉克海_狄拉克海洞.py</code></td><td>同上</td><td class="ok">✓ 重跑一致</td></tr>
+<tr><td><code>44_色心…_F心类氢模型.py</code></td><td>里德伯能量 13.605693009 → <strong>13.605693122994</strong> eV（CODATA 2018）；6 盐 F 带比值结论不变</td><td class="ok">✓ 重跑一致</td></tr>
+</tbody>
+</table>
+<div class="note">三个脚本原用 2014 版数值，与全库「CODATA 2018 对齐」声明不符；已与 <code>constants_2018.json</code> 逐项核对一致。脚本批量改为从常数表读取属 P1 后续项，不在本轮范围。</div>
+
+<h2>四、终验结果（自动检查）</h2>
+<table>
+<thead><tr><th style="width:24%">检查项</th><th>方法</th><th style="width:12%">结果</th></tr></thead>
+<tbody>
+<tr><td>霍尔符号</td><td>25 篇 md 与重建后 HTML：电子 −1/ne、空穴 +1/pe 同时命中；全库无旧写法残留</td><td class="ok">✓ 通过</td></tr>
+<tr><td>引用解析</td><td>9 篇正文全部 [24xx] 编号（共 85 处引用、覆盖 14+ 编号）对照《参考文献》汇编：0 缺口</td><td class="ok">✓ 通过</td></tr>
+<tr><td>常数表一致性</td><td>3 个修正脚本数值与 constants_2018.json 逐位一致；两张 JSON 解析有效</td><td class="ok">✓ 通过</td></tr>
+<tr><td>HTML 同步</td><td>9 篇阅读版重建后均含 v1.1 版本行；霍尔修正与纠缠边界段确认进入 HTML</td><td class="ok">✓ 通过</td></tr>
+</tbody>
+</table>
+
+<h2>五、版本升级清单（v1.0 → v1.1）</h2>
+<p>第 <strong>20 / 25 / 37 / 38 / 40 / 41 / 42 / 43 / 47</strong> 篇共 9 篇，各篇版本行已写明具体修订内容；37/38 篇同时完成第四节重组、判据条目、时间线表（P1 ②③⑤⑥⑦），43 篇补祖母绿 R 线 683/680 nm（P1 ⑪），47 篇完成立场弱化与句式对齐（P1 ④⑤⑨）。全部留痕于《修订记录.md》新增「P0 整改轮」章节（含 P0 验收核对段）。</p>
+
+<h2>六、遗留事项（P1/P2，非本轮范围）</h2>
+<ul>
+<li><strong>P1 最大单项</strong>：引用体系二选一（审核报告 §8.2 推荐方案 B：升级规范承认编号体系，21 篇第八节按 S/A/B 重排分组）；</li>
+<li>脚本批量改为从 data/ 常数表读取；21 篇批量补版本行与 [已核实] 标记；</li>
+<li>P2 资产整理：30 篇 HTML 改名补「_系统笔记」段、清理备份文件（量子纠缠_…_20260901bak.html）与 __pycache__、README 补 data/ 说明。</li>
+</ul>
+
+<div class="foot">P0 整改完成报告 · 2026 年 9 月 2 日 · 详细留痕见《修订记录.md》「P0 整改轮」章节</div>
+
+</div>
+</div>
+</body>
+</html>

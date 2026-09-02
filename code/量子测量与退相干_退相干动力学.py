@@ -21,10 +21,11 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")  # 无头环境
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- 基本常数 (CODATA 2022) ----
-HBAR = 1.054571817e-34      # J·s
-KB   = 1.380649e-23         # J/K  (exact since 2019, CODATA 2022)
+HBAR = C["hbar"]      # J·s
+KB   = C["kB"]         # J/K  (exact since 2019, CODATA 2022)
 ETA  = 1.8e-5               # Pa·s  空气动力黏度 (量级)
 TENV = 300.0                # K     环境温度
 

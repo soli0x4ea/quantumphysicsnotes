@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>量子力学笔记 P1/P2 整改完成报告</title>
+<style>
+:root{color-scheme:light}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;max-width:960px;margin:0 auto;padding:32px 24px;line-height:1.7;color:#1f2328;background:#fff}
+h1{font-size:1.6em;border-bottom:3px solid #0969da;padding-bottom:12px}
+h2{font-size:1.25em;margin-top:2em;border-left:4px solid #0969da;padding-left:10px}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:.92em}
+th,td{border:1px solid #d0d7de;padding:7px 10px;text-align:left;vertical-align:top}
+th{background:#f0f6ff}
+code{background:#f6f8fa;padding:1px 5px;border-radius:4px;font-size:.9em}
+.ok{color:#1a7f37;font-weight:600}
+.warn{color:#9a6700;font-weight:600}
+.meta{color:#57606a;font-size:.9em}
+ul{padding-left:1.4em}
+.conclusion{background:#f0fff4;border:1px solid #1a7f37;border-radius:8px;padding:14px 18px;margin-top:1.5em}
+</style>
+</head>
+<body>
+<h1>量子力学笔记 P1/P2 整改完成报告</h1>
+<p class="meta">日期：2026年9月2日 ｜ 范围：47 篇系统笔记 + 66 个脚本 + 仓库资产 ｜ 依据：《量子力学笔记审核报告》遗留项、《量子力学笔记P1P2整改方案》（report/ 下留档） ｜ 状态：<span class="ok">全部完成</span></p>
+
+<h2>一、整改内容与验收结果</h2>
+<table>
+<tr><th style="width:12%">批次</th><th style="width:22%">范围</th><th>执行内容</th><th style="width:18%">验收结果</th></tr>
+<tr><td><b>A 机械项</b></td><td>47 篇 md</td><td>中文括号 <code>（24xx）</code>→<code>[24xx]</code>；<code>[已核实]</code> 与汇编同步；19 篇第八节 S/A/B 分组重排；更新句统一基准 blockquote（43 篇保留括注）；版本行规范化 + 括注「P1 整改轮：{变更项}」</td><td><span class="ok">通过</span>：括号残留 0、SAB 缺失 0、已核实缺失 0、更新句全齐</td></tr>
+<tr><td><b>B 内容级</b></td><td>12/13/15/17/44/47 + 42/44 篇</td><td>核心公式补 <code>\tag{节.序}</code> 编号（6 篇共 48 个）；42/44 篇「量子效应显著判据」独立成条（44 篇式 (2.7) 引用自洽）</td><td><span class="ok">通过</span>：tag=0 归零、42–47 判据全齐</td></tr>
+<tr><td><b>C 脚本常数</b></td><td>66 个脚本</td><td>新建 <code>code/constants.py</code>；35 个内容脚本字面量→<code>C["键"]</code>（tokenize 级，字符串/注释不动）；常数统一读 <code>data/constants_2018.json</code></td><td><span class="ok">通过</span>：31 脚本 stdout 与基线逐字一致；4 个无基线脚本 RC=0 且数值与 P0 报告一致</td></tr>
+<tr><td><b>D P2 资产</b></td><td>仓库级</td><td>EPR 阅读版改名 <code>EPR佯谬与贝尔不等式_系统笔记_阅读版.html</code>（index/legacy 链接同步）；删除 bak 备份与 <code>__pycache__</code>；9 件临时脚本归档 <code>code/_archive_p1/</code>；README 补 data/ 说明、构建脚本用途、HTML 三版本关系表；图件嵌入扫描为无操作（无独立成段裸路径）</td><td><span class="ok">通过</span>：命名一致、无死链、目录干净</td></tr>
+<tr><td><b>E 收尾</b></td><td>全库</td><td>47 篇 HTML 阅读版全量重建；合规扫描终验；引用三方一致性核验；<code>修订记录.md</code> 追加「P1/P2 整改轮」章节；git 提交（P0+P1+P2 一并入库）</td><td><span class="ok">通过</span>：见下节</td></tr>
+</table>
+
+<h2>二、收尾阶段发现并修复的问题</h2>
+<table>
+<tr><th style="width:18%">问题</th><th>详情</th><th style="width:24%">修复</th></tr>
+<tr><td><span class="warn">版本号未递进</span></td><td>P0 轮已升至 v1.1 的 9 篇（20/25/37/38/40/41/42/43/47）被批处理覆盖为「v1.1 + P1 括注」，两轮变更未在版本号体现</td><td>9 篇版本行修正为 v1.2，括注注明「P0 整改轮升 v1.1；P1 整改轮：…」；对应 HTML 重建</td></tr>
+<tr><td><span class="warn">本篇第八节缺列</span></td><td>39 篇正文引 [24hj]（Weyl 1929）、45 篇引 [24ja]（Maiman 1960）而本篇第八节无本地条目（汇编层无缺失）</td><td>各补本地条目，标注「第 38/43 篇首引，本篇复用」；版本行括注留痕；HTML 重建</td></tr>
+</table>
+
+<h2>三、终验数据</h2>
+<ul>
+<li><b>合规扫描</b>：版本行 47/47（38 篇 v1.1 + 9 篇 v1.2）、中文括号残留 <span class="ok">0</span>、第八节 S/A/B 缺失 <span class="ok">0</span>、[已核实] 缺失 <span class="ok">0</span>、更新句全齐且 blockquote、tag=0 归零、42–47 判据条目全齐。6 篇（01/04/09/11/14/22）tag 计数 2–4 个为各篇编号公式本就少于 5 个，与整改前基线一致，非缺陷。</li>
+<li><b>引用三方一致性</b>：md 正文引用 ↔ 本篇第八节 ↔ 《参考文献.md》汇编，汇编 274 个编号 <span class="ok">零孤儿</span>，本篇缺列 0。</li>
+<li><b>脚本回归</b>：31 个脚本 stdout 与改动前基线逐字一致、RC 一致；4 个无基线脚本 RC=0。figures/ 目录 0 变更（重跑噪音已还原）。</li>
+<li><b>HTML 阅读版</b>：47/47 重建，与 md 一一对应；index.html 47 条链接与磁盘文件名一致（build_index_html.py 扫描式生成）。</li>
+</ul>
+
+<div class="conclusion">
+<b>结论</b>：审核报告 P0 七项（上轮）+ P1 全部遗留项 + P2 资产整理已全部完成并验收通过，无延后项。全库 47 篇笔记、66 个脚本、参考文献汇编、HTML 阅读版处于一致状态；修订留痕于 <code>修订记录.md</code>「P1/P2 整改轮」章节。后续任何 md 修订，须用 <code>code/build_note_html.py</code> 重建对应阅读版。
+</div>
+
+</body>
+</html>

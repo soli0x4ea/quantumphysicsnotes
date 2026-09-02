@@ -87,8 +87,7 @@ img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6
   <main class="main"><article class="paper" id="content"></article></main>
 </div>
 
-<script type="text/plain" id="src">
-# 过渡金属离子致色的量子机制（Quantum Mechanisms of Transition-Metal Gem Coloration）系统量子力学笔记
+<script type="text/plain" id="src"># 过渡金属离子致色的量子机制（Quantum Mechanisms of Transition-Metal Gem Coloration）系统量子力学笔记
 
 > **第六部分：交叉应用——量子力学与宝石学 · 数学程度 L2 · 前置依赖：第42篇《晶体场与配位场理论》、第17篇《中心力场与氢原子》、第19篇《微扰论与变分法》**
 
@@ -192,7 +191,7 @@ $$ \boldsymbol\mu_{fi}=e\langle f|\hat{\mathbf r}|i\rangle \tag{4} $$
 | 矿物 / 离子 | 配位 | Δ 或主带能量 | 计算吸收 λ | 体色 |
 |-------------|------|--------------|------------|------|
 | 红宝石 Cr³⁺ (d³) | 八面体 | Δ_o ≈ 18000 cm⁻¹ (2.23 eV) | 4T₂ ≈ 556 nm；4T₁ ≈ 405 nm；R 线 694.3/692.9 nm | 红（吸绿黄 + 红荧光） |
-| 祖母绿 Cr³⁺ (d³) | 八面体（畸变） | Δ_o ≈ 16500 cm⁻¹ (2.05 eV) | 4T₂ ≈ 606 nm；4T₁ ≈ 432 nm | 绿（吸紫红） |
+| 祖母绿 Cr³⁺ (d³) | 八面体（畸变） | Δ_o ≈ 16500 cm⁻¹ (2.05 eV) | 4T₂ ≈ 606 nm；4T₁ ≈ 432 nm；R 线 683/680 nm（发射，见 §6.3） | 绿（吸紫红） |
 | 橄榄石 Fe²⁺ (d⁶) | 双八面体 M1/M2 | 近红外主带 ≈ 9524 cm⁻¹ (1050 nm) | ≈ 1050 nm（及 870/1250 nm 分量） | 黄绿（可见区次要吸收） |
 | 蓝宝石 Fe²⁺–Ti⁴⁺ | 八面体（面共享） | 电荷转移带 500–700 nm（峰 ≈ 560、700 nm） | 吸收黄红，透蓝紫 | 蓝 |
 | 孔雀石 / 硅孔雀石 Cu²⁺ (d⁹) | 畸变八面体（J–T） | d–d 带 ≈ 8000–13000 cm⁻¹ | 可见–近红外 | 绿（孔雀石）/ 蓝绿（硅孔雀石） |
@@ -306,9 +305,11 @@ $$ I(\xi)=\frac{\xi^2}{\xi^2+\xi_0^2} \tag{6} $$
 
 **Figure 2.** Relative d–d transition intensity versus odd-parity vibronic coupling strength ξ (model I(ξ) = ξ²/(ξ²+ξ₀²)). Shaded bands mark the weak d–d and strong charge-transfer regimes.
 
-### 6.3 红宝石 R 线：²E → ⁴A₂ 的宇称 / 自旋双禁戒锐线
+### 6.3 红宝石与祖母绿的 R 线：²E → ⁴A₂ 的宇称 / 自旋双禁戒锐线
 
 Cr³⁺(d³) 在八面体基态为 ⁴A₂；激光上能级 ²E 与基态自旋多重度不同（ΔS = 1），且同为偶宇称，故 ²E→⁴A₂ 是「宇称禁戒 + 自旋禁戒」双禁戒跃迁，本应极弱；但因 ²E 寿命长（~3 ms），在脉冲泵浦下反转可实现受激辐射——这正是 Maiman (1960) [24ja] 红宝石激光的物理基础。R 线双线（R1 = 694.3 nm、R2 = 692.9 nm）来自 ²E 在自旋–轨道 + 三角场下的进一步分裂（²A 与 ²E 子能级），室温下单线宽约 0.5 nm。
+
+**祖母绿的 Cr³⁺ R 线：683 / 680 nm**。同一 Cr³⁺ 进入祖母绿（Be₃Al₂Si₆O₁₈）的畸变八面体位后，²E→⁴A₂ 锐线发射依旧存在，但 R1/R2 双线移至 **683 / 680 nm**（数据汇编见 Burns (1993) [24jg]；与宝石学正式版《分光镜》篇的 683/680 nm 口径一致）。值得注意的物理细节：祖母绿的 Δ_o（≈16500 cm⁻¹）小于红宝石（≈18000 cm⁻¹），但 ²E 是自旋翻转态，其能量主要取决于电子间排斥参数（Racah B）而**弱依赖** Δ_o（Tanabe–Sugano 图中 ²E 近水平 [24ir]），故祖母绿中 Δ_o 减小而 ²E 反而略高于红宝石——R 线向短波长方向移动约 11 nm。体色机制亦不同：祖母绿显绿源于 ⁴A₂→⁴T₂（约 606 nm）与 ⁴A₂→⁴T₁（约 432 nm）吸收紫红区光，R 线是叠加在红区的**发射**锐线（分光镜下为亮线而非暗线），对绿色体色贡献很小。
 
 ---
 
@@ -338,13 +339,15 @@ Cr³⁺(d³) 在八面体基态为 ⁴A₂；激光上能级 ²E 与基态自旋
 
 3. **部分矿物的具体致色归属仍有讨论**。例如紫晶（amethyst）的紫色多归因于 Fe³⁺ 相关中心（四面体 [FeO₄]⁻ 或辐照产生的色心），其确切跃迁归属与天然辐照角色仍在文献中讨论；本篇仅确认 Fe³⁺ 为关键杂质，不断言唯一机制（避免未核实的精细数值）。
 
-本节内容可能随研究进展（如第一性原理计算对 Δ 与电荷转移能的精确预测）更新。
+> 本节内容随研究进展可能更新（如第一性原理计算对 Δ 与电荷转移能的精确预测）。
 
 ---
 
 ## 八、参考文献
 
 **原始文献与专著（已逐条 Web 核实，卷期页 / DOI 见下）**
+
+**S 级（奠基原始文献与标准数据）**
 
 - [24ja] Maiman T.H. *Nature* **187**, 493–494 (1960). DOI: 10.1038/187493a0 — 红宝石受激发射，实测 R1 = 694.3 nm、R2 = 692.9 nm 锐线，激光物理开端。 [已核实]（第 43 篇）
 - [24jd] Laporte O. *Zeitschrift für Physik* **23**, 135–175 (1924). （无 DOI，1924 年原文）— 宇称选择定则（Laporte 规则），d–d 跃迁 g↔g 禁戒之依据。 [已核实]（第 43 篇）
@@ -353,10 +356,17 @@ Cr³⁺(d³) 在八面体基态为 ⁴A₂；激光上能级 ²E 与基态自旋
 - [24jg] Burns R.G. *Mineralogical Applications of Crystal Field Theory* 2nd ed. (Cambridge University Press, 1993). ISBN 9780521430777（电子版 DOI 10.1017/CBO9780511524899）— 矿物 / 宝石晶体场分裂与颜色数据汇编。 [已核实]（第 43 篇）
 - [24jh] Orgel L.E. *Journal of the Chemical Society* **1952**, 4756–4761 (1952). DOI: 10.1039/jr9520004756 — 弱场相关图（Orgel 图），定性预测跃迁。 [已核实]（第 43 篇）
 - [24ji] Nassau K. *The Physics and Chemistry of Color: The Fifteen Causes of Color* (Wiley, 1983). ISBN 0471867764 — 电荷转移等致色机制与「十五种致色原因」。 [已核实]（第 43 篇）
+- [24hk] Tiesinga, E.; Mohr, P. J.; Newell, D. B.; Taylor, B. N. CODATA Recommended Values of the Fundamental Physical Constants: 2018. *Reviews of Modern Physics* **93**, 025010 (2021). DOI: 10.1103/RevModPhys.93.025010 — 本篇 h、c、k_B、e 等常数的官方来源（2018 推荐值）；其中 h、c、k_B、e 自 2019 SI 重新定义起为精确值（不确定度 0）。 [已核实]（第 38、42、43 篇）
 
-**数据来源**
+**交叉引用条目（与第 42 篇共用，此处列出以便本篇独立溯源）**
 
-- CODATA (2018). Recommended Values of the Fundamental Physical Constants. NIST. https://physics.nist.gov/cuu/Constants/ — 本篇 h、c、k_B、e 采用 CODATA 2018；其中 h、c、k_B、e 自 2019 SI 重新定义起为精确值（不确定度 0）。
+- [24iq] Bethe H. *Annalen der Physik* **395**, 133–208 (1929). DOI: 10.1002/andp.19293950202 — 用点群 O_h 不可约表示处理晶体中原子能级分裂，晶体场理论奠基。 [已核实]（第 42、43 篇）
+- [24ir] Tanabe Y., Sugano S. *Journal of the Physical Society of Japan* **9**, 753–766 (1954). DOI: 10.1143/JPSJ.9.753 — dⁿ 组态立方场能量矩阵与 Tanabe–Sugano 图（I）。 [已核实]（第 42、43、47 篇）
+- [24is] Tanabe Y., Sugano S. *Journal of the Physical Society of Japan* **9**, 766–779 (1954). DOI: 10.1143/JPSJ.9.766 — dⁿ 组态立方场能量矩阵与 Tanabe–Sugano 图（II）。 [已核实]（第 42、43 篇）
+
+---
+
+*本篇版本：v1.2，2026年9月2日（P0 整改轮升 v1.1；P1 整改轮：第八节按 S/A/B 分组重排、更新句统一为基准 blockquote 句式）*
 </script>
 <script>
 // 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏

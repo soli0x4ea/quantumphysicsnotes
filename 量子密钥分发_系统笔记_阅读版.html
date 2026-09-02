@@ -87,8 +87,7 @@ img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6
   <main class="main"><article class="paper" id="content"></article></main>
 </div>
 
-<script type="text/plain" id="src">
-# 量子密钥分发
+<script type="text/plain" id="src"># 量子密钥分发
 
 > **分类归属：第四部分 量子信息与量子光学 · 数学程度：L2（运算层）· 前置依赖：第 11 篇《希尔伯特空间与狄拉克符号》、第 16 篇《角动量与自旋》、第 29 篇《量子纠缠》、第 30 篇《EPR 佯谬与贝尔不等式》、第 31 篇《量子测量与退相干》**
 > **验证依据**：Bennett & Brassard (1984) *Proc. IEEE Int. Conf. Computers, Systems & Signal Processing* (Bangalore), 175；Ekert (1991) *PRL* 67, 661；Wootters & Zurek (1982) *Nature* 299, 802；Shor & Preskill (2000) *PRL* 85, 441；Bennett, Bessette, Brassard, Salvail & Smolin (1992) *J. Cryptol.* 5, 3；Brassard, Lütkenhaus, Mor & Sanders (2000) *PRL* 85, 1330；Hwang (2003) *PRL* 91, 057901；Lo, Ma & Chen (2005) *PRL* 94, 230504；Lo, Curty & Qi (2012) *PRL* 108, 130503；Gisin, Ribordy, Tittel & Zbinden (2002) *Rev. Mod. Phys.* 74, 145；Scarani et al. (2009) *Rev. Mod. Phys.* 81, 1301；Bennett, Brassard & Mermin (1992) *PRL* 68, 557；Yin et al. (2017) *Science* 356, 1140；Chen et al. (2021) *Nature* 589, 214
@@ -493,49 +492,47 @@ Lo–Curty–Qi（2012）：Alice 与 Bob 各自独立制备态发给不可信�
 
 ---
 
+> 本节内容随研究进展可能更新。
+
 ## 八、参考文献
 
 **S 级（奠基原始文献与标准数据，均经检索核实卷期页）**
 
-- Bennett C.H., Brassard G. (1984). Quantum cryptography: Public key distribution and coin tossing. *Proceedings of the IEEE International Conference on Computers, Systems and Signal Processing*, Bangalore, pp. 175–179.（重印于 *Theoretical Computer Science* 560, 7–11, 2014）`[已核实]`（BB84 协议）
-- Ekert A.K. (1991). Quantum cryptography based on Bell's theorem. *Physical Review Letters*, 67(6), 661–663. `已核实`（E91 协议；DOI 10.1103/PhysRevLett.67.661）
-- Wootters W.K., Zurek W.H. (1982). A single quantum cannot be cloned. *Nature*, 299(5886), 802–803. `已核实`（无克隆定理；DOI 10.1038/299802a0）
-- Dieks D. (1982). Communication by EPR devices. *Physics Letters A*, 92(6), 271–272. `已核实`（无克隆定理，独立给出；与 Wootters–Zurek 同期）
-- Shor P.W., Preskill J. (2000). Simple proof of security of the BB84 quantum key distribution protocol. *Physical Review Letters*, 85(2), 441–444. `已核实`（BB84 信息论安全性，CSS 码）
-- Bennett C.H., Bessette F., Brassard G., Salvail L., Smolin J. (1992). Experimental quantum cryptography. *Journal of Cryptology*, 5(1), 3–28. `已核实`（首个 QKD 实验；DOI 10.1007/BF00191318）
-- Brassard G., Lütkenhaus N., Mor T., Sanders B.C. (2000). Limitations on Practical Quantum Cryptography. *Physical Review Letters*, 85(6), 1330–1333. `已核实`（PNS 光子数分离攻击）
-- Hwang W.-Y. (2003). Quantum Key Distribution with High Loss: Toward Global Secure Communication. *Physical Review Letters*, 91(5), 057901. `已核实`（诱饵态思想；DOI 10.1103/PhysRevLett.91.057901）
-- Lo H.-K., Ma X., Chen K. (2005). Decoy State Quantum Key Distribution. *Physical Review Letters*, 94(23), 230504. `已核实`（诱饵态严格化）
-- Wang X.-B. (2005). Beating the Photon-Number-Splitting Attack in Practical Quantum Cryptography. *Physical Review Letters*, 94(23), 230503. `已核实`（诱饵态实用协议）
-- Ma X., Qi B., Zhao Y., Lo H.-K. (2005). Practical decoy state for quantum key distribution. *Physical Review A*, 72(1), 012326. `已核实`（双诱骗态 / 真空诱骗态理论）
-- Lo H.-K., Chau H.F. (1999). Unconditional Security of Quantum Key Distribution. *Science*, 283(5410), 2050–2056. `已核实`（纠缠纯化路线安全性证明）
-- Mayers D. (2001). Unconditional Security in Quantum Cryptography. *Journal of the ACM*, 48(3), 351–406. `已核实`（JACM 版本；初版见 Crypto '96）
-- Lo H.-K., Curty M., Qi B. (2012). Measurement-Device-Independent Quantum Key Distribution. *Physical Review Letters*, 108(13), 130503. `已核实`（MDI-QKD）
-- Gisin N., Ribordy G., Tittel W., Zbinden H. (2002). Quantum cryptography. *Reviews of Modern Physics*, 74(2), 145–195. `已核实`（QKD 权威综述；DOI 10.1103/RevModPhys.74.145）
-- Scarani V., Bechmann-Pasquinucci H., Cerf N.J., Dušek M., Lütkenhaus N., Peev M. (2009). The security of practical quantum key distribution. *Reviews of Modern Physics*, 81(3), 1301–1350. `已核实`（实际 QKD 安全性综述）
-- Bennett C.H., Brassard G., Mermin N.D. (1992). Quantum cryptography without Bell's theorem. *Physical Review Letters*, 68(5), 557–559. `已核实`（BBM92；等效于 BB84）
-- Yin J. et al. (2017). Satellite-based entanglement distribution over 1200 kilometers. *Science*, 356(6343), 1140–1144. `已核实`（墨子号；Bell 违反 $2.37\pm0.09$）
-- Chen Y.-A. et al. (2021). An integrated space-to-ground quantum communication network over 4,600 kilometres. *Nature*, 589(7841), 214–219. `已核实`（天地一体化网络；DOI 10.1038/s41586-020-03093-8）
+[24ai] Bennett C.H., Brassard G. (1984). Quantum cryptography: Public key distribution and coin tossing. *Proceedings of the IEEE International Conference on Computers, Systems and Signal Processing*, Bangalore, pp. 175–179.（重印于 *Theoretical Computer Science* 560, 7–11, 2014）`[已核实]`（BB84 协议）
+[24aj] Ekert A.K. (1991). Quantum cryptography based on Bell's theorem. *Physical Review Letters*, 67(6), 661–663. `已核实`（E91 协议；DOI 10.1103/PhysRevLett.67.661）
+[24ak] Wootters W.K., Zurek W.H. (1982). A single quantum cannot be cloned. *Nature*, 299(5886), 802–803. `已核实`（无克隆定理；DOI 10.1038/299802a0）
+[24al] Dieks D. (1982). Communication by EPR devices. *Physics Letters A*, 92(6), 271–272. `已核实`（无克隆定理，独立给出；与 Wootters–Zurek 同期）
+[24am] Shor P.W., Preskill J. (2000). Simple proof of security of the BB84 quantum key distribution protocol. *Physical Review Letters*, 85(2), 441–444. `已核实`（BB84 信息论安全性，CSS 码）
+[24an] Bennett C.H., Bessette F., Brassard G., Salvail L., Smolin J. (1992). Experimental quantum cryptography. *Journal of Cryptology*, 5(1), 3–28. `已核实`（首个 QKD 实验；DOI 10.1007/BF00191318）
+[24ao] Brassard G., Lütkenhaus N., Mor T., Sanders B.C. (2000). Limitations on Practical Quantum Cryptography. *Physical Review Letters*, 85(6), 1330–1333. `已核实`（PNS 光子数分离攻击）
+[24ap] Hwang W.-Y. (2003). Quantum Key Distribution with High Loss: Toward Global Secure Communication. *Physical Review Letters*, 91(5), 057901. `已核实`（诱饵态思想；DOI 10.1103/PhysRevLett.91.057901）
+[24aq] Lo H.-K., Ma X., Chen K. (2005). Decoy State Quantum Key Distribution. *Physical Review Letters*, 94(23), 230504. `已核实`（诱饵态严格化）
+[24ar] Wang X.-B. (2005). Beating the Photon-Number-Splitting Attack in Practical Quantum Cryptography. *Physical Review Letters*, 94(23), 230503. `已核实`（诱饵态实用协议）
+[24as] Ma X., Qi B., Zhao Y., Lo H.-K. (2005). Practical decoy state for quantum key distribution. *Physical Review A*, 72(1), 012326. `已核实`（双诱骗态 / 真空诱骗态理论）
+[24at] Lo H.-K., Chau H.F. (1999). Unconditional Security of Quantum Key Distribution. *Science*, 283(5410), 2050–2056. `已核实`（纠缠纯化路线安全性证明）
+[24au] Mayers D. (2001). Unconditional Security in Quantum Cryptography. *Journal of the ACM*, 48(3), 351–406. `已核实`（JACM 版本；初版见 Crypto '96）
+[24av] Lo H.-K., Curty M., Qi B. (2012). Measurement-Device-Independent Quantum Key Distribution. *Physical Review Letters*, 108(13), 130503. `已核实`（MDI-QKD）
+[24aw] Gisin N., Ribordy G., Tittel W., Zbinden H. (2002). Quantum cryptography. *Reviews of Modern Physics*, 74(2), 145–195. `已核实`（QKD 权威综述；DOI 10.1103/RevModPhys.74.145）
+[24ax] Scarani V., Bechmann-Pasquinucci H., Cerf N.J., Dušek M., Lütkenhaus N., Peev M. (2009). The security of practical quantum key distribution. *Reviews of Modern Physics*, 81(3), 1301–1350. `已核实`（实际 QKD 安全性综述）
+[24ay] Bennett C.H., Brassard G., Mermin N.D. (1992). Quantum cryptography without Bell's theorem. *Physical Review Letters*, 68(5), 557–559. `已核实`（BBM92；等效于 BB84）
+[24az] Yin J. et al. (2017). Satellite-based entanglement distribution over 1200 kilometers. *Science*, 356(6343), 1140–1144. `已核实`（墨子号；Bell 违反 $2.37\pm0.09$）
+[24ba] Chen Y.-A. et al. (2021). An integrated space-to-ground quantum communication network over 4,600 kilometres. *Nature*, 589(7841), 214–219. `已核实`（天地一体化网络；DOI 10.1038/s41586-020-03093-8）
 
-**A 级（同行评审研究与权威教材，本篇引用为辅助支撑）**
+**A 级（同行评审研究与权威教材）**
 
-- Nielsen M.A., Chuang I.L. (2000/2010). *Quantum Computation and Quantum Information*. Cambridge University Press.（无克隆定理、Holevo 界、CSS 码的标准来源）
-- CODATA (2022). *Recommended Values of the Fundamental Physical Constants*. NIST.（本套笔记常数第一优先级；本篇数值不依赖它，但约定沿用）
+Nielsen M.A., Chuang I.L. (2000/2010). *Quantum Computation and Quantum Information*. Cambridge University Press.（无克隆定理、Holevo 界、CSS 码的标准来源）
+[#1] CODATA (2022). *Recommended Values of the Fundamental Physical Constants*. NIST.（本套笔记常数第一优先级；本篇数值不依赖它，但约定沿用） `[已核实]`
 
-**B 级（专著、教材与预印本）**
+**B 级（专著、教材、权威综述与专题文献）**
 
-- Wiesner S. (1983). Conjugate Coding. *SIGACT News*, 15(1), 78–88.（QKD 概念前身；思想源自 1960 年代未发表笔记；经典历史文献，按本套惯例入参考文献但不标 `已核实` 精确卷期页已在上文给出）
-- Lucamarini M. et al. (2018). Overcoming the rate–distance limit of quantum key distribution without quantum repeaters. *Nature* 557, 400.（双场 TF-QKD；作为 §5.1 与 §7.3 的延伸线索，数值未直接引用）
-
-**待回溯核实条目（撰写时以权威综述转引，未逐条回溯原始卷期页，不用于精确数值）**
-
-- 双场（TF-QKD）原始实验距离纪录（随年份更新）——以最新综述为准。
-- 探测器致盲攻击 Makarov et al. (2008) 原始 PRL 卷期页——以 Scarani et al. 2009 综述转引，未单独回溯。
-- 时移攻击 Zhao et al. (2008) 原始卷期页——同上。
-
+[lj] Wiesner S. (1983). Conjugate Coding. *SIGACT News*, 15(1), 78–88.（QKD 概念前身；思想源自 1960 年代未发表笔记；经典历史文献，按本套惯例入参考文献但不标 `已核实` 精确卷期页已在上文给出）
+[lk] Lucamarini M. et al. (2018). Overcoming the rate–distance limit of quantum key distribution without quantum repeaters. *Nature* 557, 400.（双场 TF-QKD；作为 §5.1 与 §7.3 的延伸线索，数值未直接引用）
+双场（TF-QKD）原始实验距离纪录（随年份更新）——以最新综述为准。
+探测器致盲攻击 Makarov et al. (2008) 原始 PRL 卷期页——以 Scarani et al. 2009 综述转引，未单独回溯。
+时移攻击 Zhao et al. (2008) 原始卷期页——同上。
 ---
 
-*本篇版本：v1.0，2026年9月1日*
+*本篇版本：v1.1，2026年9月2日（P1 整改轮：正文与文献引用迁移为全局编号（方案 B）、[已核实] 标记与汇编同步（1 条）、第七节末补更新句）*
 *数学程度：L2（运算层）*
 *配套脚本：`code/量子密钥分发_BB84密钥率.py`；图形：`figures/量子密钥分发_协议示意图.svg`、`figures/量子密钥分发_密钥率vs误码率.svg`*
 *姊妹篇交叉：《宝石学正式版/双折射后的光是否纠缠态》（单粒子偏振–路径纠缠不直接体现 EPR 非定域性，是 BB84 用单光子非正交态而非纠缠分发获安全的边界依据）*

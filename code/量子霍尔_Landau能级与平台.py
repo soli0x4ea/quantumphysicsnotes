@@ -9,13 +9,14 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- constants (CODATA 2022) ----
-hbar = 1.054571817e-34
-m_e = 9.1093837015e-31
-e = 1.602176634e-19
-h = 6.62607015e-34
-eV = 1.602176634e-19
+hbar = C["hbar"]
+m_e = C["m_e"]
+e = C["e"]
+h = C["h"]
+eV = C["e"]
 RK = h / e**2          # von Klitzing constant
 
 print(f"von Klitzing constant R_K = h/e^2 = {RK:.1f} ohm")

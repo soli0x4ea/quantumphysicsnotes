@@ -13,12 +13,13 @@ import matplotlib
 matplotlib.use("Agg")
 import numpy as np
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- CODATA 2018 常数 (SI) ----
-h = 6.62607015e-34
-hbar = 1.054571817e-34
-c = 299792458.0          # m/s
-kB = 1.380649e-23        # J/K
+h = C["h"]
+hbar = C["hbar"]
+c = C["c"]          # m/s
+kB = C["kB"]        # J/K
 c_cm = c * 100.0         # cm/s，用于波数换算
 T = 300.0                # K
 

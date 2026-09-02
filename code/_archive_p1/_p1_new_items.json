@@ -1,0 +1,124 @@
+{
+ "01": {
+  "new": []
+ },
+ "02": {
+  "new": []
+ },
+ "03": {
+  "new": []
+ },
+ "04": {
+  "new": []
+ },
+ "05": {
+  "new": []
+ },
+ "06": {
+  "new": []
+ },
+ "07": {
+  "new": []
+ },
+ "08": {
+  "new": []
+ },
+ "09": {
+  "new": []
+ },
+ "10": {
+  "new": []
+ },
+ "11": {
+  "new": []
+ },
+ "16": {
+  "new": []
+ },
+ "18": {
+  "new": []
+ },
+ "19": {
+  "new": []
+ },
+ "21": {
+  "new": []
+ },
+ "22": {
+  "new": [
+   [
+    "nist",
+    "2022",
+    "- NIST (2022). NIST Atomic Spectra Database (version 5.10). https://physics.nist.gov/asd. `[已核实]`（前 20 号元素第一电离能实验值来源，用于 §4.2/§6.2 数值）"
+   ]
+  ]
+ },
+ "23": {
+  "new": [
+   [
+    "herzberg",
+    "1950",
+    "- Herzberg G. (1950). *Molecular Spectra and Molecular Structure. I. Spectra of Diatomic Molecules* (2nd ed.). Van Nostrand. （H₂ 键长/离解能实验数据来源，$R_e=0.741\\ \\mathrm{Å}$、$D_e=4.52\\ \\mathrm{eV}$）"
+   ],
+   [
+    "atkins",
+    "2011",
+    "- Atkins P., Friedman R. (2011). *Molecular Quantum Mechanics* (5th ed.). Oxford University Press. （LCAO、Hückel、H₂ 变分推导）"
+   ]
+  ]
+ },
+ "29": {
+  "new": []
+ },
+ "30": {
+  "new": [
+   [
+    "bell",
+    "1966",
+    "- Bell J.S. (1966). On the Problem of Hidden Variables in Quantum Mechanics. *Reviews of Modern Physics*, 38(3), 447–452."
+   ],
+   [
+    "brunner",
+    "2014",
+    "- Brunner N., Cavalcanti D., Pironio S., Scarani V., Wehner S. (2014). Bell Nonlocality. *Reviews of Modern Physics*, 86, 419–478.（arXiv:1303.2849；卷期页待回溯核实）"
+   ],
+   [
+    "clauser",
+    "1974",
+    "- Clauser J.F., Horne M.A. (1974). *Physical Review D* 10, 526."
+   ],
+   [
+    "gisin",
+    "1991",
+    "- Gisin N. (1991).；Popescu S., Rohrlich D. (1992).；Greenberger D.M., Horne M.A., Zeilinger A. (1989)."
+   ],
+   [
+    "hensen",
+    "2016",
+    "- Hensen B. et al. (2016). 追加 300 次试验的结果（$S = 2.38 \\pm 0.14$，2.7σ）."
+   ],
+   [
+    "handsteiner",
+    "2017",
+    "- Handsteiner J. et al. (2017). Cosmic Bell Test.；Rauch D. et al. (2018). 类星体设置选择实验."
+   ]
+  ]
+ },
+ "31": {
+  "new": []
+ },
+ "32": {
+  "new": [
+   [
+    "wiesner",
+    "1983",
+    "- Wiesner S. (1983). Conjugate Coding. *SIGACT News*, 15(1), 78–88.（QKD 概念前身；思想源自 1960 年代未发表笔记；经典历史文献，按本套惯例入参考文献但不标 `已核实` 精确卷期页已在上文给出）"
+   ],
+   [
+    "lucamarini",
+    "2018",
+    "- Lucamarini M. et al. (2018). Overcoming the rate–distance limit of quantum key distribution without quantum repeaters. *Nature* 557, 400.（双场 TF-QKD；作为 §5.1 与 §7.3 的延伸线索，数值未直接引用）"
+   ]
+  ]
+ }
+}

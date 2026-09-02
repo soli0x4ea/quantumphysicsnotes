@@ -12,10 +12,11 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
-HBAR = 1.054571817e-34       # J.s
-M_E  = 9.1093837015e-31      # electron mass, kg
-EV   = 1.602176634e-19       # J/eV
+HBAR = C["hbar"]       # J.s
+M_E  = C["m_e"]      # electron mass, kg
+EV   = C["e"]       # J/eV
 L    = 1.0e-9                # well width, 1 nm
 N    = 800                   # interior grid points
 dx   = L / (N + 1)

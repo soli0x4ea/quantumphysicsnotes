@@ -87,11 +87,10 @@ img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6
   <main class="main"><article class="paper" id="content"></article></main>
 </div>
 
-<script type="text/plain" id="src">
-# 晶体场与配位场理论（Crystal Field and Ligand Field Theory）系统量子力学笔记
+<script type="text/plain" id="src"># 晶体场与配位场理论（Crystal Field and Ligand Field Theory）系统量子力学笔记
 
 > **第六部分：交叉应用——量子力学与宝石学 · 数学程度 L3 · 前置依赖：第16篇《角动量与自旋》、第17篇《中心力场与氢原子》、第22篇《多电子原子》**
-> **验证依据**：Bethe (1929) Ann. Phys.、Tanabe & Sugano (1954) J. Phys. Soc. Jpn.、Sugano (专著)、CODATA 2018（及你核实的其他 S/A 级来源）…
+> **验证依据**：Bethe (1929) *Ann. Phys.* 395, 133、Tanabe & Sugano (1954) *J. Phys. Soc. Jpn.* 9, 753、Tanabe & Sugano (1954) *J. Phys. Soc. Jpn.* 9, 766、Van Vleck (1932) *Phys. Rev.* 41, 208、Racah (1942) *Phys. Rev.* 61, 186、Orgel (1955) *J. Chem. Phys.* 23, 1004、Schäffer & Jørgensen (1958) *J. Inorg. Nucl. Chem.* 8, 143、Sugano, Tanabe & Kamimura (1970) *Multiplets of Transition-Metal Ions in Crystals*, Academic Press、CODATA 2018 *Rev. Mod. Phys.* 93, 025010（均为已核实 S/A 级来源，条目见第八节）
 
 ---
 
@@ -265,6 +264,8 @@ $$
   - 里德伯常数 $R_\infty=10973731.568160(21)\ \mathrm{m^{-1}}$。
   - 能量换算：电子伏特 $1\ \mathrm{eV}=1.602176634\times10^{-19}\ \mathrm{J}$（精确），对应波数 $1\ \mathrm{eV}/(hc)\approx 8065.54\ \mathrm{cm^{-1}}$。
 
+**量子效应显著的判据（能级分辨视角）**：晶体场效应是否显著，不取决于某单一尺度，而取决于两个无量纲比——其一，$\Delta_o$ 与室温热能 $k_BT$ 之比：$\Delta_o$（$10^4\ \mathrm{cm^{-1}}$ 量级，约 $1.24\text{–}3.10\ \mathrm{eV}$）远大于 $k_BT$，热布居不足以混淆 d 能级分裂，d–d 跃迁分立可辨；其二，$\Delta_o$ 与自由离子内禀能量标之比：$\Delta_o/P$ 判高/低自旋（见第四节判据 (11)），$\Delta_o/B$ 判弱场/强场极限及组态混合是否显著改写谱项结构（Tanabe–Sugano 图，见 6.2）。
+
 ---
 
 ## 四、实验基础与观测证据
@@ -368,7 +369,11 @@ $$
 
 ---
 
+> 本节内容随研究进展可能更新。
+
 ## 八、参考文献
+
+[24hk] Tiesinga, E.; Mohr, P. J.; Newell, D. B.; Taylor, B. N. CODATA Recommended Values of the Fundamental Physical Constants: 2018. *Reviews of Modern Physics* **93**, 025010 (2021). DOI: 10.1103/RevModPhys.93.025010 — 本篇所引 $\alpha$、$m_e$、$a_0$ 等常数的官方来源（2018 推荐值）。 [已核实]（第 42 篇）
 
 [24iq] Bethe H. *Ann. Phys.* **395**, 133–208 (1929). DOI: 10.1002/andp.19293950202 — 用点群群论处理晶体中原子能级分裂，晶体场理论奠基。 [已核实]（第 42 篇）
 
@@ -387,6 +392,10 @@ $$
 [24ix] Schäffer C. E., Jørgensen C. K. *J. Inorg. Nucl. Chem.* **8**, 143–148 (1958). DOI: 10.1016/0022-1902(58)80176-1 — 提出 nephelauxetic 序列，以共价性修正纯静电晶体场。 [已核实]（第 42 篇）
 
 [24iy] Sugano S., Tanabe Y., Kamimura H. *Multiplets of Transition-Metal Ions in Crystals*. Academic Press, New York (1970). ISBN 0124316751 — 配位场理论权威专著（S 级教科书，无 DOI）。 [已核实]（第 42 篇）
+
+---
+
+*本篇版本：v1.2，2026年9月2日（P0 整改轮升 v1.1；P1 整改轮：量子效应显著判据独立成条、第七节末补更新句）*
 </script>
 <script>
 // 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏

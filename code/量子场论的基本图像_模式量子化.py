@@ -11,10 +11,11 @@ import matplotlib
 matplotlib.use('Agg')
 import numpy as np
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- 常数（CODATA 2018 推荐值；SI 单位）----
-hbar = 1.054571817e-34   # J*s   约化普朗克常数（2019 重定义后精确值）
-kB   = 1.380649e-23       # J/K   玻尔兹曼常数（2019 重定义后精确值）
+hbar = C["hbar"]   # J*s   约化普朗克常数（2019 重定义后精确值）
+kB   = C["kB"]       # J/K   玻尔兹曼常数（2019 重定义后精确值）
 
 # ---- 一维单原子链参数 ----
 N = 50                      # 格点数（无量纲整数）
@@ -62,8 +63,8 @@ idx_large = nonzero[np.argmax(np.abs(k[nonzero]))]  # 最大 |k| 模
 # ---- 输出（供笔记回写具体数字）----
 print("N =", N, " a =", a, " v =", v)
 print("omega_max = %.4e s^-1 (%.4f THz)" % (omega_max, omega_max / 1e12))
-print("E0_total   = %.4e J  = %.4e eV" % (E0_total, E0_total / 1.602176634e-19))
-print("E0_per_site= %.4e J  = %.4e eV" % (E0_per_site, E0_per_site / 1.602176634e-19))
+print("E0_total   = %.4e J  = %.4e eV" % (E0_total, E0_total / C["e"]))
+print("E0_per_site= %.4e J  = %.4e eV" % (E0_per_site, E0_per_site / C["e"]))
 print("u0 (zero-point energy density) = %.4e J/m" % u0)
 print("cutoff scan (a_lat [m], E0 [J], u [J/m]):")
 for aa, e0, uu in zip(a_list, E0_scan, u_scan):

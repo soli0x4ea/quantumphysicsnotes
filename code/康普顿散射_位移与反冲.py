@@ -12,13 +12,14 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 FIG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "figures")
 os.makedirs(FIG_DIR, exist_ok=True)
 
-h = 6.62607015e-34
-me = 9.1093837015e-31
-c = 299792458.0
+h = C["h"]
+me = C["m_e"]
+c = C["c"]
 lam_C = h / (me * c)            # m
 
 
@@ -36,7 +37,7 @@ def main():
 
     print("[check] theta=0   : Delta_lambda=%.3e m, K_e=%.3e J" % (dlam[0], Ke[0]))
     print("[check] theta=pi  : Delta_lambda=%.3e m (=2 lambda_C), K_e=%.3e eV"
-          % (dlam[-1], Ke[-1] / 1.602176634e-19))
+          % (dlam[-1], Ke[-1] / C["e"]))
     assert dlam[0] == 0 and abs(Ke[0]) < 1e-30, "theta=0 must give zero shift/energy"
     assert abs(dlam[-1] - 2 * lam_C) / (2 * lam_C) < 1e-12, "theta=pi must give 2 lambda_C"
 
@@ -49,7 +50,7 @@ def main():
     axes[0].set_title("Compton shift Δλ = λ_C(1−cos θ)")
     axes[0].set_xlim(0, 180)
 
-    axes[1].plot(theta * 180 / np.pi, Ke / 1.602176634e-19, "-", color="#d62728", lw=1.7)
+    axes[1].plot(theta * 180 / np.pi, Ke / C["e"], "-", color="#d62728", lw=1.7)
     axes[1].set_xlabel("scattering angle θ (deg)")
     axes[1].set_ylabel("recoil electron kinetic energy (eV)")
     axes[1].set_title("Recoil electron energy K_e(θ), λ=71 pm")

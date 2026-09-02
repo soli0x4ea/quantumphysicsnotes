@@ -87,8 +87,7 @@ img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6
   <main class="main"><article class="paper" id="content"></article></main>
 </div>
 
-<script type="text/plain" id="src">
-# 量子谐振子
+<script type="text/plain" id="src"># 量子谐振子
 
 > **分类归属：第二部分 形式体系与数学结构 · 数学程度：L3（推导层）· 前置依赖：第 9 篇《量子态与叠加原理》、第 12 篇《算符、对易关系与表象》、第 13 篇《薛定谔方程》、第 14 篇《一维势场、势垒与量子隧穿》**
 > **验证依据**：Dirac (1927, 1958)、Schrödinger (1926a, 1926b)、Glauber (1963)、Sudarshan (1963)、Casimir (1948)、Feynman Lectures Vol. III、Sakurai & Napolitano (2011)、CODATA (2022)
@@ -117,13 +116,13 @@ img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6
 
 一维谐振子的哈密顿量为
 
-$$\hat H=\frac{\hat p^2}{2m}+\frac12 m\omega^2\hat x^2,$$
+$$\hat H=\frac{\hat p^2}{2m}+\frac12 m\omega^2\hat x^2, \tag{2.1}$$
 
 其中 $m$ 为质量，$\omega=\sqrt{k/m}$ 为经典角频率（$k$ 为等效弹性系数）。坐标与动量算符满足正则对易关系 $[\hat x,\hat p]=i\hbar$（见第 12 篇）。
 
 引入特征长度 $\ell=\sqrt{\hbar/(m\omega)}$（谐振子的"自然宽度"），定义无量纲变量 $\xi=\hat x/\ell$。为构造升降算符，令
 
-$$\hat a=\frac{1}{\sqrt{2\hbar m\omega}}\,(m\omega\hat x+i\hat p),\qquad \hat a^\dagger=\frac{1}{\sqrt{2\hbar m\omega}}\,(m\omega\hat x-i\hat p).$$
+$$\hat a=\frac{1}{\sqrt{2\hbar m\omega}}\,(m\omega\hat x+i\hat p),\qquad \hat a^\dagger=\frac{1}{\sqrt{2\hbar m\omega}}\,(m\omega\hat x-i\hat p). \tag{2.2}$$
 
 注意 $\hat a$ 不是厄米算符（$(\hat a)^\dagger=\hat a^\dagger$），它混合了 $\hat x$ 与 $\hat p$，本质是复数化的"振幅算符"。
 
@@ -188,7 +187,7 @@ $$\hat H=\frac{\hbar\omega}{4}\Big(2\hat a\hat a^\dagger+2\hat a^\dagger\hat a\B
 
 用 $[\hat a,\hat a^\dagger]=1$ 即 $\hat a\hat a^\dagger=\hat a^\dagger\hat a+1$，定义粒子数算符 $\hat N=\hat a^\dagger\hat a$：
 
-$$\hat H=\frac{\hbar\omega}{2}\big((\hat N+1)+\hat N\big)=\hbar\omega\Big(\hat N+\frac12\Big).$$
+$$\hat H=\frac{\hbar\omega}{2}\big((\hat N+1)+\hat N\big)=\hbar\omega\Big(\hat N+\frac12\Big). \tag{2.3}$$
 
 ### 2.4 谱的代数推导
 
@@ -202,11 +201,11 @@ $$\|\hat a|n\rangle\|^2=\langle n|\hat a^\dagger\hat a|n\rangle=n,\quad \|\hat a
 
 故
 
-$$\hat a|n\rangle=\sqrt{n}\,|n-1\rangle,\qquad \hat a^\dagger|n\rangle=\sqrt{n+1}\,|n+1\rangle,$$
+$$\hat a|n\rangle=\sqrt{n}\,|n-1\rangle,\qquad \hat a^\dagger|n\rangle=\sqrt{n+1}\,|n+1\rangle, \tag{2.4}$$
 
 且基态由 $\hat a|0\rangle=0$ 定义（最低态不能再降）。能量本征值：
 
-$$\hat H|n\rangle=\hbar\omega\Big(n+\frac12\Big)|n\rangle\quad\Rightarrow\quad E_n=\hbar\omega\Big(n+\frac12\Big),\qquad n=0,1,2,\dots$$
+$$\hat H|n\rangle=\hbar\omega\Big(n+\frac12\Big)|n\rangle\quad\Rightarrow\quad E_n=\hbar\omega\Big(n+\frac12\Big),\qquad n=0,1,2,\dots \tag{2.5}$$
 
 能级**等间距** $\Delta E=\hbar\omega$，且含不可消除的零点能 $E_0=\tfrac12\hbar\omega$。这正是谐振子区别于所有其他一维束缚势的标志（方势阱能级随 $n^2$ 增长，见第 14 篇）。
 
@@ -218,7 +217,7 @@ $$\frac{1}{\sqrt{2\hbar m\omega}}(m\omega x+\hbar\partial_x)\psi_0(x)=0\quad\Rig
 
 积分得 $\psi_0(x)=(\frac{m\omega}{\pi\hbar})^{1/4}e^{-m\omega x^2/(2\hbar)}$（高斯，最小不确定度波包）。递推 $\psi_n\propto (\hat a^\dagger)^n\psi_0$ 给出
 
-$$\psi_n(x)=\frac{1}{\sqrt{2^n n!}}\Big(\frac{m\omega}{\pi\hbar}\Big)^{1/4} H_n(\xi)\,e^{-\xi^2/2},\qquad \xi=\sqrt{\frac{m\omega}{\hbar}}\,x,$$
+$$\psi_n(x)=\frac{1}{\sqrt{2^n n!}}\Big(\frac{m\omega}{\pi\hbar}\Big)^{1/4} H_n(\xi)\,e^{-\xi^2/2},\qquad \xi=\sqrt{\frac{m\omega}{\hbar}}\,x, \tag{2.6}$$
 
 其中 $H_n(\xi)$ 为物理学家约定的 Hermite 多项式（$H_0=1,\ H_1=2\xi,\ H_2=4\xi^2-2,\dots$）。该形式由 Schrödinger (1926b) 用级数法（要求幂级数截断为多项式）独立得到（见第 17 篇 2.5 节同类手法）。
 
@@ -250,7 +249,7 @@ $$\psi_n(x)=\frac{1}{\sqrt{2^n n!}}\Big(\frac{m\omega}{\pi\hbar}\Big)^{1/4} H_n(
 
 2. **零点能的宏观可测后果——Casimir 效应**（Casimir 1948）。两片完美导体平行板（间距 $a$）改变了电磁场真空零点能的模态密度，产生吸引力
 
-   $$\frac{F}{A}=-\frac{\pi^2\hbar c}{240\,a^4}.$$
+   $$\frac{F}{A}=-\frac{\pi^2\hbar c}{240\,a^4}. \tag{4.1}$$
 
    代入 $\hbar c=197.3\ \text{eV·nm}$，当 $a=10\ \text{nm}$ 时获得压力约 $1.3\times10^5\ \text{Pa}\approx 1.3\ \text{atm}$（与科普文献"10 nm 间隙产生约 1 个大气压压力"一致）；$a=100\ \text{nm}$ 时降至约 $13\ \text{Pa}$。这是零点能"不是数学虚构"的判决性实验（实验确认见 Decca et al. 2007 等）。
 
@@ -281,7 +280,7 @@ $$\psi_n(x)=\frac{1}{\sqrt{2^n n!}}\Big(\frac{m\omega}{\pi\hbar}\Big)^{1/4} H_n(
 
 由位移算符作用于基态定义
 
-$$|\alpha\rangle=e^{-|\alpha|^2/2}\sum_{n=0}^\infty\frac{\alpha^n}{\sqrt{n!}}|n\rangle=D(\alpha)|0\rangle,\qquad D(\alpha)=e^{\alpha\hat a^\dagger-\alpha^*\hat a}.$$
+$$|\alpha\rangle=e^{-|\alpha|^2/2}\sum_{n=0}^\infty\frac{\alpha^n}{\sqrt{n!}}|n\rangle=D(\alpha)|0\rangle,\qquad D(\alpha)=e^{\alpha\hat a^\dagger-\alpha^*\hat a}. \tag{5.1}$$
 
 它是湮灭算符的本征态：$\hat a|\alpha\rangle=\alpha|\alpha\rangle$（$\alpha$ 为复本征值，体现"过完备"）。关键性质：
 
@@ -312,7 +311,7 @@ $$|\alpha\rangle=e^{-|\alpha|^2/2}\sum_{n=0}^\infty\frac{\alpha^n}{\sqrt{n!}}|n\
 
 3. **相干态演化的闭式验证**：取 $|\alpha\rangle$ 在 $t=0$，则 $|\alpha,t\rangle=e^{-i\hat Ht/\hbar}|\alpha\rangle=e^{-i\omega t/2}|\alpha e^{-i\omega t}\rangle$。其坐标概率密度
 
-   $$|\langle x|\alpha,t\rangle|^2=\frac{1}{\sqrt{\pi}\ell}\exp\!\Big[-\frac{(x-2\ell\,\mathrm{Re}(\alpha e^{-i\omega t}))^2}{\ell^2}\Big],$$
+   $$|\langle x|\alpha,t\rangle|^2=\frac{1}{\sqrt{\pi}\ell}\exp\!\Big[-\frac{(x-2\ell\,\mathrm{Re}(\alpha e^{-i\omega t}))^2}{\ell^2}\Big], \tag{6.1}$$
 
    高斯宽度恒为 $\ell$（与 $t$ 无关）——"不扩散"得证。配套脚本用前 $N\approx 40$ 项 Hermite 基展开数值验证此宽度不变。
 
@@ -332,9 +331,13 @@ $$|\alpha\rangle=e^{-|\alpha|^2/2}\sum_{n=0}^\infty\frac{\alpha^n}{\sqrt{n!}}|n\
 
 ---
 
+> 本节内容随研究进展可能更新。
+
 ## 八、参考文献
 
 > 本篇新增插入式条目 24ch–24cl，均在落笔前逐条回溯卷期页与 DOI，标 `[已核实]`；Schrödinger (1926b) 谐振子级数解复用第 12/13/14/17 篇的 24bv。
+
+**S 级（奠基原始文献与标准数据）**
 
 24ch. Dirac, P.A.M. (1927). The Quantum Theory of the Emission and Absorption of Radiation. *Proceedings of the Royal Society A*, 114(767), 243–265. `已核实`（首次引入产生/湮灭算符与二次量子化；DOI 10.1098/rspa.1927.0039；第 15 篇）
 
@@ -349,6 +352,8 @@ $$|\alpha\rangle=e^{-|\alpha|^2/2}\sum_{n=0}^\infty\frac{\alpha^n}{\sqrt{n!}}|n\
 > 复用：24bv. Schrödinger, E. (1926b). Quantisierung als Eigenwertproblem (Dritte Mitteilung). *Annalen der Physik*, 80, 437–490. `已核实`（含谐振子级数解 Hermite 多项式；第 15/17 篇）
 
 > 权威教材：Dirac (1958) 第 IV 章 §34（阶梯算符解谐振子，见参考文献主序列 26）；Feynman Lectures Vol. III 第 21 章"谐振子经典语境"（25）；Sakurai & Napolitano (2011) 第 2 章（28）。
+
+*本篇版本：v1.1，2026年9月2日（P1 整改轮：核心公式补 \tag 编号、第八节按 S/A/B 分组重排、第七节末补更新句）*
 </script>
 <script>
 // 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏

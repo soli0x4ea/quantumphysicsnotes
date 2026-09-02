@@ -17,13 +17,14 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 FIG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "figures")
 os.makedirs(FIG_DIR, exist_ok=True)
 
-hbar = 1.054571817e-34
-me = 9.1093837015e-31
-c = 299792458.0
+hbar = C["hbar"]
+me = C["m_e"]
+c = C["c"]
 
 
 def main():

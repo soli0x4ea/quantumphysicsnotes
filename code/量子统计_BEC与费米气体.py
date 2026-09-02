@@ -9,13 +9,14 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- constants (CODATA 2022) ----
-hbar = 1.054571817e-34
-kB = 1.380649e-23
-me = 9.1093837015e-31
-eV = 1.602176634e-19
-amu = 1.66053906660e-27
+hbar = C["hbar"]
+kB = C["kB"]
+me = C["m_e"]
+eV = C["e"]
+amu = C["u"]
 
 # =========================================================
 # Section 1: BEC critical temperature and condensate fraction

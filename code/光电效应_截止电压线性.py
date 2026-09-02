@@ -13,14 +13,15 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 FIG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "figures")
 os.makedirs(FIG_DIR, exist_ok=True)
 
 # CODATA 2022 精确定义值
-h_Js = 6.62607015e-34        # J*s
-e_C = 1.602176634e-19        # C
-c = 299792458.0
+h_Js = C["h"]        # J*s
+e_C = C["e"]        # C
+c = C["c"]
 # 以 eV 为单位时：h = 4.135667...e-15 eV*s；hc = 1239.84 eV*nm
 h_eV_s = h_Js / e_C
 hc_eV_nm = h_Js * c / e_C * 1e9

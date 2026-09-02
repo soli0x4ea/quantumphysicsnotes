@@ -30,6 +30,7 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---------- (A1) anharmonic oscillator ----------
 
@@ -117,7 +118,7 @@ print("-> 1st order overestimates the shift by ~2x; higher orders cancel ~half (
 
 # ---------- (B) helium variational ----------
 
-EH_EV = 27.211386245988  # Hartree -> eV (CODATA 2018)
+EH_EV = C["Ehartree_eV"]  # Hartree -> eV (CODATA 2018)
 
 def helium_E(alpha):
     Z = 2.0

@@ -10,11 +10,12 @@ import matplotlib
 matplotlib.use('Agg')
 import numpy as np
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- CODATA 2018 基本常数 ----
-m_e = 9.1093837011e-31      # kg
-c   = 299792458.0           # m/s
-e   = 1.602176634e-19       # C
+m_e = C["m_e"]      # kg
+c   = C["c"]           # m/s
+e   = C["e"]       # C
 MeV = 1.0e6 * e
 E0_MeV = (m_e * c**2) / MeV # 0.51099895... MeV，取作示例洞的 |E|
 

@@ -9,12 +9,13 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- constants (CODATA 2022, 精确值) ----
-hbar = 1.054571817e-34      # J*s
-me = 9.1093837015e-31       # kg
-kB = 1.380649e-23           # J/K
-eV = 1.602176634e-19        # J
+hbar = C["hbar"]      # J*s
+me = C["m_e"]       # kg
+kB = C["kB"]           # J/K
+eV = C["e"]        # J
 
 # =========================================================
 # Section 1: free electron Fermi gas

@@ -87,8 +87,7 @@ img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6
   <main class="main"><article class="paper" id="content"></article></main>
 </div>
 
-<script type="text/plain" id="src">
-# 中心力场与氢原子
+<script type="text/plain" id="src"># 中心力场与氢原子
 
 > **分类归属：第二部分 形式体系与数学结构 · 数学程度：L3（推导层）· 前置依赖：第 12 篇《算符、对易关系与表象》、第 13 篇《薛定谔方程》、第 14 篇《一维势场》、第 16 篇《角动量与自旋》**
 
@@ -115,7 +114,7 @@ img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6
 ### 2.1 两体约化与哈密顿量
 
 质子–电子两体问题先约化为质心运动 + 相对运动，相对坐标用**约化质量** $\mu=m_eM_p/(m_e+M_p)\approx m_e(1-m_e/M_p)$。氢原子哈密顿量（相对坐标 $r$）：
-$$\hat H=-\frac{\hbar^2}{2\mu}\nabla^2-\frac{e^2}{4\pi\varepsilon_0 r}.$$
+$$\hat H=-\frac{\hbar^2}{2\mu}\nabla^2-\frac{e^2}{4\pi\varepsilon_0 r}. \tag{2.1}$$
 （核视为点电荷、忽略核有限体积与相对论修正；精细结构在第 5.3 节。）
 
 ### 2.2 球坐标分离变量（不跳步）
@@ -127,15 +126,15 @@ $$\frac{1}{R}\frac{d}{dr}\!\left(r^2\frac{dR}{dr}\right)+\frac{2\mu r^2}{\hbar^2
 其中 $\hat\Lambda$ 为角部分。左只依赖 $r$、右只依赖角度，各等于常数，记为 $l(l+1)$。于是角部分方程恰为第 16 篇的 $\hat L^2 Y=l(l+1)\hbar^2 Y$，解即球谐 $Y_l^m(\theta,\phi)$，$l=0,1,2,\dots$，$m=-l,\dots,l$。
 
 径向方程令 $u(r)=rR(r)$ 化为一维形式（第 14 篇径向化的标准技巧）：
-$$-\frac{\hbar^2}{2\mu}\frac{d^2u}{dr^2}+\left[\frac{l(l+1)\hbar^2}{2\mu r^2}-\frac{e^2}{4\pi\varepsilon_0 r}\right]u(r)=E\,u(r),\qquad u(0)=0.$$
+$$-\frac{\hbar^2}{2\mu}\frac{d^2u}{dr^2}+\left[\frac{l(l+1)\hbar^2}{2\mu r^2}-\frac{e^2}{4\pi\varepsilon_0 r}\right]u(r)=E\,u(r),\qquad u(0)=0. \tag{2.2}$$
 方括号内即"有效势"：离心项 $+l(l+1)\hbar^2/(2\mu r^2)$ 在 $r\to0$ 排斥，库仑项吸引。
 
 ### 2.3 库仑势的解析解
 
 引入玻尔半径 $a_0=\dfrac{4\pi\varepsilon_0\hbar^2}{\mu e^2}$ 与无量纲变量 $\rho=2r/(na_0)$，方程化为合流超几何方程。束缚态要求径向量子数 $n_r=0,1,2,\dots\ge0$，主量子数 $n=n_r+l+1=1,2,3,\dots$，能级
-$$E_n=-\frac{\mu e^4}{2(4\pi\varepsilon_0)^2\hbar^2}\frac{1}{n^2}\equiv -\frac{\mathrm{Ry}}{n^2},\qquad \mathrm{Ry}=\frac{\mu e^4}{2(4\pi\varepsilon_0)^2\hbar^2}\approx 13.6\ \text{eV}.$$
+$$E_n=-\frac{\mu e^4}{2(4\pi\varepsilon_0)^2\hbar^2}\frac{1}{n^2}\equiv -\frac{\mathrm{Ry}}{n^2},\qquad \mathrm{Ry}=\frac{\mu e^4}{2(4\pi\varepsilon_0)^2\hbar^2}\approx 13.6\ \text{eV}. \tag{2.3}$$
 **基态**（$n=1,l=0$）：
-$$\psi_{100}(r)=\frac{1}{\sqrt{\pi a_0^3}}\,e^{-r/a_0},\qquad \langle r\rangle_{1s}=\tfrac32 a_0,\quad \text{径向节点数}=n_r=0.$$
+$$\psi_{100}(r)=\frac{1}{\sqrt{\pi a_0^3}}\,e^{-r/a_0},\qquad \langle r\rangle_{1s}=\tfrac32 a_0,\quad \text{径向节点数}=n_r=0. \tag{2.4}$$
 **简并度**：给定 $n$，$l=0,\dots,n-1$ 共 $n$ 个值，每 $l$ 有 $2l+1$ 个 $m$，合计 $\sum_{l=0}^{n-1}(2l+1)=n^2$。
 
 ---
@@ -152,7 +151,7 @@ $$\psi_{100}(r)=\frac{1}{\sqrt{\pi a_0^3}}\,e^{-r/a_0},\qquad \langle r\rangle_{
 | $n=3\to2$ 跃迁（Balmer-α） | $\lambda$ | $656.3\ \text{nm}$（红，可见） | 氢特征红线 |
 
 **能级间隔公式**（里德伯公式的量子力学来源）：
-$$\frac{1}{\lambda}=R_H\!\left(\frac{1}{n_f^2}-\frac{1}{n_i^2}\right),\qquad R_H=\frac{\mathrm{Ry}}{hc}\approx1.097\times10^7\ \text{m}^{-1}.$$
+$$\frac{1}{\lambda}=R_H\!\left(\frac{1}{n_f^2}-\frac{1}{n_i^2}\right),\qquad R_H=\frac{\mathrm{Ry}}{hc}\approx1.097\times10^7\ \text{m}^{-1}. \tag{3.1}$$
 
 ---
 
@@ -184,9 +183,9 @@ $$\frac{1}{\lambda}=R_H\!\left(\frac{1}{n_f^2}-\frac{1}{n_i^2}\right),\qquad R_H
 ### 5.3 精细结构（机制链）
 
 狄拉克方程（1928）对相对论性电子自然给出能级（第 38 篇）：
-$$E_{n,j}=mc^2\left[1+\frac{\alpha^2}{(n-|j+1/2|+\sqrt{(j+1/2)^2-\alpha^2})^2}\right]^{-1/2}-mc^2.$$
+$$E_{n,j}=mc^2\left[1+\frac{\alpha^2}{(n-|j+1/2|+\sqrt{(j+1/2)^2-\alpha^2})^2}\right]^{-1/2}-mc^2. \tag{5.1}$$
 非相对论展开到 $\alpha^2$ 量级：
-$$E_{n,j}\approx -\frac{\mathrm{Ry}}{n^2}+\frac{\mathrm{Ry}\,\alpha^2}{n^3}\left(\frac{1}{j+1/2}-\frac{3}{4n}\right),$$
+$$E_{n,j}\approx -\frac{\mathrm{Ry}}{n^2}+\frac{\mathrm{Ry}\,\alpha^2}{n^3}\left(\frac{1}{j+1/2}-\frac{3}{4n}\right), \tag{5.2}$$
 即精细结构只依赖 $n$ 与总角动量 $j$（而非单独 $l$），分裂尺度 $\sim\alpha^2\mathrm{Ry}\sim4.5\times10^{-5}\ \text{eV}$。它包含三部分之和：相对论动能修正、自旋–轨道耦合、达尔文项（Sommerfeld 1916 的旧量子论椭圆轨道已半定量给出同尺度分裂，见第 7.1 节）。**兰姆位移**是 QED 对它的进一步修正，量级更小。
 
 ### 5.4 旧量子论 vs 波动力学（对应表）
@@ -205,13 +204,13 @@ $$E_{n,j}\approx -\frac{\mathrm{Ry}}{n^2}+\frac{\mathrm{Ry}\,\alpha^2}{n^3}\left
 ### 6.1 基态解析验证
 
 基态 $\psi_{100}=(1/\sqrt{\pi a_0^3})e^{-r/a_0}$ 直接代入 2.2 节径向方程（$l=0$）可验：
-$$-\frac{\hbar^2}{2\mu}\frac{d^2u}{dr^2}-\frac{e^2}{4\pi\varepsilon_0 r}u=E u,\quad u=r\psi_{100}.$$
+$$-\frac{\hbar^2}{2\mu}\frac{d^2u}{dr^2}-\frac{e^2}{4\pi\varepsilon_0 r}u=E u,\quad u=r\psi_{100}. \tag{6.1}$$
 因 $u\propto r e^{-r/a_0}$，$u''=(1/a_0^2-2/(a_0r))u$，代入并利用 $a_0=4\pi\varepsilon_0\hbar^2/(\mu e^2)$ 得 $E=-\mu e^4/(2(4\pi\varepsilon_0)^2\hbar^2)=-\mathrm{Ry}$。脚本（6.2 节）以有限差分重算，结果一致。
 
 ### 6.2 径向方程有限差分数值验证（数值例）
 
 将 2.2 节径向方程在 $r\in(0,r_{\max}]$ 离散为对称三对角本征值问题（同第 13 篇有限差分法，去掉 scipy 依赖，用 `numpy.linalg.eigh`）。对 $l=0,1,2$ 分别取最低本征值，应得
-$$E_{n}\approx -\frac{13.6\ \text{eV}}{n^2},\qquad n=n_r+l+1.$$
+$$E_{n}\approx -\frac{13.6\ \text{eV}}{n^2},\qquad n=n_r+l+1. \tag{6.2}$$
 脚本 `code/中心力场与氢原子_径向方程.py` 输出：① 最低若干能级相对 $-13.6/n^2$ 的相对误差；② 径向概率密度 $|u(r)|^2/r$ 的若干态图；③ 能级–简并度示意图。输出 `figures/中心力场与氢原子_径向波函数.svg`、`figures/中心力场与氢原子_能级图.svg`。该数值例与 6.1 节解析结果互为印证，并满足规范"解析与数值各至少一例"的要求。
 
 ### 6.3 与宝石学 Cr³⁺ 的接口（概念例，非求解）
@@ -240,7 +239,11 @@ $$E_{n}\approx -\frac{13.6\ \text{eV}}{n^2},\qquad n=n_r+l+1.$$
 
 ---
 
+> 本节内容随研究进展可能更新。
+
 ## 八、参考文献
+
+**S 级（奠基原始文献与标准数据）**
 
 24cc. Bohr, N. (1913). On the Constitution of Atoms and Molecules. *Philosophical Magazine*, 26(151), 1–25; (153), 476–502; (155), 857–875. `已核实`（旧量子论三篇；第 14 篇亦引）
 
@@ -258,13 +261,15 @@ $$E_{n}\approx -\frac{13.6\ \text{eV}}{n^2},\qquad n=n_r+l+1.$$
 
 #1. CODATA (2022). *Recommended Values of the Fundamental Physical Constants*. NIST. `已核实`（玻尔半径 $a_0$、里德伯能量、精细结构常数 $\alpha$ 均取自此）
 
+**A 级（同行评审研究与权威教材）**
+
 #25. Feynman, R.P., Leighton, R.B., & Sands, M. (2010). *The Feynman Lectures on Physics*, Vol. III. Basic Books. `已核实`（第 19 章氢原子超精细分裂 = 两态系统）
 
 #27. Landau, L.D., & Lifshitz, E.M. (1977). *Quantum Mechanics: Non-Relativistic Theory* (3rd ed., Vol. 3). Pergamon. `已核实`（库仑势 SO(4) 偶然简并的标准论证）
 
 #28. Sakurai, J.J., & Napolitano, J. (2011). *Modern Quantum Mechanics* (2nd ed.). Addison-Wesley.
 
-*第 17 篇《中心力场与氢原子》v1.0，2026年9月1日。Bohr (1913) 三篇、Sommerfeld (1916) 卷期页于本次撰写时回溯核实并标 `[已核实]`；基态能量 $-13.6\ \text{eV}/n^2$ 由有限差分数值独立验证（第 6.2 节）；宝石学 Cr³⁺ R 线接口仅作概念连接，数值以第 42/43 篇为准。*
+*本篇版本：v1.1，2026年9月2日（P1 整改轮：核心公式补 \tag 编号、第八节按 S/A/B 分组重排、第七节末补更新句）*
 </script>
 <script>
 // 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏

@@ -21,6 +21,7 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 FIG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "figures")
 os.makedirs(FIG_DIR, exist_ok=True)
@@ -132,9 +133,9 @@ def main():
     print("[saved]", out)
 
     # ---- 附加输出：真实 50 kV 电子的德布罗意波长（正文第三节）----
-    h = 6.62607015e-34          # J*s, exact
+    h = C["h"]          # J*s, exact
     me = 9.1093837139e-31       # kg, CODATA 2022
-    e = 1.602176634e-19         # C, exact
+    e = C["e"]         # C, exact
     V = 50e3                    # 50 kV
     lam = h / np.sqrt(2 * me * e * V)
     print("[deBroglie] lambda(electron, 50 kV) = %.3e m  (about %.2f pm)" % (lam, lam * 1e12))

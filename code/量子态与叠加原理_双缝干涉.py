@@ -15,14 +15,15 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")  # 无显示环境
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- 物理常数 (CODATA 2018/2022) ----
-H = 6.62607015e-34        # J·s 普朗克常数（精确值）
-M_E = 9.1093837015e-31    # kg 电子质量
+H = C["h"]        # J·s 普朗克常数（精确值）
+M_E = C["m_e"]    # kg 电子质量
 
 # ---- 实验参数（示例：100 eV 电子双缝） ----
 E_eV = 100.0              # 电子动能 (eV)
-E_J = E_eV * 1.602176634e-19  # 转焦耳
+E_J = E_eV * C["e"]  # 转焦耳
 p = np.sqrt(2.0 * M_E * E_J)  # 非相对论动量
 lam = H / p               # de Broglie 波长 (m)
 d = 1.0e-7               # 缝距 (m) = 100 nm

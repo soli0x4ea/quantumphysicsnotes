@@ -10,12 +10,13 @@ import matplotlib
 matplotlib.use('Agg')
 import numpy as np
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- CODATA 2018 基本常数（NIST），2019 SI 重新定义后 e、c 为精确值 ----
-m_e = 9.1093837011e-31      # kg   电子/正电子静止质量 (CODATA 2018)
-c   = 299792458.0           # m/s  真空中光速（精确）
-e   = 1.602176634e-19       # C    基本电荷（精确）
-m_p = 1.67262192369e-27    # kg   质子质量（CODATA 2018），用于反冲修正示例
+m_e = C["m_e"]      # kg   电子/正电子静止质量 (CODATA 2018)
+c   = C["c"]           # m/s  真空中光速（精确）
+e   = C["e"]       # C    基本电荷（精确）
+m_p = C["m_p"]    # kg   质子质量（CODATA 2018），用于反冲修正示例
 MeV = 1.0e6 * e             # 1 MeV 对应的焦耳数（精确，因为 e、1e6 为定义值）
 
 # ---- 计算 ----

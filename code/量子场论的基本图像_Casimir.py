@@ -9,10 +9,11 @@ import matplotlib
 matplotlib.use('Agg')
 import numpy as np
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- 常数（CODATA 2018；SI 单位）----
-hbar = 1.054571817e-34   # J*s
-c = 2.99792458e8          # m/s
+hbar = C["hbar"]   # J*s
+c = C["c"]          # m/s
 pi = np.pi
 
 def casimir_pressure(d):

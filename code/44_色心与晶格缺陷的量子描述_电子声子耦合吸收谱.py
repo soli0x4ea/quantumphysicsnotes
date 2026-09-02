@@ -10,10 +10,11 @@ matplotlib.use("Agg")
 import math
 import numpy as np
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- CODATA 2018 相关常数（SI，能量在内部换算为 eV）----
-hbar_eVs = 6.582119569e-16        # 约化普朗克常数 [eV·s]
-kB_eV = 8.617333262e-5           # 玻尔兹曼常数 [eV/K]
+hbar_eVs = C["hbar_eVs"]        # 约化普朗克常数 [eV·s]
+kB_eV = C["kB_eVK"]           # 玻尔兹曼常数 [eV/K]
 c_nm_ps = 299792458e-3 * 1e3     # 光速 [nm/ps] 仅用于波长换算直观展示
 
 # ---- 模型参数（NV 中心近邻数量级；S、ħω、ZPL 见正文表与文献 [24jo][24jp][24js]）----

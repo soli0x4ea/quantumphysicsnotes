@@ -19,15 +19,16 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 FIG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "figures")
 os.makedirs(FIG_DIR, exist_ok=True)
 
 # CODATA 2022（h、e 为精确定义值；me、c 相对不确定度 <= 3.1e-10）
-h = 6.62607015e-34
-e = 1.602176634e-19
+h = C["h"]
+e = C["e"]
 me = 9.1093837139e-31
-c = 299792458.0
+c = C["c"]
 
 
 def lambda_nonrel(V):

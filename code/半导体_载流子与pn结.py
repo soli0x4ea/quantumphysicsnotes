@@ -9,11 +9,12 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- constants (CODATA 2022) ----
-kB = 1.380649e-23           # J/K
-e = 1.602176634e-19        # C
-eV = 1.602176634e-19       # J
+kB = C["kB"]           # J/K
+e = C["e"]        # C
+eV = C["e"]       # J
 
 # =========================================================
 # Section 1: intrinsic carrier concentration vs temperature (Si)

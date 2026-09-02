@@ -16,10 +16,11 @@ import matplotlib
 matplotlib.use("Agg")  # 无显示后端，便于服务器/沙箱运行
 import matplotlib.pyplot as plt
 import numpy as np
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- 物理常数（CODATA 2018；2019 SI 重新定义后 h、c、k_B 为精确值）----
-H = 6.62607015e-34        # J·s   普朗克常数（精确）
-C = 299792458.0           # m/s   光速（精确）
+H = C["h"]        # J·s   普朗克常数（精确）
+C = C["c"]           # m/s   光速（精确）
 HC_EV_NM = 1239.841984    # eV·nm = h*c 换算（精确，派生量）
 NM_PER_CM = 1.0e7         # 1 cm = 1e7 nm（波数 <-> 波长换算用）
 

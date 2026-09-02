@@ -237,12 +237,32 @@
 ├── 参考文献.md                         统一文献汇编
 ├── 修订记录.md                         校验问题记录
 ├── README.md                          本文件
+├── index.html                         导航首页（由 code/build_index_html.py 生成）
+├── remote_index_legacy.html           早期远程部署索引（仅留档，勿更新）
 ├── 30_EPR佯谬与贝尔不等式_系统笔记.md      第 30 篇（第四部分）
+├── {主题}_系统笔记_阅读版.html          47 篇单文件阅读版（与 md 一一对应，由 code/build_note_html.py 生成）
 ├── code/                              可复现数值脚本（numpy/scipy/matplotlib）
+│   ├── constants.py                   常数表加载器（from constants import C）
+│   ├── build_note_html.py             单篇 md → 自包含 HTML 阅读版（KaTeX + marked）
+│   ├── build_index_html.py            扫描磁盘真实文件名生成 index.html（防死链）
+│   ├── build_preview_app.py           47 篇目录与正文编译为单文件预览版
+│   └── _archive_p1/                   P1/P2 整改轮的一次性批处理与扫描脚本（仅留档）
 ├── data/                              常数表 JSON（对齐 CODATA 版本）
+│   └── constants_2018.json            CODATA 2018 物理常数（脚本经 constants.py 统一读取，禁止硬编码字面量）
 ├── figures/                           图形资产（优先 SVG）
+├── 预览版/                            单文件合并预览（code/build_preview_app.py 生成）
 └── {主题}_系统笔记.md                  后续正文条目（置于根目录）
 ```
+
+### HTML 版本关系
+
+| 版本 | 位置 | 生成方式 | 用途 |
+|------|------|---------|------|
+| 阅读版 | 根目录 `{主题}_系统笔记_阅读版.html`（47 个，与 md 一一对应） | `code/build_note_html.py` 逐篇生成 | 单篇精读，KaTeX 公式 + 相对路径引用 figures/ |
+| 导航首页 | `index.html` | `code/build_index_html.py` 扫描磁盘文件名生成 | 47 篇总导航，链接与真实文件名一致 |
+| 预览版 | `预览版/量子力学笔记_预览版.html`（单文件合并） | `code/build_preview_app.py` 编译 | 移动端/离线整体浏览（GemologyNotes-iOS 内容框架） |
+
+md 为唯一事实来源；阅读版与预览版均为派生产物，md 修订后须用对应脚本重建。
 
 ---
 

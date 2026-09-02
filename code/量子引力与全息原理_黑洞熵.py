@@ -8,12 +8,13 @@ import matplotlib
 matplotlib.use('Agg')
 import numpy as np
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- SI constants (CODATA 2018) ----
-hbar = 1.054571817e-34   # J*s
-c    = 299792458.0       # m/s
-G    = 6.67430e-11       # m^3 kg^-1 s^-2
-kB   = 1.380649e-23      # J/K
+hbar = C["hbar"]   # J*s
+c    = C["c"]       # m/s
+G    = C["G"]       # m^3 kg^-1 s^-2
+kB   = C["kB"]      # J/K
 Msun = 1.98847e30        # kg
 
 # ---- Planck units ----

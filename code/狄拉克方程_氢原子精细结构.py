@@ -7,12 +7,13 @@ import matplotlib
 matplotlib.use('Agg')
 import numpy as np
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- 常数（CODATA 2018，见参考文献 24hk）----
-ALPHA = 1.0 / 137.035999084          # 精细结构常数
-MEV = 0.51099895000                  # m_e c^2 (MeV)
+ALPHA = 1.0 / C["alpha_inv"]          # 精细结构常数
+MEV = C["me_c2_MeV"]                  # m_e c^2 (MeV)
 M_EV = MEV * 1.0e6                   # m_e c^2 (eV)
-EV_TO_HZ = 2.417989242e14            # 1 eV = 2.417989242e14 Hz
+EV_TO_HZ = C["eV_Hz"]            # 1 eV = 2.417989242e14 Hz
 Z = 1.0                              # 氢原子
 
 def E_Dirac_total(n, kappa):

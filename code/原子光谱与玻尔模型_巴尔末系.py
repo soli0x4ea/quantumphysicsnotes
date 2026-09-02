@@ -13,16 +13,17 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 FIG_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "figures")
 os.makedirs(FIG_DIR, exist_ok=True)
 
 # CODATA 2022
-me = 9.1093837015e-31
-mp = 1.67262192369e-27
-h = 6.62607015e-34
-c = 299792458.0
-R_inf = 10973731.568160          # m^-1 (infinite nuclear mass)
+me = C["m_e"]
+mp = C["m_p"]
+h = C["h"]
+c = C["c"]
+R_inf = C["R_inf"]          # m^-1 (infinite nuclear mass)
 mu_over_me = mp / (me + mp)      # reduced-mass factor
 R_H = R_inf * mu_over_me         # m^-1, hydrogen
 E_ion_H = 13.598434              # eV, hydrogen ionization (reduced mass)

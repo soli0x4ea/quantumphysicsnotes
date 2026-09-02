@@ -9,10 +9,11 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- constants (CODATA 2022) ----
-hbar = 1.054571817e-34      # J*s
-me = 9.1093837015e-31       # kg
+hbar = C["hbar"]      # J*s
+me = C["m_e"]       # kg
 # effective: hbar^2 / (2m) in eV * Angstrom^2  (for 1D energy E = (hbar^2/2m)*alpha^2)
 # hbar^2/(2m) = 6.104e-39 J*m^2 = 3.81 eV*A^2
 hbar2_2m_eV_A2 = 3.81

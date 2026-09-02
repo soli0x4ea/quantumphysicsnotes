@@ -23,12 +23,13 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401  确保 3D 投影可用
+from constants import C as CODATA  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 
 # ---------------- 常数（CODATA 2018，精确值）----------------
-H = 6.62607015e-34        # J·s   普朗克常数（精确）
-C = 299792458.0           # m/s   真空光速（精确）
-E_CHARGE = 1.602176634e-19  # C    元电荷（精确）
+H = CODATA["h"]        # J·s   普朗克常数（精确）
+C = CODATA["c"]           # m/s   真空光速（精确）
+E_CHARGE = CODATA["e"]  # C    元电荷（精确）
 
 
 def energy_ev(wavelength_nm):

@@ -6,13 +6,14 @@ import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+from constants import C  # CODATA 2018 常数自 data/constants_2018.json 加载（本目录 constants.py）
 
 # ---- 常数 (CODATA 2022) ----
-u = 1.66053906660e-27          # atomic mass unit, kg
+u = C["u"]          # atomic mass unit, kg
 m_Ag = 107.8682 * u            # silver-107/109 average, kg
-kB = 1.380649e-23              # Boltzmann constant, J/K
-muB = 9.2740100783e-24         # Bohr magneton, J/T
-hbar = 1.054571817e-34         # J*s (exact)
+kB = C["kB"]              # Boltzmann constant, J/K
+muB = C["mu_B"]         # Bohr magneton, J/T
+hbar = C["hbar"]         # J*s (exact)
 
 # ---- 实验参数 (Gerlach-Stern 类磁极, 量级估算) ----
 T = 1000.0                     # oven temperature, K

@@ -87,10 +87,9 @@ img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6
   <main class="main"><article class="paper" id="content"></article></main>
 </div>
 
-<script type="text/plain" id="src">
-# 狄拉克方程
+<script type="text/plain" id="src"># 狄拉克方程
 > **分类归属：第五部分·相对论量子理论与前沿 · 数学程度：L3 · 前置依赖：第 12 篇《算符、对易关系与表象》、第 16 篇《角动量与自旋》、第 9 篇《量子态与叠加原理》**
-> **验证依据**：Dirac (1928) Proc. R. Soc. Lond. A；Darwin (1928) Proc. R. Soc. Lond. A；Foldy & Wouthuysen (1950) Phys. Rev.；Lamb & Retherford (1947) Phys. Rev.；Hanneke et al. (2008) Phys. Rev. Lett.；Tiesinga et al. (2021) Rev. Mod. Phys.
+> **验证依据**：Dirac (1928) *Proc. R. Soc. Lond. A* 117, 610 与 118, 351、Darwin (1928) *Proc. R. Soc. Lond. A* 118, 654、Weyl (1929) *Z. Phys.* 56, 330、Anderson (1932) *Science* 76, 238、Anderson (1933) *Phys. Rev.* 43, 491、Blackett & Occhialini (1933) *Proc. R. Soc. Lond. A* 139, 699、Lamb & Retherford (1947) *Phys. Rev.* 72, 241、Bethe (1947) *Phys. Rev.* 72, 339、Foldy & Wouthuysen (1950) *Phys. Rev.* 78, 29、Hanneke et al. (2008) *Phys. Rev. Lett.* 100, 120801、Tiesinga et al. (2021) *Rev. Mod. Phys.* 93, 025010（均为已核实 S/A 级来源，条目见第八节）
 
 ---
 
@@ -107,7 +106,7 @@ $$(i\gamma^\mu \partial_\mu - m)\,\psi(x)=0,$$
 **核心特征（编号）**：
 1. **开平方线性化**：从相对论能量关系 $E^2=p^2c^2+m^2c^4$ 对能量 "开平方"，强制方程对时间一阶（与薛定谔方程形式一致），由此必须引入矩阵系数。
 2. **$4\times4$ $\gamma$ 矩阵**：满足 Clifford 代数 $\{\gamma^\mu,\gamma^\nu\}=2g^{\mu\nu}$，是闵可夫斯基时空的几何要求，而非任意假设。
-3. **自旋 1/2 自然涌现**：线性化自动给出电子自旋角动量 $\mathbf{S}=\hbar\boldsymbol{\sigma}/2$ 与磁矩，无需像 "自旋电子" 模型那样外挂半量子假设（24bi）。
+3. **自旋 1/2 自然涌现**：线性化自动给出电子自旋角动量 $\mathbf{S}=\hbar\boldsymbol{\sigma}/2$ 与磁矩，无需像 "自旋电子" 模型那样外挂半量子假设[24bi]。
 4. **负能解与反粒子预告**：方程存在负能解，狄拉克由此推出反粒子（正电子，1932 年由 Anderson 在宇宙线中观测到；该观测细节见第 39 篇《反粒子》，本篇不展开）。
 5. **氢原子精细结构**：方程精确给出氢原子能级的精细结构分裂，分裂量随 $(Z\alpha)^4$ 缩放，与实验（含后来的 Lamb 位移修正）在同一量级（24hi, 24hm）。
 
@@ -227,13 +226,13 @@ $$H_{\rm eff}= \frac{\pi^2}{2m}+V-\frac{p^4}{8m^3c^2}
 
 $$\Delta E_{\rm fs}\propto (Z\alpha)^4\,m c^2. \tag{13}$$
 
-**Foldy-Wouthuysen 变换**（24hh）提供了更系统的非相对论约化：通过幺正变换将正、负能子空间分离为独立的二分量大分量，使 (12) 可由变换级数严格导出，并揭示 FW 表象下的位置与自旋算符与通常非相对论算符的对应关系。
+**Foldy-Wouthuysen 变换**[24hh]提供了更系统的非相对论约化：通过幺正变换将正、负能子空间分离为独立的二分量大分量，使 (12) 可由变换级数严格导出，并揭示 FW 表象下的位置与自旋算符与通常非相对论算符的对应关系。
 
 ---
 
 ## 三、物理量与特征尺度
 
-下表常数以 **CODATA 2018 推荐值**（24hk，发表于 2021）为源；磁矩反常以 Hanneke 等 2008（24hl）为源。所有数值给出不确定度（括号标最后数位）。
+下表常数以 **CODATA 2018 推荐值**（24hk，发表于 2021）为源；磁矩反常以 Hanneke 等 2008[24hl]为源。所有数值给出不确定度（括号标最后数位）。
 
 | 物理量 | 符号 | 数值 / 量级 | 适用条件 |
 |---|---|---|---|
@@ -250,18 +249,46 @@ $$\Delta E_{\rm fs}\propto (Z\alpha)^4\,m c^2. \tag{13}$$
 - 精细结构分裂 $\Delta E_{\rm fs}\sim (Z\alpha)^4 m c^2$：对氢 $Z=1$，$(Z\alpha)^4\approx 2.84\times10^{-9}$，故 $\Delta E_{\rm fs}\sim 10^{-4}\,\mathrm{eV}$ 量级，对应射频/微波波段（GHz）。
 - Lamb 位移 $\Delta E_{\rm Lamb}\sim \alpha(Z\alpha)^4 m c^2\ln(1/\alpha)$（高阶 QED），对氢约 $\mu\mathrm{eV}$ 量级，比精细结构小约 10 倍，恰为检验 QED 的关键窗口。
 
+**相对论（量子）效应显著的判据**：
+- **速度判据 $v/c\sim Z\alpha$**：类氢体系中电子速度 $v\approx Z\alpha c$。氢（$Z=1$）$v/c\approx\alpha\approx1/137$，相对论修正在 $10^{-4}$ 相对量级；铀（$Z=92$）$v/c\approx0.67$，狄拉克方程成为必需而非微扰可选。
+- **能量判据 $|E_{\rm bind}|/m_ec^2$**：氢基态 $13.6\,\mathrm{eV}/511\,\mathrm{keV}\approx2.7\times10^{-5}$，薛定谔方程足够；比值 $\gtrsim10^{-2}$（重元素内壳层）时精细结构不可忽略，比值 $\sim1$（$Z\alpha\to1$）时须完整狄拉克谱乃至量子场论。
+- **修正量级标度**：相对论修正 $\sim(Z\alpha)^2$（相对量）、精细结构 $\sim(Z\alpha)^4 m_ec^2$、Lamb 位移 $\sim\alpha(Z\alpha)^4 m_ec^2$——三个标度分别标出薛定谔方程、狄拉克树级、QED 各自的适用边界，是判断"何时必须升级方程"的定量依据。
+
 ---
 
 ## 四、实验基础与观测证据
 
-1. **电子 $g-2$ 精密测量（24hl）**：Hanneke、Fogwell 与 Gabrielse（2008）用单电子量子回旋测得 $g/2=1.001\,159\,652\,180\,73(28)$，相对不确定度 $0.28\ \mathrm{ppt}$（parts per trillion，$2.8\times10^{-13}$）。该值与 QED 理论计算在同等精度内吻合，反之可用 $g-2$ 反推 $\alpha^{-1}=137.035\,999\,084(51)$（不确定度 $0.37\ \mathrm{ppb}$）。这既验证了狄拉克方程给出的 $g=2$ 主导项，也以极高精度暴露了 QED 辐射修正（反常磁矩）。
-2. **氢原子精细结构与 Lamb 位移（24hi, 24hm）**：Lamb 与 Retherford（1947）用微波方法测得 $2S_{1/2}$ 与 $2P_{1/2}$ 并不简并（狄拉克点核模型预言二者因同为 $j=1/2$ 而简并），移位约 $1000\,\mathrm{MHz}$；现代精密值约 $1058\,\mathrm{MHz}$。Bethe（1947）在 Shelter Island 会议归途上用质量重整化给出首个 Lamb 位移的 QED 计算（24hm）。狄拉克方程本身（树级、点核）给出的精细结构 $j$ 分裂（约 10.9 GHz，见第 6 节）在大 $Z$ 强场下已被实验反复确认。
-3. **反粒子（概念证据，详见第 39 篇）**：狄拉克方程的负能解逻辑上预告了电荷共轭态——正电子；其 1932 年宇宙线观测是方程的里程碑式印证。本篇不展开观测细节。
+### 4.1 关键实验
 
-**常见误读纠正**：
+1. **电子 $g-2$ 精密测量[24hl]**：Hanneke、Fogwell 与 Gabrielse（2008）用单电子量子回旋测得 $g/2=1.001\,159\,652\,180\,73(28)$，相对不确定度 $0.28\ \mathrm{ppt}$（parts per trillion，$2.8\times10^{-13}$）。该值与 QED 理论计算在同等精度内吻合，反之可用 $g-2$ 反推 $\alpha^{-1}=137.035\,999\,084(51)$（不确定度 $0.37\ \mathrm{ppb}$）。这既验证了狄拉克方程给出的 $g=2$ 主导项，也以极高精度暴露了 QED 辐射修正（反常磁矩）。
+2. **氢原子精细结构与 Lamb 位移（24hi, 24hm）**：Lamb 与 Retherford（1947）用微波方法测得 $2S_{1/2}$ 与 $2P_{1/2}$ 并不简并（狄拉克点核模型预言二者因同为 $j=1/2$ 而简并），移位约 $1000\,\mathrm{MHz}$；现代精密值 $1057.8\,\mathrm{MHz}$。Bethe（1947）在 Shelter Island 会议归途上用质量重整化给出首个 Lamb 位移的 QED 计算[24hm]。**证据链闭环**：狄拉克树级预言 $2S_{1/2}-2P_{1/2}$ 简并（分裂为 0）→ Lamb-Retherford 实验否定该简并（$\sim1000\,\mathrm{MHz}$）→ Bethe 的质量重整化计算给出量级正确的解释 → 完整 QED 计算与现代精密值在亚 MHz 级吻合。狄拉克方程给出正确的树级主导项——精细结构 $j$ 分裂（约 10.9 GHz，见第 6 节），在大 $Z$ 强场下已被反复确认；而 Lamb 位移恰落在其失效窗口（$\mu\mathrm{eV}$），成为暴露单粒子理论边界、开启 QED 的关键实验。
+3. **反粒子与对产生（24hn, 24hq, 24hr；观测细节见第 39 篇）**：**证据链闭环**：狄拉克方程的负能解[24bi]→ 空穴理论预告电荷共轭态 → Anderson（1932）在宇宙线磁云室中首报"易偏转正电粒子"[24hn]→ Anderson（1933）基于 1300 张云室照片确认其质量与电子同量级、电荷符号相反[24hq]→ Blackett 与 Occhialini（1933）用符合计数控制的云室直接观测穿透辐射中的 $e^+e^-$ 对产生与湮灭[24hr]。对产生的阈值判定 $E_\gamma\ge 2m_ec^2=1.022\,\mathrm{MeV}$（自由光子对产生被能量-动量守恒禁止，须在核或场附近以分担反冲动量）与云室中正负电子径迹自同一点出发的观测图像自洽。该链条同时划出单粒子理论的边界：对产生过程本身无法由单粒子狄拉克方程自洽描述——负能解在单粒子框架内是结构性困难，在量子场论中转化为反粒子预言（见第 7 节诠释与第 39、40 篇）。
+
+### 4.2 里程碑实验时间线
+
+| 年份 | 实验者 | 装置/体系 | 关键结果 | 文献 |
+|------|--------|----------|---------|------|
+| 1928 | Dirac | 理论（线性化） | 方程提出，自旋 1/2 与 $g=2$ 自然涌现 | *Proc. R. Soc. A* 117, 610[24bi] |
+| 1928 | Darwin | 中心场解析解 | 复得 Sommerfeld 精细结构公式 | *Proc. R. Soc. A* 118, 654[24hg] |
+| 1932 | Anderson | 磁云室（宇宙线） | 正电子首报 | *Science* 76, 238[24hn] |
+| 1933 | Anderson | 磁云室 | 1300 张照片确认正电子质量与电荷 | *Phys. Rev.* 43, 491[24hq] |
+| 1933 | Blackett & Occhialini | 符合计数云室 | $e^+e^-$ 对产生与湮灭的直接观测 | *Proc. R. Soc. A* 139, 699[24hr] |
+| 1947 | Lamb & Retherford | 微波共振（氢原子束） | $2S_{1/2}-2P_{1/2}$ 移位约 1000 MHz | *Phys. Rev.* 72, 241[24hi] |
+| 1947 | Bethe | 理论（质量重整化） | 首个 Lamb 位移 QED 计算 | *Phys. Rev.* 72, 339[24hm] |
+| 1950 | Foldy & Wouthuysen | 理论（幺正变换） | 系统的非相对论约化与经典极限 | *Phys. Rev.* 78, 29[24hh] |
+| 2008 | Hanneke, Fogwell & Gabrielse | 单电子量子回旋 | $g/2=1.001\,159\,652\,180\,73(28)$，0.28 ppt | *PRL* 100, 120801[24hl] |
+
+### 4.3 常见误读纠正
 - 误："狄拉克方程直接预言了 $g-2$ 的反常部分。" 正：狄拉克方程在树级给出 $g=2$；反常 $a_e\approx0.00116$ 完全来自 QED（及更高阶）辐射修正。
 - 误："精细结构 = Lamb 位移。" 正：精细结构是狄拉克相对论效应导致的 $j$ 简并解除（量级 $10^{-4}\,\mathrm{eV}$）；Lamb 位移是 QED 真空涨落导致的 $2S_{1/2}-2P_{1/2}$ 分裂（量级 $\mu\mathrm{eV}$），二者物理起源与量级均不同。
 - 误："负能解意味着理论错误。" 正：负能解是相对论性单粒子方程的结构性特征；在现代量子场论中被重新解释为反粒子（见第 7 节诠释）。
+
+### 4.4 实验局限与适用边界
+
+- **$g-2$ 检验的理论依赖**：$a_e$ 的实验值本身不构成对理论的独立检验——与 QED 计算比较须先独立测定 $\alpha$；若反过来用 $a_e$ 反推 $\alpha$，则依赖 QED 微扰级数（已算至 $(\alpha/\pi)^5$，即 $\alpha$ 的 10 阶）截断收敛性的判断，存在循环依赖。检验的独立性来自基于原子反冲/干涉的 $\alpha$ 另路测量。
+- **Lamb 位移的历史测量精度**：1947 年首测依赖热原子束中 $2S$ 亚稳态的电场淬灭与微波跃迁定标，绝对不确定度达数十 MHz（约 5%）；现代精密值 1057.8 MHz 来自冷原子束与激光光谱方法，其理论解释须含两圈自能、真空极化与核尺寸修正——该量级上"检验对象"已是 QED 而非狄拉克方程本身。
+- **高 $Z$ 检验的模型依赖**：精细结构随 $(Z\alpha)^4$ 增长，高 $Z$ 类氢离子对狄拉克谱更灵敏，但有限核体积、核极化与高阶 QED 修正同样随 $Z$ 迅速上升，分离出"纯狄拉克项"须引入核结构模型假设，削弱了检验的直接性。
+- **单粒子图像的统一边界**：上述检验（氢谱、$g-2$）均处于"束缚能 $\ll m_ec^2$、场强远低于对产生阈值"的窗口内；一旦 $E\gtrsim 2m_ec^2=1.022\,\mathrm{MeV}$（强激光场、重离子碰撞、临界电荷 $Z\alpha\to1$），单粒子解释失效，证据链移交量子场论（第 39、40 篇）。
 
 ---
 
@@ -286,7 +313,7 @@ chiral（手征 / Weyl）表象取
 $$\gamma^0=\begin{pmatrix}0&I\\I&0\end{pmatrix},\qquad
 \gamma^i=\begin{pmatrix}0&\sigma^i\\-\sigma^i&0\end{pmatrix}. \tag{14}$$
 
-在该表象下质量为 0 的狄拉克方程解耦为一对 Weyl 方程（左手、右手各二分量），手征结构一目了然。Dirac 表象与 chiral 表象由幺正相似变换 $U$ 联系（$\gamma'^\mu=U\gamma^\mu U^\dagger$），物理可观测量与表象无关。Weyl 于 1929 年在引力与电子的工作中系统讨论了这一结构（24hj）。
+在该表象下质量为 0 的狄拉克方程解耦为一对 Weyl 方程（左手、右手各二分量），手征结构一目了然。Dirac 表象与 chiral 表象由幺正相似变换 $U$ 联系（$\gamma'^\mu=U\gamma^\mu U^\dagger$），物理可观测量与表象无关。Weyl 于 1929 年在引力与电子的工作中系统讨论了这一结构[24hj]。
 
 ### 5.3 概念辨析
 
@@ -341,10 +368,10 @@ $$E_{n,j}\approx -\frac{m c^2\alpha^2 Z^2}{2n^2}\Bigl[1+(Z\alpha)^2\Bigl(\frac{1
 ## 七、历史脉络与学术争议
 
 - **1928 年，Dirac 两篇 PRSL 论文**（24bi, 24hf）：第一篇给出相对论性电子的线性波动方程，自动导出自旋 1/2 与磁矩；第二篇给出单电子的相对论理论与负能解结构。
-- **1928 年，Darwin**（24hg）：用常规波算符方法重新导出狄拉克理论，并精确求解中心场，得到 Sommerfeld 氢公式；其工作说明早期 "自旋电子" 方程是狄拉克方程的近似。
-- **1929 年，Weyl**（24hj）：讨论引力与电子的二分量（手征）形式，为 chiral 表象与中微子（质量为零时的 Weyl 方程）埋下伏笔。
-- **1947 年，Lamb & Retherford**（24hi）与 **Bethe**（24hm）：前者实验发现 $2S_{1/2}-2P_{1/2}$ 不简并（Lamb 位移），后者在归途上以质量重整化给出首个 QED 计算，开启现代量子电动力学。
-- **1950 年，Foldy & Wouthuysen**（24hh）：给出系统的非相对论约化变换，厘清正负能子空间与经典极限的对应。
+- **1928 年，Darwin**[24hg]：用常规波算符方法重新导出狄拉克理论，并精确求解中心场，得到 Sommerfeld 氢公式；其工作说明早期 "自旋电子" 方程是狄拉克方程的近似。
+- **1929 年，Weyl**[24hj]：讨论引力与电子的二分量（手征）形式，为 chiral 表象与中微子（质量为零时的 Weyl 方程）埋下伏笔。
+- **1947 年，Lamb & Retherford**[24hi]与 **Bethe**[24hm]：前者实验发现 $2S_{1/2}-2P_{1/2}$ 不简并（Lamb 位移），后者在归途上以质量重整化给出首个 QED 计算，开启现代量子电动力学。
+- **1950 年，Foldy & Wouthuysen**[24hh]：给出系统的非相对论约化变换，厘清正负能子空间与经典极限的对应。
 
 **争议与诠释（并列，不断言某方正确）**：
 
@@ -352,12 +379,15 @@ $$E_{n,j}\approx -\frac{m c^2\alpha^2 Z^2}{2n^2}\Bigl[1+(Z\alpha)^2\Bigl(\frac{1
 2. **Lamb 位移的理论地位**：一方视 Bethe 1947 的质量重整化为 "救场技巧"，强调狄拉克方程作为单粒子理论在 $\mu\mathrm{eV}$ 精度下已不够用；另一方（现代 QED 视角）视其为场论成功的起点，认为狄拉克方程仍是低能有效理论的核心，辐射修正是其微扰补丁。**两方在实验预言上一致，分歧在于理论叙事与本体论承诺**。
 3. **$g=2$ 的 "精确性"**：狄拉克方程给出 $g=2$ 被长期视为 "精确预言"；但自 1948 年 Schwinger 等人起，QED 显示 $g$ 偏离 2 是必然的辐射效应。今天 $g-2$ 同时是 "狄拉克树级正确的证据" 与 "QED 高阶修正的精密探针"，两视角互补而非互斥。
 
-本节内容可能随研究进展更新。
+> 本节内容随研究进展可能更新。
 
 ---
 
 ## 八、参考文献
 
+**S 级（奠基原始文献与标准数据）**
+
+[24bi] Dirac, P. A. M. The Quantum Theory of the Electron. *Proceedings of the Royal Society of London. Series A* **117**, 610–624 (1928). DOI: 10.1098/rspa.1928.0023 — 首篇狄拉克方程论文：从 $E^2=p^2c^2+m^2c^4$ 线性化导出方程，自旋 1/2 与 $g=2$ 自然涌现。 [已核实]（第 38 篇）
 
 [24hf] Dirac, P. A. M. The Quantum Theory of the Electron. Part II. Relativistic Theory of the Single Electron. *Proceedings of the Royal Society of London. Series A* **118**, 351–361 (1928). DOI: 10.1098/rspa.1928.0056 — 给出单电子相对论理论的完整形式与负能解结构。 [已核实]（第 38 篇）
 
@@ -374,6 +404,16 @@ $$E_{n,j}\approx -\frac{m c^2\alpha^2 Z^2}{2n^2}\Bigl[1+(Z\alpha)^2\Bigl(\frac{1
 [24hl] Hanneke, D.; Fogwell, S.; Gabrielse, G. New Measurement of the Electron Magnetic Moment and the Fine Structure Constant. *Physical Review Letters* **100**, 120801 (2008). DOI: 10.1103/PhysRevLett.100.120801 — 单电子量子回旋测得 $g/2=1.00115965218073(28)$，相对不确定度 0.28 ppt。 [已核实]（第 38 篇）
 
 [24hm] Bethe, H. A. The Electromagnetic Shift of Energy Levels. *Physical Review* **72**, 339–341 (1947). DOI: 10.1103/PhysRev.72.339 — 用质量重整化给出首个 Lamb 位移的 QED 计算，开启现代量子电动力学。 [已核实]（第 38 篇）
+
+[24hn] Anderson, C. D. The Apparent Existence of Easily Deflectable Positives. *Science* **76**, 238–239 (1932). DOI: 10.1126/science.76.1967.238 — 宇宙线磁云室中正电子的首篇报道（"易偏转正电粒子"）。 [已核实]（第 38、39 篇）
+
+[24hq] Anderson, C. D. The Positive Electron. *Physical Review* **43**, 491–494 (1933). DOI: 10.1103/PhysRev.43.491 — 基于约 1300 张云室照片确认正电子质量与电子同量级、电荷符号相反。 [已核实]（第 38、39 篇）
+
+[24hr] Blackett, P. M. S.; Occhialini, G. P. S. Some Photographs of the Tracks of Penetrating Radiation. *Proceedings of the Royal Society of London. Series A* **139**, 699–726 (1933). DOI: 10.1098/rspa.1933.0048 — 用符合计数控制的云室直接观测穿透辐射中的 $e^+e^-$ 对产生与湮灭。 [已核实]（第 38、39 篇）
+
+---
+
+*本篇版本：v1.2，2026年9月2日（P0 整改轮升 v1.1；P1 整改轮：中文括号引用统一为方括号（24 处）、第八节按 S/A/B 分组重排、更新句统一为基准 blockquote 句式）*
 </script>
 <script>
 // 在 markdown 解析前抽出公式，用占位符保护，避免被 marked 当成强调语法破坏
