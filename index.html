@@ -62,6 +62,18 @@
   .aux .d{color:var(--muted);font-size:.85em;display:block;margin-top:2px;}
   .assets{color:var(--muted);font-size:.9em;}
   .assets a{margin-right:12px;}
+  .paths{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:8px;}
+  .path{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--accent);
+        border-radius:10px;padding:14px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;}
+  .path .ph{font-weight:700;font-size:1em;margin:0 0 .15em;color:var(--accent);}
+  .path .pt{font-size:.92em;font-weight:600;margin:0 0 .4em;}
+  .path .pi{color:var(--muted);font-size:.85em;margin:0 0 .6em;flex:1;line-height:1.55;}
+  .path .pmeta{font-size:.8em;color:var(--muted);margin-bottom:.6em;}
+  .path .pmeta b{color:var(--fg);}
+  .path .seq{font-size:.78em;color:var(--muted);font-variant-numeric:tabular-nums;
+            line-height:1.6;word-break:break-all;margin-bottom:.7em;}
+  .path .seq .more{font-style:italic;}
+  .path .btn.primary{font-size:.82em;align-self:flex-start;}
   footer{margin-top:3em;padding-top:1em;border-top:1px solid var(--border);color:var(--muted);font-size:.85em;}
   .empty{color:var(--muted);padding:20px 0;display:none;}
 </style>
@@ -74,7 +86,7 @@
     <div class="stat"><b>47</b> 篇笔记</div>
     <div class="stat"><b>47</b> 个阅读版</div>
     <div class="stat"><b>348</b> 条参考文献</div>
-    <div class="stat"><b>68</b> 个可复现脚本</div>
+    <div class="stat"><b>70</b> 个可复现脚本</div>
     <div class="stat"><b>88</b> 个图表</div>
   </div>
 </header>
@@ -84,271 +96,50 @@
   <div class="hint">输入即过滤，支持标题、摘要与难度等级。<span id="count"></span></div>
 </div>
 
-  <section data-part>
-    <h2>第一部分：量子行为与基础概念（10 篇）</h2>
-    <div class="grid">
-      <article class="card" data-search="01 量子行为 子弹/水波/电子三实验、概率幅、不可区分性、量子力学第一原理、看一眼就破坏干涉 l1 01_量子行为_系统笔记.md">
-        <div class="top"><span class="num">01</span><h3>量子行为</h3><span class="badge l1">L1</span></div>
-        <p class="desc">子弹/水波/电子三实验、概率幅、不可区分性、量子力学第一原理、看一眼就破坏干涉</p>
-        <div class="links"><a class="btn primary" href="%E9%87%8F%E5%AD%90%E8%A1%8C%E4%B8%BA_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/01_%E9%87%8F%E5%AD%90%E8%A1%8C%E4%B8%BA_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="02 波粒二象性与德布罗意关系 λ=h/p 与 e=ħω、戴维孙-革末实验、单电子双缝的逐点累积 l2 02_波粒二象性_系统笔记.md">
-        <div class="top"><span class="num">02</span><h3>波粒二象性与德布罗意关系</h3><span class="badge l2">L2</span></div>
-        <p class="desc">λ=h/p 与 E=ħω、戴维孙-革末实验、单电子双缝的逐点累积</p>
-        <div class="links"><a class="btn primary" href="%E6%B3%A2%E7%B2%92%E4%BA%8C%E8%B1%A1%E6%80%A7_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/02_%E6%B3%A2%E7%B2%92%E4%BA%8C%E8%B1%A1%E6%80%A7_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="03 黑体辐射与能量量子化 紫外灾难、普朗克定律、维恩位移、h 的首次测定 l2 03_黑体辐射_系统笔记.md">
-        <div class="top"><span class="num">03</span><h3>黑体辐射与能量量子化</h3><span class="badge l2">L2</span></div>
-        <p class="desc">紫外灾难、普朗克定律、维恩位移、h 的首次测定</p>
-        <div class="links"><a class="btn primary" href="%E9%BB%91%E4%BD%93%E8%BE%90%E5%B0%84_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/03_%E9%BB%91%E4%BD%93%E8%BE%90%E5%B0%84_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="04 光电效应与光子 爱因斯坦 1905、逸出功、截止频率、瞬时发射、密立根验证 l1 04_光电效应_系统笔记.md">
-        <div class="top"><span class="num">04</span><h3>光电效应与光子</h3><span class="badge l1">L1</span></div>
-        <p class="desc">爱因斯坦 1905、逸出功、截止频率、瞬时发射、密立根验证</p>
-        <div class="links"><a class="btn primary" href="%E5%85%89%E7%94%B5%E6%95%88%E5%BA%94_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/04_%E5%85%89%E7%94%B5%E6%95%88%E5%BA%94_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="05 康普顿散射 δλ=(h/m_ec)(1−cosθ)、康普顿波长 2.426 pm、光子动量的直接证据 l2 05_康普顿散射_系统笔记.md">
-        <div class="top"><span class="num">05</span><h3>康普顿散射</h3><span class="badge l2">L2</span></div>
-        <p class="desc">Δλ=(h/m_ec)(1−cosθ)、康普顿波长 2.426 pm、光子动量的直接证据</p>
-        <div class="links"><a class="btn primary" href="%E5%BA%B7%E6%99%AE%E9%A1%BF%E6%95%A3%E5%B0%84_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/05_%E5%BA%B7%E6%99%AE%E9%A1%BF%E6%95%A3%E5%B0%84_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="06 原子光谱与玻尔模型 里德伯公式、巴尔末系、定态跃迁、对应原理、模型的成功与崩塌处 l2 06_原子光谱与玻尔模型_系统笔记.md">
-        <div class="top"><span class="num">06</span><h3>原子光谱与玻尔模型</h3><span class="badge l2">L2</span></div>
-        <p class="desc">里德伯公式、巴尔末系、定态跃迁、对应原理、模型的成功与崩塌处</p>
-        <div class="links"><a class="btn primary" href="%E5%8E%9F%E5%AD%90%E5%85%89%E8%B0%B1%E4%B8%8E%E7%8E%BB%E5%B0%94%E6%A8%A1%E5%9E%8B_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/06_%E5%8E%9F%E5%AD%90%E5%85%89%E8%B0%B1%E4%B8%8E%E7%8E%BB%E5%B0%94%E6%A8%A1%E5%9E%8B_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="07 物质波包与波粒统一 相速度/群速度、波包扩散、e=ħω 与 p=ħk 的一致性 l2 07_物质波包_系统笔记.md">
-        <div class="top"><span class="num">07</span><h3>物质波包与波粒统一</h3><span class="badge l2">L2</span></div>
-        <p class="desc">相速度/群速度、波包扩散、E=ħω 与 p=ħk 的一致性</p>
-        <div class="links"><a class="btn primary" href="%E7%89%A9%E8%B4%A8%E6%B3%A2%E5%8C%85_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/07_%E7%89%A9%E8%B4%A8%E6%B3%A2%E5%8C%85_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="08 不确定性关系 δxδp≥ħ/2、傅里叶带宽定理、制备不确定度 vs 测量扰动、能量-时间关系争议 l2 08_不确定性关系_系统笔记.md">
-        <div class="top"><span class="num">08</span><h3>不确定性关系</h3><span class="badge l2">L2</span></div>
-        <p class="desc">ΔxΔp≥ħ/2、傅里叶带宽定理、制备不确定度 vs 测量扰动、能量-时间关系争议</p>
-        <div class="links"><a class="btn primary" href="%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7%E5%85%B3%E7%B3%BB_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/08_%E4%B8%8D%E7%A1%AE%E5%AE%9A%E6%80%A7%E5%85%B3%E7%B3%BB_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="09 量子态与叠加原理 态矢量、线性叠加、相位与相干性、与经典叠加的本质区别 l2 09_量子态与叠加原理_系统笔记.md">
-        <div class="top"><span class="num">09</span><h3>量子态与叠加原理</h3><span class="badge l2">L2</span></div>
-        <p class="desc">态矢量、线性叠加、相位与相干性、与经典叠加的本质区别</p>
-        <div class="links"><a class="btn primary" href="%E9%87%8F%E5%AD%90%E6%80%81%E4%B8%8E%E5%8F%A0%E5%8A%A0%E5%8E%9F%E7%90%86_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/09_%E9%87%8F%E5%AD%90%E6%80%81%E4%B8%8E%E5%8F%A0%E5%8A%A0%E5%8E%9F%E7%90%86_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="10 测量理论与波函数坍缩 投影测量、von neumann 测量模型、povm、量子芝诺效应 l3 10_测量理论_系统笔记.md">
-        <div class="top"><span class="num">10</span><h3>测量理论与波函数坍缩</h3><span class="badge l3">L3</span></div>
-        <p class="desc">投影测量、von Neumann 测量模型、POVM、量子芝诺效应</p>
-        <div class="links"><a class="btn primary" href="%E6%B5%8B%E9%87%8F%E7%90%86%E8%AE%BA_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/10_%E6%B5%8B%E9%87%8F%E7%90%86%E8%AE%BA_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-    </div>
-  </section>
-  <section data-part>
-    <h2>第二部分：形式体系与数学结构（10 篇）</h2>
-    <div class="grid">
-      <article class="card" data-search="11 希尔伯特空间与狄拉克符号 态空间、内积与范数、完备性、 bra-ket 记号、离散谱与连续谱 l2 11_希尔伯特空间与狄拉克符号_系统笔记.md">
-        <div class="top"><span class="num">11</span><h3>希尔伯特空间与狄拉克符号</h3><span class="badge l2">L2</span></div>
-        <p class="desc">态空间、内积与范数、完备性、 bra-ket 记号、离散谱与连续谱</p>
-        <div class="links"><a class="btn primary" href="%E5%B8%8C%E5%B0%94%E4%BC%AF%E7%89%B9%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%8B%84%E6%8B%89%E5%85%8B%E7%AC%A6%E5%8F%B7_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/11_%E5%B8%8C%E5%B0%94%E4%BC%AF%E7%89%B9%E7%A9%BA%E9%97%B4%E4%B8%8E%E7%8B%84%E6%8B%89%E5%85%8B%E7%AC%A6%E5%8F%B7_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="12 算符、对易关系与表象 可观测量与厄米算符、对易子、本征值谱、位置/动量表象、矩阵表示 l3 12_算符表象_系统笔记.md">
-        <div class="top"><span class="num">12</span><h3>算符、对易关系与表象</h3><span class="badge l3">L3</span></div>
-        <p class="desc">可观测量与厄米算符、对易子、本征值谱、位置/动量表象、矩阵表示</p>
-        <div class="links"><a class="btn primary" href="%E7%AE%97%E7%AC%A6%E8%A1%A8%E8%B1%A1_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/12_%E7%AE%97%E7%AC%A6%E8%A1%A8%E8%B1%A1_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="13 薛定谔方程 含时与定态形式、概率流连续性方程、定态的一般性质 l2 13_薛定谔方程_系统笔记.md">
-        <div class="top"><span class="num">13</span><h3>薛定谔方程</h3><span class="badge l2">L2</span></div>
-        <p class="desc">含时与定态形式、概率流连续性方程、定态的一般性质</p>
-        <div class="links"><a class="btn primary" href="%E8%96%9B%E5%AE%9A%E8%B0%94%E6%96%B9%E7%A8%8B_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/13_%E8%96%9B%E5%AE%9A%E8%B0%94%E6%96%B9%E7%A8%8B_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="14 一维势场、势垒与量子隧穿 无限深势阱、有限方势阱、δ 势、隧穿系数、wkb 近似 l3 14_一维势场_系统笔记.md">
-        <div class="top"><span class="num">14</span><h3>一维势场、势垒与量子隧穿</h3><span class="badge l3">L3</span></div>
-        <p class="desc">无限深势阱、有限方势阱、δ 势、隧穿系数、WKB 近似</p>
-        <div class="links"><a class="btn primary" href="%E4%B8%80%E7%BB%B4%E5%8A%BF%E5%9C%BA_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/14_%E4%B8%80%E7%BB%B4%E5%8A%BF%E5%9C%BA_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="15 量子谐振子 升降算符解法、零点能、波函数与厄米多项式、相干态 l3 15_量子谐振子_系统笔记.md">
-        <div class="top"><span class="num">15</span><h3>量子谐振子</h3><span class="badge l3">L3</span></div>
-        <p class="desc">升降算符解法、零点能、波函数与厄米多项式、相干态</p>
-        <div class="links"><a class="btn primary" href="%E9%87%8F%E5%AD%90%E8%B0%90%E6%8C%AF%E5%AD%90_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/15_%E9%87%8F%E5%AD%90%E8%B0%90%E6%8C%AF%E5%AD%90_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="16 角动量与自旋 [l_i, l_j]=iħε_ijk l_k、升降算符、泡利矩阵、自旋 1/2、clebsch-gordan 系数 l3 16_角动量与自旋_系统笔记.md">
-        <div class="top"><span class="num">16</span><h3>角动量与自旋</h3><span class="badge l3">L3</span></div>
-        <p class="desc">[L_i, L_j]=iħε_ijk L_k、升降算符、泡利矩阵、自旋 1/2、Clebsch-Gordan 系数</p>
-        <div class="links"><a class="btn primary" href="%E8%A7%92%E5%8A%A8%E9%87%8F%E4%B8%8E%E8%87%AA%E6%97%8B_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/16_%E8%A7%92%E5%8A%A8%E9%87%8F%E4%B8%8E%E8%87%AA%E6%97%8B_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="17 中心力场与氢原子 分离变量、球谐函数、径向方程、能级与简并度、塞曼分裂 l3 17_中心力场与氢原子_系统笔记.md">
-        <div class="top"><span class="num">17</span><h3>中心力场与氢原子</h3><span class="badge l3">L3</span></div>
-        <p class="desc">分离变量、球谐函数、径向方程、能级与简并度、塞曼分裂</p>
-        <div class="links"><a class="btn primary" href="%E4%B8%AD%E5%BF%83%E5%8A%9B%E5%9C%BA%E4%B8%8E%E6%B0%A2%E5%8E%9F%E5%AD%90_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/17_%E4%B8%AD%E5%BF%83%E5%8A%9B%E5%9C%BA%E4%B8%8E%E6%B0%A2%E5%8E%9F%E5%AD%90_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="18 绘景变换与密度矩阵 薛定谔/海森堡/相互作用绘景、纯态与混合态、约化密度矩阵、冯诺依曼熵 l3 18_绘景变换与密度矩阵_系统笔记.md">
-        <div class="top"><span class="num">18</span><h3>绘景变换与密度矩阵</h3><span class="badge l3">L3</span></div>
-        <p class="desc">薛定谔/海森堡/相互作用绘景、纯态与混合态、约化密度矩阵、冯诺依曼熵</p>
-        <div class="links"><a class="btn primary" href="%E7%BB%98%E6%99%AF%E5%8F%98%E6%8D%A2%E4%B8%8E%E5%AF%86%E5%BA%A6%E7%9F%A9%E9%98%B5_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/18_%E7%BB%98%E6%99%AF%E5%8F%98%E6%8D%A2%E4%B8%8E%E5%AF%86%E5%BA%A6%E7%9F%A9%E9%98%B5_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="19 微扰论与变分法 定态非简并/简并微扰、含时微扰与跃迁概率、变分原理、氦原子基态估算 l3 19_微扰论与变分法_系统笔记.md">
-        <div class="top"><span class="num">19</span><h3>微扰论与变分法</h3><span class="badge l3">L3</span></div>
-        <p class="desc">定态非简并/简并微扰、含时微扰与跃迁概率、变分原理、氦原子基态估算</p>
-        <div class="links"><a class="btn primary" href="%E5%BE%AE%E6%89%B0%E8%AE%BA%E4%B8%8E%E5%8F%98%E5%88%86%E6%B3%95_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/19_%E5%BE%AE%E6%89%B0%E8%AE%BA%E4%B8%8E%E5%8F%98%E5%88%86%E6%B3%95_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="20 路径积分与传播子 费曼 1948、作用量与相位、传播子、经典极限 ħ→0、与薛定谔方程等价性 l3 20_路径积分与传播子_系统笔记.md">
-        <div class="top"><span class="num">20</span><h3>路径积分与传播子</h3><span class="badge l3">L3</span></div>
-        <p class="desc">费曼 1948、作用量与相位、传播子、经典极限 ħ→0、与薛定谔方程等价性</p>
-        <div class="links"><a class="btn primary" href="%E8%B7%AF%E5%BE%84%E7%A7%AF%E5%88%86%E4%B8%8E%E4%BC%A0%E6%92%AD%E5%AD%90_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/20_%E8%B7%AF%E5%BE%84%E7%A7%AF%E5%88%86%E4%B8%8E%E4%BC%A0%E6%92%AD%E5%AD%90_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-    </div>
-  </section>
-  <section data-part>
-    <h2>第三部分：多体、对称与凝聚态（8 篇）</h2>
-    <div class="grid">
-      <article class="card" data-search="21 全同粒子与泡利不相容原理 交换对称性、玻色子与费米子、自旋统计定理、黑体辐射的玻色推导 l3 21_全同粒子_系统笔记.md">
-        <div class="top"><span class="num">21</span><h3>全同粒子与泡利不相容原理</h3><span class="badge l3">L3</span></div>
-        <p class="desc">交换对称性、玻色子与费米子、自旋统计定理、黑体辐射的玻色推导</p>
-        <div class="links"><a class="btn primary" href="%E5%85%A8%E5%90%8C%E7%B2%92%E5%AD%90_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/21_%E5%85%A8%E5%90%8C%E7%B2%92%E5%AD%90_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="22 多电子原子与元素周期表 中心场近似、壳层结构、洪特规则、屏蔽与有效核电荷 l2 22_多电子原子_系统笔记.md">
-        <div class="top"><span class="num">22</span><h3>多电子原子与元素周期表</h3><span class="badge l2">L2</span></div>
-        <p class="desc">中心场近似、壳层结构、洪特规则、屏蔽与有效核电荷</p>
-        <div class="links"><a class="btn primary" href="%E5%A4%9A%E7%94%B5%E5%AD%90%E5%8E%9F%E5%AD%90_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/22_%E5%A4%9A%E7%94%B5%E5%AD%90%E5%8E%9F%E5%AD%90_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="23 分子结构与化学键 h₂⁺ 分子离子、h₂ 共价键、交换积分、苯分子 π 电子 l3 23_分子结构_系统笔记.md">
-        <div class="top"><span class="num">23</span><h3>分子结构与化学键</h3><span class="badge l3">L3</span></div>
-        <p class="desc">H₂⁺ 分子离子、H₂ 共价键、交换积分、苯分子 π 电子</p>
-        <div class="links"><a class="btn primary" href="%E5%88%86%E5%AD%90%E7%BB%93%E6%9E%84_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/23_%E5%88%86%E5%AD%90%E7%BB%93%E6%9E%84_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="24 晶体中的电子与能带 布洛赫定理、能带与带隙、有效质量、态密度、导体/绝缘体/半导体判据 l3 24_晶体中的电子与能带_系统笔记.md">
-        <div class="top"><span class="num">24</span><h3>晶体中的电子与能带</h3><span class="badge l3">L3</span></div>
-        <p class="desc">布洛赫定理、能带与带隙、有效质量、态密度、导体/绝缘体/半导体判据</p>
-        <div class="links"><a class="btn primary" href="%E6%99%B6%E4%BD%93%E4%B8%AD%E7%9A%84%E7%94%B5%E5%AD%90%E4%B8%8E%E8%83%BD%E5%B8%A6_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/24_%E6%99%B6%E4%BD%93%E4%B8%AD%E7%9A%84%E7%94%B5%E5%AD%90%E4%B8%8E%E8%83%BD%E5%B8%A6_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="25 半导体与pn结 电子与空穴、掺杂、霍尔效应、pn 结整流、晶体管原理 l2 25_半导体与pn结_系统笔记.md">
-        <div class="top"><span class="num">25</span><h3>半导体与pn结</h3><span class="badge l2">L2</span></div>
-        <p class="desc">电子与空穴、掺杂、霍尔效应、pn 结整流、晶体管原理</p>
-        <div class="links"><a class="btn primary" href="%E5%8D%8A%E5%AF%BC%E4%BD%93%E4%B8%8Epn%E7%BB%93_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/25_%E5%8D%8A%E5%AF%BC%E4%BD%93%E4%B8%8Epn%E7%BB%93_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="26 量子统计 玻色-爱因斯坦分布、bec、费米气体与简并压、液氦超流 l3 26_量子统计_系统笔记.md">
-        <div class="top"><span class="num">26</span><h3>量子统计</h3><span class="badge l3">L3</span></div>
-        <p class="desc">玻色-爱因斯坦分布、BEC、费米气体与简并压、液氦超流</p>
-        <div class="links"><a class="btn primary" href="%E9%87%8F%E5%AD%90%E7%BB%9F%E8%AE%A1_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/26_%E9%87%8F%E5%AD%90%E7%BB%9F%E8%AE%A1_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="27 超导与宏观量子现象 库珀对、bcs 能隙、迈斯纳效应、磁通量子化、约瑟夫森结 l3 27_超导与宏观量子现象_系统笔记.md">
-        <div class="top"><span class="num">27</span><h3>超导与宏观量子现象</h3><span class="badge l3">L3</span></div>
-        <p class="desc">库珀对、BCS 能隙、迈斯纳效应、磁通量子化、约瑟夫森结</p>
-        <div class="links"><a class="btn primary" href="%E8%B6%85%E5%AF%BC%E4%B8%8E%E5%AE%8F%E8%A7%82%E9%87%8F%E5%AD%90%E7%8E%B0%E8%B1%A1_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/27_%E8%B6%85%E5%AF%BC%E4%B8%8E%E5%AE%8F%E8%A7%82%E9%87%8F%E5%AD%90%E7%8E%B0%E8%B1%A1_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="28 量子霍尔效应 朗道能级、整数量子霍尔、边缘态、分数量子霍尔与拓扑序 l3 28_量子霍尔效应_系统笔记.md">
-        <div class="top"><span class="num">28</span><h3>量子霍尔效应</h3><span class="badge l3">L3</span></div>
-        <p class="desc">朗道能级、整数量子霍尔、边缘态、分数量子霍尔与拓扑序</p>
-        <div class="links"><a class="btn primary" href="%E9%87%8F%E5%AD%90%E9%9C%8D%E5%B0%94%E6%95%88%E5%BA%94_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/28_%E9%87%8F%E5%AD%90%E9%9C%8D%E5%B0%94%E6%95%88%E5%BA%94_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-    </div>
-  </section>
-  <section data-part>
-    <h2>第四部分：量子信息与量子光学（8 篇）</h2>
-    <div class="grid">
-      <article class="card" data-search="29 量子纠缠 不可分态定义、 separable 判据、纠缠熵、ppt 判据、纠缠 witness l3 29_量子纠缠_系统笔记.md">
-        <div class="top"><span class="num">29</span><h3>量子纠缠</h3><span class="badge l3">L3</span></div>
-        <p class="desc">不可分态定义、 separable 判据、纠缠熵、PPT 判据、纠缠 Witness</p>
-        <div class="links"><a class="btn primary" href="%E9%87%8F%E5%AD%90%E7%BA%A0%E7%BC%A0_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/29_%E9%87%8F%E5%AD%90%E7%BA%A0%E7%BC%A0_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="30 epr 佯谬与贝尔不等式 epr 1935、bell 1964、chsh 1969、aspect 1982（5σ）、weihs 1998、漏洞闭合 l2 30_epr佯谬与贝尔不等式_系统笔记.md">
-        <div class="top"><span class="num">30</span><h3>EPR 佯谬与贝尔不等式</h3><span class="badge l2">L2</span></div>
-        <p class="desc">EPR 1935、Bell 1964、CHSH 1969、Aspect 1982（5σ）、Weihs 1998、漏洞闭合</p>
-        <div class="links"><a class="btn primary" href="EPR%E4%BD%AF%E8%B0%AC%E4%B8%8E%E8%B4%9D%E5%B0%94%E4%B8%8D%E7%AD%89%E5%BC%8F_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/30_EPR%E4%BD%AF%E8%B0%AC%E4%B8%8E%E8%B4%9D%E5%B0%94%E4%B8%8D%E7%AD%89%E5%BC%8F_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="31 量子测量与退相干 环境诱导退相干、指针基、退相干时间尺度、量子-经典边界 l3 31_量子测量与退相干_系统笔记.md">
-        <div class="top"><span class="num">31</span><h3>量子测量与退相干</h3><span class="badge l3">L3</span></div>
-        <p class="desc">环境诱导退相干、指针基、退相干时间尺度、量子-经典边界</p>
-        <div class="links"><a class="btn primary" href="%E9%87%8F%E5%AD%90%E6%B5%8B%E9%87%8F%E4%B8%8E%E9%80%80%E7%9B%B8%E5%B9%B2_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/31_%E9%87%8F%E5%AD%90%E6%B5%8B%E9%87%8F%E4%B8%8E%E9%80%80%E7%9B%B8%E5%B9%B2_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="32 量子密钥分发 bb84、e91、无克隆定理、安全性证明、现实系统与攻击 l2 32_量子密钥分发_系统笔记.md">
-        <div class="top"><span class="num">32</span><h3>量子密钥分发</h3><span class="badge l2">L2</span></div>
-        <p class="desc">BB84、E91、无克隆定理、安全性证明、现实系统与攻击</p>
-        <div class="links"><a class="btn primary" href="%E9%87%8F%E5%AD%90%E5%AF%86%E9%92%A5%E5%88%86%E5%8F%91_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/32_%E9%87%8F%E5%AD%90%E5%AF%86%E9%92%A5%E5%88%86%E5%8F%91_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="33 量子隐形传态与密集编码 协议步骤、经典比特与纠缠资源消耗、实验实现 l2 33_量子隐形传态与密集编码_系统笔记.md">
-        <div class="top"><span class="num">33</span><h3>量子隐形传态与密集编码</h3><span class="badge l2">L2</span></div>
-        <p class="desc">协议步骤、经典比特与纠缠资源消耗、实验实现</p>
-        <div class="links"><a class="btn primary" href="%E9%87%8F%E5%AD%90%E9%9A%90%E5%BD%A2%E4%BC%A0%E6%80%81%E4%B8%8E%E5%AF%86%E9%9B%86%E7%BC%96%E7%A0%81_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/33_%E9%87%8F%E5%AD%90%E9%9A%90%E5%BD%A2%E4%BC%A0%E6%80%81%E4%B8%8E%E5%AF%86%E9%9B%86%E7%BC%96%E7%A0%81_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="34 量子计算与量子算法 量子比特、通用门集、deutsch-jozsa、shor、grover、量子纠错与容错阈值 l3 34_量子计算与量子算法_系统笔记.md">
-        <div class="top"><span class="num">34</span><h3>量子计算与量子算法</h3><span class="badge l3">L3</span></div>
-        <p class="desc">量子比特、通用门集、Deutsch-Jozsa、Shor、Grover、量子纠错与容错阈值</p>
-        <div class="links"><a class="btn primary" href="%E9%87%8F%E5%AD%90%E8%AE%A1%E7%AE%97%E4%B8%8E%E9%87%8F%E5%AD%90%E7%AE%97%E6%B3%95_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/34_%E9%87%8F%E5%AD%90%E8%AE%A1%E7%AE%97%E4%B8%8E%E9%87%8F%E5%AD%90%E7%AE%97%E6%B3%95_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="35 光场量子化与相干态 电磁场模式量子化、fock 态、相干态、压缩态、光子统计与 g⁽²⁾ l3 35_光场量子化与相干态_系统笔记.md">
-        <div class="top"><span class="num">35</span><h3>光场量子化与相干态</h3><span class="badge l3">L3</span></div>
-        <p class="desc">电磁场模式量子化、Fock 态、相干态、压缩态、光子统计与 g⁽²⁾</p>
-        <div class="links"><a class="btn primary" href="%E5%85%89%E5%9C%BA%E9%87%8F%E5%AD%90%E5%8C%96%E4%B8%8E%E7%9B%B8%E5%B9%B2%E6%80%81_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/35_%E5%85%89%E5%9C%BA%E9%87%8F%E5%AD%90%E5%8C%96%E4%B8%8E%E7%9B%B8%E5%B9%B2%E6%80%81_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="36 腔量子电动力学与量子比特实现 jaynes-cummings 模型、rabi 振荡、超导量子比特、离子阱、中性原子 l3 36_腔量子电动力学与量子比特实现_系统笔记.md">
-        <div class="top"><span class="num">36</span><h3>腔量子电动力学与量子比特实现</h3><span class="badge l3">L3</span></div>
-        <p class="desc">Jaynes-Cummings 模型、Rabi 振荡、超导量子比特、离子阱、中性原子</p>
-        <div class="links"><a class="btn primary" href="%E8%85%94%E9%87%8F%E5%AD%90%E7%94%B5%E5%8A%A8%E5%8A%9B%E5%AD%A6%E4%B8%8E%E9%87%8F%E5%AD%90%E6%AF%94%E7%89%B9%E5%AE%9E%E7%8E%B0_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/36_%E8%85%94%E9%87%8F%E5%AD%90%E7%94%B5%E5%8A%A8%E5%8A%9B%E5%AD%A6%E4%B8%8E%E9%87%8F%E5%AD%90%E6%AF%94%E7%89%B9%E5%AE%9E%E7%8E%B0_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-    </div>
-  </section>
-  <section data-part>
-    <h2>第五部分：相对论量子理论与前沿（5 篇）</h2>
-    <div class="grid">
-      <article class="card" data-search="37 克莱因-戈登方程 相对论性能量动量关系、协变化、负概率密度困难、适用范围 l3 37_克莱因-戈登方程_系统笔记.md">
-        <div class="top"><span class="num">37</span><h3>克莱因-戈登方程</h3><span class="badge l3">L3</span></div>
-        <p class="desc">相对论性能量动量关系、协变化、负概率密度困难、适用范围</p>
-        <div class="links"><a class="btn primary" href="%E5%85%8B%E8%8E%B1%E5%9B%A0-%E6%88%88%E7%99%BB%E6%96%B9%E7%A8%8B_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/37_%E5%85%8B%E8%8E%B1%E5%9B%A0-%E6%88%88%E7%99%BB%E6%96%B9%E7%A8%8B_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="38 狄拉克方程 开平方问题、γ 矩阵、自旋的自然涌现、氢原子精细结构 l3 38_狄拉克方程_系统笔记.md">
-        <div class="top"><span class="num">38</span><h3>狄拉克方程</h3><span class="badge l3">L3</span></div>
-        <p class="desc">开平方问题、γ 矩阵、自旋的自然涌现、氢原子精细结构</p>
-        <div class="links"><a class="btn primary" href="%E7%8B%84%E6%8B%89%E5%85%8B%E6%96%B9%E7%A8%8B_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/38_%E7%8B%84%E6%8B%89%E5%85%8B%E6%96%B9%E7%A8%8B_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="39 反粒子与狄拉克海 正电子的预言与 1932 年发现、狄拉克海的困难、量子场论的处理 l2 39_反粒子与狄拉克海_系统笔记.md">
-        <div class="top"><span class="num">39</span><h3>反粒子与狄拉克海</h3><span class="badge l2">L2</span></div>
-        <p class="desc">正电子的预言与 1932 年发现、狄拉克海的困难、量子场论的处理</p>
-        <div class="links"><a class="btn primary" href="%E5%8F%8D%E7%B2%92%E5%AD%90%E4%B8%8E%E7%8B%84%E6%8B%89%E5%85%8B%E6%B5%B7_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/39_%E5%8F%8D%E7%B2%92%E5%AD%90%E4%B8%8E%E7%8B%84%E6%8B%89%E5%85%8B%E6%B5%B7_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="40 量子场论的基本图像 场的正则量子化、粒子即场的激发、费曼图与微扰展开、真空涨落 l3 40_量子场论的基本图像_系统笔记.md">
-        <div class="top"><span class="num">40</span><h3>量子场论的基本图像</h3><span class="badge l3">L3</span></div>
-        <p class="desc">场的正则量子化、粒子即场的激发、费曼图与微扰展开、真空涨落</p>
-        <div class="links"><a class="btn primary" href="%E9%87%8F%E5%AD%90%E5%9C%BA%E8%AE%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%9B%BE%E5%83%8F_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/40_%E9%87%8F%E5%AD%90%E5%9C%BA%E8%AE%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%9B%BE%E5%83%8F_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="41 量子引力与全息原理 引力量子化障碍、霍金辐射、黑洞信息悖论、ads/cft、弦论与景观 l1 41_量子引力与全息原理_系统笔记.md">
-        <div class="top"><span class="num">41</span><h3>量子引力与全息原理</h3><span class="badge l1">L1</span></div>
-        <p class="desc">引力量子化障碍、霍金辐射、黑洞信息悖论、AdS/CFT、弦论与景观</p>
-        <div class="links"><a class="btn primary" href="%E9%87%8F%E5%AD%90%E5%BC%95%E5%8A%9B%E4%B8%8E%E5%85%A8%E6%81%AF%E5%8E%9F%E7%90%86_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/41_%E9%87%8F%E5%AD%90%E5%BC%95%E5%8A%9B%E4%B8%8E%E5%85%A8%E6%81%AF%E5%8E%9F%E7%90%86_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-    </div>
-  </section>
-  <section data-part>
-    <h2>第六部分：交叉应用——量子力学与宝石学（6 篇）</h2>
-    <div class="grid">
-      <article class="card" data-search="42 晶体场与配位场理论 d 轨道在配位场中的分裂、δ_o 与 δ_t、tanabe-sugano 图、选择定则 l3 42_晶体场与配位场理论_系统笔记.md">
-        <div class="top"><span class="num">42</span><h3>晶体场与配位场理论</h3><span class="badge l3">L3</span></div>
-        <p class="desc">d 轨道在配位场中的分裂、Δ_o 与 Δ_t、Tanabe-Sugano 图、选择定则</p>
-        <div class="links"><a class="btn primary" href="%E6%99%B6%E4%BD%93%E5%9C%BA%E4%B8%8E%E9%85%8D%E4%BD%8D%E5%9C%BA%E7%90%86%E8%AE%BA_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/42_%E6%99%B6%E4%BD%93%E5%9C%BA%E4%B8%8E%E9%85%8D%E4%BD%8D%E5%9C%BA%E7%90%86%E8%AE%BA_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="43 过渡金属离子致色的量子机制 d-d 跃迁与 laporte 规则、fe²⁺→ti⁴⁺ 电荷转移、cr³⁺ 能级与 694 nm r 线 l2 43_过渡金属离子致色的量子机制_系统笔记.md">
-        <div class="top"><span class="num">43</span><h3>过渡金属离子致色的量子机制</h3><span class="badge l2">L2</span></div>
-        <p class="desc">d-d 跃迁与 Laporte 规则、Fe²⁺→Ti⁴⁺ 电荷转移、Cr³⁺ 能级与 694 nm R 线</p>
-        <div class="links"><a class="btn primary" href="%E8%BF%87%E6%B8%A1%E9%87%91%E5%B1%9E%E7%A6%BB%E5%AD%90%E8%87%B4%E8%89%B2%E7%9A%84%E9%87%8F%E5%AD%90%E6%9C%BA%E5%88%B6_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/43_%E8%BF%87%E6%B8%A1%E9%87%91%E5%B1%9E%E7%A6%BB%E5%AD%90%E8%87%B4%E8%89%B2%E7%9A%84%E9%87%8F%E5%AD%90%E6%9C%BA%E5%88%B6_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="44 色心与晶格缺陷的量子描述 f 心、钻石 nv 中心、空穴色心、天河石 pb⁺-o⁻、辐照致色 l2 44_色心与晶格缺陷的量子描述_系统笔记.md">
-        <div class="top"><span class="num">44</span><h3>色心与晶格缺陷的量子描述</h3><span class="badge l2">L2</span></div>
-        <p class="desc">F 心、钻石 NV 中心、空穴色心、天河石 Pb⁺-O⁻、辐照致色</p>
-        <div class="links"><a class="btn primary" href="%E8%89%B2%E5%BF%83%E4%B8%8E%E6%99%B6%E6%A0%BC%E7%BC%BA%E9%99%B7%E7%9A%84%E9%87%8F%E5%AD%90%E6%8F%8F%E8%BF%B0_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/44_%E8%89%B2%E5%BF%83%E4%B8%8E%E6%99%B6%E6%A0%BC%E7%BC%BA%E9%99%B7%E7%9A%84%E9%87%8F%E5%AD%90%E6%8F%8F%E8%BF%B0_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="45 光谱学仪器的量子基础 拉曼散射与极化率、红外吸收与振动模式、荧光与磷光动力学、选择定则 l2 45_光谱学仪器的量子基础_系统笔记.md">
-        <div class="top"><span class="num">45</span><h3>光谱学仪器的量子基础</h3><span class="badge l2">L2</span></div>
-        <p class="desc">拉曼散射与极化率、红外吸收与振动模式、荧光与磷光动力学、选择定则</p>
-        <div class="links"><a class="btn primary" href="%E5%85%89%E8%B0%B1%E5%AD%A6%E4%BB%AA%E5%99%A8%E7%9A%84%E9%87%8F%E5%AD%90%E5%9F%BA%E7%A1%80_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/45_%E5%85%89%E8%B0%B1%E5%AD%A6%E4%BB%AA%E5%99%A8%E7%9A%84%E9%87%8F%E5%AD%90%E5%9F%BA%E7%A1%80_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="46 矿物光学性质的第一性原理计算 介电张量的量子表达、kubo 线性响应、双折射的从头算、dft 方法 l3 46_矿物光学性质的第一性原理计算_系统笔记.md">
-        <div class="top"><span class="num">46</span><h3>矿物光学性质的第一性原理计算</h3><span class="badge l3">L3</span></div>
-        <p class="desc">介电张量的量子表达、Kubo 线性响应、双折射的从头算、DFT 方法</p>
-        <div class="links"><a class="btn primary" href="%E7%9F%BF%E7%89%A9%E5%85%89%E5%AD%A6%E6%80%A7%E8%B4%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86%E8%AE%A1%E7%AE%97_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/46_%E7%9F%BF%E7%89%A9%E5%85%89%E5%AD%A6%E6%80%A7%E8%B4%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86%E8%AE%A1%E7%AE%97_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-      <article class="card" data-search="47 宝石学中的量子误用辨析 线性双折射能否产生纠缠、r 线是吸收还是发射、色心归属错误等常见误判 l2 47_宝石学中的量子误用辨析_系统笔记.md">
-        <div class="top"><span class="num">47</span><h3>宝石学中的量子误用辨析</h3><span class="badge l2">L2</span></div>
-        <p class="desc">线性双折射能否产生纠缠、R 线是吸收还是发射、色心归属错误等常见误判</p>
-        <div class="links"><a class="btn primary" href="%E5%AE%9D%E7%9F%B3%E5%AD%A6%E4%B8%AD%E7%9A%84%E9%87%8F%E5%AD%90%E8%AF%AF%E7%94%A8%E8%BE%A8%E6%9E%90_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0_%E9%98%85%E8%AF%BB%E7%89%88.html">阅读版</a><a class="btn" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/47_%E5%AE%9D%E7%9F%B3%E5%AD%A6%E4%B8%AD%E7%9A%84%E9%87%8F%E5%AD%90%E8%AF%AF%E7%94%A8%E8%BE%A8%E6%9E%90_%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0.md">Markdown</a></div>
-      </article>
-    </div>
-  </section>
+  <h2>推荐阅读路径</h2>
+  <p class="sub" style="margin:.2em 0 1em;color:var(--muted);font-size:.9em;">五段路径均由脚本按传递闭包计算并逐篇校验前置闭合——按序读不会撞见没读过的概念。零门槛读者从 1A/1B 入手，物理系读者走 2，宝石学交叉走 3，前沿窗口走 4。</p>
+  <div class="paths">
+    <article class="path">
+      <p class="ph">路径 1A</p>
+      <p class="pt">最小轮廓线（零门槛起步）</p>
+      <p class="pi">只想花最短时间建立量子力学完整轮廓的读者，走这一条。</p>
+      <p class="pmeta"><b>15</b> 篇 · 前置闭合校验通过</p>
+      <div class="seq">01 → 02 → 07 → 08 → 09 → 11 → 12 → 03 → 04 <span class="more">…共 15 篇</span></div>
+      <a class="btn primary" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%E4%B8%8E%E9%98%85%E8%AF%BB%E8%B7%AF%E5%BE%84.md">查看完整路径与读法</a>
+    </article>
+    <article class="path">
+      <p class="ph">路径 1B</p>
+      <p class="pt">完整通识线（零门槛全覆盖）</p>
+      <p class="pi">想在零推导前提下尽可能多覆盖的读者，走这一条：全部 L1/L2 篇目（22 篇）加上为满足前置而纳入的 L3 篇目（仅读 §一 的一句话结论）。</p>
+      <p class="pmeta"><b>38</b> 篇 · 前置闭合校验通过</p>
+      <div class="seq">01 → 02 → 07 → 08 → 09 → 11 → 12 → 03 → 04 <span class="more">…共 38 篇</span></div>
+      <a class="btn primary" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%E4%B8%8E%E9%98%85%E8%AF%BB%E8%B7%AF%E5%BE%84.md">查看完整路径与读法</a>
+    </article>
+    <article class="path">
+      <p class="ph">路径 2</p>
+      <p class="pt">物理系主线</p>
+      <p class="pi">面向需要完整掌握形式体系的读者，按拓扑序通读全部 47 篇，含 §二 数学结构与 §六 可解模型的全部推导。</p>
+      <p class="pmeta"><b>47</b> 篇 · 前置闭合校验通过</p>
+      <div class="seq">01 → 02 → 07 → 08 → 09 → 11 → 12 → 03 → 04 <span class="more">…共 47 篇</span></div>
+      <a class="btn primary" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%E4%B8%8E%E9%98%85%E8%AF%BB%E8%B7%AF%E5%BE%84.md">查看完整路径与读法</a>
+    </article>
+    <article class="path">
+      <p class="ph">路径 3</p>
+      <p class="pt">宝石学交叉线</p>
+      <p class="pi">面向宝石学从业者：以第六部分 6 篇为目标，回溯其全部前置。</p>
+      <p class="pmeta"><b>26</b> 篇 · 前置闭合校验通过</p>
+      <div class="seq">01 → 02 → 07 → 08 → 09 → 11 → 12 → 03 → 13 <span class="more">…共 26 篇</span></div>
+      <a class="btn primary" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%E4%B8%8E%E9%98%85%E8%AF%BB%E8%B7%AF%E5%BE%84.md">查看完整路径与读法</a>
+    </article>
+    <article class="path">
+      <p class="ph">路径 4</p>
+      <p class="pt">前沿窗口线</p>
+      <p class="pi">面向想了解理论前沿的读者：以第五部分 5 篇为目标，回溯其全部前置。</p>
+      <p class="pmeta"><b>16</b> 篇 · 前置闭合校验通过</p>
+      <div class="seq">01 → 02 → 07 → 08 → 09 → 11 → 12 → 13 → 16 <span class="more">…共 16 篇</span></div>
+      <a class="btn primary" href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%E4%B8%8E%E9%98%85%E8%AF%BB%E8%B7%AF%E5%BE%84.md">查看完整路径与读法</a>
+    </article>
+  </div>
 
 <h2>辅助文档</h2>
 <ul class="aux">
@@ -356,12 +147,14 @@
   <li><a href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6%E7%B3%BB%E7%BB%9F%E7%AC%94%E8%AE%B0%E6%95%B4%E7%90%86%E8%A7%84%E8%8C%83.md">整理规范</a><span class="d">八节结构、来源分级、写作禁忌、质量检查清单</span></li>
   <li><a href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE.md">参考文献</a><span class="d">全部笔记引用文献统一汇编，S/A/B/C 四级分级</span></li>
   <li><a href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/%E4%BF%AE%E8%AE%A2%E8%AE%B0%E5%BD%95.md">修订记录</a><span class="d">交叉验证发现并修正的问题，含原文错误与依据来源</span></li>
+  <li><a href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB%E4%B8%8E%E9%98%85%E8%AF%BB%E8%B7%AF%E5%BE%84.md">依赖关系与阅读路径</a><span class="d">篇级前置依赖、核心概念簇、五段推荐路径（每段经前置闭合校验）</span></li>
+  <li><a href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/%E6%9C%AF%E8%AF%AD%E4%B8%8E%E7%AC%A6%E5%8F%B7%E8%A1%A8.md">术语与符号表</a><span class="d">符号含义人工核定 + 中英术语对照 + 缩写索引（多义全列）</span></li>
   <li><a href="https://github.com/soli0x4ea/quantumphysicsnotes/blob/main/README.md">README</a><span class="d">项目概述与文件清单</span></li>
 </ul>
 
 <h2>配套资产</h2>
 <p class="assets">
-<a href="https://github.com/soli0x4ea/quantumphysicsnotes/tree/main/code">code/ 可复现脚本（68）</a>
+<a href="https://github.com/soli0x4ea/quantumphysicsnotes/tree/main/code">code/ 可复现脚本（70）</a>
   <a href="https://github.com/soli0x4ea/quantumphysicsnotes/tree/main/figures">figures/ 图表（88）</a>
   <a href="https://github.com/soli0x4ea/quantumphysicsnotes/tree/main/data">data/ 常数表（2）</a>
   <a href="%E9%A2%84%E8%A7%88%E7%89%88/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6%E7%AC%94%E8%AE%B0_%E9%A2%84%E8%A7%88%E7%89%88.html">预览版入口</a>

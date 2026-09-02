@@ -28,8 +28,14 @@ AUX_DOCS = [
     ("量子力学系统笔记整理规范.md", "整理规范", "八节结构、来源分级、写作禁忌、质量检查清单"),
     ("参考文献.md", "参考文献", "全部笔记引用文献统一汇编，S/A/B/C 四级分级"),
     ("修订记录.md", "修订记录", "交叉验证发现并修正的问题，含原文错误与依据来源"),
+    ("依赖关系与阅读路径.md", "依赖关系与阅读路径",
+     "篇级前置依赖、核心概念簇、五段推荐路径（每段经前置闭合校验）"),
+    ("术语与符号表.md", "术语与符号表",
+     "符号含义人工核定 + 中英术语对照 + 缩写索引（多义全列）"),
     ("README.md", "README", "项目概述与文件清单"),
 ]
+
+PATH_DOC = "依赖关系与阅读路径.md"
 
 TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-CN">
@@ -95,6 +101,18 @@ TEMPLATE = """<!DOCTYPE html>
   .aux .d{color:var(--muted);font-size:.85em;display:block;margin-top:2px;}
   .assets{color:var(--muted);font-size:.9em;}
   .assets a{margin-right:12px;}
+  .paths{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:8px;}
+  .path{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--accent);
+        border-radius:10px;padding:14px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;}
+  .path .ph{font-weight:700;font-size:1em;margin:0 0 .15em;color:var(--accent);}
+  .path .pt{font-size:.92em;font-weight:600;margin:0 0 .4em;}
+  .path .pi{color:var(--muted);font-size:.85em;margin:0 0 .6em;flex:1;line-height:1.55;}
+  .path .pmeta{font-size:.8em;color:var(--muted);margin-bottom:.6em;}
+  .path .pmeta b{color:var(--fg);}
+  .path .seq{font-size:.78em;color:var(--muted);font-variant-numeric:tabular-nums;
+            line-height:1.6;word-break:break-all;margin-bottom:.7em;}
+  .path .seq .more{font-style:italic;}
+  .path .btn.primary{font-size:.82em;align-self:flex-start;}
   footer{margin-top:3em;padding-top:1em;border-top:1px solid var(--border);color:var(--muted);font-size:.85em;}
   .empty{color:var(--muted);padding:20px 0;display:none;}
 </style>
@@ -117,7 +135,7 @@ TEMPLATE = """<!DOCTYPE html>
   <div class="hint">输入即过滤，支持标题、摘要与难度等级。<span id="count"></span></div>
 </div>
 
-__SECTIONS__
+__PATHS__
 
 <h2>辅助文档</h2>
 <ul class="aux">
@@ -245,9 +263,78 @@ def build_assets(ncode, nfig, ndata):
     return items
 
 
+def parse_paths():
+    """从《依赖关系与阅读路径.md》解析五段路径，作为 index 路径入口的单一数据源。
+
+    解析段格式：
+        ### 路径 1A · 最小轮廓线（零门槛起步）
+
+        **适用对象一句话。**
+
+        - 涉及篇目：**15 篇**（...）
+        - 前置闭合校验：**通过**
+
+        | 顺序 | 篇号 | 标题 | ... |
+    """
+    doc = ROOT / PATH_DOC
+    if not doc.exists():
+        sys.exit(f"路径文档缺失：{PATH_DOC}")
+    text = doc.read_text(encoding="utf-8")
+    paths = []
+    block_re = re.compile(r"^### (路径 [0-9A-Z]+)\s*·\s*(.+?)\n\n(.+?)(?=^### |\Z)",
+                          re.M | re.S)
+    for m in block_re.finditer(text):
+        code, title, body = m.group(1).strip(), m.group(2).strip(), m.group(3)
+        n_m = re.search(r"涉及篇目：\*\*(\d+)\s*篇", body)
+        n = int(n_m.group(1)) if n_m else 0
+        nums = [int(x) for x in re.findall(r"^\|\s*\d+\s*\|\s*(\d{2})\s*\|", body, re.M)]
+        # 适用对象：首个非空段第一句，去 markdown 粗体
+        for ln in body.splitlines():
+            if ln.strip():
+                para = ln.strip().strip("* ")
+                intro = re.split(r"[。！]", para)[0] + "。"
+                break
+        else:
+            intro = ""
+        paths.append({"code": code, "title": title, "n": n, "nums": nums, "intro": intro})
+    if not paths:
+        sys.exit("路径解析失败：未找到任何「### 路径 X ·」段落")
+    return paths
+
+
+def build_paths(paths):
+    doc_url = f"{REPO}/blob/main/{quote(PATH_DOC)}"
+    cards = []
+    for p in paths:
+        nums = p["nums"]
+        seq = " → ".join(f"{x:02d}" for x in nums[:9])
+        if len(nums) > 9:
+            seq += f' <span class="more">…共 {len(nums)} 篇</span>'
+        elif not nums:
+            seq = "（详见文档）"
+        cards.append(
+            f'    <article class="path">\n'
+            f'      <p class="ph">{p["code"]}</p>\n'
+            f'      <p class="pt">{p["title"]}</p>\n'
+            f'      <p class="pi">{p["intro"]}</p>\n'
+            f'      <p class="pmeta"><b>{p["n"]}</b> 篇 · 前置闭合校验通过</p>\n'
+            f'      <div class="seq">{seq}</div>\n'
+            f'      <a class="btn primary" href="{doc_url}">查看完整路径与读法</a>\n'
+            f'    </article>'
+        )
+    return (
+        '  <h2>推荐阅读路径</h2>\n'
+        '  <p class="sub" style="margin:.2em 0 1em;color:var(--muted);font-size:.9em;">'
+        '五段路径均由脚本按传递闭包计算并逐篇校验前置闭合——按序读不会撞见没读过的概念。'
+        '零门槛读者从 1A/1B 入手，物理系读者走 2，宝石学交叉走 3，前沿窗口走 4。</p>\n'
+        '  <div class="paths">\n' + "\n".join(cards) + "\n  </div>"
+    )
+
+
 def main():
     parts, rows = parse_sequence()
     mds, htmls = collect_files()
+    paths = parse_paths()
 
     # 分组归属：按目录表格顺序与各组声明篇数切分
     idx, grouped = 0, []
@@ -308,6 +395,7 @@ def main():
 
     out = (TEMPLATE
            .replace("__SECTIONS__", "\n".join(sections))
+           .replace("__PATHS__", build_paths(paths))
            .replace("__AUX__", "\n".join(aux))
            .replace("__ASSETS__", "\n  ".join(build_assets(ncode, nfig, ndata)))
            .replace("__REPO__", REPO)
