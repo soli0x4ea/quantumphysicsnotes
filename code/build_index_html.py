@@ -270,7 +270,11 @@ def main():
             if not html:
                 missing.append(f"第 {it['no']} 篇缺少阅读版 html（md={md}）")
                 continue
+            # GitHub Pages 不渲染 .md（点击只会下载原始文件），
+            # Markdown 按钮指向仓库 blob 页，由 GitHub 在线渲染。
+            md_url = f"{REPO}/blob/main/{quote(md)}"
             title = it["title"].replace("_系统笔记.md", "").replace("_系统笔记", "")
+            title = re.sub(r"^\d{2}_", "", title)   # 序.md 个别链接文本残留 NN_ 前缀
             lvl = it["level"]
             search = f"{it['no']:02d} {title} {it['desc']} {lvl} {md}".lower().replace('"', "")
             cards.append(
@@ -280,7 +284,7 @@ def main():
                 f'        <p class="desc">{it["desc"]}</p>\n'
                 f'        <div class="links">'
                 f'<a class="btn primary" href="{quote(html)}">阅读版</a>'
-                f'<a class="btn" href="{quote(md)}">Markdown</a></div>\n'
+                f'<a class="btn" href="{md_url}">Markdown</a></div>\n'
                 f"      </article>"
             )
         sections.append(
@@ -297,7 +301,7 @@ def main():
         if not (ROOT / fn).exists():
             sys.exit(f"辅助文档缺失：{fn}")
         aux.append(
-            f'  <li><a href="{quote(fn)}">{name}</a><span class="d">{desc}</span></li>'
+            f'  <li><a href="{REPO}/blob/main/{quote(fn)}">{name}</a><span class="d">{desc}</span></li>'
         )
 
     ncode, nfig, ndata = count_dir("code"), count_dir("figures"), count_dir("data")

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>404 · 量子力学系统笔记</title>
+<style>
+  :root{
+    color-scheme: light dark;
+    --bg:#ffffff; --fg:#1a1a1a; --muted:#6b7280; --card:#f7f8fa; --border:#e5e7eb;
+    --accent:#2c8a6b; --link:#1a73e8;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#16181d; --fg:#e6e6e6; --muted:#9aa0a6; --card:#1f2228; --border:#2f333b;
+      --accent:#5fcf9f; --link:#7cb0ff;
+    }
+  }
+  *{box-sizing:border-box;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Noto Sans CJK SC",sans-serif;
+       max-width:640px;margin:0 auto;padding:96px 20px 64px;line-height:1.8;color:var(--fg);background:var(--bg);
+       text-align:center;}
+  .code{font-size:4.2em;font-weight:700;color:var(--accent);letter-spacing:.04em;margin:0;}
+  h1{font-size:1.25em;margin:.4em 0 .6em;}
+  p{color:var(--muted);margin:.4em 0;}
+  a{color:var(--link);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  .home{display:inline-block;margin-top:1.6em;padding:9px 22px;border-radius:8px;
+        background:var(--accent);color:#fff;font-size:.95em;}
+  .home:hover{text-decoration:none;opacity:.88;}
+  .hint{font-size:.85em;margin-top:1.2em;}
+</style>
+</head>
+<body>
+  <p class="code">404</p>
+  <h1>这一页坍缩到了别处</h1>
+  <p>您访问的路径不存在。站点结构曾于 2026-09 调整，旧链接可能已失效。</p>
+  <p>若您在找某篇笔记，请从首页检索 47 篇目录。</p>
+  <a class="home" href="./">返回首页</a>
+  <p class="hint">约 5 秒后自动跳转…</p>
+  <script>setTimeout(function(){ location.replace('./'); }, 5000);</script>
+</body>
+</html>
