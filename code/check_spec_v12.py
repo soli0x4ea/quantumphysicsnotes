@@ -21,12 +21,12 @@ P2 归档层 · 规范符合性校验（规范 v1.2 的可执行部分）
   6. 辨析表：列头字面统一、≥1 条、每行严格 3 列、单元格非空
   7. 部分字段 = 权威定义（CANON，导入自 normalize_p2，单一真源）
   8. 辨析表位于 §一 内、且在 §二 之前（保证零门槛读者第一屏就看得到）
+  9. 序.md 目录与头部标注一致性（方案第五节要求纳入机械校验）：
+     序.md 目录表每篇的「部分归属 + 数学程度」须与各 md 头部一致；目录须含全 47 篇
 
 边界（诚实原则）：
   - 本脚本只判**可机械判定的形式要求**。一句话结论写得准不准、辨析对不对，
     属语义判断，脚本不假装能判，留给人工与交叉审校。
-
-用法：python3 code/check_spec_v12.py
 """
 import re
 import sys
@@ -145,6 +145,63 @@ def table_rows(text: str):
     return rows
 
 
+def verify_xu_consistency(notes):
+    """方案第五节要求：序.md 目录表与头部标注一致性纳入机械校验。
+
+    解析序.md 的六大部分目录表（列：序号 / 文档 / 核心内容 / 数学程度），
+    得到每篇号 → (部分序号, 数学程度)；与各 md 头部「部分字段」与「数学程度」
+    比对。这是守住 P2 已修正的 09 篇分类错误不再漂移的机械防线。
+    """
+    xu = (ROOT / "序.md").read_text(encoding="utf-8")
+    problems = []
+
+    # 按 '### 第X部分' 标题切分，提取每部分块
+    parts = re.split(r"\n### 第([一二三四五六])部分[：:]", xu)
+    xu_map = {}  # no -> (part_cn, L)
+    for idx in range(1, len(parts), 2):
+        cn = parts[idx]
+        body = parts[idx + 1]
+        for line in body.split("\n"):
+            if not line.startswith("|"):
+                continue
+            cells = [c.strip() for c in line.strip().strip("|").split("|")]
+            if len(cells) < 4:
+                continue
+            no_s, lv = cells[0], cells[-1]
+            if not re.match(r"^\d+$", no_s):
+                continue
+            m = re.match(r"L([123])", lv)
+            if not m:
+                continue
+            xu_map[int(no_s)] = (cn, "L" + m.group(1))
+
+    for p in notes:
+        no = int(p.name[:2])
+        text = p.read_text(encoding="utf-8")
+        if no not in xu_map:
+            problems.append(f"{p.name}: 序.md 目录缺此篇")
+            continue
+        xu_cn, xu_L = xu_map[no]
+        mdeg = re.search(r"数学程度[：:\s]*L([123])", text[:2000])
+        md_L = ("L" + mdeg.group(1)) if mdeg else None
+        hit = PART_RE.search(text[:2000])
+        md_cn = None
+        if hit:
+            pc = re.search(r"第([一二三四五六])部分", hit.group(0))
+            md_cn = pc.group(1) if pc else None
+        if md_L != xu_L:
+            problems.append(f"{p.name}: 数学程度 序.md={xu_L} / md头部={md_L}")
+        if md_cn != xu_cn:
+            problems.append(f"{p.name}: 部分归属 序.md=第{xu_cn}部分 / md头部=第{md_cn}部分")
+
+    if len(xu_map) != 47:
+        problems.append(f"序.md 目录篇数 {len(xu_map)}，预期 47")
+    missing = sorted(set(range(1, 48)) - set(xu_map))
+    if missing:
+        problems.append(f"序.md 目录缺篇号：{missing}")
+    return problems
+
+
 def main():
     notes = sorted(ROOT.glob("[0-9][0-9]_*_系统笔记.md"))
     problems = []
@@ -159,6 +216,9 @@ def main():
 
     for p in notes:
         problems += check_file(int(p.name[:2]), p)
+
+    # 9. 序.md 目录一致性
+    problems += verify_xu_consistency(notes)
 
     # 汇总输出
     if problems:
@@ -175,7 +235,7 @@ def main():
         if m:
             lens.append(len(m.group(1)))
     print("✓ 规范 v1.2 校验全部通过（47/47 篇）")
-    print(f"  · 八节结构 / 三件套 / 辨析表格式 / 部分字段：全部符合")
+    print(f"  · 八节结构 / 三件套 / 辨析表格式 / 部分字段 / 序.md 目录一致性：全部符合")
     print(f"  · 辨析条目合计 {total_rows} 条"
           f"（每篇 {min(len(table_rows(p.read_text(encoding='utf-8'))) for p in notes)}"
           f"–{max(len(table_rows(p.read_text(encoding='utf-8'))) for p in notes)} 条）")
