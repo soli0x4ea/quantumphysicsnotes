@@ -1,6 +1,6 @@
 # EPR佯谬与贝尔不等式
 
-> **分类归属：第四部分 量子信息与量子光学 · 数学程度：L2（运算层）· 前置依赖：第 9 篇《量子态与叠加原理》、第 11 篇《希尔伯特空间与狄拉克符号》、第 16 篇《角动量与自旋》、第 29 篇《量子纠缠》**
+> **分类归属：第四部分·量子信息与量子光学 · 数学程度：L2（运算层）· 前置依赖：第 9 篇《量子态与叠加原理》、第 11 篇《希尔伯特空间与狄拉克符号》、第 16 篇《角动量与自旋》、第 29 篇《量子纠缠》**
 > **验证依据**：Einstein, Podolsky & Rosen (1935) *Phys. Rev.* 47, 777、Bohr (1935) *Phys. Rev.* 48, 696、Bohm & Aharonov (1957) *Phys. Rev.* 108, 1070、Bell (1964) *Physics* 1, 195、Clauser, Horne, Shimony & Holt (1969) *PRL* 23, 880、Freedman & Clauser (1972) *PRL* 28, 938、Aspect, Grangier & Roger (1982) *PRL* 49, 91、Aspect, Dalibard & Roger (1982) *PRL* 49, 1804、Cirel'son (1980) *Lett. Math. Phys.* 4, 93、Weihs et al. (1998) *PRL* 81, 5039、Rowe et al. (2001) *Nature* 409, 791、Hensen et al. (2015) *Nature* 526, 682、Giustina et al. (2015) *PRL* 115, 250401、Shalm et al. (2015) *PRL* 115, 250402、Tan, Walls & Collett (1991) *PRL* 66, 252、CODATA (2022)、Feynman Lectures Vol. III, §18-3
 
 ---
@@ -15,7 +15,7 @@
 
 ## 一、概念与定位
 
-> **一句话结论**：EPR 论证量子不完备，贝尔将其转为可测不等式：定域实在论关联受限 S≤2，量子预言 2√2 且实验确认违反，定域实在论被排除。
+> **一句话结论**：EPR 论证量子不完备，贝尔把它变成可测不等式：定域实在论 S≤2，量子预言 2√2，实验确认违反。
 
 ### 1.1 定义
 
