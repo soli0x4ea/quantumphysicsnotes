@@ -89,12 +89,22 @@ img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6
 
 <script type="text/plain" id="src"># 晶体场与配位场理论（Crystal Field and Ligand Field Theory）系统量子力学笔记
 
-> **第六部分：交叉应用——量子力学与宝石学 · 数学程度 L3 · 前置依赖：第16篇《角动量与自旋》、第17篇《中心力场与氢原子》、第22篇《多电子原子》**
+> **第六部分·交叉应用——量子力学与宝石学 · 数学程度：L3 · 前置依赖：第16篇《角动量与自旋》、第17篇《中心力场与氢原子》、第22篇《多电子原子》**
 > **验证依据**：Bethe (1929) *Ann. Phys.* 395, 133、Tanabe & Sugano (1954) *J. Phys. Soc. Jpn.* 9, 753、Tanabe & Sugano (1954) *J. Phys. Soc. Jpn.* 9, 766、Van Vleck (1932) *Phys. Rev.* 41, 208、Racah (1942) *Phys. Rev.* 61, 186、Orgel (1955) *J. Chem. Phys.* 23, 1004、Schäffer & Jørgensen (1958) *J. Inorg. Nucl. Chem.* 8, 143、Sugano, Tanabe & Kamimura (1970) *Multiplets of Transition-Metal Ions in Crystals*, Academic Press、CODATA 2018 *Rev. Mod. Phys.* 93, 025010（均为已核实 S/A 级来源，条目见第八节）
 
 ---
 
+## 阅读指引（三层）
+
+| 深度 | 阅读范围 | 你能带走什么 |
+|------|---------|------------|
+| 零门槛线 | §一 + §四 + §七 | 结论、实验数字、来龙去脉（不碰一个公式） |
+| 进阶线 | 加 §三 + §五 | 量级感、物理机制 |
+| 完整线 | 全部八节 | 完整推导与可解模型 |
+
 ## 一、概念与定位
+
+> **一句话结论**：配位场对称性破缺使 d 轨道能级分裂，分裂差 Δ 的量级决定配合物的颜色、磁性与高/低自旋态。
 
 **晶体场理论（Crystal Field Theory, CFT）** 与它的推广 **配位场理论（Ligand Field Theory, LFT）** 解释一个核心事实：自由过渡金属离子的五重简并 d 轨道（d_xy、d_xz、d_yz、d_z²、d_x²−y²），在配位体所构成的静电（或共价）环境中，因对称性破缺而发生能级分裂，从而产生过渡金属配合物的颜色、磁性与自旋态。
 
@@ -111,6 +121,14 @@ img{max-width:100%; margin:20px 0; border:1px solid var(--line); border-radius:6
 5. **共价性的修正——配位场理论**：纯静电"点电荷"模型无法解释配体序列的全部规律，引入角重叠模型（AOM）与云展开（nephelauxetic）效应以纳入金属–配体共价性 [24ix]。
 
 ---
+
+### 通俗说法辨析
+
+| 通俗说法 | 严谨表述 | 误区根源 |
+|---------|---------|---------|
+| 晶体场是"离子把电子锁进格子" | 是对称性破缺导致的轨道能级分裂，并非空间囚禁 | 把能级分裂想成物理禁锢 |
+| 自旋态只由"电子怎么排"决定 | 由晶体场分裂 Δ 与成对能 P 的相对大小决定 | 忽略 Δ 与 P 的竞争 |
+| 配位场理论只是晶体场改名 | LFT 引入共价性（AOM、云展开）修正纯静电模型 | 把推广当重命名 |
 
 ## 二、数学结构
 
